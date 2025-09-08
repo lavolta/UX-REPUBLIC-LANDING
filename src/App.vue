@@ -1,8 +1,4 @@
 <script setup lang="ts">
-const test = defineProps<{
-  isVisible: boolean
-}>()
-console.log('test', test)
 </script>
 
 <template>
@@ -21,16 +17,3 @@ console.log('test', test)
     to read the documentation
   </p>
 </template>
-
-<style scoped lang="scss">
-section {
-  h1 {
-    color:red;
-    font-size: 1.3rem;
-  }
-
-  p {
-    font-size:1.2rem;
-  }
-}
-</style>

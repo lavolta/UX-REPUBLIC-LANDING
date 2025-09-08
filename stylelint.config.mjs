@@ -81,6 +81,6 @@ export default {
     "color-function-notation": "modern",
     "lightness-notation": "percentage",
     "alpha-value-notation": "percentage",
-    "hue-degree-notation": "number",
+    "hue-degree-notation": "number"
   },
 };
