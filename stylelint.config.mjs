@@ -1,9 +1,7 @@
 /** @type {import('stylelint').Config} */
 export default {
   extends: [
-    // preset pour SCSS (inclut les bonnes règles de base)
     "stylelint-config-standard-scss",
-    // permet d’analyser les <style> dans .vue / .html
     "stylelint-config-html",
     "stylelint-config-property-sort-order-smacss"
   ],
@@ -19,10 +17,14 @@ export default {
       files: ["**/*.{scss,sass}"],
       customSyntax: "postcss-scss",
     },
+    {
+      files: ["src/assets/scss/**/*.{scss,sass}"],
+      customSyntax: "postcss-scss",
+    },
   ],
 
   rules: {
-    // --- tes règles existantes, inchangées ---
+    "no-empty-source": null,
     "selector-max-id": 0,
     "selector-max-class": 3,
     "selector-max-type": 3,
@@ -30,7 +32,7 @@ export default {
 
     "selector-pseudo-class-no-unknown": [true, { ignorePseudoClasses: ["deep", "global"] }],
     "selector-pseudo-element-no-unknown": [true, { ignorePseudoElements: ["v-deep"] }],
-    "at-rule-no-unknown": [true, { ignoreAtRules: ["theme", "utility"] }],
+    "at-rule-no-unknown": [true, { ignoreAtRules: ["use","forward","theme", "utility"] }],
     "declaration-property-value-no-unknown": [
       true,
       {
