@@ -1,0 +1,26 @@
+[
+  { "id": 1,
+    "title": "UX / UI Design – Concevoir des expériences performantes",
+    "description": "Interfaces intuitives, inclusives et engageantes…",
+    "tags": ["Audit et stratégie UX","Recherche utilisateur","Design Thinking","UI","Accessibilité","UX Factory"],
+    "image": "../src/assets/img/card1.webp"
+  },
+  { "id": 2,
+    "title": "Performance – Optimiser vos parcours digitaux",
+    "description": "Mesure, CRO, SXO pour maximiser le ROI…",
+    "tags": ["CRO","SXO","Web analytics"],
+    "image": "../src/assets/img/card2.webp"
+  },
+  { "id": 3,
+    "title": "Innovation — Anticiper les usages de demain",
+    "description": "Exploration, IA, prototypage rapide…",
+    "tags": ["Prototypage","IA","Ateliers"],
+    "image": "../src/assets/img/card3.webp"
+  },
+  { "id": 4,
+    "title": "Design System — Cohérence & vitesse",
+    "description": "Tokens, librairies, guidelines…",
+    "tags": ["Design tokens","Librairie UI","Docs","Gouvernance"],
+    "image": "../src/assets/img/card4.webp"
+  }
+]
