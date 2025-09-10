@@ -6,7 +6,6 @@ export default {
     'stylelint-config-property-sort-order-smacss',
   ],
   plugins: ['stylelint-order'],
-
   // Important : dire à stylelint comment parser .vue et .scss
   overrides: [
     {

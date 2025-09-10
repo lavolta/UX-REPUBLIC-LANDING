@@ -5,17 +5,12 @@ import pluginVitest from '@vitest/eslint-plugin'
 import stylistic from '@stylistic/eslint-plugin'
 
 export default defineConfigWithVueTs(
-  {
-    name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
-  },
-
+  { name: 'app/files-to-lint', files: ['**/*.{ts,mts,tsx,vue,mjs}'] },
   globalIgnores([
     '**/dist/**',
     '**/dist-ssr/**',
     '**/coverage/**',
   ]),
-
   ...pluginVue.configs['flat/recommended'],
   {
     name: 'app/vue-block-order',
@@ -25,10 +20,6 @@ export default defineConfigWithVueTs(
     },
   },
   vueTsConfigs.recommended,
-  {
-    ...pluginVitest.configs.recommended,
-    files: ['src/**/__tests__/*'],
-  },
-
+  { ...pluginVitest.configs.recommended, files: ['src/**/__tests__/*'] },
   stylistic.configs.recommended,
 )
