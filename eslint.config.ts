@@ -2,12 +2,7 @@ import { globalIgnores } from 'eslint/config'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
-/*
- * To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
- * import { configureVueProject } from '@vue/eslint-config-typescript'
- * configureVueProject({ scriptLangs: ['ts', 'tsx'] })
- * More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
- */
+import stylistic from '@stylistic/eslint-plugin'
 
 export default defineConfigWithVueTs(
   {
@@ -21,10 +16,19 @@ export default defineConfigWithVueTs(
     '**/coverage/**',
   ]),
 
-  pluginVue.configs['flat/strongly-recommended'],
+  ...pluginVue.configs['flat/recommended'],
+  {
+    name: 'app/vue-block-order',
+    files: ['**/*.vue'],
+    rules: {
+      'vue/block-order': ['error', { order: ['script', 'template', 'style'] }],
+    },
+  },
   vueTsConfigs.recommended,
   {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },
+
+  stylistic.configs.recommended,
 )

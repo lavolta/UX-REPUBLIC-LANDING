@@ -9,17 +9,17 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 export default defineConfig({
   plugins: [
     VueI18nPlugin({
-      ssr: true
+      ssr: true,
     }),
     vue(),
-    vueDevTools()
+    vueDevTools(),
   ],
   ssr: {
     noExternal: [/vue-i18n/],
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 })
