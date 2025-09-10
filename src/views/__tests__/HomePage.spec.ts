@@ -2,8 +2,9 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import HomeView from '../HomeView.vue'
+import {fr} from '@/locales'
 
-const HomePageH1Content = 'HomePage'
+const HomePageH1Content = fr.hero.title
 
 describe('HomeView', () => {
   it('contient un h1', () => {

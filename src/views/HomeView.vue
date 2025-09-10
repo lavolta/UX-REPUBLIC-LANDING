@@ -1,3 +1,3 @@
 <template>
-  <h1>HomePage</h1>
+  <h1>{{ $t('hero.title') }}</h1>
 </template>
