@@ -1,10 +1,28 @@
-import { createApp } from 'vue'
+import { ViteSSG } from 'vite-ssg'
+import { createI18n } from 'vue-i18n'
 import App from './App.vue'
-import router from './router'
+import routes from './router'
+import { en, fr } from './locales'
+
 import './assets/scss/main.scss'
 
-const app = createApp(App)
-
-app.use(router)
-
-app.mount('#app')
+export const createApp = ViteSSG(
+  App,
+  {
+    routes,
+    base: import.meta.env.BASE_URL,
+  },
+  ({ app }) => {
+    const i18n = createI18n({
+      legacy: false,
+      globalInjection: true,
+      locale: 'fr',
+      fallbackLocale: 'fr',
+      messages: {
+        fr,
+        en,
+      },
+    })
+    app.use(i18n)
+  },
+)
