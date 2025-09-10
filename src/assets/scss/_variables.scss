@@ -3,4 +3,21 @@
   --color-secondary: #2ecc71;
   --color-background: #f9f9f9;
   --color-text: #333333;
+
+    /* Typo – familles */
+  --font-sans: "Inter", system-ui, -apple-system, segoe ui, roboto, sans-serif;
+  --font-heading: "Montserrat", var(--font-sans);
+  --font-style: normal;
+  --font-optical-size: auto;
+
+  /* Typo – tailles/line-height (exemple) */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --leading-normal: 1.5;
+
+  /* Raccourcis utiles */
+  --font-body: var(--font-sans);
+  --font-title: var(--font-heading);
 }

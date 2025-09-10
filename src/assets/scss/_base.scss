@@ -1,0 +1,21 @@
+@layer base {
+  html, body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-size: 1.6rem;
+    font-style: var(--font-style);
+    font-optical-sizing: var(--font-optical-size);
+    line-height: var(--leading-normal);
+  }
+
+  // https://developer.mozilla.org/fr/docs/Web/CSS/:where
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-title);
+    font-weight: 700;
+  }
+
+  h1 { font-size: clamp(2rem, 1.2rem + 2vw, 3rem); }
+  h2 { font-size: clamp(1.5rem, 1rem + 1.2vw, 2.25rem); }
+  h3 { font-size: 1.5rem; }
+}

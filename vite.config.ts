@@ -14,6 +14,15 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @use "@/assets/scss/mixins" as *;
+        `,
+      },
+    },
+  },
   ssr: {
     noExternal: [/vue-i18n/],
   },

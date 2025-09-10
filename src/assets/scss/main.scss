@@ -1,3 +1,9 @@
 @use './reset';
+@use './base';
 @use './variables';
 @use './components/index' as *;
+@layer reset, base;
+
+body {
+  color: var(--color-background);
+}
