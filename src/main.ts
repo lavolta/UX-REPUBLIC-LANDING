@@ -2,7 +2,7 @@ import { ViteSSG } from 'vite-ssg'
 import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import routes from './router'
-import {en, fr} from '@/locales/index'
+import {en, fr} from './locales'
 
 import './assets/scss/main.scss'
 
