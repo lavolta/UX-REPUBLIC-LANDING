@@ -51,14 +51,14 @@
     }
   }
 
-  @include bp.tablet {
-    &__sticky {
-      padding: 3rem 2rem;
-    }
+  // @include bp.tablet {
+  //   &__sticky {
+  //     padding: 3rem 2rem;
+  //   }
 
-    &__head {
-      max-width: 90ch;
-      text-align: left;
-    }
-  }
+  //   &__head {
+  //     max-width: 90ch;
+  //     text-align: left;
+  //   }
+  // }
 }

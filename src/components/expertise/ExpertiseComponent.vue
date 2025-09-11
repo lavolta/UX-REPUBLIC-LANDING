@@ -1,39 +1,7 @@
-<template>
-  <section
-    id="expertises"
-    class="expertises"
-    ref="sectionRef"
-  >
-    <div class="expertises__sticky">
-      <header class="expertises__head">
-        <h2>Nos expertises en action</h2>
-        <p>De l'analyse à l'exécution, nous construisons des expériences qui comptent.</p>
-      </header>
-
-      <CardStack
-        :cards="cards"
-        :active="activeStep"
-        :scroll-progress="scrollProgress"
-        :direction="scrollDirection"
-        @exit-top="scrollToPrevSection"
-      />
-    </div>
-
-    <div class="expertises__steps">
-      <div
-        v-for="(card, index) in cards"
-        :key="card.id"
-        class="step"
-        :data-index="index"
-      />
-    </div>
-  </section>
-</template>
-
-<script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue"
-import CardStack from "../components/expertise/CardStack.vue"
-import cards from "../content/expertises.json"
+<script lang="ts" setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import CardStack from '@/components/card/CardStack.vue'
+import cards from '@/content/expertises.json'
 
 const sectionRef = ref(null)
 const activeStep = ref(0)
@@ -47,7 +15,7 @@ const leavingTop = ref(false)
 const upSegment = ref({
   active: false,
   startIndex: null,
-  startPos: null
+  startPos: null,
 })
 
 const scrollToPrevSection = () => {
@@ -57,7 +25,10 @@ const scrollToPrevSection = () => {
   if (prev) {
     prev.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }
-  setTimeout(() => { leavingTop.value = false }, 600)
+  setTimeout(
+    () => { leavingTop.value = false },
+    600,
+  )
 }
 
 const handleScroll = () => {
@@ -99,12 +70,13 @@ const handleScroll = () => {
 
       activeStep.value = downIndex
       scrollProgress.value = stepProgress
-    } else {
+    }
+    else {
       if (!upSegment.value.active) {
         upSegment.value = {
           active: true,
           startIndex: Math.min(Math.ceil(pos), cardCount - 1),
-          startPos: pos
+          startPos: pos,
         }
         activeStep.value = upSegment.value.startIndex
       }
@@ -117,13 +89,14 @@ const handleScroll = () => {
           upSegment.value = { active: false, startIndex: null, startPos: null }
           scrollProgress.value = 0
           scrollToPrevSection()
-        } else {
+        }
+        else {
           const newIndex = upSegment.value.startIndex - 1
           activeStep.value = newIndex
           upSegment.value = {
             active: true,
             startIndex: newIndex,
-            startPos: upSegment.value.startPos - 1
+            startPos: upSegment.value.startPos - 1,
           }
           scrollProgress.value = 0
         }
@@ -143,3 +116,35 @@ onBeforeUnmount(() => {
   if (animationFrameId) cancelAnimationFrame(animationFrameId)
 })
 </script>
+
+<template>
+  <section
+    id="expertises"
+    ref="sectionRef"
+    class="expertises"
+  >
+    <div class="expertises__sticky">
+      <header class="expertises__head">
+        <h2>Nos expertises en action</h2>
+        <p>De l'analyse à l'exécution, nous construisons des expériences qui comptent.</p>
+      </header>
+
+      <CardStack
+        :cards="cards"
+        :active="activeStep"
+        :scroll-progress="scrollProgress"
+        :direction="scrollDirection"
+        @exit-top="scrollToPrevSection"
+      />
+    </div>
+
+    <div class="expertises__steps">
+      <div
+        v-for="(card, index) in cards"
+        :key="card.id"
+        class="step"
+        :data-index="index"
+      />
+    </div>
+  </section>
+</template>

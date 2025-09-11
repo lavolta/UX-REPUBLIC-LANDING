@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  card: { type: Object, required: true },
+})
+
+const cardIndex = computed(() => {
+  // Trouver l'index de la carte dans le tableau original si nécessaire
+  return props.card.id - 1 // Supposant que les IDs commencent à 1
+})
+</script>
+
 <template>
   <div class="card__inner">
     <div class="left">
@@ -8,14 +21,14 @@
         {{ card.title }}
       </h3>
       <p
-        class="card__inner--desc"
         v-if="card.description"
+        class="card__inner--desc"
       >
         {{ card.description }}
       </p>
       <ul
-        class="card__inner--tags"
         v-if="card.tags?.length"
+        class="card__inner--tags"
       >
         <li
           v-for="tag in card.tags"
@@ -43,16 +56,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { computed } from 'vue'
-
-const props = defineProps({
-  card: { type: Object, required: true }
-})
-
-const cardIndex = computed(() => {
-  // Trouver l'index de la carte dans le tableau original si nécessaire
-  return props.card.id - 1 // Supposant que les IDs commencent à 1
-})
-</script>

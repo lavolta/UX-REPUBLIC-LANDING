@@ -5,13 +5,4 @@
   color: #e6e8eb;
   text-align: center;
   place-items: center;
-
-  .container { width: min(100% - 32px, 1040px); margin-inline: auto; }
-  h1 { margin: 0 0 .5rem; font-size: clamp(1.8rem, 6vw, 3rem); }
-  p  { margin: 0 0 1.25rem; color:#a0a7b0; }
-
-  .cta {
-    display: inline-block; padding: .8rem 1.2rem; border-radius: 12px;
-    background: #70e1ff; color:#0b1015; font-weight: 700; text-decoration: none;
-  }
 }
