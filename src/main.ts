@@ -23,6 +23,7 @@ export const createApp = ViteSSG(
         en,
       },
     })
+
     app.use(i18n)
   },
 )

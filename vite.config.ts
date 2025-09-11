@@ -7,6 +7,7 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [
     VueI18nPlugin({
       ssr: true,
@@ -14,6 +15,15 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @use "@/assets/scss/mixins" as *;
+        `,
+      },
+    },
+  },
   ssr: {
     noExternal: [/vue-i18n/],
   },
