@@ -23,6 +23,7 @@ export default {
   ],
 
   rules: {
+    'no-irregular-whitespace': true,
     'no-empty-source': null,
     'selector-max-id': 0,
     'selector-max-class': 3,
@@ -31,7 +32,7 @@ export default {
 
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global'] }],
     'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep'] }],
-    'at-rule-no-unknown': [true, { ignoreAtRules: ['use', 'forward', 'theme', 'mixin', 'utility'] }],
+    'at-rule-no-unknown': [true, { ignoreAtRules: ['use', 'forward', 'theme', 'mixin', 'utility', 'include'] }],
     'declaration-property-value-no-unknown': [
       true,
       {

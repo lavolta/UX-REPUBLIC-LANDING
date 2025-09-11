@@ -1,9 +1,9 @@
 @layer base {
   html, body {
     background: var(--color-bg);
-    color: var(--color-fg);
+    color: var(--color-text);
     font-family: var(--font-body);
-    font-size: 1.6rem;
+    font-size: 1rem;  // 1rem = 16px
     font-style: var(--font-style);
     font-optical-sizing: var(--font-optical-size);
     line-height: var(--leading-normal);
