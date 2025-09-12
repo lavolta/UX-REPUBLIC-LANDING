@@ -25,7 +25,7 @@ export default {
   rules: {
     'no-irregular-whitespace': true,
     'no-empty-source': null,
-    'selector-max-id': 0,
+    'selector-max-id': 1,
     'selector-max-class': 3,
     'selector-max-type': 3,
     'no-descending-specificity': null,
