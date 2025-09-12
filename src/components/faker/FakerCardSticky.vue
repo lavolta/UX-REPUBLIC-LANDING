@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { useGetContent } from '@/composable'
-const { content: cards } = useGetContent('expert.cards', true)
-console.log('cards : ', cards)
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+import type { CardExpertInterface } from '@/interfaces'
+
+const { tm } = useI18n({ useScope: 'global' })
+const cards = computed<CardExpertInterface[]>(() => {
+  return tm('expert.cards')
+})
+
 </script>
 
 <template>
@@ -16,8 +22,8 @@ console.log('cards : ', cards)
         >
           <div class="card__content">
             <div>
-              <h2>Card {{ i + 1 }}</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <h2>{{ card.title }} {{ i + 1 }}</h2>
+              <p>{{ card.text }}</p>
               <p>
                 <a
                   href="#top"
@@ -27,8 +33,8 @@ console.log('cards : ', cards)
             </div>
             <figure>
               <img
-                src="/images/img-1.jpg"
-                alt="Image description"
+                :src="card.picture.href"
+                :alt="card.picture.alt"
               >
             </figure>
           </div>
