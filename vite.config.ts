@@ -20,6 +20,7 @@ export default defineConfig({
       scss: {
         additionalData: `
           @use "@/assets/scss/mixins" as *;
+          @use "@/assets/scss/utilities" as *;
         `,
       },
     },
