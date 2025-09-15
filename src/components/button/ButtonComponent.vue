@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 const props = withDefaults(defineProps<{
-  type?: 'primary' | 'secondary' | 'redtags' | 'bluetags'
+  type?: 'primary' | 'secondary' | 'warning' | 'info'
   size?: 'small' | 'medium' | 'large'
   disabled?: boolean
   isExternal?: boolean
@@ -19,14 +19,6 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{
   (e: 'click', event: MouseEvent): void
 }>()
-
-// const { t } = useI18n()
-// const translatedText = computed(() => {
-//   if (props.tags) {
-//     return t(`tags.${props.tags}`)
-//   }
-//   return props.text ? t(props.text) : ''
-// })
 </script>
 
 <template>
@@ -58,60 +50,42 @@ const emit = defineEmits<{
   padding: 1.33rem;
   border: none;
   border-radius: 1.5rem;
+  color: white;
   font-family: inherit;
   font-weight: 600;
   text-align: center;
   cursor: pointer;
-}
 
-/* Couleurs */
-.primary {
+  &.primary {
   background-color: #262A31;
-  color: white;
-}
+  }
 
-.secondary {
+  &.secondary {
   background-color: #33A6FF;
-  color: white;
-}
+  }
 
-/* .secondary:hover:not(:disabled) {
-} */
+  &.warning {
+    background-color: #ED2749;
+  }
 
-.redtags {
-  background-color: #ED2749;
-  color: white;
-}
+  &.info {
+    background-color: #33A6FF;
+  }
 
-.bluetags {
-  background-color: #33A6FF;
-  color: white;
-}
-
-/* .redtags:hover:not(:disabled) {
-} */
-
-/* Tailles */
-.small {
+  &.small {
   font-size: 1rem;
 }
 
-.medium {
+&.medium {
   font-size: 1.125rem;
 }
 
-.large {
+&.large {
   font-size: 1.5rem;
 }
 
-/* .btn:disabled {
-}
-
-.btn:not(:disabled):hover {
-} */
-
-/* Focus pour accessibilité */
-.btn:focus {
+&:focus {
   outline: none;
+}
 }
 </style>
