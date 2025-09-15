@@ -13,6 +13,16 @@ declare module 'vue-i18n' {
       title: string
       subtitle: string
     }
+    button: {
+      offerCta: string
+      translateCta: string
+      contactCta: string
+    }
+    tags: {
+      accessibility: string
+      security: string
+      performance: string
+    }
     expert: {
       title: string
       cards: CardExpertInterface[]

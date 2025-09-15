@@ -9,6 +9,16 @@ export const fr = {
     title: 'Hero titre "fr" file',
     subtitle: 'Hero sous titre',
   },
+  button: {
+    offerCta: 'Rejoignez-nous',
+    translateCta: 'FR',
+    contactCta: 'Contactez-nous',
+  },
+  tags: {
+    accessibility: 'Accessibilité',
+    security: 'Sécurité',
+    performance: 'Performance',
+  },
   expert: {
     title: 'mon super titre',
     cards: [
