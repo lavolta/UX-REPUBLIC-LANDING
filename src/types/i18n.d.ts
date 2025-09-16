@@ -14,6 +14,7 @@ declare module 'vue-i18n' {
       subtitle: string
     }
     button: {
+      navigationCta: string
       offerCta: string
       translateCta: string
       contactCta: string

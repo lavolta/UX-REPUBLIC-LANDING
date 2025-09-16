@@ -10,6 +10,7 @@ export const fr = {
     subtitle: 'Hero sous titre',
   },
   button: {
+    navigationCta: 'Naviguer',
     offerCta: 'Rejoignez-nous',
     translateCta: 'FR',
     contactCta: 'Contactez-nous',
