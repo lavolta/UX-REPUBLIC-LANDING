@@ -15,6 +15,7 @@ declare module 'vue-i18n' {
     }
     heroHome: HeroBannerTextInterface[]
     button: {
+      navigationCta: string
       offerCta: string
       translateCta: string
       contactCta: string

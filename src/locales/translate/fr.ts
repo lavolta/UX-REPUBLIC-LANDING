@@ -16,6 +16,7 @@ export const fr = {
     { text: 'au centre', isSpecialStyle: true },
   ],
   button: {
+    navigationCta: 'Naviguer',
     offerCta: 'Rejoignez-nous',
     translateCta: 'FR',
     contactCta: 'Contactez-nous',

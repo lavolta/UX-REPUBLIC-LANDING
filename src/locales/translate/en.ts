@@ -16,6 +16,7 @@ export const en = {
     { text: 'au centre', isSpecialStyle: true },
   ],
   button: {
+    navigationCta: 'Navigate',
     offerCta: 'Join our team',
     translateCta: 'EN',
     contactCta: 'Contact us',
