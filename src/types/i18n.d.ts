@@ -1,5 +1,5 @@
 import 'vue-i18n'
-import type { CardExpertInterface } from '@/interfaces'
+import type { CardExpertInterface, HeroBannerTextInterface } from '@/interfaces'
 // https://vue-i18n.intlify.dev/guide/advanced/typescript
 declare module 'vue-i18n' {
   export interface DefineLocaleMessage {
@@ -13,6 +13,7 @@ declare module 'vue-i18n' {
       title: string
       subtitle: string
     }
+    heroHome: HeroBannerTextInterface[]
     button: {
       offerCta: string
       translateCta: string
