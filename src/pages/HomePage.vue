@@ -4,6 +4,7 @@ import FakeCardSticky from '@/components/faker/FakerCardSticky.vue'
 import FakeSection from '@/components/faker/FakeSection.vue'
 import FakeHeadline from '@/components/faker/FakerHeadline.vue'
 import HeroStyle1 from '@/components/faker/hero/HeroStyle1.vue'
+import ButtonComponent from '@/components/button/ButtonComponent.vue'
 
 const fakeContent = {
   title: 'Créateur d\'expériences performantes centrées utilisateurs',
@@ -18,6 +19,20 @@ useDefaultSeo('home')
       :title="fakeContent.title"
       :subtitle="fakeContent.subtitle"
     />
+  </FakeSection>
+  <FakeSection>
+    <ButtonComponent
+      type="primary"
+      size="large"
+    >
+      <span>{{ $t('button.contactCta') }}</span>
+    </ButtonComponent>
+    <ButtonComponent
+      type="warning"
+      size="large"
+    >
+      <span>{{ $t('tags.accessibility') }}</span>
+    </ButtonComponent>
   </FakeSection>
   <FakeCardSticky />
   <FakeSection />

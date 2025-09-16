@@ -15,6 +15,16 @@ export const en = {
     { text: 'mettent l’utilisateur', isSpecialStyle: false },
     { text: 'au centre', isSpecialStyle: true },
   ],
+  button: {
+    offerCta: 'Join our team',
+    translateCta: 'EN',
+    contactCta: 'Contact us',
+  },
+  tags: {
+    accessibility: 'Accessibility',
+    security: 'Security',
+    performance: 'Performance',
+  },
   expert: {
     title: 'EN | Mon super titre',
     cards: [

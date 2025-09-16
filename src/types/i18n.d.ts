@@ -14,6 +14,16 @@ declare module 'vue-i18n' {
       subtitle: string
     }
     heroHome: HeroBannerTextInterface[]
+    button: {
+      offerCta: string
+      translateCta: string
+      contactCta: string
+    }
+    tags: {
+      accessibility: string
+      security: string
+      performance: string
+    }
     expert: {
       title: string
       cards: CardExpertInterface[]
