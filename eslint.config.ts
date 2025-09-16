@@ -22,4 +22,14 @@ export default defineConfigWithVueTs(
   vueTsConfigs.recommended,
   { ...pluginVitest.configs.recommended, files: ['src/**/__tests__/*'] },
   stylistic.configs.recommended,
+  {
+    name: 'app/vue-indent',
+    files: ['**/*.{vue, scss}'],
+    plugins: {
+      '@stylistic': stylistic,
+    },
+    rules: {
+      '@stylistic/indent': ['error', 2],
+    },
+  },
 )

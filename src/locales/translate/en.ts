@@ -9,6 +9,12 @@ export const en = {
     title: 'Hero title from "en" file',
     subtitle: 'Hero subtitle',
   },
+  heroHome: [
+    { text: 'EN Dompteur', isSpecialStyle: false },
+    { text: 'd’expériences qui', isSpecialStyle: false },
+    { text: 'mettent l’utilisateur', isSpecialStyle: false },
+    { text: 'au centre', isSpecialStyle: true },
+  ],
   button: {
     navigationCta: 'Navigate',
     offerCta: 'Join our team',

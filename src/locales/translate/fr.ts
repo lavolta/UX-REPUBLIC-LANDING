@@ -9,6 +9,12 @@ export const fr = {
     title: 'Hero titre "fr" file',
     subtitle: 'Hero sous titre',
   },
+  heroHome: [
+    { text: 'Dompteur', isSpecialStyle: false },
+    { text: 'd’expériences qui', isSpecialStyle: false },
+    { text: 'mettent l’utilisateur', isSpecialStyle: false },
+    { text: 'au centre', isSpecialStyle: true },
+  ],
   button: {
     navigationCta: 'Naviguer',
     offerCta: 'Rejoignez-nous',
