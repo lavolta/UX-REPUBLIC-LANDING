@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, type ComponentPublicInstance, onUnmounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import FakeSection from '@/components/faker/FakeSection.vue'
 import type { HeroBannerTextInterface } from '@/interfaces'
 
 const { tm } = useI18n()
@@ -89,7 +88,6 @@ onUnmounted (() => window.removeEventListener('scroll', editWordPosition))
       </h1>
     </div>
   </section>
-  <FakeSection />
 </template>
 <style lang="scss" scoped>
 .hero {
@@ -118,7 +116,7 @@ onUnmounted (() => window.removeEventListener('scroll', editWordPosition))
 
   &__vector {
     position: absolute;
-    z-index: 3;
+          z-index: 3;
     inset: 0;
     width: 100%;
     height: 100%;
@@ -179,7 +177,7 @@ onUnmounted (() => window.removeEventListener('scroll', editWordPosition))
     transition: transform 0.7s cubic-bezier(0.39, 0.58, 0.57, 1);
 
     &.special {
-      color: var(--color-primary);
+       color: var(--color-primary);
       font-style: italic;
     }
 

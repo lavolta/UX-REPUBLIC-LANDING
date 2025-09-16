@@ -3,7 +3,7 @@ import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import FakeCardSticky from '@/components/faker/FakerCardSticky.vue'
 import FakeSection from '@/components/faker/FakeSection.vue'
 import FakeHeadline from '@/components/faker/FakerHeadline.vue'
-import FakeLangSwitcher from '@/components/faker/FakeLangSwitcher.vue'
+import HeroStyle1 from '@/components/faker/hero/HeroStyle1.vue'
 
 const fakeContent = {
   title: 'Créateur d\'expériences performantes centrées utilisateurs',
@@ -12,9 +12,8 @@ const fakeContent = {
 useDefaultSeo('home')
 </script>
 <template>
+  <HeroStyle1 />
   <FakeSection>
-    <h1>{{ $t('hero.title') }}</h1>
-    <FakeLangSwitcher />
     <FakeHeadline
       :title="fakeContent.title"
       :subtitle="fakeContent.subtitle"
