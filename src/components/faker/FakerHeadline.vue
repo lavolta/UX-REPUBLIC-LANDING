@@ -17,10 +17,14 @@ defineProps<{
   margin: 0 auto;
   padding: 0 2rem;
   color: var(--color-white);
-  text-align: center;
 
   h2 {
     margin-bottom: 2rem;
+    font-size: 3rem;
+  }
+
+  p {
+    font-size: 1.125rem;
   }
 }
 </style>

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { InfiniteSliderItem } from '@/interfaces'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import FakeCardSticky from '@/components/faker/FakerCardSticky.vue'
 import FakeSection from '@/components/faker/FakeSection.vue'
@@ -6,6 +7,7 @@ import FakeHeadline from '@/components/faker/FakerHeadline.vue'
 import NavbarComponent from '@/components/navbar/NavbarComponent.vue'
 import HeroStyle1 from '@/components/faker/hero/HeroStyle1.vue'
 import ButtonComponent from '@/components/button/ButtonComponent.vue'
+import FakeInfiniteSlider from '@/components/faker/fakeInfiniteSlider/FakeInfiniteSlider.vue'
 
 const fakeContent = {
   title: 'Créateur d\'expériences performantes centrées utilisateurs',
@@ -20,6 +22,11 @@ const handleCtaClick = (index) => {
 </script>
 <template>
   <HeroStyle1 />
+  <FakeInfiniteSlider
+    :slider-lists="$tm('brand.listing') as InfiniteSliderItem[][]"
+    :title="$t('brand.title')"
+    :subtitle="$t('brand.subtitle')"
+  />
   <FakeSection>
     <FakeHeadline
       :title="fakeContent.title"

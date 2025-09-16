@@ -58,4 +58,46 @@ export const en = {
       },
     ],
   },
+  brand: {
+    title: 'EN | Ils nous font confiance',
+    subtitle: 'EN | Depuis plus de 10 ans, de grandes entreprises et institutions nous confient la conception et l’optimisation de leurs expériences digitales. Leur confiance, renouvelée projet après projet, témoigne de la qualité et de l’impact de nos expertises.',
+    listing: [[
+      {
+        picture: {
+          alt: 'He trusts us | airbus',
+          href: '/images/clients/airbus.png',
+        },
+      },
+      {
+        picture: {
+          alt: 'He trusts us | airbus',
+          href: '/images/clients/airbus.png',
+        },
+      },
+      {
+        picture: {
+          alt: 'He trusts us | generali',
+          href: '/images/clients/generali.png',
+        },
+      },
+      {
+        picture: {
+          alt: 'He trusts us | Leroy merlin',
+          href: '/images/clients/leroymerlin.png',
+        },
+      },
+      {
+        picture: {
+          alt: 'He trusts us | bouygues',
+          href: '/images/clients/bouygues.png',
+        },
+      },
+      {
+        picture: {
+          alt: 'He trusts us | gameloft',
+          href: '/images/clients/gameloft.png',
+        },
+      },
+    ]],
+  },
 } satisfies import('vue-i18n').DefineLocaleMessage

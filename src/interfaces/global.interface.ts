@@ -6,3 +6,7 @@ export interface HeroBannerTextInterface {
   text: string
   isSpecialStyle: boolean
 }
+
+export interface InfiniteSliderItem {
+  picture: PictureInterface
+}
