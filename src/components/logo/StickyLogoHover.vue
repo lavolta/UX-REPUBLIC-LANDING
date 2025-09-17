@@ -22,13 +22,13 @@ const currentIndex = ref(0)
 .sticky-logo {
   position: fixed;
   z-index: 1000;
-  top: 14px;
-  left: 11px;
-  width: 50px;
-  height: 50px;
-  padding: 4px;
+  top: 0.875rem; // 14px
+  left: 0.6875rem; // 11px
+  width: 3.125rem; // 50px
+  height: 3.125rem; // 50px
+  padding: 0.25rem; // 4px
   transition: transform 0.2s ease;
-  border-radius: 8px;
+  border-radius: 0.5rem; // 8px
   box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
   cursor: pointer;
   object-fit: contain;
@@ -39,15 +39,15 @@ const currentIndex = ref(0)
 
   // Responsive
   @include mq(tablet) {
-    width: 60px;
-    height: 60px;
+    width: 3.75rem; // 60px
+    height: 3.75rem; // 60px
   }
 
-  @media (width <= 767px) {
-    top: 10px;
-    left: 10px;
-    width: 40px;
-    height: 40px;
+  @media (width <= 47.9375rem) { // 767px
+    top: 0.625rem; // 10px
+    left: 0.625rem; // 10px
+    width: 2.5rem; // 40px
+    height: 2.5rem; // 40px
   }
 }
 </style>
