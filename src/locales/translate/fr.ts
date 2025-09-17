@@ -15,6 +15,40 @@ export const fr = {
     { text: 'mettent l’utilisateur', isSpecialStyle: false },
     { text: 'au centre', isSpecialStyle: true },
   ],
+  agencies: {
+    paris: {
+      title: 'Paris-France',
+      address: '163 quai du Docteur Dervaux 92600 Asnières-sur-Seine',
+    },
+    bordeaux: {
+      title: 'Bordeaux-France',
+      address: '2 Rue du Jardin de l/Ars 33800 Bordeaux',
+    },
+    lyon: {
+      title: 'Lyon-France',
+      address: 'Boulevard de Stalingrad 69100 Villeurbanne',
+    },
+    lille: {
+      title: 'Lille-France',
+      address: 'Boulevard Louis XIV, 59800 Lille',
+    },
+    bellgique: {
+      title: 'Bellgique',
+      address: '12 Avenue de Broqueville, B-1150 Woluwe-Saint-Pierre',
+    },
+    suisse: {
+      title: 'Suisse',
+      address: 'Route de la Longeraie, 1110 Morges',
+    },
+    luxembourge: {
+      title: 'Luxembourge',
+      address: 'Rue Emile Mark, Differdange',
+    },
+    paysbas: {
+      title: 'Pays bas',
+      address: 'Rue Emile Mark, Differdange',
+    },
+  },
   button: {
     navigationCta: 'Naviguer',
     offerCta: 'Rejoignez-nous',

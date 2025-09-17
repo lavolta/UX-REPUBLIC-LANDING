@@ -13,6 +13,40 @@ declare module 'vue-i18n' {
       title: string
       subtitle: string
     }
+    agencies: {
+      paris: {
+        title: string
+        address: string
+      }
+      bordeaux: {
+        title: string
+        address: string
+      }
+      lyon: {
+        title: string
+        address: string
+      }
+      lille: {
+        title: string
+        address: string
+      }
+      bellgique: {
+        title: string
+        address: string
+      }
+      suisse: {
+        title: string
+        address: string
+      }
+      luxembourge: {
+        title: string
+        address: string
+      }
+      paysbas: {
+        title: string
+        address: string
+      }
+    }
     heroHome: HeroBannerTextInterface[]
     button: {
       navigationCta: string

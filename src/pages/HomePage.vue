@@ -6,6 +6,7 @@ import FakeHeadline from '@/components/faker/FakerHeadline.vue'
 import NavbarComponent from '@/components/navbar/NavbarComponent.vue'
 import HeroStyle1 from '@/components/faker/hero/HeroStyle1.vue'
 import ButtonComponent from '@/components/button/ButtonComponent.vue'
+import AgenciesComponent from '@/components/agency/AgenciesComponent.vue'
 
 const fakeContent = {
   title: 'Créateur d\'expériences performantes centrées utilisateurs',
@@ -43,6 +44,7 @@ const handleCtaClick = (index) => {
   </FakeSection>
   <FakeCardSticky />
   <FakeSection />
+  <AgenciesComponent />
 </template>
 
 <style lang="scss" scoped>

@@ -1,8 +1,8 @@
 export const en = {
   seo: {
     home: {
-      title: 'The futur is republic | en',
-      description: 'Description dans le head pour la page Accueil EN.',
+      title: 'The future is republic | en',
+      description: 'Head description for the Home page EN.',
     },
   },
   hero: {
@@ -10,10 +10,10 @@ export const en = {
     subtitle: 'Hero subtitle',
   },
   heroHome: [
-    { text: 'EN Dompteur', isSpecialStyle: false },
-    { text: 'd’expériences qui', isSpecialStyle: false },
-    { text: 'mettent l’utilisateur', isSpecialStyle: false },
-    { text: 'au centre', isSpecialStyle: true },
+    { text: 'EN Tamer', isSpecialStyle: false },
+    { text: 'of experiences that', isSpecialStyle: false },
+    { text: 'put the user', isSpecialStyle: false },
+    { text: 'at the center', isSpecialStyle: true },
   ],
   button: {
     navigationCta: 'Navigate',
@@ -21,38 +21,72 @@ export const en = {
     translateCta: 'EN',
     contactCta: 'Contact us',
   },
+  agencies: {
+    paris: {
+      title: 'Paris-France',
+      address: '163 quai du Docteur Dervaux, 92600 Asnières-sur-Seine',
+    },
+    bordeaux: {
+      title: 'Bordeaux-France',
+      address: '2 Rue du Jardin de l\'Ars, 33800 Bordeaux',
+    },
+    lyon: {
+      title: 'Lyon-France',
+      address: 'Boulevard de Stalingrad, 69100 Villeurbanne',
+    },
+    lille: {
+      title: 'Lille-France',
+      address: 'Boulevard Louis XIV, 59800 Lille',
+    },
+    bellgique: {
+      title: 'Belgium',
+      address: '12 Avenue de Broqueville, B-1150 Woluwe-Saint-Pierre',
+    },
+    suisse: {
+      title: 'Switzerland',
+      address: 'Route de la Longeraie, 1110 Morges',
+    },
+    luxembourge: {
+      title: 'Luxembourg',
+      address: 'Rue Emile Mark, Differdange',
+    },
+    paysbas: {
+      title: 'Netherlands',
+      address: 'Rue Emile Mark, Differdange',
+    },
+  },
   tags: {
     accessibility: 'Accessibility',
     security: 'Security',
     performance: 'Performance',
   },
   expert: {
-    title: 'EN | Mon super titre',
+    title: 'EN | My super title',
     cards: [
       {
-        title: 'Carte 1',
-        text: 'EN | Ceci est le text de la carte 1',
+        title: 'Card 1',
+        text: 'EN | This is the text for card 1',
         tags: ['Ux', 'Ui'],
         picture: {
-          alt: 'image carte 1',
+          alt: 'card image 1',
           href: '/images/img-1.jpg',
         },
       },
       {
-        title: 'Carte 2',
-        text: 'EN | Ceci est le text de la carte 2',
+        title: 'Card 2',
+        text: 'EN | This is the text for card 2',
         tags: ['Ux', 'Ui'],
         picture: {
-          alt: 'image carte 2',
+          alt: 'card image 2',
           href: '/images/img-1.jpg',
         },
       },
       {
-        title: 'Carte 3',
-        text: 'EN | Ceci est le text de la carte 3',
+        title: 'Card 3',
+        text: 'EN | This is the text for card 3',
         tags: ['Ux', 'Ui'],
         picture: {
-          alt: 'image carte 3',
+          alt: 'card image 3',
           href: '/images/img-1.jpg',
         },
       },
