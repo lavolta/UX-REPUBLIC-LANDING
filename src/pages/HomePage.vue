@@ -6,6 +6,7 @@ import FakeHeadline from '@/components/faker/FakerHeadline.vue'
 import NavbarComponent from '@/components/navbar/NavbarComponent.vue'
 import HeroStyle1 from '@/components/faker/hero/HeroStyle1.vue'
 import ButtonComponent from '@/components/button/ButtonComponent.vue'
+import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
 
 const fakeContent = {
   title: 'Créateur d\'expériences performantes centrées utilisateurs',
@@ -19,6 +20,21 @@ const handleCtaClick = (index) => {
 }
 </script>
 <template>
+  <StickyLogoHover
+    :logos="[
+      '/logos/logo.svg',
+      '/logos/logo-2.svg',
+      '/logos/logo-3.svg',
+      '/logos/logo-4.svg',
+      '/logos/logo-5.svg',
+      '/logos/logo-6.svg',
+      '/logos/logo-7.svg',
+      '/logos/logo-8.svg',
+      '/logos/logo-9.svg',
+      '/logos/logo-10.svg'
+    ]"
+    alt-text="ux-republic"
+  />
   <HeroStyle1 />
   <FakeSection>
     <FakeHeadline
