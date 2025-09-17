@@ -6,6 +6,7 @@ import FakeHeadline from '@/components/faker/FakerHeadline.vue'
 import NavbarComponent from '@/components/navbar/NavbarComponent.vue'
 import HeroStyle1 from '@/components/faker/hero/HeroStyle1.vue'
 import ButtonComponent from '@/components/button/ButtonComponent.vue'
+import NumberComponent from '@/components/numbers/NumberComponent.vue'
 
 const fakeContent = {
   title: 'Créateur d\'expériences performantes centrées utilisateurs',
@@ -26,6 +27,7 @@ const handleCtaClick = (index) => {
       :subtitle="fakeContent.subtitle"
     />
   </FakeSection>
+  <NumberComponent />
   <FakeSection>
     <NavbarComponent @cta-click="handleCtaClick" />
     <ButtonComponent
