@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { InfiniteSliderItem } from '@/interfaces'
 import FakerHeadline from '@/components/faker/FakerHeadline.vue'
+import InfiniteSlider from '@/components/infiniteSlider/InfiniteSlider.vue'
 defineProps<{
   title?: string
   subtitle?: string
@@ -19,13 +20,12 @@ defineProps<{
         v-for="(sliderList, key) in sliderLists"
         :key="`sliderlist-${key}`"
         class="infinite-slider__list"
-        :style="{ '--animation-duration': `${40 + ((key + 1) * 10)}s` }"
+        :style="{ '--animation-duration': `${10 + ((key + 1) * 10)}s` }"
       >
         <li
           v-for="(sliderListItem, sliderListItemKey) in sliderList"
           :key="`sliderListeItem-${key}-${sliderListItemKey}`"
           class="infinite-slider__item"
-          :style="{ '--i': String(sliderListItemKey + 1) }"
         >
           <img
             :src="sliderListItem.picture.href"
@@ -36,7 +36,8 @@ defineProps<{
           v-for="(sliderListItem, sliderListItemKey) in sliderList"
           :key="`sliderListeItem-${key}-${sliderListItemKey}`"
           class="infinite-slider__item"
-          :style="{ '--i': String(sliderListItemKey + 1) }"
+          style="background-color:red;"
+          aria-hidden="true"
         >
           <img
             :src="sliderListItem.picture.href"
@@ -44,6 +45,7 @@ defineProps<{
           >
         </li>
       </ul>
+      <InfiniteSlider />
     </div>
   </div>
 </template>
@@ -59,10 +61,6 @@ defineProps<{
   }
 
   @keyframes slide {
-    from {
-      transform: translateX(0);
-    }
-
     to {
       transform: translateX(-100%);
     }
@@ -75,13 +73,14 @@ defineProps<{
     margin: 0 auto;
     overflow: hidden;
     white-space: nowrap;
-    mask-image: linear-gradient(
-      to right,
-      rgb(0 0 0 / 0%),
-      rgb(0 0 0 / 100%) 10%,
-      rgb(0 0 0 / 100%) 90%,
-      rgb(0 0 0 / 0%)
-    );
+
+    // mask-image: linear-gradient(
+    //   to right,
+    //   rgb(0 0 0 / 0%),
+    //   rgb(0 0 0 / 100%) 10%,
+    //   rgb(0 0 0 / 100%) 90%,
+    //   rgb(0 0 0 / 0%)
+    // );
   }
 
   &__list {
