@@ -86,9 +86,11 @@ const socialLinks = ref([
   flex-direction: column; /* nav on top, icons below */
   gap: 1rem;
   align-items: center;
+  color: var(--color-text-grey);
 }
 
 .copyright-text {
+  color: var(--color-text-grey);
   font-size: 0.875rem;
   font-weight: 300;
 }

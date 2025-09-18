@@ -6,21 +6,30 @@ import FooterNav from './FooterNav.vue'
 
 <template>
   <footer class="footer-section">
-    <ContactSection />
-    <FooterNav />
+    <div class="footer-section__inner">
+      <ContactSection />
+      <FooterNav />
+    </div>
   </footer>
 </template>
 
 <style lang="scss" scoped>
 .footer-section {
-  // bottom: 0;
-  // left: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  background: var(--color-bg-dark);
+  background: var(--color-bg-footer);
 
-  @include mq(desktop) {
-    max-width: 1260px;
-    padding: 0 90px;
+  .contact-container {
+    margin-bottom: 3.5rem;
+  }
+
+  &__inner {
+    width: 100%;
+    max-width: var(--max-section-width);
+    margin: 0 auto;
+    padding: 28.125rem 0 4rem;
   }
 }
 </style>

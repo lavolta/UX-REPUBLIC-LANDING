@@ -96,7 +96,8 @@ $grid-gap-desktop: 2.6875rem; // 43px
   line-height: 1.4;
 
   @include mq(desktop) {
-    font-size: 1.5rem;
+    font-size: 2.375rem;
+    line-height: 2.8125rem;
   }
 }
 
