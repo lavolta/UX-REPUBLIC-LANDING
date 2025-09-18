@@ -1,16 +1,11 @@
+<script lang="ts" setup>
+import InfiniteScrollSlider from '@/components/infinite-scroll-slider/InfiniteScrollSlider.vue'
+import ProjectGridBG from './ProjectGridBG.vue'
+</script>
 <template>
   <section class="project-grid">
+    <ProjectGridBG />
     <div class="project-grid__inner">
-      <div
-        aria-hidden="true"
-        class="project-grid__bg"
-      >
-        <span
-          v-for="i in 6"
-          :key="i"
-          aria-hidden="true"
-        />
-      </div>
       <p class="project-grid__title section-title">
         Nos réussites
       </p>
@@ -86,42 +81,23 @@
         </div>
       </div>
     </div>
+    <InfiniteScrollSlider />
   </section>
 </template>
 <style lang="scss" scoped>
 .project-grid {
+  position: relative;
+  padding: 130px 0 190px;
+
   &__inner {
     position: relative;
     width: 100%;
     max-width: 1260px;
     margin: 0 auto;
-    padding:8.125rem 0;
+    padding-bottom:9.375rem;
 
     // background: linear-gradient(to right, white 0, transparent 1px,transparent 108px, white 108px, transparent 109px);
     // background-size: 10% 100%;
-  }
-
-  &__bg {
-    display: grid;
-    position: absolute;
-    z-index: 1;
-    top: 0; left: 0;
-    grid-gap: 0 2.85%;
-    grid-template-areas:
-    "s1 s2 . . s3 s4 . . s5 s6 . .";
-    grid-template-columns: repeat(12, 1fr);
-    width: 100%;
-    height: 100%;
-
-    > span {
-      @for $i from 1 through 6 {
-        &:nth-child(#{$i}) {
-          grid-area: s#{$i};
-          border-right: 1px solid #2F3339;
-        }
-      }
-    }
-
   }
 
   &__title {
