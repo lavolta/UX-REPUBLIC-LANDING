@@ -4,7 +4,7 @@
     class="project-grid-bg"
   >
     <div>
-      <div class="project-grid-bg__inner">
+      <div class="project-grid-bg__inner grid">
         <span
           v-for="i in 6"
           :key="i"
@@ -30,11 +30,8 @@
   }
 
   &__inner {
-    display: grid;
-    grid-gap: 0 2.85%;
     grid-template-areas:
     "s1 s2 . . s3 s4 . . s5 s6 . .";
-    grid-template-columns: repeat(12, 1fr);
     width: 100%;
     height: 100%;
 
@@ -42,7 +39,7 @@
       @for $i from 1 through 6 {
         &:nth-child(#{$i}) {
           grid-area: s#{$i};
-          border-right: 1px solid #2F3339;
+          border-right: 1px solid var(--color-border);
         }
       }
     }
