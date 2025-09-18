@@ -28,19 +28,52 @@ const showPlus = computed(() => {
 
 <style lang="scss" scoped>
 .number {
-  display: inline-block;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
   color: var(--color-white);
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 6.25rem; // 100px
+  font-size: 4rem;
   font-style: normal;
   font-weight: 200;
-  letter-spacing: 0%;
-  line-height: 2.8125rem; // 45px
+  line-height: 1;
 
-  &-plus {
-    // margin-left: 0.1em;
-    // font-size: 0.8em;
-    // vertical-align: super;
+  @include mq(desktop) {
+    font-size: 6.25rem;
+  }
+}
+
+.number-plus {
+  position: relative;
+  top: 0.05em;
+  align-self: center;
+  margin-left: 0.1em;
+  font-size: 0.5em;
+
+  @include mq(desktop) {
+    top: 0.03em;
+    font-size: 0.45em;
+  }
+}
+
+@include mq(tablet) {
+  .number {
+    font-size: 5rem;
+  }
+
+  .number-plus {
+    top: 0.04em;
+    font-size: 0.48em;
+  }
+}
+
+@include mq(mobile) {
+  .number {
+    font-size: 3.5rem;
+  }
+
+  .number-plus {
+    top: 0.06em;
+    font-size: 0.52em;
   }
 }
 </style>

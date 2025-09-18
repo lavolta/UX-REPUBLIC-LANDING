@@ -26,7 +26,6 @@ withDefaults(defineProps<Props>(), {
 .title {
   margin: 0;
   color: var(--color-white);
-  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 1rem;
   font-weight: 200;
   letter-spacing: 10%;
