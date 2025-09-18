@@ -32,7 +32,7 @@ export default {
 
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global'] }],
     'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep'] }],
-    'at-rule-no-unknown': [true, { ignoreAtRules: ['use', 'forward', 'theme', 'mixin', 'utility', 'include'] }],
+    'at-rule-no-unknown': [true, { ignoreAtRules: ['use', 'forward', 'theme', 'mixin', 'utility', 'include', 'for'] }],
     'declaration-property-value-no-unknown': [
       true,
       {

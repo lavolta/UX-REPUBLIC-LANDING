@@ -148,7 +148,7 @@ onUnmounted (() => window.removeEventListener('scroll', editWordPosition))
     color: var(--color-white);
 
     h1 {
-      font-family: var(--font-heading-temporary);
+      font-family: var(--font-heading);
       font-size: 4.875rem;
       font-weight: 100;
       line-height: 1;
