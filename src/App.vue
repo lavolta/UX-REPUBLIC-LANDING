@@ -6,7 +6,7 @@ useHead({
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap',
     },
   ],
 })
