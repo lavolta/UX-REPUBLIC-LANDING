@@ -9,7 +9,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
       <p class="project-grid__title section-title">
         Nos réussites
       </p>
-      <div class="project-grid__list">
+      <div class="project-grid__list grid">
         <div
           class="project-item project-item--first"
         >
@@ -92,7 +92,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
   &__inner {
     position: relative;
     width: 100%;
-    max-width: 1260px;
+    max-width: var(--max-section-width);
     margin: 0 auto;
     padding-bottom:9.375rem;
 
@@ -107,15 +107,12 @@ import ProjectGridBG from './ProjectGridBG.vue'
   }
 
   &__list {
-    display: grid;
     position: relative;
     z-index: 2;
-    grid-gap: 0 2.85%;
     grid-template-areas:
     ". i1 i1 i1 i1 i1 i1 i1 . . . ."
     "i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2"
     ". . . . . i3 i3 i3 i3 i3 i3 i3";
-    grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, auto);
 
     > div {

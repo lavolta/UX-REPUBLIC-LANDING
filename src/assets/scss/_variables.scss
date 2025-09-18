@@ -4,6 +4,7 @@
   --color-background: #f9f9f9;
   --color-bg-dark: #181C23;
   --color-white: #ffffff;
+  --color-border: #2F3339;
 
     /* Typo – familles */
   --font-sans: "Bricolage Grotesque", sans-serif;
@@ -23,4 +24,5 @@
   --font-title: var(--font-heading);
   --color-bg: var(--color-bg-dark);
   --color-text: var(--color-white);
+  --max-section-width: 78.75rem;
 }
