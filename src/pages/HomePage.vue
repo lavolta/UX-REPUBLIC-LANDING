@@ -25,8 +25,9 @@ useDefaultSeo('home')
 .main-section {
   position: relative;
   z-index: 10;
-  margin-bottom: 37.93rem;
+  margin-bottom: 42.3125rem;
   background-color: var(--color-bg);
+
 }
 
 .main-content {

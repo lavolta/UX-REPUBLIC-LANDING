@@ -21,7 +21,7 @@ import FooterNav from './FooterNav.vue'
   width: 100%;
   background: var(--color-bg-footer);
 
-  .contact-container {
+  .contact {
     margin-bottom: 3.5rem;
   }
 

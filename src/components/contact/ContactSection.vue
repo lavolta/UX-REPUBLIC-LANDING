@@ -30,7 +30,6 @@
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  margin-bottom: 3.5rem;
 
   &__title {
     flex-shrink: 1;
