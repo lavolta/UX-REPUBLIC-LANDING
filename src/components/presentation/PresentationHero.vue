@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import TitleComponent from '@/components/title/TitleComponent.vue'
+import NumberComponent from '@/components/numbers/NumberComponent.vue'
 </script>
 
 <template>
-  <div class="presentation-container">
-    <div class="presentation-grid">
+  <div class="presentation">
+    <div class="presentation__grid">
       <div class="title-section">
         <TitleComponent uppercase>
           UX-REPUBLIC
@@ -17,13 +18,14 @@ import TitleComponent from '@/components/title/TitleComponent.vue'
         </p>
       </div>
     </div>
+    <NumberComponent />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.presentation-container {
+.presentation {
   width: 100%;
-  max-width: 1260px;
+  max-width: var(--max-section-width);
   margin: 0 auto;
   padding: 2rem 1rem;
 
@@ -32,65 +34,58 @@ import TitleComponent from '@/components/title/TitleComponent.vue'
   }
 
   @include mq(desktop) {
-    padding: 1rem 5.625rem;
+    padding: 7.25rem 0 17.5rem;
   }
 
-  @include mq(large) {
-    padding: 1rem 5.625rem;
-  }
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    width: 100%;
 
-  @include mq(xlarge) {
-    padding: 1rem 5.625rem;
-  }
-}
-
-.presentation-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1.5rem;
-  align-items: start;
-  width: 100%;
-
-  // Mobile first - 1 colonne
-  .title-section,
-  .description-section {
-    grid-column: span 12;
-  }
-
-  // Tablet
-  @include mq(tablet) {
-    gap: 2rem;
-
+    // Mobile first - 1 colonne
     .title-section,
     .description-section {
       grid-column: span 12;
     }
-  }
 
-  // Desktop
-  @include mq(desktop) {
-    gap: 2rem;
-    align-items: start;
+    // Tablet
+    @include mq(tablet) {
+      gap: 2rem;
 
-    .title-section {
-      grid-column: 1 / span 6;
-      text-align: left;
+      .title-section,
+      .description-section {
+        grid-column: span 12;
+      }
     }
 
-    .description-section {
-      grid-column: 7 / span 6;
-      text-align: left;
+    // Desktop
+    @include mq(desktop) {
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 13.125rem;
+
+      .title-section {
+        grid-column: 1 / span 6;
+        text-align: left;
+      }
+
+      .description-section {
+        grid-column: 7 / span 6;
+        text-align: left;
+      }
     }
-  }
 
-  // Large screens
-  @include mq(large) {
-    gap: 2.6875rem; // 43px
-  }
+    // Large screens
+    @include mq(large) {
+      gap: 2.6875rem; // 43px
+    }
 
-  // XLarge screens
-  @include mq(xlarge) {
-    gap: 3rem;
+    // XLarge screens
+    @include mq(xlarge) {
+      gap: 3rem;
+    }
   }
 }
 

@@ -3,7 +3,6 @@ import FakeSection from '@/components/faker/FakeSection.vue'
 import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
-import NumberComponent from '@/components/numbers/NumberComponent.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
 import FooterSection from '@/components/footer/FooterSection.vue'
 
@@ -12,7 +11,6 @@ useDefaultSeo('home')
 <template>
   <main class="main-section">
     <PresentationHero />
-    <NumberComponent />
     <FakeSection color="teal" />
     <ProjectGrid />
     <FakeSection color="teal" />
