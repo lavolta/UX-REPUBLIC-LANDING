@@ -1,46 +1,18 @@
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { useScroll } from '@vueuse/core'
+import { computed } from 'vue'
 
-const isVisible = ref(false)
-const isScrollingUp = ref(false)
-let lastScrollY = 0
+// si tu veux écouter sur la fenêtre entière
+const { arrivedState } = useScroll(window)
 
-const handleScroll = () => {
-  const currentScrollY = window.scrollY
-  const windowHeight = window.innerHeight
-  const documentHeight = document.documentElement.scrollHeight
-
-  if (currentScrollY + windowHeight >= documentHeight - 100) {
-    isVisible.value = true
-    isScrollingUp.value = false
-  }
-  else if (currentScrollY < lastScrollY.value) {
-    isScrollingUp.value = true
-  }
-  else {
-    isVisible.value = false
-    isScrollingUp.value = false
-  }
-
-  lastScrollY = currentScrollY
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  handleScroll()
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+const isBottom = computed(() => arrivedState.bottom)
 </script>
 
 <template>
   <div
     class="contact"
     :class="{
-      'visible': isVisible,
-      'scrolling-up': isScrollingUp
+      'visible': isBottom
     }"
   >
     <span class="contact-title">
@@ -51,58 +23,27 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .contact {
-  position: relative;
-  bottom: -180px;
+  position: absolute;
+  bottom: 0;
   left: 0;
   width: 100%;
   overflow: hidden;
-  transition: all 0.8s ease;
-  opacity: 0%;
+  transform: translateY(100%);
+  transition: transform 0.4s ease-in-out;
+  line-height: 1;
   text-align: center;
 
   &.visible {
-    bottom: -160px;
-    opacity: 90%;
-  }
-
-  &.scrolling-up {
-    animation: gentle-sway 3s ease-in-out infinite;
-    opacity: 70%;
+    transform: translateY(25%);
   }
 
   &-title {
-    display: inline-block;
-    min-width: 100%;
-    margin: 0;
-    padding: 0;
-    transition: transform 0.4s ease;
+    display: block;
     color: #22252C;
     font-size: 14.375rem;
     font-weight: 400;
-    text-transform: uppercase;
+    line-height: 1;
     white-space: nowrap;
-  }
-}
-
-@keyframes gentle-sway {
-  0% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-4px);
-  }
-
-  50% {
-    transform: translateX(2px);
-  }
-
-  75% {
-    transform: translateX(-2px);
-  }
-
-  100% {
-    transform: translateX(0);
   }
 }
 

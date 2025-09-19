@@ -37,6 +37,9 @@ console.log('items', items)
 </template>
 <style lang="scss" scoped>
 .news {
+  position: relative;
+  overflow: hidden;
+
   --item-size: 25%;
 
   &__inner {
