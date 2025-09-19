@@ -16,6 +16,7 @@ useDefaultSeo('home')
     <FakeSection color="teal" />
     <NewsGrid />
   </main>
+
   <FooterSection />
 </template>
 
