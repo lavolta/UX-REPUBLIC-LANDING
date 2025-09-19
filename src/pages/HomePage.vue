@@ -5,11 +5,13 @@ import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
 import FooterSection from '@/components/footer/FooterSection.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 
 useDefaultSeo('home')
 </script>
 <template>
   <main class="main-section">
+    <HeroBanner />
     <PresentationHero />
     <FakeSection color="teal" />
     <ProjectGrid />
