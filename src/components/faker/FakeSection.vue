@@ -1,5 +1,8 @@
+<script lang="ts" setup>
+defineProps<{ color: string }>()
+</script>
 <template>
-  <section>
+  <section :style="`background-color:${color};`">
     <slot />
   </section>
 </template>

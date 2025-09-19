@@ -2,14 +2,15 @@
   --color-primary: #3498db;
   --color-secondary: #2ecc71;
   --color-background: #f9f9f9;
-  --color-text: #333333;
   --color-bg-dark: #181C23;
+  --color-bg-footer: #22262D;
   --color-white: #ffffff;
+  --color-border: #2F3339;
+  --color-text-grey: #858585;
 
     /* Typo – familles */
-  --font-sans: "Inter", system-ui, -apple-system, segoe ui, roboto, sans-serif;
-  --font-heading: "Montserrat", var(--font-sans);
-  --font-heading-temporary: "Helvetica", var(--font-sans);
+  --font-sans: "Bricolage Grotesque", sans-serif;
+  --font-heading: var(--font-sans);
   --font-style: normal;
   --font-optical-size: auto;
 
@@ -23,4 +24,8 @@
   /* Raccourcis utiles */
   --font-body: var(--font-sans);
   --font-title: var(--font-heading);
+  --color-bg: var(--color-bg-dark);
+  --color-text: var(--color-white);
+  --max-section-width: 78.75rem;
+  --color-btn-border: #555555;
 }

@@ -6,3 +6,16 @@ export interface HeroBannerTextInterface {
   text: string
   isSpecialStyle: boolean
 }
+
+export type NewsItemType = GridItemImageInterface | GridItemTextInterface
+export interface GridItemImageInterface {
+  image: PictureInterface
+  type: 'img'
+}
+export interface GridItemTextInterface {
+  title: string
+  text: string
+  date: string
+  href: string
+  type: 'text'
+}

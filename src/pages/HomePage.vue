@@ -1,68 +1,48 @@
 <script lang="ts" setup>
-import { useDefaultSeo } from '@/composable/useDefaultSeo'
-import FakeCardSticky from '@/components/faker/FakerCardSticky.vue'
 import FakeSection from '@/components/faker/FakeSection.vue'
-import FakeHeadline from '@/components/faker/FakerHeadline.vue'
-import NavbarComponent from '@/components/navbar/NavbarComponent.vue'
-import HeroStyle1 from '@/components/faker/hero/HeroStyle1.vue'
-import ButtonComponent from '@/components/button/ButtonComponent.vue'
-import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
+import NewsGrid from '@/components/news-grid/NewsGrid.vue'
+import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
+import PresentationHero from '@/components/presentation/PresentationHero.vue'
+import FooterSection from '@/components/footer/FooterSection.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
+import { useDefaultSeo } from '@/composable/useDefaultSeo'
 
-const fakeContent = {
-  title: 'Créateur d\'expériences performantes centrées utilisateurs',
-  subtitle: 'Précurseurs du design à Paris, nous avons grandi avec audace. Aujourd’hui, dans un paysage où les discours se ressemblent, nous choisissons de nous réinventer. Fidèles à nos valeurs — innovation, proximité, pragmatisme et partage — nous affirmons une nouvelle ambition : créer des expériences justes, utiles, performantes et profondément humaines.',
-}
 useDefaultSeo('home')
-
-const handleCtaClick = (index) => {
-  console.log(`CTA ${index} a été cliqué`)
-  // Ici vous pouvez ajouter la logique pour chaque CTA
-}
 </script>
 <template>
-  <StickyLogoHover
-    :logos="[
-      '/logos/logo.svg',
-      '/logos/logo-2.svg',
-      '/logos/logo-3.svg',
-      '/logos/logo-4.svg',
-      '/logos/logo-5.svg',
-      '/logos/logo-6.svg',
-      '/logos/logo-7.svg',
-      '/logos/logo-8.svg',
-      '/logos/logo-9.svg',
-      '/logos/logo-10.svg'
-    ]"
-    alt-text="ux-republic"
-  />
-  <HeroStyle1 />
-  <FakeSection>
-    <FakeHeadline
-      :title="fakeContent.title"
-      :subtitle="fakeContent.subtitle"
-    />
-  </FakeSection>
-  <FakeSection>
-    <NavbarComponent @cta-click="handleCtaClick" />
-    <ButtonComponent
-      type="primary"
-      size="large"
-    >
-      <span>{{ $t('button.contactCta') }}</span>
-    </ButtonComponent>
-    <ButtonComponent
-      type="warning"
-      size="large"
-    >
-      <span>{{ $t('tags.accessibility') }}</span>
-    </ButtonComponent>
-  </FakeSection>
-  <FakeCardSticky />
-  <FakeSection />
+  <main class="main-section">
+    <HeroBanner />
+    <PresentationHero />
+    <FakeSection color="teal" />
+    <ProjectGrid />
+    <FakeSection color="teal" />
+    <NewsGrid />
+  </main>
+  <FooterSection />
 </template>
 
 <style lang="scss" scoped>
-p {
-  color: var(--testing-color);
+.main-section {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 42.3125rem;
+  background-color: var(--color-bg);
+
+}
+
+.main-content {
+  padding-bottom: 400px; // Correspond à la hauteur du footer
+
+  @include mq(tablet) {
+    padding-bottom: 350px;
+  }
+
+  @include mq(mobile) {
+    padding-bottom: 300px;
+  }
+
+  @include mq(mobile-small) {
+    padding-bottom: 250px;
+  }
 }
 </style>
