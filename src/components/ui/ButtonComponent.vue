@@ -20,7 +20,7 @@ withDefaults(defineProps<Props>(), {
 </template>
 
 <style lang="scss" scoped>
-.button {
+.uibutton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
