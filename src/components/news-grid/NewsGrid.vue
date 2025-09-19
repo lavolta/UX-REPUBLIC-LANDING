@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
+import ContactAnimation from '../contact/ContactAnimation.vue'
 import { useI18n } from 'vue-i18n'
 const { tm } = useI18n()
 const items = tm('news.items')
@@ -31,10 +32,14 @@ console.log('items', items)
         </div>
       </div>
     </div>
+    <ContactAnimation />
   </section>
 </template>
 <style lang="scss" scoped>
 .news {
+  position: relative;
+  overflow: hidden;
+
   --item-size: 25%;
 
   &__inner {
@@ -77,5 +82,4 @@ console.log('items', items)
     }
   }
 }
-
 </style>

@@ -7,6 +7,13 @@ const disabledNavMenu = ref(false)
 
 const { y, directions } = useScroll(window)
 
+const handlscroll = () => {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth',
+  })
+}
+
 watchEffect(() => {
   if (y.value <= 0) {
     disabledNavMenu.value = false
@@ -32,10 +39,11 @@ watchEffect(() => {
           href="#"
           traget="_blank"
         >Rejoignez-nous</a>
-        <a
-          href="#"
-          traget="_blank"
-        >Contactez-nous</a>
+        <button
+          @click="handlscroll"
+        >
+          Contactez-nous
+        </button>
       </nav>
     </div>
   </header>
@@ -73,8 +81,10 @@ watchEffect(() => {
       transform: translateY(var(--nav-translate-y));
     }
 
-    > a {
+    > a,
+    > button {
       display: block;
+      background-color: transparent;
       font-size: 1rem;
       font-weight: 200;
 
