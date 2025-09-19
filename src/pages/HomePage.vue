@@ -2,14 +2,18 @@
 import FakeSection from '@/components/faker/FakeSection.vue'
 import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
-import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
 import FooterSection from '@/components/footer/FooterSection.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
+import HeaderComponent from '@/components/header/HeaderComponent.vue'
+import { useDefaultSeo } from '@/composable/useDefaultSeo'
 
 useDefaultSeo('home')
 </script>
 <template>
+  <HeaderComponent />
   <main class="main-section">
+    <HeroBanner />
     <PresentationHero />
     <FakeSection color="teal" />
     <ProjectGrid />
