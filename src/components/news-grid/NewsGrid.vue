@@ -43,7 +43,7 @@ console.log('items', items)
 
     // max-width: 1356px;
     margin: 0 auto;
-    padding: 9.1875rem 0;
+    padding: 9.1875rem 0 23.3125rem;
   }
 
   &__title {
