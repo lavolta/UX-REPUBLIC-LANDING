@@ -26,3 +26,10 @@ export interface XpItemInterface {
   mainpicture: PictureInterface
   secondarypicture: PictureInterface
 }
+
+export interface AgencyItemInterface {
+  title: string
+  address: string
+  email?: string
+  picture: PictureInterface
+}

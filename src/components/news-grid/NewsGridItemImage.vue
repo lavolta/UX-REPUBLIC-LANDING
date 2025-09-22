@@ -17,6 +17,7 @@ defineProps<{ picture: PictureInterface }>()
 
   > img {
     display: block;
+    border-radius: 3px;
   }
 
   &:hover {

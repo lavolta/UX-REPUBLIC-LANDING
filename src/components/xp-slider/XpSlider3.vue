@@ -280,7 +280,7 @@ useSwipe(xpSection, {
   position: relative;
   width: 100%;
   height: 100vh;
-  overscroll-behavior: contain; /* empêche la propagation au viewport */
+  overscroll-behavior: contain;
   touch-action: pan-x;
 
   // background-color: rgb(170 42 42);
@@ -393,6 +393,7 @@ useSwipe(xpSection, {
       width: 100%;
       height: 100%;
       transition: var(--transition-timing);
+      border-radius: 3px;
 
       &.actif {
         top: 0;
