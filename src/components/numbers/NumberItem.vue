@@ -13,7 +13,7 @@ defineProps<Props>()
 
 <template>
   <div class="stat-item">
-    <div class="title-line" />
+    <!-- <div class="title-line" /> -->
     <TitleComponent
       uppercase
       class="stat-title"
@@ -45,20 +45,26 @@ defineProps<Props>()
   }
 }
 
-.title-line {
-  width: 100%;
-  height: 1px;
-  margin-bottom: 1rem;
-  background-color: #2F3339;
-
-  @include mq(tablet) {
-    margin-bottom: 1.25rem;
-  }
-
-  @include mq(desktop) {
-    margin-bottom: 1.5625rem;
-  }
+.stat-title {
+    width: 12.5rem;
+    padding-top: 1.75rem;
+    border-top: 0.063rem solid #2F3339;
 }
+
+// .title-line {
+//   width: 100%;
+//   height: 1px;
+//   margin-bottom: 1rem;
+//   background-color: #2F3339;
+
+//   @include mq(tablet) {
+//     margin-bottom: 1.25rem;
+//   }
+
+//   @include mq(desktop) {
+//     margin-bottom: 1.5625rem;
+//   }
+// }
 
 // Responsive adjustments
 @include mq(mobile-small) {
