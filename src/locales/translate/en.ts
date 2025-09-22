@@ -78,7 +78,7 @@ export const en = {
         type: 'img',
         image: {
           alt: 'test',
-          href: '/images/project/project-item-media-1.gif',
+          href: '/images/clients/news-image-1.webp',
         },
       },
       {
@@ -96,11 +96,8 @@ export const en = {
         type: 'text',
       },
       {
-        type: 'img',
-        image: {
-          alt: 'test',
-          href: '/images/clients/mbappe.gif',
-        },
+        type: 'social',
+        socialType: 'linkedin',
       },
       {
         title: 'Midjourney Vidéo : Quand l’IA révolutionne aussi la vidéo !',
@@ -110,11 +107,8 @@ export const en = {
         type: 'text',
       },
       {
-        type: 'img',
-        image: {
-          alt: 'test',
-          href: '/images/clients/mouvingbg.gif',
-        },
+        type: 'social',
+        socialType: 'youtube',
       },
     ],
   },

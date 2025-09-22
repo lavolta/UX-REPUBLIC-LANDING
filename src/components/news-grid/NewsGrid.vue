@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
+import NewGridSocialItem from './NewGridSocialItem.vue'
 import ContactAnimation from '../contact/ContactAnimation.vue'
 import { useI18n } from 'vue-i18n'
 const { tm } = useI18n()
@@ -27,6 +28,10 @@ const items = tm('news.items')
           <NewsGridItemImage
             v-else-if="item.type === 'img'"
             :picture="item.image"
+          />
+          <NewGridSocialItem
+            v-else-if="item.type === 'social'"
+            :type="item.socialType"
           />
         </div>
       </div>
