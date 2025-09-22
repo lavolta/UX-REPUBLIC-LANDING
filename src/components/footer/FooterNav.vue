@@ -1,19 +1,18 @@
 <!-- components/footer/FooterNav.vue -->
 <script setup lang="ts">
-import { ref } from 'vue'
 import LinkedinIcon from '../icons/LinkedinIcon.vue'
 import YoutubeIcon from '../icons/YoutubeIcon.vue'
 
-const footerLinks = ref([
+const footerLinks = [
   { text: 'Informations Légales', url: '#legal' },
   { text: 'Politique de Confidentialité (RGPD)', url: '#privacy' },
   { text: 'Mentions légales', url: '#mentions' },
-])
+]
 
-const socialLinks = ref([
+const socialLinks = [
   { icon: LinkedinIcon, url: '#linkedin' },
   { icon: YoutubeIcon, url: '#youtube' },
-])
+]
 </script>
 
 <template>
