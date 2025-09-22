@@ -19,3 +19,10 @@ export interface GridItemTextInterface {
   href: string
   type: 'text'
 }
+
+export interface XpItemInterface {
+  title: string
+  text: string
+  mainpicture: PictureInterface
+  secondarypicture: PictureInterface
+}

@@ -96,15 +96,11 @@ useEventListener(xpSection, 'wheel', (e) => {
   const scollingBottom = e.deltaY > 0
   const tempPos = scollingBottom ? translatePosition.value + 30 : translatePosition.value - 30
   translatePosition.value = tempPos <= 0 ? 0 : tempPos
-
-  console.log('scollingBottom', scollingBottom)
-  console.log('translatePosition.value', translatePosition.value)
 }, { passive: false })
 
 useResizeObserver(xpbgcontainer, (entries) => {
   const entry = entries[0]
   bgContainerHeight.value = entry.contentRect.height
-  console.log('Nouvelle hauteur détectée :', bgContainerHeight.value)
 })
 
 </script>

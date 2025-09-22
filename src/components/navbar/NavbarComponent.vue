@@ -19,7 +19,6 @@ const handleFirstHover = () => {
   if (!animationPlayed.value) {
     setTimeout(() => {
       animationPlayed.value = true
-      console.log('Animations disabled after first hover')
     }, 1200)
   }
 }
