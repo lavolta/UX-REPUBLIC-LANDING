@@ -159,6 +159,7 @@ useEventListener(xpSection, 'wheel', (e) => {
           <span>
             0{{ key + 1 }}
           </span>
+          <!-- eslint-disable vue/no-v-html -->
           <span v-html="item.title" />
         </p>
       </div>
