@@ -84,12 +84,14 @@ watchEffect(() => {
     > a,
     > button {
       display: block;
+      padding: 1rem 1.563rem;
       background-color: transparent;
       font-size: 1rem;
       font-weight: 200;
 
       &:hover {
-        text-decoration: underline;
+        border-radius: 2.563rem;
+        background-color: #555555;
       }
 
       &:not(:last-child) {
