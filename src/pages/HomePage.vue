@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import FakeSection from '@/components/faker/FakeSection.vue'
 import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
@@ -8,17 +7,20 @@ import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import AgenciesComponent from '@/components/agencies/AgenciesComponent.vue'
+import XpSlider from '@/components/xp-slider/XpSlider3.vue'
 
 useDefaultSeo('home')
 </script>
 <template>
   <HeaderComponent />
-  <main class="main-section">
+  <main
+    ref="mainSection"
+    class="main-section"
+  >
     <HeroBanner />
     <PresentationHero />
-    <FakeSection color="teal" />
+    <XpSlider />
     <ProjectGrid />
-    <FakeSection color="teal" />
     <AgenciesComponent />
     <NewsGrid />
   </main>
