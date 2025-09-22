@@ -30,7 +30,7 @@ export const xpItems: XpItemInterface[] = [
     },
   },
   {
-    title: 'Anticiper <br>>les usages <br>>futurs',
+    title: 'Anticiper <br>les usages <br>futurs',
     text: 'Gardez une longueur d’avance en créant des solutions avant-gardistes et en explorant sans cesse de nouvelles idées.',
     mainpicture: {
       alt: '',
