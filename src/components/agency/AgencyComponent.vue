@@ -5,32 +5,72 @@ import {
   computed,
   onMounted,
   watch,
+  useTemplateRef,
 
 } from 'vue'
-import { useWindowSize } from '@vueuse/core'
+import {
+  useWindowSize,
+  useElementVisibility,
+  useElementBounding,
+  useWindowScroll,
+  useThrottleFn,
+} from '@vueuse/core'
 
 const items = ref(agencyItems)
 const { height: windowHeight } = useWindowSize()
+
+const agencySection = useTemplateRef('agencySection')
+const agencySectionInView = useElementVisibility(agencySection)
+const { y: windowsYScroll } = useWindowScroll()
+const { top: agencySectionTop } = useElementBounding(agencySection)
 
 const itemActif = ref(0)
 const prevActif = ref(0)
 const hasMounted = ref(false)
 const inTransition = ref(false)
 const out = ref(false)
-
 const SPEED_PX_PER_S = 1400
 
 const distancePx = computed(() =>
   Math.abs(itemActif.value - prevActif.value) * windowHeight.value,
 )
+const isAgencySectionFitToOfTheScreen = computed(() => {
+  return !(Math.abs(agencySectionTop.value) > 1)
+})
+const snapSectionToTop = useThrottleFn(() => {
+  if (!window) return
+  const offset = agencySectionTop?.value // distance entre le haut de la section et le haut du viewport
+  window.scrollTo({
+    top: windowsYScroll.value + offset, // aligne le haut de la section à 0
+    behavior: 'smooth',
+  })
+}, 300)
 
-watch(itemActif, (n, o) => {
-  // mémorise la slide précédente pour calculer la distance
-  prevActif.value = o ?? 0
+const pickRandomThemeIndex = (exclude: number | null) => {
+  let n = 1 + Math.floor(Math.random() * THEME_COUNT) // 1..5
+  while (exclude !== null && n === exclude) {
+    n = 1 + Math.floor(Math.random() * THEME_COUNT)
+  }
+  return n
+}
+const setThemeForActifItem = () => {
+  const idx = pickRandomThemeIndex(lastThemeIdx.value)
+  lastThemeIdx.value = idx
+  activeTheme.value = `theme-${idx}`
+}
+watch(agencySectionInView, (newState) => {
+  console.log('agencySectionInView :', newState)
+  if (newState) {
+    snapSectionToTop()
+  }
+})
+watch(itemActif, (newIndex, oldIndex) => {
+  prevActif.value = oldIndex ?? 0
+  setThemeForActifItem()
 })
 
 const durationSec = computed(() => {
-  if (!hasMounted.value) return 0 // pas d'anim à l'initialisation
+  if (!hasMounted.value) return 0
   const raw = distancePx.value / SPEED_PX_PER_S
   const min = 0.18
   const max = 1.2
@@ -38,6 +78,12 @@ const durationSec = computed(() => {
 })
 
 const setActifItem = (key: number) => {
+  if (key === itemActif.value) {
+    return
+  }
+  if (!isAgencySectionFitToOfTheScreen.value) {
+    snapSectionToTop()
+  }
   if (inTransition.value) {
     return
   }
@@ -50,6 +96,7 @@ const setActifItem = (key: number) => {
     out.value = false
   }, 10)
 }
+
 const randomTilt = (min = -10, max = 10, excludeAbsBelow = 2): number => {
   let n = 0
   do {
@@ -67,6 +114,16 @@ const handleClickOnAgencySection = () => {
   }
   setActifItem(tempActifItem)
 }
+
+const THEME_COUNT = 5
+
+const activeTheme = ref<string>('theme-1')
+const lastThemeIdx = ref<number | null>(null)
+
+const classForItem = (key: number) => ([
+  { actif: key === itemActif.value, out: out.value && key === itemActif.value },
+  key === itemActif.value && activeTheme.value,
+])
 onMounted(() => {
   hasMounted.value = true
   activeTilt.value = randomTilt()
@@ -74,6 +131,7 @@ onMounted(() => {
 </script>
 <template>
   <section
+    ref="agencySection"
     class="agency"
   >
     <p class="agency__sectiontitle section-title">
@@ -87,10 +145,7 @@ onMounted(() => {
         v-for="(item, key) in items"
         :key="`agency-item-${key}`"
         class="agency-item"
-        :class="{
-          'actif': key === itemActif,
-          'out': out && key === itemActif
-        }"
+        :class="classForItem(key)"
       >
         <h2 class="agency-item__title">
           <span

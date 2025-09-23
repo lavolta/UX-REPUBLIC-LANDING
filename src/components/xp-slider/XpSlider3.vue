@@ -38,6 +38,9 @@ watch(morThanThirdPartOnScreen, (newValue) => {
 })
 
 const scrollOutsideOfXpSection = (goingToBottomOfTheSection: boolean) => {
+  if (!window) {
+    return
+  }
   let offset
   if (goingToBottomOfTheSection) {
     offset = y.value + xpSectionHeight.value
@@ -52,6 +55,9 @@ const scrollOutsideOfXpSection = (goingToBottomOfTheSection: boolean) => {
 }
 
 const scrollToTopOfXpSection = () => {
+  if (!window) {
+    return
+  }
   const offset = y.value + xpSectionTop?.value
   window.scrollTo({
     top: offset, // aligne le haut de la section à 0
@@ -139,6 +145,9 @@ watch([() => lockUserOnSlider.value, isSectionAligned], () => {
 })
 
 const alignSectionInstant = () => {
+  if (!window) {
+    return
+  }
   // Scroll instantané (pas 'smooth') = pas d’inertie parasite
   const offset = y.value + (xpSectionTop?.value || 0)
   window.scrollTo({ top: offset, behavior: 'auto' })
