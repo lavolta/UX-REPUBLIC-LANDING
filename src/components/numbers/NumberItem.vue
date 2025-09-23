@@ -13,61 +13,44 @@ defineProps<Props>()
 
 <template>
   <div class="stat-item">
-    <div class="title-line" />
-    <TitleComponent
-      uppercase
-      class="stat-title"
-    >
-      {{ title }}
-    </TitleComponent>
-    <NumberComponent
-      :value="value"
-      class="stat-number"
-    />
+    <div class="stat-item__inner">
+      <TitleComponent
+        uppercase
+        class="stat-item__title"
+      >
+        {{ title }}
+      </TitleComponent>
+      <NumberComponent
+        :value="value"
+        class="stat-item__number"
+      />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-
-  @include mq(tablet) {
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  @include mq(desktop) {
-    align-items: flex-start;
-    gap: 1.5625rem;
-  }
-}
-
-.title-line {
   width: 100%;
-  height: 1px;
-  margin-bottom: 1rem;
-  background-color: #2F3339;
+  border-top: solid 1px var(--color-btn-border);
 
-  @include mq(tablet) {
-    margin-bottom: 1.25rem;
+  &__inner {
+    padding: 1.5625rem 0;
   }
 
-  @include mq(desktop) {
-    margin-bottom: 1.5625rem;
-  }
-}
-
-// Responsive adjustments
-@include mq(mobile-small) {
-  .stat-item {
-    gap: 0.75rem;
+  &__title {
+    margin-bottom: 2.9375rem;
+    letter-spacing: 1px;
   }
 
-  .title-line {
-    margin-bottom: 0.75rem;
+  &__number {
+    font-size: 3.125rem;
+    line-height: 1.4063rem;
+
+    @include mq(desktop) {
+      font-size: 6.25rem;
+      line-height: 2.8125rem;
+    }
   }
 }
+
 </style>

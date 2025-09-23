@@ -29,17 +29,20 @@ import NumberItem from '@/components/numbers/NumberItem.vue'
 <style lang="scss" scoped>
 .stats {
   display: flex;
+  gap: 0;
   flex-wrap: wrap;
-  align-items: flex-start;
 
   @include mq(desktop) {
     flex-wrap: nowrap;
-    gap: 0 2.6875rem;
+     gap: 0 2.6875rem;
   }
 
-  .stat-item {
-    width: 50%;
-    padding: 1.875rem;
+  >div {
+    width: 100%;
+
+    @include mq(tablet) {
+      width: 50%;
+    }
 
     @include mq(desktop) {
       width: 25%;

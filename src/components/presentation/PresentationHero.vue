@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import TitleComponent from '@/components/title/TitleComponent.vue'
 import NumberComponent from '@/components/numbers/NumberComponent.vue'
 </script>
 
 <template>
   <div class="presentation">
     <div class="presentation__grid">
-      <div class="title-section">
-        <TitleComponent uppercase>
-          UX-REPUBLIC
-        </TitleComponent>
-      </div>
+      <p class="presentation__sectionTitle section-title">
+        UX-REPUBLIC
+      </p>
 
-      <div class="description-section">
-        <p class="description">
+      <div class="presentation__content">
+        <p>
           Dompteur d'expériences qui mettent l'utilisateur au centre. Précurseurs du design à Paris, nous avons grandi avec audace. Aujourd'hui, dans un paysage où les discours se ressemblent, nous choisissons de nous réinventer. Fidèles à nos valeurs — innovation, proximité, pragmatisme et partage — nous affirmons une nouvelle ambition : créer des expériences justes, utiles, performantes et profondément humaines.
         </p>
       </div>
@@ -27,111 +24,54 @@ import NumberComponent from '@/components/numbers/NumberComponent.vue'
   width: 100%;
   max-width: var(--max-section-width);
   margin: 0 auto;
-  padding: 2rem 1rem;
-
-  @include mq(tablet) {
-    padding: 1rem 2rem;
-  }
+  padding: 4rem 2rem;
 
   @include mq(desktop) {
-    padding: 7.25rem 0 17.5rem;
+    padding: 7.25rem 0 15.9375rem;
+  }
+
+  &__sectionTitle {
+    margin-bottom: 2rem;
+    line-height: 1;
+
+    @include mq(desktop) {
+      margin-bottom: 0;
+      line-height: 2.8125rem;
+    }
   }
 
   &__grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
     align-items: start;
-    width: 100%;
+    margin-bottom: 4rem;
 
-    // Mobile first - 1 colonne
-    .title-section,
-    .description-section {
-      grid-column: span 12;
-    }
-
-    // Tablet
-    @include mq(tablet) {
-      gap: 2rem;
-
-      .title-section,
-      .description-section {
-        grid-column: span 12;
-      }
-    }
-
-    // Desktop
     @include mq(desktop) {
-      gap: 2rem;
-      align-items: start;
       margin-bottom: 13.125rem;
+    }
 
-      .title-section {
-        grid-column: 1 / span 6;
-        text-align: left;
-      }
+    >* {
+      width: 100%;
 
-      .description-section {
-        grid-column: 7 / span 6;
-        text-align: left;
+      @include mq(desktop) {
+        width: 50%;
       }
     }
+  }
 
-    // Large screens
-    @include mq(large) {
-      gap: 2.6875rem; // 43px
+  &__content {
+    p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 200;
+      line-height: 2rem;
+
+      @include mq(desktop) {
+        font-size: 2rem;
+        line-height: 2.8125rem;
+      }
     }
-
-    // XLarge screens
-    @include mq(xlarge) {
-      gap: 3rem;
-    }
   }
 }
 
-.description {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 1.25rem; // 20px mobile
-  font-style: normal;
-  font-weight: 200;
-  letter-spacing: 0%;
-  line-height: 1.4;
-
-  // Tablet
-  @include mq(tablet) {
-    font-size: 1.5rem; // 24px
-    line-height: 1.5;
-  }
-
-  // Desktop (1024px+) - 24px
-  @include mq(desktop) {
-    font-size: 1.5rem; // 24px
-    line-height: 1.5;
-  }
-
-  // Large (1280px+) - 32px
-  @include mq(large) {
-    font-size: 2rem; // 32px
-    line-height: 1.5;
-  }
-
-  // XLarge (1440px+) - Peut-être ajuster si nécessaire
-  @include mq(xlarge) {
-    font-size: 2rem; // Reste à 32px ou augmentez si besoin
-    line-height: 1.5;
-  }
-}
-
-// Ajustements responsive supplémentaires
-@include mq(mobile-small) {
-  .presentation-container {
-    padding: 1.5rem 0.75rem;
-  }
-
-  .description {
-    font-size: 1.125rem;
-    line-height: 1.35;
-  }
-}
 </style>
