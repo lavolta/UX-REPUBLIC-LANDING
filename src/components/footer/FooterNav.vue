@@ -3,15 +3,9 @@
 import LinkedinIcon from '../icons/LinkedinIcon.vue'
 import YoutubeIcon from '../icons/YoutubeIcon.vue'
 
-const footerLinks = [
-  { text: 'Informations Légales', url: '#legal' },
-  { text: 'Politique de Confidentialité (RGPD)', url: '#privacy' },
-  { text: 'Mentions légales', url: '#mentions' },
-]
-
 const socialLinks = [
-  { icon: LinkedinIcon, url: '#linkedin' },
-  { icon: YoutubeIcon, url: '#youtube' },
+  { icon: LinkedinIcon, url: 'https://www.linkedin.com/company/ux-republic' },
+  { icon: YoutubeIcon, url: 'https://www.youtube.com/@UXREPUBLICParis' },
 ]
 </script>
 
@@ -28,35 +22,19 @@ const socialLinks = [
         </p>
       </div>
 
-      <!-- Right: nav + social -->
+      <!-- Right: social -->
       <div class="footer__nav">
-        <nav
-          class="footer__nav-links"
-          aria-label="Liens de pied de page"
+        <a
+          v-for="social in socialLinks"
+          :key="social.url"
+          :href="social.url"
+          class="social-link"
         >
-          <a
-            v-for="link in footerLinks"
-            :key="link.url"
-            :href="link.url"
-            class="footer__nav-links--style"
-          >
-            {{ link.text }}
-          </a>
-        </nav>
-
-        <div class="footer__nav-socials">
-          <a
-            v-for="social in socialLinks"
-            :key="social.url"
-            :href="social.url"
-            class="social-link"
-          >
-            <component
-              :is="social.icon"
-              class="footer__nav-socials--icon"
-            />
-          </a>
-        </div>
+          <component
+            :is="social.icon"
+            class="footer__nav-socials--icon"
+          />
+        </a>
       </div>
     </div>
   </footer>
@@ -80,8 +58,8 @@ const socialLinks = [
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    gap: 6rem;
+    justify-content: stretch;
+    gap: 43rem;
    }
 
    &-copyright {
@@ -99,36 +77,8 @@ const socialLinks = [
     flex-direction: row;
     gap: 1rem;
 
-   @include mq(desktop) {
-    justify-content: flex-end;
-    gap: 3rem;
-    }
-
-    &-links {
-      display: flex;
-      flex-direction: column;
-      margin-top: 0.5rem;
-
-      @include mq(desktop) {
-        display: flex;
-        flex-direction: row;
-        gap: 2.5rem;
-        align-items: center;
-        margin-top: 0;
-      }
-
-      &--style {
-        font-size: 0.875rem;
-        font-weight: 300;
-        line-height: 1.19;
-        text-decoration: none;
-        white-space: nowrap;
-
-        // &:hover {
-        //   opacity: 100%;
-        //   text-decoration: underline;
-        // }
-      }
+    @include mq(desktop) {
+     justify-content: flex-end;
     }
 
     &-socials {

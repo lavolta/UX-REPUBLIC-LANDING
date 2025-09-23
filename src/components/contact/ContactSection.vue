@@ -10,12 +10,6 @@
       les solutions qui vous conviennent.
     </h2>
     <div class="contact__cta">
-      <!-- <a
-        class="button"
-        href="#_"
-      >
-        par email ?
-      </a> -->
       <a
         class="button"
         href="#_"
