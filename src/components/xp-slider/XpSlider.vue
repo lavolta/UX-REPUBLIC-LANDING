@@ -242,7 +242,7 @@ useSwipe(xpSection, {
           class="xp__title"
           :class="{'actif': activeSlide === key}"
         >
-          <span>
+          <span class="xp__number">
             0{{ key + 1 }}
           </span>
           <!-- eslint-disable vue/no-v-html -->
@@ -292,8 +292,6 @@ useSwipe(xpSection, {
   height: 100vh;
   overscroll-behavior: contain;
   touch-action: pan-x;
-
-  // background-color: rgb(170 42 42);
   overflow: hidden;
 
   &__debugger {
@@ -310,10 +308,14 @@ useSwipe(xpSection, {
     position: absolute;
     z-index: 3;
     top: 3.125rem;
-    left: 50%;
+    left: 2rem;
     width: 100%;
     max-width: var(--max-section-width);
-    transform: translateX(-50%);
+
+    @include mq(desktop) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   &__bg {
@@ -340,16 +342,39 @@ useSwipe(xpSection, {
     display: flex;
     position: relative;
     z-index: 2;
-    align-items: center;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    justify-content: center;
     width: 100%;
     max-width: var(--max-section-width);
     height: 100%;
     margin: 0 auto;
+    padding: 2rem;
+
+    @include mq(desktop) {
+      flex-flow: row nowrap;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 0;
+    }
 
     // background-color: rgb(69 69 104);
 
     >div {
-      width: 33.33%;
+      width: 100%;
+
+      @include mq(desktop) {
+        width: 33.33%;
+      }
+    }
+  }
+
+  &__titlelist {
+    position: relative;
+    margin-bottom: 2rem;
+
+    @include mq(desktop) {
+      margin-bottom: 0;
     }
   }
 
@@ -357,16 +382,15 @@ useSwipe(xpSection, {
     span {
       display: block;
 
-      &:first-child {
-        margin-bottom: 2.1875rem;
-        font-size: 1rem;
-        font-weight: 200;
-      }
-
       &:last-child {
-        font-size: 2.375rem;
+        font-size: 1.19rem;
         font-weight: 400;
-        line-height: 2.8125rem;
+        line-height: 1.41rem;
+
+        @include mq(desktop) {
+          font-size: 2.375rem;
+          line-height: 2.8125rem;
+        }
       }
     }
 
@@ -375,14 +399,35 @@ useSwipe(xpSection, {
     }
   }
 
+  &__number {
+    position: relative;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 200;
+
+    @include mq(desktop) {
+      position: absolute;
+      bottom: calc(100% + 2.1875rem);
+      margin-bottom: 0;
+    }
+  }
+
   &__textlist {
     p {
       width: 100%;
-      max-width: 20.25rem;
-      margin-left: auto;
-      font-size: 1.125rem;
+      margin-top: 2rem;
+      font-size: 1rem;
       font-weight: 300;
-      line-height: 1.875rem;
+      line-height: 1.5rem;
+
+      @include mq(desktop) {
+        max-width: 20.25rem;
+        margin-top: 0;
+        margin-left: auto;
+        font-size: 1.125rem;
+        font-weight: 300;
+        line-height: 1.875rem;
+      }
 
       &:not(.actif) {
         display: none;
@@ -392,9 +437,20 @@ useSwipe(xpSection, {
 
   &__picturelist {
     position: relative;
-    width: 100%;
-    padding-top: 33.33%;
+    width: 15rem!important;
+    height: 15rem;
     overflow: hidden;
+
+    @include mq(tablet) {
+      width: 50%!important;
+      height: auto;
+      padding-top: 50%;
+    }
+
+    @include mq(desktop) {
+      width: 33.33%!important;
+      padding-top: 33.33%;
+    }
 
     > img {
       display: block;

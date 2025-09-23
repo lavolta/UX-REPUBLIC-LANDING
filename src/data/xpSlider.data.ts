@@ -6,7 +6,7 @@ export const xpItems: XpItemInterface[] = [
     text: 'Vos défis deviennent une stratégie claire et actionnable : l’utilisateur placé au cœur de vos projets pour générer un impact fort et mesurable.',
     mainpicture: {
       alt: '',
-      href: '/images/xp-slider/main-1.jpg',
+      href: '/images/xp-slider/main-1.webp',
 
     },
     secondarypicture: {
@@ -20,7 +20,7 @@ export const xpItems: XpItemInterface[] = [
     text: 'Nous transformons vos interfaces en leviers de croissance, grâce à des expériences alliant design, produit et performance pour générer impact.',
     mainpicture: {
       alt: '',
-      href: '/images/xp-slider/main-2.jpg',
+      href: '/images/xp-slider/main-2.webp',
 
     },
     secondarypicture: {
@@ -34,7 +34,7 @@ export const xpItems: XpItemInterface[] = [
     text: 'Gardez une longueur d’avance en créant des solutions avant-gardistes et en explorant sans cesse de nouvelles idées.',
     mainpicture: {
       alt: '',
-      href: '/images/xp-slider/main-3.jpg',
+      href: '/images/xp-slider/main-3.webp',
 
     },
     secondarypicture: {
@@ -48,7 +48,7 @@ export const xpItems: XpItemInterface[] = [
     text: 'Vos équipes montent en puissance grâce à nos formations 100% opérationnelles, pour qu’elles adoptent une culture agile et centrée utilisateur.',
     mainpicture: {
       alt: '',
-      href: '/images/xp-slider/main-4.jpg',
+      href: '/images/xp-slider/main-4.webp',
 
     },
     secondarypicture: {
