@@ -120,10 +120,6 @@ const THEME_COUNT = 5
 const activeTheme = ref<string>('theme-1')
 const lastThemeIdx = ref<number | null>(null)
 
-const classForItem = (key: number) => ([
-  { actif: key === itemActif.value, out: out.value && key === itemActif.value },
-  key === itemActif.value && activeTheme.value,
-])
 onMounted(() => {
   hasMounted.value = true
   activeTilt.value = randomTilt()
@@ -145,7 +141,8 @@ onMounted(() => {
         v-for="(item, key) in items"
         :key="`agency-item-${key}`"
         class="agency-item"
-        :class="classForItem(key)"
+        :data-theme="item.theme"
+        :class="{ actif: key === itemActif, out: out && key === itemActif }"
       >
         <h2 class="agency-item__title">
           <span
@@ -339,32 +336,39 @@ onMounted(() => {
   opacity: 0%;
 
   --animation: transform cubic-bezier(0.68, -0.55, 0.27, 1.55) .5s;
+  --title-color: #3E434C;
 
-  &.theme-1 {
+  &[data-theme="theme-2"] {
     #{$c}__title {
       font-family: Carattere, cursive;
     }
   }
 
-  &.theme-2 {
+  &[data-theme="theme-3"] {
     #{$c}__title {
       font-family: "Bowlby One", sans-serif;
     }
   }
 
-  &.theme-3 {
+  &[data-theme="theme-4"] {
     #{$c}__title {
       font-family: "Dawning of a New Day", cursive;
     }
   }
 
-  &.theme-4 {
+  &[data-theme="theme-5"] {
+    #{$c}__title {
+      font-family: Questrial, sans-serif;
+    }
+  }
+
+  &[data-theme="theme-6"] {
     #{$c}__title {
       font-family: "VT323", monospace;
     }
   }
 
-  &.theme-5 {
+  &[data-theme="theme-7"] {
     #{$c}__title {
       font-family: "Zen Loop", cursive;
     }
@@ -390,9 +394,10 @@ onMounted(() => {
   &__title {
     margin-bottom: 6.375rem;
     overflow: hidden;
+    color: var(--title-color);
     font-size: 14.375rem;
     font-weight: 400;
-    line-height: 1;
+    line-height: 22.4rem;
 
     > span {
       display: block;
