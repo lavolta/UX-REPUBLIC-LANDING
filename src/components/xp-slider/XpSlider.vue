@@ -23,7 +23,7 @@ const activeSlide = ref(0)
 const lockUserOnSlider = ref(false)
 const debug = ref(false)
 
-const stepThreshold = 500 // à ajuster: 120–200 selon la sensibilité souhaitée
+const stepThreshold = 300 // à ajuster: 120–200 selon la sensibilité souhaitée
 const wheelAcc = ref(0) // accumulateur de deltaY
 const edgeArmed = ref<null | 'top' | 'bottom'>(null)
 
@@ -267,6 +267,20 @@ useSwipe(xpSection, {
         >
           {{ item.text }}
         </p>
+        <div
+          v-for="(item, key) in items"
+          :key="`xp-tag-item-${key}`"
+          class="xp__tags"
+          :class="{'actif': activeSlide === key }"
+        >
+          <span
+            v-for="(tag, keytag) in item.tags"
+            :key="keytag"
+            class="button"
+          >
+            {{ tag }}
+          </span>
+        </div>
       </div>
     </div>
     <div
@@ -293,6 +307,25 @@ useSwipe(xpSection, {
   overscroll-behavior: contain;
   touch-action: pan-x;
   overflow: hidden;
+
+  &__tags {
+    display: none;
+    flex-wrap: wrap;
+    max-width: 20.25rem;
+    margin-top: 1rem;
+    margin-left: auto;
+
+    &.actif {
+      display: flex;
+    }
+
+    > .button {
+      margin-right: 5px;
+      margin-bottom: 5px;
+      padding: 1rem;
+      font-size: 0.75rem;
+    }
+  }
 
   &__debugger {
     position: fixed;
