@@ -3,13 +3,11 @@ import { ref } from 'vue'
 
 const textures = ref([
   '/images/textures/white.png',
-  '/images/textures/black-sand.png',
-  '/images/textures/sable.png',
-  '/images/textures/cuivre.png',
 ])
 
 const currentIndex = ref(0)
 
+// eslint-disable-next-line
 const switchIndex = () => {
   const newIndex = currentIndex.value + 1
   if (newIndex > textures.value.length - 1) {
@@ -23,7 +21,6 @@ const switchIndex = () => {
 <template>
   <div
     class="sticky-logo"
-    @mouseenter="switchIndex"
   >
     <svg
       width="76"

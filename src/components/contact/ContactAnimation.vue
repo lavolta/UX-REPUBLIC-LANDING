@@ -26,22 +26,23 @@ onMounted(() => {
 .contact {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
   width: 100%;
+  max-width: var(--max-section-width);
   overflow: hidden;
-  transform: translateY(100%);
+  transform: translate(-50%, 100%);
   transition: transform 0.4s ease-in-out;
   line-height: 1;
   text-align: center;
 
   &.visible {
-    transform: translateY(25%);
+    transform: translate(-50%, 25%);
   }
 
   &-title {
     display: block;
     color: #22252C;
-    font-size: 14.375rem;
+    font-size: 12.075rem;
     font-weight: 400;
     line-height: 1;
     white-space: nowrap;

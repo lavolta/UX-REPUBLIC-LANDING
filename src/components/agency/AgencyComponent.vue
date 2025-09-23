@@ -218,10 +218,12 @@ onMounted(() => {
   position: relative;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
   background-color: var(--color-background);
-  overscroll-behavior: contain;
-  touch-action: pan-x;
   color: var(--color-text-dark);
+
+  // overscroll-behavior: contain;
+  touch-action: pan-x;
 
   &__sectiontitle {
     display: block;
