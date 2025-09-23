@@ -34,7 +34,7 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: auto;
   overflow: hidden;
 
   &__img {
@@ -50,7 +50,7 @@
     }
 
     @include mq(desktop) {
-      display: none;
+      height: 80vh;
     }
   }
 

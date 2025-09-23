@@ -116,7 +116,7 @@ onUnmounted (() => window.removeEventListener('scroll', editWordPosition))
 
   &__vector {
     position: absolute;
-          z-index: 3;
+    z-index: 3;
     inset: 0;
     width: 100%;
     height: 100%;
