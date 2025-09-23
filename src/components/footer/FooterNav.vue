@@ -17,34 +17,34 @@ const socialLinks = [
 
 <template>
   <footer
-    class="footer-container"
+    class="footer"
     role="contentinfo"
   >
-    <div class="footer-grid">
+    <div class="footer__inner">
       <!-- Left: copyright -->
-      <div class="copyright-section">
-        <p class="copyright-text">
+      <div class="footer__inner-copyright">
+        <p class="footer__inner-copyright--text">
           © 2025 UX Republic — Membre du groupe Smile — Tous droits réservés.
         </p>
       </div>
 
       <!-- Right: nav + social -->
-      <div class="nav-section">
+      <div class="footer__nav">
         <nav
-          class="footer-nav"
+          class="footer__nav-links"
           aria-label="Liens de pied de page"
         >
           <a
             v-for="link in footerLinks"
             :key="link.url"
             :href="link.url"
-            class="footer-link"
+            class="footer__nav-links--style"
           >
             {{ link.text }}
           </a>
         </nav>
 
-        <div class="social-icons">
+        <div class="footer__nav-socials">
           <a
             v-for="social in socialLinks"
             :key="social.url"
@@ -53,7 +53,7 @@ const socialLinks = [
           >
             <component
               :is="social.icon"
-              class="social-icon"
+              class="footer__nav-socials--icon"
             />
           </a>
         </div>
@@ -63,172 +63,88 @@ const socialLinks = [
 </template>
 
 <style lang="scss" scoped>
-/* Root container stays full width (so you can keep a full-bleed background) */
-.footer-container {
+.footer {
+  display: block;
   width: 100%;
-  color: var(--color-text);
-}
 
-/* Inner wrapper; we'll constrain/center it at desktop+ */
-.footer-grid {
-  display: grid;
-  gap: 1.5rem;
-  padding-inline: 1rem; /* small gutters on small screens */
-}
+  &__inner {
+   display: flex;
+   flex-direction: column;
 
-.copyright-section {
-  text-align: center;
-}
-
-.nav-section {
-  display: flex;
-  flex-direction: column; /* nav on top, icons below */
-  gap: 1rem;
-  align-items: center;
-  color: var(--color-text-grey);
-}
-
-.copyright-text {
-  color: var(--color-text-grey);
-  font-size: 0.875rem;
-  font-weight: 300;
-}
-
-.footer-nav {
-  display: flex;
-  flex-direction: column; /* stacked links on mobile */
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.footer-link {
-  transition: opacity 0.3s ease;
-  opacity: 80%;
-  font-size: 0.875rem;
-  font-weight: 300;
-  line-height: 1.19;
-  text-decoration: none;
-  white-space: nowrap;
-
-  &:hover {
-    opacity: 100%;
-    text-decoration: underline;
-  }
-}
-
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s ease;
-  opacity: 80%;
-
-  &:hover {
-    opacity: 100%;
-  }
-}
-
-.social-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  transition: transform 0.3s ease;
-  fill: var(--color-text);
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-/* ==================== TABLET (>=768px) ==================== */
-@include mq(tablet) {
-  .footer-grid {
-    padding-inline: 2rem;
-  }
-
-  .copyright-section {
-    text-align: left;
-  }
-
-  .footer-nav {
-    flex-flow: row wrap;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* ==================== DESKTOP (>=1024px & <1440px) ==================== */
-
-@include mq(desktop) {
-  .footer-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    max-width: 1260px;
-    margin-inline: auto;
-    padding-inline: 0;
-    gap: 2rem;
-  }
-
-  .copyright-section {
-    text-align: left;
-  }
-
-  .nav-section {
+   @include mq(tablet) {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
+   }
 
-  .footer-nav {
-    display: inline-flex;
-    flex-flow: row wrap;
-    gap: 1rem;
-  }
-
-  .social-icons {
-    gap: 0.75rem;
-  }
-
-  .social-icon {
-    width: 1.625rem;
-    height: 1.625rem;
-  }
-}
-
-/* ==================== LARGE (>=1440px) ==================== */
-
-/* Requirement: everything on ONE line here */
-@include mq(large) {
-  .footer-grid {
-    align-items: center;
-    max-width: 1260px;
-    margin-inline: auto;
-    gap: 2rem;
-  }
-
-  .nav-section {
+   @include mq(desktop) {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 2.6875rem;
+    justify-content: flex-start;
+    gap: 6rem;
+   }
+
+   &-copyright {
+   text-align: left;
+
+   &--text {
+    font-size: 0.875rem;
+    font-weight: 300;
+    }
+   }
   }
 
-  .footer-nav {
-    flex-wrap: nowrap;
-    gap: 2.6875rem;
-  }
+  &__nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 
-  .social-icons {
-    gap: 1.0625rem;
-    flex-shrink: 0;
-  }
+   @include mq(desktop) {
+    justify-content: flex-end;
+    gap: 3rem;
+    }
+
+    &-links {
+      display: flex;
+      flex-direction: column;
+      margin-top: 0.5rem;
+
+      @include mq(desktop) {
+        display: flex;
+        flex-direction: row;
+        gap: 2.5rem;
+        align-items: center;
+        margin-top: 0;
+      }
+
+      &--style {
+        font-size: 0.875rem;
+        font-weight: 300;
+        line-height: 1.19;
+        text-decoration: none;
+        white-space: nowrap;
+
+        // &:hover {
+        //   opacity: 100%;
+        //   text-decoration: underline;
+        // }
+      }
+    }
+
+    &-socials {
+      display: flex;
+      align-items: center;
+
+      @include mq(desktop) {
+        gap: 1.063rem;
+      }
+
+      &--icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+   }
 }
 </style>

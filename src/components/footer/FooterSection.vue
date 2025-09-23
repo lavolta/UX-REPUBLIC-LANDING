@@ -20,6 +20,7 @@ import FooterNav from '@/components/footer/FooterNav.vue'
   left: 0;
   width: 100%;
   background: var(--color-bg-footer);
+  color: var(--color-text-grey);
 
   .contact {
     margin-bottom: 3.5rem;
@@ -27,9 +28,13 @@ import FooterNav from '@/components/footer/FooterNav.vue'
 
   &__inner {
     width: 100%;
-    max-width: var(--max-section-width);
     margin: 0 auto;
-    padding: 28.125rem 0 4rem;
+    padding: 1rem 2rem;
+
+     @include mq(desktop) {
+      max-width: var(--max-section-width);
+      padding: 28.125rem 0 4rem;
+    }
   }
 }
 </style>
