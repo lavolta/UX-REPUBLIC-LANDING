@@ -38,9 +38,6 @@ watch(morThanThirdPartOnScreen, (newValue) => {
 })
 
 const scrollOutsideOfXpSection = (goingToBottomOfTheSection: boolean) => {
-  if (!window) {
-    return
-  }
   let offset
   if (goingToBottomOfTheSection) {
     offset = y.value + xpSectionHeight.value
@@ -55,9 +52,6 @@ const scrollOutsideOfXpSection = (goingToBottomOfTheSection: boolean) => {
 }
 
 const scrollToTopOfXpSection = () => {
-  if (!window) {
-    return
-  }
   const offset = y.value + xpSectionTop?.value
   window.scrollTo({
     top: offset, // aligne le haut de la section à 0
@@ -145,9 +139,6 @@ watch([() => lockUserOnSlider.value, isSectionAligned], () => {
 })
 
 const alignSectionInstant = () => {
-  if (!window) {
-    return
-  }
   // Scroll instantané (pas 'smooth') = pas d’inertie parasite
   const offset = y.value + (xpSectionTop?.value || 0)
   window.scrollTo({ top: offset, behavior: 'auto' })
@@ -290,7 +281,7 @@ useSwipe(xpSection, {
   position: relative;
   width: 100%;
   height: 100vh;
-  overscroll-behavior: contain;
+  overscroll-behavior: contain; /* empêche la propagation au viewport */
   touch-action: pan-x;
 
   // background-color: rgb(170 42 42);
@@ -403,7 +394,6 @@ useSwipe(xpSection, {
       width: 100%;
       height: 100%;
       transition: var(--transition-timing);
-      border-radius: 3px;
 
       &.actif {
         top: 0;

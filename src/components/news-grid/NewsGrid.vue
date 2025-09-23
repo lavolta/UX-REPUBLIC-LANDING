@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
+import NewGridSocialItem from './NewGridSocialItem.vue'
 import ContactAnimation from '../contact/ContactAnimation.vue'
 import { useI18n } from 'vue-i18n'
 const { tm } = useI18n()
@@ -28,6 +29,12 @@ const items = tm('news.items')
             v-else-if="item.type === 'img'"
             :picture="item.image"
           />
+          <NewGridSocialItem
+            v-else-if="item.type === 'social'"
+            :no-left-padding="key == 0 || key == 4"
+            :no-right-padding="key == 3 || key == 7"
+            :item="item"
+          />
         </div>
       </div>
     </div>
@@ -39,7 +46,15 @@ const items = tm('news.items')
   position: relative;
   overflow: hidden;
 
-  --item-size: 25%;
+  --item-size: 100%;
+
+  @include mq(tablet) {
+    --item-size: 50%;
+  }
+
+  @include mq(desktop) {
+    --item-size: 25%;
+  }
 
   &__inner {
     width: 100%;
@@ -47,11 +62,20 @@ const items = tm('news.items')
 
     // max-width: 1356px;
     margin: 0 auto;
-    padding: 9.1875rem 0 23.3125rem;
+    padding: 4rem 2rem;
+
+    @include mq(desktop) {
+      padding: 9.1875rem 0 23.3125rem;
+    }
+
   }
 
   &__title {
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
+
+    @include mq(tablet) {
+      margin-bottom: 5rem;
+    }
   }
 
   &__grid {
@@ -62,17 +86,21 @@ const items = tm('news.items')
       position: relative;
       width: var(--item-size);
       padding-top: var(--item-size);
+      border: 1px solid var(--color-border);
 
-      &:nth-child(odd) {border-right: 1px solid var(--color-border);}
-      &:nth-child(-n+4) {border-bottom: 1px solid var(--color-border);}
+      @include mq(desktop) {
+        border: none;
+        &:nth-child(odd) {border-right: 1px solid var(--color-border);}
+        &:nth-child(-n+4) {border-bottom: 1px solid var(--color-border);}
 
-      &:nth-child(2) {
-        border-right: 1px solid var(--color-border);
-        border-bottom: 1px solid var(--color-border);
+        &:nth-child(2) {
+          border-right: 1px solid var(--color-border);
+          border-bottom: 1px solid var(--color-border);
+        }
+        &:nth-child(6) {border-right: 1px solid var(--color-border);}
       }
-      &:nth-child(6) {border-right: 1px solid var(--color-border);}
 
-      > div {
+      > * {
         position: absolute;
         top: 0; left: 0;
         width: 100%;
