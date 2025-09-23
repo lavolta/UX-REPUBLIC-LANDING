@@ -14,13 +14,13 @@
         class="button"
         href="#_"
       >
-        par email ?
+        Contactez-nous
       </a>
       <a
         class="button"
         href="#_"
       >
-        par téléphone ?
+        Un projet ?
       </a>
     </div>
   </div>

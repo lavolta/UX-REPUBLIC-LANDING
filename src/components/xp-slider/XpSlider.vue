@@ -23,7 +23,7 @@ const activeSlide = ref(0)
 const lockUserOnSlider = ref(false)
 const debug = ref(false)
 
-const stepThreshold = 200 // à ajuster: 120–200 selon la sensibilité souhaitée
+const stepThreshold = 500 // à ajuster: 120–200 selon la sensibilité souhaitée
 const wheelAcc = ref(0) // accumulateur de deltaY
 const edgeArmed = ref<null | 'top' | 'bottom'>(null)
 

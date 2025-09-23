@@ -10,8 +10,8 @@ const footerLinks = [
 ]
 
 const socialLinks = [
-  { icon: LinkedinIcon, url: '#linkedin' },
-  { icon: YoutubeIcon, url: '#youtube' },
+  { icon: LinkedinIcon, url: 'https://www.linkedin.com/company/ux-republic' },
+  { icon: YoutubeIcon, url: 'https://www.youtube.com/@UXREPUBLICParis' },
 ]
 </script>
 
@@ -49,6 +49,7 @@ const socialLinks = [
             v-for="social in socialLinks"
             :key="social.url"
             :href="social.url"
+            target="_blank"
             class="social-link"
           >
             <component
@@ -95,7 +96,7 @@ const socialLinks = [
 }
 
 .footer-nav {
-  display: flex;
+  display: none!important;
   flex-direction: column; /* stacked links on mobile */
   gap: 0.75rem;
   align-items: center;
