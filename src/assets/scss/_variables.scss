@@ -1,7 +1,7 @@
 :root {
   --color-primary: #3498db;
   --color-secondary: #2ecc71;
-  --color-background: #f9f9f9;
+  --color-background: #F7F7F7;
   --color-bg-dark: #181C23;
   --color-bg-footer: #22262D;
   --color-white: #ffffff;
@@ -26,6 +26,7 @@
   --font-title: var(--font-heading);
   --color-bg: var(--color-bg-dark);
   --color-text: var(--color-white);
+  --color-text-dark: var(--color-bg-dark);
   --max-section-width: 78.75rem;
   --color-btn-border: #555555;
 }
