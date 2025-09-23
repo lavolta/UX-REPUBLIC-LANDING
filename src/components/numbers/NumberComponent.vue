@@ -38,7 +38,8 @@ import NumberItem from '@/components/numbers/NumberItem.vue'
   }
 
   .stat-item {
-    width: 100%;
+    width: 50%;
+    padding: 1.875rem;
 
     @include mq(desktop) {
       width: 25%;
