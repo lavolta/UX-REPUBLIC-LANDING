@@ -5,7 +5,7 @@ import NumberItem from '@/components/numbers/NumberItem.vue'
 <template>
   <div class="stats">
     <NumberItem
-      title="Xperience"
+      title="Années"
       :value="12"
     />
 

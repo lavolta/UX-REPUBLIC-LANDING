@@ -61,7 +61,7 @@ const setThemeForActifItem = () => {
 watch(agencySectionInView, (newState) => {
   console.log('agencySectionInView :', newState)
   if (newState) {
-    snapSectionToTop()
+    // snapSectionToTop()
   }
 })
 watch(itemActif, (newIndex, oldIndex) => {
