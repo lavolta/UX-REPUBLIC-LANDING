@@ -6,8 +6,15 @@ export interface HeroBannerTextInterface {
   text: string
   isSpecialStyle: boolean
 }
+export interface GridItemSocialInterface {
+  type: 'social'
+  title: string
+  link: string
+  buttonText: string
+  socialType: 'linkedin' | 'youtube'
+}
 
-export type NewsItemType = GridItemImageInterface | GridItemTextInterface
+export type NewsItemType = GridItemImageInterface | GridItemTextInterface | GridItemSocialInterface
 export interface GridItemImageInterface {
   image: PictureInterface
   type: 'img'

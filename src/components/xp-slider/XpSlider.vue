@@ -245,7 +245,7 @@ useSwipe(xpSection, {
           <span>
             0{{ key + 1 }}
           </span>
-          <!-- eslint-disable-next-line vue/no-v-html -->
+          <!-- eslint-disable vue/no-v-html -->
           <span v-html="item.title" />
         </p>
       </div>
