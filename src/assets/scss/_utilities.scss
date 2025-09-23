@@ -1,3 +1,5 @@
+@use './mixins/mq' as *;
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -33,6 +35,10 @@
 
 .grid {
   display: grid;
-  grid-gap: 0 2.85%;
+  grid-gap: 0 11px;
   grid-template-columns: repeat(12, 1fr);
+
+  @include mq(desktop) {
+    grid-gap: 0 2.85%;
+  }
 }
