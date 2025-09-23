@@ -31,7 +31,9 @@ const items = tm('news.items')
           />
           <NewGridSocialItem
             v-else-if="item.type === 'social'"
-            :type="item.socialType"
+            :no-left-padding="key == 0 || key == 4"
+            :no-right-padding="key == 3 || key == 7"
+            :item="item"
           />
         </div>
       </div>
@@ -77,7 +79,7 @@ const items = tm('news.items')
       }
       &:nth-child(6) {border-right: 1px solid var(--color-border);}
 
-      > div {
+      > * {
         position: absolute;
         top: 0; left: 0;
         width: 100%;

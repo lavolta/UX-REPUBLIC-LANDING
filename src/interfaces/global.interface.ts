@@ -8,6 +8,9 @@ export interface HeroBannerTextInterface {
 }
 export interface GridItemSocialInterface {
   type: 'social'
+  title: string
+  link: string
+  buttonText: string
   socialType: 'linkedin' | 'youtube'
 }
 

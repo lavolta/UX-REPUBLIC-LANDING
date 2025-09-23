@@ -97,6 +97,9 @@ export const fr = {
       },
       {
         type: 'social',
+        title: 'We are on <br> Linkedin',
+        buttonText: 'Venez follow',
+        link: 'https://www.linkedin.com/company/ux-republic',
         socialType: 'linkedin',
       },
       {
@@ -108,6 +111,9 @@ export const fr = {
       },
       {
         type: 'social',
+        title: 'We are on <br> Youtube',
+        buttonText: 'Venez follow',
+        link: 'https://www.youtube.com/@UXREPUBLICParis',
         socialType: 'youtube',
       },
     ],

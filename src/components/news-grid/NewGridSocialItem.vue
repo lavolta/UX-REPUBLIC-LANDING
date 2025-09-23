@@ -1,126 +1,126 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import type { GridItemSocialInterface } from '@/interfaces'
 
-interface Props {
-  type: 'linkedin' | 'youtube'
-}
+defineProps<{
+  item: GridItemSocialInterface
+  noLeftPadding?: boolean
+  noRightPadding?: boolean
+}>()
 
-const props = defineProps<Props>()
-
-const socialData = computed(() => {
-  const data = {
-    linkedin: {
-      name: 'LinkedIn',
-      color: '#0077B5',
-      url: 'https://linkedin.com',
-      logoUrl: '/images/icons/social/linkedin.svg',
-    },
-    youtube: {
-      name: 'YouTube',
-      color: '#FF0000',
-      url: 'https://youtube.com',
-      logoUrl: '/images/icons/social/youtube.svg',
-    },
-  }
-  return data[props.type]
-})
-
-const followIconUrl = '/images/icons/social/follow-arrow.svg'
 </script>
 
 <template>
-  <div
+  <a
     class="social"
-    :style="{ '--social-color': socialData.color }"
+    :class="{
+      'no-left-p': noLeftPadding,
+      'no-right-p': noRightPadding
+    }"
+    :href="item.link"
+    target="_blank"
   >
-    <div class="social__media">
-      <div class="social__logo">
+    <div class="social__inner">
+      <div class="social__media">
         <img
-          :src="socialData.logoUrl"
-          :alt="socialData.name + ' logo'"
+          :src="`/images/icons/social/${item.socialType}.svg`"
+          alt=""
+        >
+        <span
+          class="social__text"
+          v-html="item.title"
+        />
+      </div>
+      <div
+
+        class="social__button"
+      >
+        <span>
+          {{ item.buttonText }}
+        </span>
+        <img
+          src="/images/icons/social/follow-arrow.svg"
+          :alt="`nous suivre sur ${item.socialType}`"
         >
       </div>
-      <span class="social__text">We are <br>on {{ socialData.name }}</span>
     </div>
-    <div class="social__cta">
-      <button class="social__button">
-        Venez follow <img
-          :src="followIconUrl"
-          alt="Follow icon"
-        >
-      </button>
-    </div>
-  </div>
+  </a>
 </template>
 
 <style scoped lang="scss">
 .social {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 20.125rem;
-  height: 18.688rem;
-  padding: 2.125rem 1.375rem;
-  background: #82828233;
+  --bg-color: #82828233;
+
+  $c: &;
+
+  display: block;
+  padding: 0.9375rem;
+
+  &.no-right-p {
+    padding-right: 0;
+  }
+
+  &.no-right-l {
+    padding-left: 0;
+  }
+
+  &:hover {
+    #{$c}__button {
+      img {
+        transform: translateX(10px);
+      }
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 2.125rem 1.375rem;
+    background: var(--bg-color);
+  }
 
   &__media {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 2rem;
+    gap: 1.625rem;
+
+    > img {
+      display: block;
+      width: 3.125rem;
+      height: 3.125rem;
+    }
   }
 
   &__logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-
-    :deep(svg) {
-      width: 40px;
-      height: 40px;
-      fill: currentcolor;
-    }
+    color: var(--color-white);
   }
 
   &__text {
-    color: #ffffff;
-    font-size: 1.2rem;
+    color: var(--color-white);
+    font-size: 1.375rem;
     font-weight: 500;
+    line-height: 119%;
     text-align: left;
-  }
-
-  &__cta {
-    width: 100%;
   }
 
   &__button {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    border: none;
-    background: transparent;
-    color: white;
-    font-size: 1rem;
     font-weight: 300;
-    cursor: pointer;
-    gap: 4rem;
 
-    :deep(svg) {
-      width: 16px;
-      height: 16px;
-      fill: currentcolor;
+    img {
+      transition: transform ease-in-out .2s;
     }
 
-    &:hover {
-      transform: scale(1.05);
-      opacity: 90%;
+    span {
+      display: block;
+      margin-right: 2.8125rem;
     }
 
-    &:active {
-      transform: scale(0.95);
-    }
   }
+
 }
 </style>
