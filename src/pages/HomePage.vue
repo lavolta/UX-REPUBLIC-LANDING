@@ -6,7 +6,7 @@ import FooterSection from '@/components/footer/FooterSection.vue'
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
-import XpSlider from '@/components/xp-slider/XpSlider3.vue'
+import XpSlider from '@/components/xp-slider/XpSlider.vue'
 import AgencyComponent from '@/components/agency/AgencyComponent.vue'
 
 useDefaultSeo('home')
