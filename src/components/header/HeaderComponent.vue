@@ -45,8 +45,10 @@ watchEffect(() => {
         <a
           href="#"
           traget="_blank"
+          class="button"
         >Rejoignez-nous</a>
         <button
+          class="button"
           @click="handlscroll"
         >
           Contactez-nous
@@ -90,18 +92,15 @@ watchEffect(() => {
 
     > a,
     > button {
-      display: block;
+      padding: 1rem;
+
+      @include mq(desktop) {
+        padding: 1rem 1.5625rem;
+      }
+
+      border: none;
       background-color: transparent;
-      font-size: 1rem;
-      font-weight: 200;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:not(:last-child) {
-        margin-right: 3.125rem;
-      }
+      cursor: pointer;
     }
   }
 
