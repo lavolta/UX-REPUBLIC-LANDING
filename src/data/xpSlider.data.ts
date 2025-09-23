@@ -49,7 +49,7 @@ export const xpItems: XpItemInterface[] = [
   {
     title: 'Transmettre<br>durablement<br>notre savoir-faire',
     text: 'Vos équipes montent en puissance grâce à nos formations 100% opérationnelles, pour qu’elles adoptent une culture agile et centrée utilisateur.',
-    tags: ['Parcours de certification Qualiopi'],
+    tags: ['Parcours de certification Qualiopi', 'Formations sur-mesure', 'Coaching UX'],
     mainpicture: {
       alt: '',
       href: '/images/xp-slider/main-4.webp',
