@@ -24,10 +24,10 @@ import ProjectGridBG from './ProjectGridBG.vue'
               <div>
                 <span class="project-item__number">01</span>
                 <h3 class="project-item__title">
-                  Schmidt
+                  BPCE : Une fidélité bâtie sur la confiance
                 </h3>
                 <p class="project-item__text">
-                  Accélérer la stratégie métier par la méthode du Design Sprint.
+                  Depuis 2017, nous accompagnons le groupe BPCE en intégrant nos consultants UX, UI, Product et Analytics. Cette collaboration de longue date est la preuve de leur confiance dans nos expertises pour transformer leur expérience digitale.
                 </p>
               </div>
             </div>
@@ -47,10 +47,10 @@ import ProjectGridBG from './ProjectGridBG.vue'
               <div>
                 <span class="project-item__number">02</span>
                 <h3 class="project-item__title">
-                  Pièces et Pneus
+                  LVMH : Au service d'une excellence durable
                 </h3>
                 <p class="project-item__text">
-                  SEO & IA au service de la performance : +50% de trafic en seulement un an.
+                  La Maison Louis Vuitton fut l'un de nos premiers clients en 2014. Depuis, nous œuvrons aux côtés de différentes marques du groupe LVMH, en leur apportant un design d'expérience qui reflète leur quête constante de l'excellence.
                 </p>
               </div>
             </div>
@@ -70,10 +70,10 @@ import ProjectGridBG from './ProjectGridBG.vue'
               <div>
                 <span class="project-item__number">03</span>
                 <h3 class="project-item__title">
-                  Découvrons notre Constitution
+                  NAVBLUE : L'innovation au long cours
                 </h3>
                 <p class="project-item__text">
-                  Design ludique au service de l'instruction civique : Rendre la Constitution attractive pour les jeunes générations.
+                  Partenaires depuis 2018, nous avons construit une relation solide avec NAVBLUE (Groupe Airbus), une entité du groupe Airbus. Nous accompagnons leurs équipes pour concevoir des produits digitaux performants, essentiels pour maintenir leur avance technologique.
                 </p>
               </div>
             </div>
@@ -87,7 +87,11 @@ import ProjectGridBG from './ProjectGridBG.vue'
 <style lang="scss" scoped>
 .project-grid {
   position: relative;
-  padding: 130px 0 190px;
+  padding: 4rem 2rem;
+
+  @include mq(desktop) {
+    padding: 130px 0 190px;
+  }
 
   &__inner {
     position: relative;
@@ -95,25 +99,31 @@ import ProjectGridBG from './ProjectGridBG.vue'
     max-width: var(--max-section-width);
     margin: 0 auto;
     padding-bottom:9.375rem;
-
-    // background: linear-gradient(to right, white 0, transparent 1px,transparent 108px, white 108px, transparent 109px);
-    // background-size: 10% 100%;
   }
 
   &__title {
     position: relative;
     z-index: 2;
-    margin-bottom: 4.625rem;
+    margin-bottom: 2rem;
+
+    @include mq(desktop) {
+      margin-bottom: 4.625rem;
+    }
   }
 
   &__list {
+    display: block;
     position: relative;
     z-index: 2;
-    grid-template-areas:
-    ". i1 i1 i1 i1 i1 i1 i1 . . . ."
-    "i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2"
-    ". . . . . i3 i3 i3 i3 i3 i3 i3";
-    grid-template-rows: repeat(3, auto);
+
+    @include mq(desktop) {
+      display: grid;
+      grid-template-areas:
+      ". i1 i1 i1 i1 i1 i1 i1 . . . ."
+      "i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2"
+      ". . . . . i3 i3 i3 i3 i3 i3 i3";
+      grid-template-rows: repeat(3, auto);
+    }
 
     > div {
       &:nth-child(1) {grid-area: i1;}
@@ -136,6 +146,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
   }
 
   &__media {
+    flex-shrink: 0;
     width: 100%;
     max-width: 13.4375rem;
     height: 21.25rem;
@@ -176,13 +187,16 @@ import ProjectGridBG from './ProjectGridBG.vue'
 
   &--first {
     #{$c}__inner {
-      padding-left: 10.1%;
+      padding-left: 0;
+
+      @include mq(desktop) {
+        padding-left: 10.1%;
+      }
     }
     #{$c}__media {
       position: relative;
       max-width: 15.62rem;
       height: 19.125rem;
-      background-color: pink;
 
       > img {
         display: block;
@@ -192,7 +206,11 @@ import ProjectGridBG from './ProjectGridBG.vue'
       }
     }
     #{$c}__content {
-      padding-left: 11.2%;
+      padding-left: 2rem;
+
+      @include mq(desktop) {
+        padding-left: 11.2%;
+      }
     }
   }
 
@@ -219,7 +237,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
       height: 18.25rem;
     }
     #{$c}__content {
-      padding-left: 18%;
+      padding-left: 16.7%;
     }
   }
 }
