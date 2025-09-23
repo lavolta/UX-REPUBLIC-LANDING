@@ -1,18 +1,25 @@
 <script lang="ts" setup>
 import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
 import { useScroll } from '@vueuse/core'
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, shallowRef, onMounted } from 'vue'
 
 const disabledNavMenu = ref(false)
 
-const { y, directions } = useScroll(window)
+const windowTarget = shallowRef<Window | null>(null)
+
+const { y, directions } = useScroll(windowTarget)
 
 const handlscroll = () => {
+  if (!window) return
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: 'smooth',
   })
 }
+
+onMounted(() => {
+  windowTarget.value = window
+})
 
 watchEffect(() => {
   if (y.value <= 0) {
@@ -38,8 +45,10 @@ watchEffect(() => {
         <a
           href="#"
           traget="_blank"
+          class="button"
         >Rejoignez-nous</a>
         <button
+          class="button"
           @click="handlscroll"
         >
           Contactez-nous
@@ -83,18 +92,15 @@ watchEffect(() => {
 
     > a,
     > button {
-      display: block;
+      padding: 1rem;
+
+      @include mq(desktop) {
+        padding: 1rem 1.5625rem;
+      }
+
+      border: none;
       background-color: transparent;
-      font-size: 1rem;
-      font-weight: 200;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:not(:last-child) {
-        margin-right: 3.125rem;
-      }
+      cursor: pointer;
     }
   }
 
