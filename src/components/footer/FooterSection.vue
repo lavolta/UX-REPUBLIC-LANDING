@@ -1,7 +1,7 @@
 <!-- components/footer/FooterSection.vue -->
 <script setup lang="ts">
-import ContactSection from '../contact/ContactSection.vue'
-import FooterNav from './FooterNav.vue'
+import ContactSection from '@/components/contact/ContactSection.vue'
+import FooterNav from '@/components/footer/FooterNav.vue'
 </script>
 
 <template>

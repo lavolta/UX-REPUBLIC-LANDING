@@ -78,7 +78,7 @@ export const fr = {
         type: 'img',
         image: {
           alt: 'test',
-          href: '/images/project/project-item-media-1.gif',
+          href: '/images/clients/news-image-1.webp',
         },
       },
       {
@@ -96,11 +96,11 @@ export const fr = {
         type: 'text',
       },
       {
-        type: 'img',
-        image: {
-          alt: 'test',
-          href: '/images/clients/mbappe.gif',
-        },
+        type: 'social',
+        title: 'We are on <br> Linkedin',
+        buttonText: 'Venez follow',
+        link: 'https://www.linkedin.com/company/ux-republic',
+        socialType: 'linkedin',
       },
       {
         title: 'Midjourney Vidéo : Quand l’IA révolutionne aussi la vidéo !',
@@ -110,11 +110,11 @@ export const fr = {
         type: 'text',
       },
       {
-        type: 'img',
-        image: {
-          alt: 'test',
-          href: '/images/clients/mouvingbg.gif',
-        },
+        type: 'social',
+        title: 'We are on <br> Youtube',
+        buttonText: 'Venez follow',
+        link: 'https://www.youtube.com/@UXREPUBLICParis',
+        socialType: 'youtube',
       },
     ],
   },

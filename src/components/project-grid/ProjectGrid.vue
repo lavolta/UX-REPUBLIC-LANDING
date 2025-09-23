@@ -16,7 +16,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
           <div class="project-item__inner">
             <div class="project-item__media">
               <img
-                src="/images/project/project-item-media-1.gif"
+                src="/images/project/project-item-media-1.webp"
                 alt="Image verre Schmidt"
               >
             </div>
@@ -39,7 +39,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
           <div class="project-item__inner">
             <div class="project-item__media">
               <img
-                src="/images/project/project-item-media-1.gif"
+                src="/images/project/project-item-media-2.webp"
                 alt="Image verre Schmidt"
               >
             </div>
@@ -62,7 +62,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
           <div class="project-item__inner">
             <div class="project-item__media">
               <img
-                src="/images/project/project-item-media-1.gif"
+                src="/images/project/project-item-media-3.webp"
                 alt="Image verre Schmidt"
               >
             </div>

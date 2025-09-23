@@ -51,13 +51,20 @@ withDefaults(defineProps<{
   padding: 2.5rem var(--lateral-padding);
 
   &.no-left-p {
-    #{$c}__info {
-      left: 0;
-    }
+    @include mq(desktop) {
+      padding-left: 0;
 
-    padding-left: 0;
+      #{$c}__info {
+       left: 0;
+      }
+    }
   }
-  &.no-right-p {padding-right: 0;}
+
+  &.no-right-p {
+    @include mq(desktop) {
+      padding-right: 0;
+    }
+  }
 
   &__title {
     margin-bottom: .875rem;

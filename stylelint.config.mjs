@@ -73,7 +73,7 @@ export default {
     },
 
     'import-notation': 'string',
-    'max-nesting-depth': 3,
+    'max-nesting-depth': 4,
     'media-feature-range-notation': 'context',
     'media-feature-name-unit-allowed-list': { width: 'rem' },
 
