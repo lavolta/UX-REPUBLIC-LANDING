@@ -56,11 +56,15 @@ defineProps<{
   padding: 0.9375rem;
 
   &.no-right-p {
-    padding-right: 0;
+    @include mq(desktop) {
+      padding-right: 0;
+    }
   }
 
   &.no-right-l {
-    padding-left: 0;
+    @include mq(desktop) {
+      padding-left: 0;
+    }
   }
 
   &:hover {
