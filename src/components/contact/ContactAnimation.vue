@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { useScroll } from '@vueuse/core'
-import { computed } from 'vue'
-
-// si tu veux écouter sur la fenêtre entière
-const { arrivedState } = useScroll(window)
-
+import { computed, shallowRef, onMounted } from 'vue'
+const windowTarget = shallowRef<Window | null>(null)
+const { arrivedState } = useScroll(windowTarget)
 const isBottom = computed(() => arrivedState.bottom)
+onMounted(() => {
+  windowTarget.value = window
+})
 </script>
 
 <template>
