@@ -4,6 +4,7 @@ export const agencyItems: AgencyItemInterface[] = [
     title: 'Paris',
     address: '163 quai du Docteur Dervaux 92600 Asnières-sur-Seine',
     theme: 'theme-1',
+    email: 'paris@ux-republic.com',
     picture: {
       alt: 'Paris',
       href: '/images/agencies/paris.png',
@@ -23,6 +24,7 @@ export const agencyItems: AgencyItemInterface[] = [
     title: 'Lyon',
     address: '81 Bd de Stalingrad 69100 Villeurbanne',
     theme: 'theme-3',
+    email: 'lyon@ux-republic.com',
     picture: {
       alt: 'Lyon',
       href: '/images/agencies/lyon.png',
@@ -32,6 +34,7 @@ export const agencyItems: AgencyItemInterface[] = [
     title: 'Lille',
     address: 'Boulevard Louis XIV, 59800 Lille',
     theme: 'theme-4',
+    email: 'lille@ux-republic.com',
     picture: {
       alt: 'Lille',
       href: '/images/agencies/lille.png',
@@ -61,6 +64,7 @@ export const agencyItems: AgencyItemInterface[] = [
     title: 'Luxembourg',
     address: '115A, Rue Emile Mark, Oberkorn Differdange 4620 Oberkorn Differdange',
     theme: 'theme-7',
+    email: 'luxembourg@ux-republic.com',
     picture: {
       alt: 'Luxembourg',
       href: '/images/agencies/luxembourg.png',
