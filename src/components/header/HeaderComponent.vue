@@ -6,7 +6,6 @@ import { ref, watchEffect, shallowRef, onMounted } from 'vue'
 const disabledNavMenu = ref(false)
 
 const windowTarget = shallowRef<Window | null>(null)
-
 const { y, directions } = useScroll(windowTarget)
 
 onMounted(() => {

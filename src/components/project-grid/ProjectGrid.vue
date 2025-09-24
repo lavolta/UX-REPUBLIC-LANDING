@@ -16,7 +16,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
           <div class="project-item__inner">
             <div class="project-item__media">
               <img
-                src="/images/project/project-item-media-1.webp"
+                src="/images/project/project-item-media-1.png"
                 alt="Image verre Schmidt"
               >
             </div>
@@ -39,7 +39,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
           <div class="project-item__inner">
             <div class="project-item__media">
               <img
-                src="/images/project/project-item-media-2.webp"
+                src="/images/project/project-item-media-2.png"
                 alt="Image verre Schmidt"
               >
             </div>
@@ -62,7 +62,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
           <div class="project-item__inner">
             <div class="project-item__media">
               <img
-                src="/images/project/project-item-media-3.webp"
+                src="/images/project/project-item-media-3.png"
                 alt="Image verre Schmidt"
               >
             </div>
@@ -121,7 +121,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
       grid-template-areas:
       ". i1 i1 i1 i1 i1 i1 i1 . . . ."
       "i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2 i2"
-      ". . . . . i3 i3 i3 i3 i3 i3 i3";
+      ". . . . i3 i3 i3 i3 i3 i3 i3 i3";
       grid-template-rows: repeat(3, auto);
     }
 
@@ -195,8 +195,8 @@ import ProjectGridBG from './ProjectGridBG.vue'
     }
     #{$c}__media {
       position: relative;
-      max-width: 15.62rem;
-      height: 19.125rem;
+      max-width: 19rem;
+      height: 23.125rem;
 
       > img {
         display: block;
@@ -209,7 +209,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
       padding-left: 2rem;
 
       @include mq(desktop) {
-        padding-left: 11.2%;
+        padding-left: 2.8%;
       }
     }
   }
@@ -218,6 +218,18 @@ import ProjectGridBG from './ProjectGridBG.vue'
     #{$c}__inner {
       flex-direction: row-reverse;
       justify-content: space-between;
+    }
+    #{$c}__media {
+      position: relative;
+      max-width: 19.5rem;
+      height: 21.3125rem;
+
+      > img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
     #{$c}__content {
       padding-top: 8.125rem;
@@ -231,13 +243,14 @@ import ProjectGridBG from './ProjectGridBG.vue'
 
   &--third {
     #{$c}__inner {
-      padding-left: 10.1%;
+      padding-left: 8.5%;
     }
     #{$c}__media {
-      height: 18.25rem;
+      max-width: 20.25rem;
+      height: 20rem;
     }
     #{$c}__content {
-      padding-left: 16.7%;
+      padding-left: 14.4%;
     }
   }
 }
