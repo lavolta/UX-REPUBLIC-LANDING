@@ -27,7 +27,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
                   BPCE
                 </h3>
                 <p class="project-item__text">
-                  Depuis 2017, nous travaillons avec le groupe BPCE en intégrant nos consultants UX, UI, Product et Analytics pour contribuer à l'amélioration de leur expérience digitale.
+                  Nos experts UX/UI, Product et Analytics travaillent avec BPCE depuis 2017 pour optimiser leur performance digitale.
                 </p>
               </div>
             </div>
@@ -50,7 +50,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
                   LVMH
                 </h3>
                 <p class="project-item__text">
-                  Depuis 2014, notre collaboration, initiée avec la Maison Louis Vuitton, s'est étendue à d'autres marques du groupe LVMH, auxquelles nous apportons un design d'expérience à la hauteur de leur quête d'excellence.
+                  Depuis 2014, notre design d'expérience accompagne LVMH, reflétant l'excellence initiée avec Louis Vuitton.
                 </p>
               </div>
             </div>
@@ -73,7 +73,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
                   NAVBLUE
                 </h3>
                 <p class="project-item__text">
-                  Depuis 2018, nous accompagnons les équipes de NAVBLUE (Groupe Airbus) pour concevoir des produits digitaux performants, les aidant ainsi à maintenir leur avance technologique.
+                  Partenaires de NAVBLUE (Groupe Airbus) depuis 2018, nous créons des produits digitaux qui assurent leur avance technologique.
                 </p>
               </div>
             </div>

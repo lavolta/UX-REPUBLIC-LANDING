@@ -78,7 +78,7 @@ export const fr = {
         type: 'img',
         image: {
           alt: 'test',
-          href: '/images/clients/news-image-1.webp',
+          href: '/images/dog.gif',
         },
       },
       {
@@ -97,8 +97,8 @@ export const fr = {
       },
       {
         type: 'social',
-        title: 'We are on <br> Linkedin',
-        buttonText: 'Venez follow',
+        title: 'Actualités & <br> événements',
+        buttonText: 'Suivez-nous',
         link: 'https://www.linkedin.com/company/ux-republic',
         socialType: 'linkedin',
       },
@@ -111,8 +111,8 @@ export const fr = {
       },
       {
         type: 'social',
-        title: 'We are on <br> Youtube',
-        buttonText: 'Venez follow',
+        title: 'Replays & <br> vidéos',
+        buttonText: 'Abonnez-vous',
         link: 'https://www.youtube.com/@UXREPUBLICParis',
         socialType: 'youtube',
       },
