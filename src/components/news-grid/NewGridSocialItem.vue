@@ -26,9 +26,8 @@ defineProps<{
         >
         <span
           class="social__text"
-          v-html="item.title"
+          v-text="item.title"
         />
-        <!-- eslint-disable-next-line vue/no-v-html -->
       </div>
       <div
         class="social__button"
