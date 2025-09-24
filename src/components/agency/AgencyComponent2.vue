@@ -193,31 +193,20 @@ onMounted(() => {
   background-color: var(--color-background);
   color: var(--color-text-dark);
 
-  // overscroll-behavior: contain;
-  touch-action: pan-x;
-
   &__mask {
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+    display: flex;
+    align-items: center;
     overflow: hidden;
 
+    @include mq(desktop) {
+      position: absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+    }
+
     > div {
-      // position: relative;
-      // width: 100%;
-      // height: 100%;
-
-      // top: 28%;
-      // left: 50%;
-      // width: 1960px;
-      // height: 1710px;
-      // transform: translate(-50%, -50%);
-      // mask-image: url("/images/mask-white.svg");
-      // mask-repeat: no-repeat;
-      // mask-position: 40% 50%;
-
       img {
         position: absolute;
         top: 0;
@@ -241,13 +230,19 @@ onMounted(() => {
   &__sectiontitle {
     display: block;
     position: absolute;
-    z-index: 3;
+    z-index: 10;
     top: 3.125rem;
     left: 50%;
     width: 100%;
     max-width: var(--max-section-width);
+    padding: 0 2rem;
     transform: translateX(-50%);
     color: var(--color-text-dark);
+
+    @include mq(desktop) {
+      padding: 0;
+      color: var(--color-text-dark);
+    }
   }
 
   &__inner {
@@ -320,22 +315,35 @@ onMounted(() => {
 
     ul {
       display: flex;
-      gap: 9.375rem;
+      gap: 1rem;
       width: 100%;
       max-width: var(--max-section-width);
       margin: 0 auto;
+      padding: 0 1rem;
+      overflow-y: auto;
+
+      @include mq(desktop) {
+        padding: 0;
+        gap: 9.375rem;
+        overflow-y: none;
+      }
     }
   }
 
   &__cta {
-        padding: 1.25rem 0;
+        padding: 2rem;
         background-color: transparent;
         color: var(--agency-text-color);
-        font-size: .75rem;
+        font-size: 1rem;
         font-weight: 200;
         letter-spacing: 1px;
         line-height: 1.125rem;
         text-align: center;
+
+        @include mq(desktop) {
+          padding: 1.25rem 0;
+          font-size: .75rem;
+        }
 
         &.actif,
         &:hover {
@@ -408,13 +416,27 @@ onMounted(() => {
     }
   }
 
+  >div {
+    padding: 0 2rem;
+
+    @include mq(desktop) {
+      padding: 0;
+    }
+  }
+
   &__title {
     margin-bottom: 6.375rem;
     overflow: hidden;
     color: #C5C5C5;
-    font-size: 14.375rem;
+    font-size: 6rem;
     font-weight: 400;
-    line-height: 22.4rem;
+    line-height: 10rem;
+
+    @include mq(desktop) {
+      font-size: 14.375rem;
+      font-weight: 400;
+      line-height: 22.4rem;
+    }
 
     > span {
       display: block;

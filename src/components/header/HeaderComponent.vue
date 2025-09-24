@@ -78,11 +78,20 @@ watchEffect(() => {
     width: 100%;
     max-width: var(--max-section-width);
     margin: 0 auto;
+    padding: 0 2rem;
+
+    @include mq(desktop) {
+      padding: 0;
+    }
   }
 
   &__nav {
-    display: flex;
+    display: none;
     align-items: center;
+
+    @include mq(desktop) {
+      display: flex;
+    }
 
     > a,
     > button {
@@ -100,7 +109,11 @@ watchEffect(() => {
 
   .sticky-logo {
     position: relative;
-    left: -4.75rem;
+    left: 0;
+
+    @include mq(desktop) {
+      left: -4.75rem;
+    }
   }
 }
 </style>

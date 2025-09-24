@@ -19,6 +19,7 @@ import FooterNav from '@/components/footer/FooterNav.vue'
   bottom: 0;
   left: 0;
   width: 100%;
+  overflow: hidden;
   background: var(--color-bg-footer);
 
   .contact {

@@ -88,6 +88,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
 .project-grid {
   position: relative;
   padding: 4rem 2rem;
+  overflow: hidden;
 
   @include mq(desktop) {
     padding: 130px 0 190px;
