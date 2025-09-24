@@ -6,7 +6,6 @@ defineProps<{
   noLeftPadding?: boolean
   noRightPadding?: boolean
 }>()
-
 </script>
 
 <template>
@@ -27,11 +26,10 @@ defineProps<{
         >
         <span
           class="social__text"
-          v-html="item.title"
+          v-text="item.title"
         />
       </div>
       <div
-
         class="social__button"
       >
         <span>
@@ -123,8 +121,6 @@ defineProps<{
       display: block;
       margin-right: 2.8125rem;
     }
-
   }
-
 }
 </style>

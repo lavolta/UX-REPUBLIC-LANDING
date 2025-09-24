@@ -1,7 +1,7 @@
 export const en = {
   seo: {
     home: {
-      title: 'The futur is republic | en',
+      title: 'The futur is republic',
       description: 'Description dans le head pour la page Accueil EN.',
     },
   },
