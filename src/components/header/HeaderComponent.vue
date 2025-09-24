@@ -35,12 +35,14 @@ watchEffect(() => {
 
 </script>
 <template>
-  <header class="header">
+  <header
+    class="header"
+    :class="{'hidden': disabledNavMenu}"
+  >
     <div class="header__inner">
       <StickyLogoHover />
       <nav
         class="header__nav"
-        :class="{'hidden': disabledNavMenu}"
       >
         <a
           href="#"
@@ -62,6 +64,7 @@ watchEffect(() => {
   $c: &;
 
   --header-vertical-padding: .8125rem;
+  --nav-translate-y: calc(-100% - var(--header-vertical-padding));
 
   position: fixed;
   z-index: 20;
@@ -69,6 +72,11 @@ watchEffect(() => {
   left: 0;
   width: 100%;
   padding: var(--header-vertical-padding) 0;
+  transition: transform ease-in .3s;
+
+  &.hidden {
+    transform: translateY(var(--nav-translate-y));
+  }
 
   &__inner {
     display: flex;
@@ -80,15 +88,8 @@ watchEffect(() => {
   }
 
   &__nav {
-    --nav-translate-y: calc(-100% - var(--header-vertical-padding));
-
     display: flex;
     align-items: center;
-    transition: transform ease-in .3s;
-
-    &.hidden {
-      transform: translateY(var(--nav-translate-y));
-    }
 
     > a,
     > button {
