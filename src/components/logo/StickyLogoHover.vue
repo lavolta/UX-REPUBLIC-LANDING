@@ -6,16 +6,6 @@ const textures = ref([
 ])
 
 const currentIndex = ref(0)
-
-// eslint-disable-next-line
-const switchIndex = () => {
-  const newIndex = currentIndex.value + 1
-  if (newIndex > textures.value.length - 1) {
-    currentIndex.value = 0
-    return
-  }
-  currentIndex.value = newIndex
-}
 </script>
 
 <template>
@@ -57,14 +47,14 @@ const switchIndex = () => {
 
   // filter: grayscale(100%);
   // transition: filter ease-in .2s;
-  &:hover {
-    filter: grayscale(0%);
-  }
+  // &:hover {
+  //   filter: grayscale(0%);
+  // }
 
-  > img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+  // > img {
+  //   display: block;
+  //   width: 100%;
+  //   height: auto;
+  // }
 }
 </style>

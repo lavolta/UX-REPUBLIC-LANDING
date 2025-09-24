@@ -37,7 +37,7 @@ watchEffect(() => {
 <template>
   <header class="header">
     <div class="header__inner">
-      <StickyLogoHover />
+      <StickyLogoHover :class="{'hidden': disabledNavMenu}" />
       <nav
         class="header__nav"
         :class="{'hidden': disabledNavMenu}"
@@ -63,7 +63,7 @@ watchEffect(() => {
 
   --header-vertical-padding: .8125rem;
 
-  position: fixed;
+  position: absolute;
   z-index: 20;
   top: 0;
   left: 0;
@@ -105,8 +105,8 @@ watchEffect(() => {
   }
 
   .sticky-logo {
-    position: relative;
-    left: -4.75rem;
+    // position: relative;
+    // left: -4.75rem;
   }
 }
 </style>
