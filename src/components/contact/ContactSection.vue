@@ -7,12 +7,11 @@
   <div class="contact">
     <h2 class="contact__title">
       Prêts à transformer <br>
-      votre expérience digitale&nbsp;?
+      votre expérience digitale ?
     </h2>
     <div class="contact__cta">
       <a
         href="mailto:contact@ux-republic.com"
-        target="_blank"
         class="button"
       >
         Contactez-nous

@@ -9,14 +9,6 @@ const windowTarget = shallowRef<Window | null>(null)
 
 const { y, directions } = useScroll(windowTarget)
 
-// const handlscroll = () => {
-//   if (!window) return
-//   window.scrollTo({
-//     top: document.body.scrollHeight,
-//     behavior: 'smooth',
-//   })
-// }
-
 onMounted(() => {
   windowTarget.value = window
 })
@@ -46,7 +38,9 @@ watchEffect(() => {
           href="https://jobs.smile.eu/departments/ux-republic"
           target="_blank"
           class="button"
-        >Rejoignez-nous</a>
+        >
+          Rejoignez-nous
+        </a>
         <a
           href="mailto:contact@ux-republic.com"
           class="button"
