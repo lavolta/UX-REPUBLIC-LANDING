@@ -24,11 +24,11 @@ defineProps<{
           :src="`/images/icons/social/${item.socialType}.svg`"
           alt=""
         >
-        <!-- eslint-disable-next-line vue/no-v-html -->
         <span
           class="social__text"
           v-html="item.title"
         />
+        <!-- eslint-disable-next-line vue/no-v-html -->
       </div>
       <div
         class="social__button"
