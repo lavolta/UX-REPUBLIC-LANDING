@@ -1,14 +1,20 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 const items = ref([
-  { src: '/images/clients/adeo.png', alt: 'Ils nous ont fait confiance | adeo', hidden: true },
-  { src: '/images/clients/bouygues.png', alt: 'Ils nous ont fait confiance | bouygues Télécom', hidden: true },
-  { src: '/images/clients/generali.png', alt: 'Ils nous ont fait confiance | generali', hidden: true },
-  { src: '/images/clients/le_Monde.png', alt: 'Ils nous ont fait confiance | le monde', hidden: true },
-  { src: '/images/clients/adeo.png', alt: 'Ils nous ont fait confiance | adeo', hidden: false },
-  { src: '/images/clients/bouygues.png', alt: 'Ils nous ont fait confiance | bouygues Télécom', hidden: false },
-  { src: '/images/clients/generali.png', alt: 'Ils nous ont fait confiance | generali', hidden: false },
-  { src: '/images/clients/le_Monde.png', alt: 'Ils nous ont fait confiance | le monde', hidden: false },
+  { src: '/images/slider-client/logo-1.png', alt: 'Ils nous ont fait confiance | LVMH', hidden: false },
+  { src: '/images/slider-client/logo-2.png', alt: 'Ils nous ont fait confiance | Petit Bateau', hidden: false },
+  { src: '/images/slider-client/logo-3.png', alt: 'Ils nous ont fait confiance | Shopmium', hidden: false },
+  { src: '/images/slider-client/logo-4.png', alt: 'Ils nous ont fait confiance | generali', hidden: false },
+  { src: '/images/slider-client/logo-5.png', alt: 'Ils nous ont fait confiance | lrm', hidden: false },
+  { src: '/images/slider-client/logo-6.png', alt: 'Ils nous ont fait confiance | adeo', hidden: false },
+  { src: '/images/slider-client/logo-7.png', alt: 'Ils nous ont fait confiance | manomano', hidden: false },
+  { src: '/images/slider-client/logo-8.png', alt: 'Ils nous ont fait confiance | casino', hidden: false },
+  { src: '/images/slider-client/logo-9.png', alt: 'Ils nous ont fait confiance | Groupama', hidden: false },
+  { src: '/images/slider-client/logo-10.png', alt: 'Ils nous ont fait confiance | BPCE', hidden: false },
+  { src: '/images/slider-client/logo-11.png', alt: 'Ils nous ont fait confiance | SG', hidden: false },
+  { src: '/images/slider-client/logo-12.png', alt: 'Ils nous ont fait confiance | Carrefour', hidden: false },
+  { src: '/images/slider-client/logo-13.png', alt: 'Ils nous ont fait confiance | AXA', hidden: false },
+  { src: '/images/slider-client/logo-14.png', alt: 'Ils nous ont fait confiance | BNP', hidden: false },
 ])
 const disabledAnimation = ref(false)
 onMounted(() => {
@@ -50,8 +56,8 @@ onMounted(() => {
 
   @keyframes scroll {
     to {
-      // 16 -> -25%  | 8 -> -50%
-      transform: translateX(calc(-25% - 1rem));
+      // 28 -> -14.29% | 16 -> -25%  | 8 -> -50%
+      transform: translateX(calc(-50.25% - 1rem));
     }
   }
 
