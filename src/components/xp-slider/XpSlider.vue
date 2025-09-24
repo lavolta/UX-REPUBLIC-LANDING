@@ -323,7 +323,10 @@ useSwipe(xpSection, {
       margin-right: 5px;
       margin-bottom: 5px;
       padding: 1rem;
-      font-size: 0.75rem;
+
+      // Font size en 12px
+      // font-size: 0.75rem;
+      font-size: 1rem;
     }
   }
 

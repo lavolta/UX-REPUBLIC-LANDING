@@ -26,7 +26,7 @@ defineProps<{
         >
         <span
           class="social__text"
-          v-text="item.title"
+          v-html="item.title"
         />
       </div>
       <div
