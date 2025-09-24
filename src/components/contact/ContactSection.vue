@@ -6,21 +6,23 @@
 <template>
   <div class="contact">
     <h2 class="contact__title">
-      Nous nous engageons à trouver<br>
-      les solutions qui vous conviennent.
+      Prêts à transformer <br>
+      votre expérience digitale&nbsp;?
     </h2>
     <div class="contact__cta">
       <a
+        href="mailto:contact@ux-republic.com"
+        target="_blank"
         class="button"
-        href="#_"
       >
         Contactez-nous
       </a>
       <a
+        href="https://share.hsforms.com/1yebtsQyRStqLl6yNujF0fw3n0wx"
+        target="_blank"
         class="button"
-        href="#_"
       >
-        Un projet ?
+        Votre projet
       </a>
     </div>
   </div>

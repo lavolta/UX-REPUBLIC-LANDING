@@ -24,10 +24,10 @@ import ProjectGridBG from './ProjectGridBG.vue'
               <div>
                 <span class="project-item__number">01</span>
                 <h3 class="project-item__title">
-                  BPCE : Une fidélité bâtie sur la confiance
+                  BPCE
                 </h3>
                 <p class="project-item__text">
-                  Depuis 2017, nous accompagnons le groupe BPCE en intégrant nos consultants UX, UI, Product et Analytics. Cette collaboration de longue date est la preuve de leur confiance dans nos expertises pour transformer leur expérience digitale.
+                  Depuis 2017, nous travaillons avec le groupe BPCE en intégrant nos consultants UX, UI, Product et Analytics pour contribuer à l'amélioration de leur expérience digitale.
                 </p>
               </div>
             </div>
@@ -47,10 +47,10 @@ import ProjectGridBG from './ProjectGridBG.vue'
               <div>
                 <span class="project-item__number">02</span>
                 <h3 class="project-item__title">
-                  LVMH : Au service d'une excellence durable
+                  LVMH
                 </h3>
                 <p class="project-item__text">
-                  La Maison Louis Vuitton fut l'un de nos premiers clients en 2014. Depuis, nous œuvrons aux côtés de différentes marques du groupe LVMH, en leur apportant un design d'expérience qui reflète leur quête constante de l'excellence.
+                  Depuis 2014, notre collaboration, initiée avec la Maison Louis Vuitton, s'est étendue à d'autres marques du groupe LVMH, auxquelles nous apportons un design d'expérience à la hauteur de leur quête d'excellence.
                 </p>
               </div>
             </div>
@@ -70,10 +70,10 @@ import ProjectGridBG from './ProjectGridBG.vue'
               <div>
                 <span class="project-item__number">03</span>
                 <h3 class="project-item__title">
-                  NAVBLUE : L'innovation au long cours
+                  NAVBLUE
                 </h3>
                 <p class="project-item__text">
-                  Partenaires depuis 2018, nous avons construit une relation solide avec NAVBLUE (Groupe Airbus), une entité du groupe Airbus. Nous accompagnons leurs équipes pour concevoir des produits digitaux performants, essentiels pour maintenir leur avance technologique.
+                  Depuis 2018, nous accompagnons les équipes de NAVBLUE (Groupe Airbus) pour concevoir des produits digitaux performants, les aidant ainsi à maintenir leur avance technologique.
                 </p>
               </div>
             </div>

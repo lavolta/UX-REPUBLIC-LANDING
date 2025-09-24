@@ -6,7 +6,7 @@ export function useDefaultSeo(page: PageType) {
 
   useHead({
     title: t(`seo.${page}.title`),
-    titleTemplate: '%s | MySite',
+    titleTemplate: '%s',
     htmlAttrs: {
       lang: locale.value,
     },
