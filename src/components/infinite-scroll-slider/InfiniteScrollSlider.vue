@@ -24,7 +24,7 @@ onMounted(() => {
 <template>
   <div
     class="scroller"
-    :style="{ '--animation-duration': `${items.length / 4 * 10}s` }"
+    :style="{ '--animation-duration': `${items.length / 2 * 10}s` }"
     :class="{'disabled-animation': disabledAnimation}"
   >
     <div

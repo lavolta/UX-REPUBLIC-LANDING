@@ -34,7 +34,7 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 78vh;
   overflow: hidden;
 
   &__img {

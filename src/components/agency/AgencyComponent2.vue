@@ -6,7 +6,6 @@ import {
   onMounted,
   watch,
   useTemplateRef,
-
 } from 'vue'
 import {
   useElementVisibility,
@@ -16,7 +15,6 @@ import {
 } from '@vueuse/core'
 
 const items = ref(agencyItems)
-
 const agencySection = useTemplateRef('agencySection')
 const agencySectionInView = useElementVisibility(agencySection)
 const { y: windowsYScroll } = useWindowScroll()
@@ -93,7 +91,6 @@ const randomTilt = (min = -10, max = 10, excludeAbsBelow = 2): number => {
 
 const activeTilt = ref(0)
 const handleClickOnAgencySection = () => {
-  console.log('click')
   let tempActifItem = itemActif.value + 1
   if (tempActifItem > items.value.length - 1) {
     tempActifItem = 0
@@ -333,6 +330,7 @@ onMounted(() => {
   &__cta {
         padding: 1.25rem 0;
         background-color: transparent;
+        color: var(--agency-text-color);
         font-size: .75rem;
         font-weight: 200;
         letter-spacing: 1px;
@@ -353,8 +351,8 @@ onMounted(() => {
 
   opacity: 0%;
 
-  --animation: transform cubic-bezier(0.68, -0.55, 0.27, 1.55) .5s;
-  --title-color: #3E434C;
+  --animation: all ease-in-out .5s;
+  --title-color: var(--agency-text-color);
 
   &[data-theme="theme-2"] {
     #{$c}__title {
@@ -397,6 +395,7 @@ onMounted(() => {
     #{$c}__title {
       >span {
         transform: translateY(0);
+        opacity: 100%;
       }
     }
   }
@@ -404,7 +403,7 @@ onMounted(() => {
   &.out {
     #{$c}__title {
       >span {
-        transform: translateY(-100%);
+        transform: translateY(-3%);
       }
     }
   }
@@ -419,8 +418,9 @@ onMounted(() => {
 
     > span {
       display: block;
-      transform: translateY(-100%);
+      transform: translateY(-3%);
       transition: var(--animation);
+      opacity: 0%;
     }
 
     // text-shadow: 0 0 2px var(--color-background);
