@@ -6,7 +6,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-1',
     picture: {
       alt: 'Paris',
-      href: 'https://picsum.photos/id/231/254/316',
+      href: '/images/agencies/paris.png',
     },
   },
   {
@@ -16,7 +16,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-2',
     picture: {
       alt: 'Bordeaux',
-      href: 'https://picsum.photos/id/232/254/316',
+      href: '/images/agencies/bordeaux.png',
     },
   },
   {
@@ -24,8 +24,8 @@ export const agencyItems: AgencyItemInterface[] = [
     address: '81 Bd de Stalingrad 69100 Villeurbanne',
     theme: 'theme-3',
     picture: {
-      alt: 'Bordeaux',
-      href: 'https://picsum.photos/id/233/254/316',
+      alt: 'Lyon',
+      href: '/images/agencies/lyon.png',
     },
   },
   {
@@ -34,7 +34,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-4',
     picture: {
       alt: 'Lille',
-      href: 'https://picsum.photos/id/234/254/316',
+      href: '/images/agencies/lille.png',
     },
   },
   {
@@ -44,7 +44,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-5',
     picture: {
       alt: 'Lausanne',
-      href: 'https://picsum.photos/id/235/254/316',
+      href: '/images/agencies/lausanne.png',
     },
   },
   {
@@ -53,8 +53,8 @@ export const agencyItems: AgencyItemInterface[] = [
     email: 'belgique@ux-republic.com',
     theme: 'theme-6',
     picture: {
-      alt: 'Lille',
-      href: 'https://picsum.photos/id/236/254/316',
+      alt: 'Bruxelles',
+      href: '/images/agencies/bruxelles.png',
     },
   },
   {
@@ -63,7 +63,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-7',
     picture: {
       alt: 'Luxembourg',
-      href: 'https://picsum.photos/id/237/254/316',
+      href: '/images/agencies/luxembourg.png',
     },
   },
 ]

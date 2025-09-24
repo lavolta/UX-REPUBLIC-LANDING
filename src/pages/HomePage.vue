@@ -7,7 +7,7 @@ import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import XpSlider from '@/components/xp-slider/XpSlider.vue'
-import AgencyComponent from '@/components/agency/AgencyComponent.vue'
+import AgencyComponent from '@/components/agency/AgencyComponent2.vue'
 
 useDefaultSeo('home')
 </script>
