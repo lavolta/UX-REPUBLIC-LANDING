@@ -105,8 +105,12 @@ watchEffect(() => {
   }
 
   .sticky-logo {
-    position: relative;
-    left: -4.75rem;
+    margin-left: 2rem;
+
+    @include mq(desktop) {
+      margin-left: 0;
+    }
+
   }
 }
 </style>

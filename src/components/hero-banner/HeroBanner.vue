@@ -34,8 +34,12 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: auto;
   overflow: hidden;
+
+   @include mq(desktop) {
+      height: 70vh;
+  }
 
   &__img {
     display: block;
