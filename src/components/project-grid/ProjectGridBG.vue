@@ -29,7 +29,7 @@ watch(top, (newvalue) => {
           :key="i"
           aria-hidden="true"
           :class="{'show': animeBg}"
-          :style="{transitionDelay: `${i * 20}ms`}"
+          :style="{transitionDelay: `${i * 10}ms`}"
         />
       </div>
     </div>
@@ -68,7 +68,7 @@ watch(top, (newvalue) => {
 
     > span {
       height: 0;
-      transition: height cubic-bezier(1, 0.01, 0.36, 1) 3s;
+      transition: height cubic-bezier(0.4, 0, 0.2, 1) 3s;
 
       &.show {
         height: 100%;
