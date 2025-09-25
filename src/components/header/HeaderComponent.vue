@@ -2,6 +2,7 @@
 import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
 import { useScroll } from '@vueuse/core'
 import { ref, watchEffect, shallowRef, onMounted } from 'vue'
+import { globalStore } from '@/store'
 
 const disabledNavMenu = ref(false)
 
@@ -13,14 +14,17 @@ onMounted(() => {
 })
 
 watchEffect(() => {
-  if (y.value <= 0) {
+  if (y.value <= 0 && !globalStore.forcedHideHeader) {
     disabledNavMenu.value = false
   }
-  else if (directions.bottom) {
+  else if (directions.bottom && !globalStore.forcedHideHeader) {
     disabledNavMenu.value = true
   }
-  else if (directions.top) {
+  else if (directions.top && !globalStore.forcedHideHeader) {
     disabledNavMenu.value = false
+  }
+  else if (globalStore.forcedHideHeader) {
+    disabledNavMenu.value = true
   }
 })
 

@@ -7,6 +7,7 @@ import {
   useWindowScroll,
 } from '@vueuse/core'
 import { xpItems } from '@/data'
+import { globalStore } from '@/store'
 // MES REF AUX DIFFERENTS ITEM QUE JE CIBLE
 const xpSection = useTemplateRef('xpSection')
 
@@ -58,11 +59,13 @@ const scrollToTopOfXpSection = () => {
   if (!window) {
     return
   }
+  globalStore.setForcedHideHeader(true)
   const offset = y.value + xpSectionTop?.value
   window.scrollTo({
     top: offset, // aligne le haut de la section à 0
     behavior: 'smooth',
   })
+  handleForcedHideHeader()
 }
 
 useEventListener(
@@ -144,15 +147,26 @@ watch([() => lockUserOnSlider.value, isSectionAligned], () => {
   }
 })
 
+const timoutIdentifier = ref()
+const handleForcedHideHeader = () => {
+  if (timoutIdentifier.value) {
+    clearTimeout(timoutIdentifier.value)
+  }
+  timoutIdentifier.value = setTimeout(() => globalStore.setForcedHideHeader(false), 2000)
+}
+
 const alignSectionInstant = () => {
   if (!window) {
     return
   }
+  globalStore.setForcedHideHeader(true)
   // Scroll instantané (pas 'smooth') = pas d’inertie parasite
   const offset = y.value + (xpSectionTop?.value || 0)
   window.scrollTo({ top: offset, behavior: 'auto' })
   isAligning.value = false
+  handleForcedHideHeader()
 }
+
 useSwipe(xpSection, {
   threshold: 40, // 30–60 selon feeling
   passive: false,
