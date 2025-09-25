@@ -1,5 +1,22 @@
+<script lang="ts" setup>
+import { useElementVisibility } from '@vueuse/core'
+import { useTemplateRef, watch, ref } from 'vue'
+const firstView = ref(true)
+const animeBg = ref(false)
+
+const target = useTemplateRef<HTMLDivElement>('gridBgContainer')
+const targetIsVisible = useElementVisibility(target)
+
+watch(targetIsVisible, (newValue) => {
+  if (newValue && firstView.value) {
+    firstView.value = false
+    animeBg.value = true
+  }
+})
+</script>
 <template>
   <div
+    ref="gridBgContainer"
     aria-hidden="true"
     class="project-grid-bg"
   >
@@ -9,6 +26,8 @@
           v-for="i in 6"
           :key="i"
           aria-hidden="true"
+          :class="{'show': animeBg}"
+          :style="{transitionDelay: `${i * 50}ms`}"
         />
       </div>
     </div>
@@ -46,6 +65,13 @@
     }
 
     > span {
+      height: 0;
+      transition: height cubic-bezier(1, 0.01, 0.36, 1) 3s;
+
+      &.show {
+        height: 100%;
+      }
+
       &:nth-child(3) {
         display: none;
 
