@@ -42,10 +42,14 @@ onMounted(() => {
   &-title {
     display: block;
     color: #22252C;
-    font-size: 12.075rem;
+    font-size: 3.7rem;
     font-weight: 400;
     line-height: 1;
     white-space: nowrap;
+
+    @include mq(desktop) {
+      font-size: 12.075rem;
+    }
   }
 }
 

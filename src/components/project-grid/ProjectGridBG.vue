@@ -46,7 +46,14 @@
     }
 
     > span {
-      &:nth-child(3),
+      &:nth-child(3) {
+        display: none;
+
+        @include mq(tablet) {
+          display: block;
+        }
+      }
+
       &:nth-child(4),
       &:nth-child(5) {
         display: none;

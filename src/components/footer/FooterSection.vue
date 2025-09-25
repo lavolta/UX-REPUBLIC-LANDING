@@ -30,7 +30,11 @@ import FooterNav from '@/components/footer/FooterNav.vue'
     width: 100%;
     max-width: var(--max-section-width);
     margin: 0 auto;
-    padding: 28.125rem 0 4rem;
+    padding: 4rem 2rem;
+
+    @include mq(desktop) {
+      padding: 28.125rem 0 4rem;
+    }
   }
 }
 </style>

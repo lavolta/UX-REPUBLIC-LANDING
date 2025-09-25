@@ -29,34 +29,59 @@
 <style lang="scss" scoped>
 .contact {
   display: flex;
+  flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
 
+  @include mq(desktop) {
+    flex-direction: row;
+  }
+
   &__title {
     flex-shrink: 1;
-    font-size: 2.375rem;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
     font-weight: 400;
-    line-height: 2.8125rem;
+    line-height: 2rem;
+
+    @include mq(desktop) {
+      margin-bottom: 0;
+      font-size: 2.375rem;
+      font-weight: 400;
+      line-height: 2.8125rem;
+    }
   }
 
   &__cta {
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @include mq(desktop) {
+      flex-direction: row;
+      align-items: stretch;
+    }
 
     > a {
       display: flex;
       align-items: center;
-      padding: 0 1.875rem;
       font-size: 1.5rem;
       font-weight: 400;
 
-      &:first-child {
-        margin-right: 2.25rem;
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+
+        @include mq(desktop) {
+          margin-right: 2.25rem;
+          margin-bottom: 0;
+        }
       }
 
       &:last-child {
-        padding-right: 3.25rem;
-        padding-left: 3.25rem;
+        @include mq(desktop) {
+          padding-right: 3.25rem;
+          padding-left: 3.25rem;
+        }
       }
     }
   }

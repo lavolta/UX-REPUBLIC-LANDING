@@ -32,9 +32,12 @@ useDefaultSeo('home')
 .main-section {
   position: relative;
   z-index: 10;
-  margin-bottom: 42.3125rem;
+  margin-bottom: 30.1125rem;
   background-color: var(--color-bg);
 
+  @include mq(desktop) {
+    margin-bottom: 42.3125rem;
+  }
 }
 
 .main-content {

@@ -78,14 +78,14 @@ const socialLinks = [
 }
 
 .copyright-section {
-  text-align: center;
+  // text-align: center;
 }
 
 .nav-section {
   display: flex;
   flex-direction: column; /* nav on top, icons below */
   gap: 1rem;
-  align-items: center;
+  align-items: flex-start;
   color: var(--color-text-grey);
 }
 

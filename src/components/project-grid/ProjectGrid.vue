@@ -132,7 +132,11 @@ import ProjectGridBG from './ProjectGridBG.vue'
       &:nth-child(3) {grid-area: i3;}
 
       &:not(:last-child) {
-        margin-bottom: 4.25rem;
+        margin-bottom: 8rem;
+
+        @include mq(desktop) {
+          margin-bottom: 4.25rem;
+        }
       }
     }
   }
@@ -148,11 +152,21 @@ import ProjectGridBG from './ProjectGridBG.vue'
 
   &__media {
     flex-shrink: 0;
-    width: 100%;
-    max-width: 13.4375rem;
-    height: 21.25rem;
+    width: 50%;
+    max-width: 50%;
+    height: auto;
     overflow: hidden;
     border-radius: 3px;
+
+    @include mq(tablet) {
+      width: 33.33%;
+      max-width: 33.33%;
+    }
+
+    @include mq(desktop) {
+      width: 100%;
+      max-width: 13.4375rem;
+    }
 
     > img {
       display: block;
@@ -163,27 +177,54 @@ import ProjectGridBG from './ProjectGridBG.vue'
   }
 
   &__content {
-    padding-top: 7.5rem;
+    width: 50%;
+    padding-top: 4rem;
+
+    @include mq(tablet) {
+      width: 66.66%;
+    }
+
+    @include mq(desktop) {
+      width: auto;
+      padding-top: 7.5rem;
+    }
   }
 
   &__number {
       display: block;
-      margin-bottom: 2.25rem;
-      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
       font-weight: 300;
+
+      @include mq(desktop) {
+        margin-bottom: 2.25rem;
+        font-size: 1.25rem;
+      }
   }
 
   &__title {
-    margin-bottom: 2.75rem;
-    font-size: 2.375rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
     font-weight: 400;
-    line-height: 2.8125rem;
+    line-height: 2rem;
+
+    @include mq(desktop) {
+      margin-bottom: 2.75rem;
+      font-size: 2.375rem;
+      line-height: 2.8125rem;
+    }
   }
 
   &__text {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 300;
-    line-height: 2.25rem;
+    line-height: 1.8rem;
+
+    @include mq(desktop) {
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 2.25rem;
+    }
   }
 
   &--first {
@@ -196,8 +237,17 @@ import ProjectGridBG from './ProjectGridBG.vue'
     }
     #{$c}__media {
       position: relative;
-      max-width: 19rem;
-      height: 23.125rem;
+      width: 100%;
+      max-width: 50%;
+
+      @include mq(tablet) {
+        max-width: calc(33.33% + 2.93rem);
+      }
+
+      @include mq(desktop) {
+        max-width: 19rem;
+        height: 23.125rem;
+      }
 
       > img {
         display: block;
@@ -207,10 +257,15 @@ import ProjectGridBG from './ProjectGridBG.vue'
       }
     }
     #{$c}__content {
+      width: 50%;
       padding-left: 2rem;
 
+      @include mq(tablet) {
+        width: calc(66.66% - 2.93rem);
+      }
+
       @include mq(desktop) {
-        padding-left: 2.8%;
+        padding-left: 1.2rem;
       }
     }
   }
@@ -222,8 +277,17 @@ import ProjectGridBG from './ProjectGridBG.vue'
     }
     #{$c}__media {
       position: relative;
-      max-width: 19.5rem;
-      height: 21.3125rem;
+      width: 50%;
+
+      @include mq(tablet) {
+        width: 100%;
+        max-width: calc(33.33% + 8.03rem);
+      }
+
+      @include mq(desktop) {
+        max-width: 19.5rem;
+        height: 21.3125rem;
+      }
 
       > img {
         display: block;
@@ -233,8 +297,20 @@ import ProjectGridBG from './ProjectGridBG.vue'
       }
     }
     #{$c}__content {
-      padding-top: 8.125rem;
-      padding-left: 5.6%;
+      width: 50%;
+      padding-top: 4rem;
+      padding-left: 0;
+
+      @include mq(tablet) {
+        width: calc(66.66% - 2.93rem);
+        max-width: calc(33.33% + 2.93rem);
+      }
+
+      @include mq(desktop) {
+        width: auto;
+        padding-top: 8.125rem;
+        padding-left: 5.6%;
+      }
     }
     #{$c}__text {
       width: 100%;
@@ -244,14 +320,35 @@ import ProjectGridBG from './ProjectGridBG.vue'
 
   &--third {
     #{$c}__inner {
-      padding-left: 8.5%;
+      padding-left: 0;
+
+      @include mq(desktop) {
+        padding-left: 8.5%;
+      }
     }
     #{$c}__media {
-      max-width: 20.25rem;
-      height: 20rem;
+      max-width: 100%;
+      height: auto;
+
+      @include mq(tablet) {
+        max-width: 33.33%;
+      }
+
+      @include mq(desktop) {
+        max-width: 20.25rem;
+        height: 20rem;
+      }
     }
     #{$c}__content {
-      padding-left: 14.4%;
+      padding-left: 2rem;
+
+      @include mq(tablet) {
+        padding-left: 4.93rem;
+      }
+
+      @include mq(desktop) {
+        padding-left: 6.8rem;
+      }
     }
   }
 }
