@@ -55,13 +55,13 @@ const setActifItem = (key: number) => {
   }, 10)
 }
 
-const handleClickOnAgencySection = () => {
+const handleClickOnAgencySection = (itemNumber: number | null = null) => {
   globalStore.setForcedHideHeader(true)
   let tempActifItem = itemActif.value + 1
   if (tempActifItem > items.value.length - 1) {
     tempActifItem = 0
   }
-  setActifItem(tempActifItem)
+  setActifItem(itemNumber ? itemNumber : tempActifItem)
   handleForcedHideHeader()
 }
 const timoutIdentifier = ref()
@@ -90,7 +90,9 @@ onBeforeUnmount(() => {
     <p class="agency__sectiontitle section-title">
       Un réseau international <br>au service de vos projets
     </p>
-    <div class="agency__mask">
+    <div
+      class="agency__mask"
+    >
       <div>
         <img
           v-for="(item, key) in items"
@@ -104,7 +106,7 @@ onBeforeUnmount(() => {
     </div>
     <div
       class="agency__inner"
-      @click="handleClickOnAgencySection"
+      @click="handleClickOnAgencySection(null)"
     >
       <div
         v-for="(item, key) in items"
@@ -145,7 +147,7 @@ onBeforeUnmount(() => {
           <button
             class="agency__cta"
             :class="{'actif': key === itemActif}"
-            @click.prevent="handleClickOnAgencySection"
+            @click="handleClickOnAgencySection(key)"
           >
             {{ item.title }}
           </button>
@@ -174,6 +176,7 @@ onBeforeUnmount(() => {
 
     @include mq(desktop) {
       position: absolute;
+      z-index: 1;
       top:0;
       left:0;
       width:100%;
