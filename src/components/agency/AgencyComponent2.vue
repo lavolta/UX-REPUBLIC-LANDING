@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { agencyItems } from '@/data'
+import { globalStore } from '@/store'
 import {
   ref,
   computed,
   onMounted,
-  watch,
+  onBeforeUnmount,
   useTemplateRef,
 } from 'vue'
 import {
-  useElementVisibility,
   useElementBounding,
   useWindowScroll,
   useThrottleFn,
@@ -16,12 +16,10 @@ import {
 
 const items = ref(agencyItems)
 const agencySection = useTemplateRef('agencySection')
-const agencySectionInView = useElementVisibility(agencySection)
 const { y: windowsYScroll } = useWindowScroll()
 const { top: agencySectionTop } = useElementBounding(agencySection)
 
 const itemActif = ref(0)
-const prevActif = ref(0)
 const hasMounted = ref(false)
 const inTransition = ref(false)
 const out = ref(false)
@@ -38,29 +36,6 @@ const snapSectionToTop = useThrottleFn(() => {
   })
 }, 300)
 
-const pickRandomThemeIndex = (exclude: number | null) => {
-  let n = 1 + Math.floor(Math.random() * THEME_COUNT) // 1..5
-  while (exclude !== null && n === exclude) {
-    n = 1 + Math.floor(Math.random() * THEME_COUNT)
-  }
-  return n
-}
-const setThemeForActifItem = () => {
-  const idx = pickRandomThemeIndex(lastThemeIdx.value)
-  lastThemeIdx.value = idx
-  activeTheme.value = `theme-${idx}`
-}
-watch(agencySectionInView, (newState) => {
-  console.log('agencySectionInView :', newState)
-  if (newState) {
-    // snapSectionToTop()
-  }
-})
-watch(itemActif, (newIndex, oldIndex) => {
-  prevActif.value = oldIndex ?? 0
-  setThemeForActifItem()
-})
-
 const setActifItem = (key: number) => {
   if (key === itemActif.value) {
     return
@@ -75,37 +50,36 @@ const setActifItem = (key: number) => {
   out.value = true
   setTimeout(() => {
     itemActif.value = key
-    activeTilt.value = randomTilt()
     inTransition.value = false
     out.value = false
   }, 10)
 }
 
-const randomTilt = (min = -10, max = 10, excludeAbsBelow = 2): number => {
-  let n = 0
-  do {
-    n = Math.floor(Math.random() * (max - min + 1)) + min // entier inclusif
-  } while (Math.abs(n) < excludeAbsBelow) // évite -1,0,1 pour que ça se voie
-  return n
-}
-
-const activeTilt = ref(0)
 const handleClickOnAgencySection = () => {
+  globalStore.setForcedHideHeader(true)
   let tempActifItem = itemActif.value + 1
   if (tempActifItem > items.value.length - 1) {
     tempActifItem = 0
   }
   setActifItem(tempActifItem)
+  handleForcedHideHeader()
 }
-
-const THEME_COUNT = 5
-
-const activeTheme = ref<string>('theme-1')
-const lastThemeIdx = ref<number | null>(null)
+const timoutIdentifier = ref()
+const handleForcedHideHeader = () => {
+  if (timoutIdentifier.value) {
+    clearTimeout(timoutIdentifier.value)
+  }
+  timoutIdentifier.value = setTimeout(() => globalStore.setForcedHideHeader(false), 2000)
+}
 
 onMounted(() => {
   hasMounted.value = true
-  activeTilt.value = randomTilt()
+})
+
+onBeforeUnmount(() => {
+  if (timoutIdentifier.value) {
+    clearTimeout(timoutIdentifier.value)
+  }
 })
 </script>
 <template>
@@ -171,7 +145,7 @@ onMounted(() => {
           <button
             class="agency__cta"
             :class="{'actif': key === itemActif}"
-            @click.prevent="setActifItem(key)"
+            @click.prevent="handleClickOnAgencySection"
           >
             {{ item.title }}
           </button>
