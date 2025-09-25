@@ -1,18 +1,20 @@
 <script lang="ts" setup>
-import { useElementVisibility } from '@vueuse/core'
+import { useElementBounding } from '@vueuse/core'
 import { useTemplateRef, watch, ref } from 'vue'
 const firstView = ref(true)
 const animeBg = ref(false)
 
 const target = useTemplateRef<HTMLDivElement>('gridBgContainer')
-const targetIsVisible = useElementVisibility(target)
+const { top } = useElementBounding(target)
 
-watch(targetIsVisible, (newValue) => {
-  if (newValue && firstView.value) {
+watch(top, (newvalue) => {
+  if (newvalue <= 0 && firstView.value) {
     firstView.value = false
     animeBg.value = true
   }
+  console.log('top', newvalue)
 })
+
 </script>
 <template>
   <div
@@ -27,7 +29,7 @@ watch(targetIsVisible, (newValue) => {
           :key="i"
           aria-hidden="true"
           :class="{'show': animeBg}"
-          :style="{transitionDelay: `${i * 50}ms`}"
+          :style="{transitionDelay: `${i * 20}ms`}"
         />
       </div>
     </div>
