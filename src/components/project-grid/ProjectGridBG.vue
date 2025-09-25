@@ -29,7 +29,7 @@ watch(top, (newvalue) => {
           :key="i"
           aria-hidden="true"
           :class="{'show': animeBg}"
-          :style="{transitionDelay: `${i * 10}ms`}"
+          :style="{transitionDelay: `${i * 10 * 2}ms`}"
         />
       </div>
     </div>
