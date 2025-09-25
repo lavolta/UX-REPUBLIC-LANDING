@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NumberComponent from '@/components/numbers/NumberComponent.vue'
+import CountComponent from '../count/CountComponent.vue'
 </script>
 
 <template>
@@ -15,7 +15,7 @@ import NumberComponent from '@/components/numbers/NumberComponent.vue'
         </p>
       </div>
     </div>
-    <NumberComponent />
+    <CountComponent />
   </div>
 </template>
 
