@@ -35,11 +35,18 @@ export interface XpItemInterface {
   tags: string[]
 }
 
-export type AgencyItemTheme = 'theme-1' | 'theme-2' | 'theme-3' | 'theme-4' | 'theme-5' | 'theme-6' | 'theme-7'
+export type ItemThemeType = 'theme-1' | 'theme-2' | 'theme-3' | 'theme-4' | 'theme-5' | 'theme-6' | 'theme-7'
 export interface AgencyItemInterface {
   title: string
   address: string
   email?: string
-  theme: AgencyItemTheme
+  theme: ItemThemeType
   picture: PictureInterface
+}
+
+export interface ProjectItemInterface {
+  title: string
+  content: string
+  picture: PictureInterface
+  theme: ItemThemeType
 }

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
+import HeaderComponent from '@/components/header/HeaderComponent.vue'
+import FooterSection from '@/components/footer/FooterSection.vue'
 useHead({
   link: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -15,5 +17,22 @@ useHead({
 })
 </script>
 <template>
-  <RouterView />
+  <HeaderComponent />
+  <main class="main-section">
+    <RouterView />
+  </main>
+  <FooterSection />
 </template>
+
+<style lang="scss" scoped>
+.main-section {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 30.1125rem;
+  background-color: var(--color-bg);
+
+  @include mq(desktop) {
+    margin-bottom: 42.3125rem;
+  }
+}
+</style>

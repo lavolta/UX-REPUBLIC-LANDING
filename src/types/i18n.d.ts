@@ -1,5 +1,5 @@
 import 'vue-i18n'
-import type { CardExpertInterface, HeroBannerTextInterface, NewsItemType } from '@/interfaces'
+import type { CardExpertInterface, HeroBannerTextInterface, NewsItemType, ProjectItemInterface } from '@/interfaces'
 // https://vue-i18n.intlify.dev/guide/advanced/typescript
 declare module 'vue-i18n' {
   export interface DefineLocaleMessage {
@@ -28,6 +28,10 @@ declare module 'vue-i18n' {
     expert: {
       title: string
       cards: CardExpertInterface[]
+    }
+    project: {
+      title: string
+      items: ProjectItemInterface[]
     }
     news: {
       items: NewsItemType[]

@@ -1,7 +1,7 @@
 <!-- components/footer/FooterNav.vue -->
 <script setup lang="ts">
-import LinkedinIcon from '../icons/LinkedinIcon.vue'
-import YoutubeIcon from '../icons/YoutubeIcon.vue'
+import LinkedinIcon from '@/components/icons/LinkedinIcon.vue'
+import YoutubeIcon from '@/components/icons/YoutubeIcon.vue'
 
 const footerLinks = [
   { text: 'Informations Légales', url: '#legal' },
@@ -197,11 +197,6 @@ const socialLinks = [
 
   .social-icons {
     gap: 0.75rem;
-  }
-
-  .social-icon {
-    width: 1.625rem;
-    height: 1.625rem;
   }
 }
 

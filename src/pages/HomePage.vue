@@ -2,56 +2,18 @@
 import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
-import FooterSection from '@/components/footer/FooterSection.vue'
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
-import HeaderComponent from '@/components/header/HeaderComponent.vue'
+import AgencyComponent from '@/components/agency/AgencyComponent.vue'
+import XpSlider from '@/components/xp-slider/XpSlider.vue'
+
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
-import XpSlider from '@/components/xp-slider/XpSlider2.vue'
-import AgencyComponent from '@/components/agency/AgencyComponent2.vue'
 useDefaultSeo('home')
 </script>
 <template>
-  <HeaderComponent />
-  <main
-    ref="mainSection"
-    class="main-section"
-  >
-    <HeroBanner />
-    <PresentationHero />
-    <XpSlider />
-    <ProjectGrid />
-    <AgencyComponent />
-    <NewsGrid />
-  </main>
-
-  <FooterSection />
+  <HeroBanner />
+  <PresentationHero />
+  <XpSlider />
+  <ProjectGrid />
+  <AgencyComponent />
+  <NewsGrid />
 </template>
-
-<style lang="scss" scoped>
-.main-section {
-  position: relative;
-  z-index: 10;
-  margin-bottom: 30.1125rem;
-  background-color: var(--color-bg);
-
-  @include mq(desktop) {
-    margin-bottom: 42.3125rem;
-  }
-}
-
-.main-content {
-  padding-bottom: 400px; // Correspond à la hauteur du footer
-
-  @include mq(tablet) {
-    padding-bottom: 350px;
-  }
-
-  @include mq(mobile) {
-    padding-bottom: 300px;
-  }
-
-  @include mq(mobile-small) {
-    padding-bottom: 250px;
-  }
-}
-</style>
