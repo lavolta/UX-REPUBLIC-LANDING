@@ -1,3 +1,10 @@
+<script lang="ts" setup>
+import { onMounted, useTemplateRef } from 'vue'
+const video = useTemplateRef<HTMLVideoElement>('heroVideo')
+onMounted(() => {
+  video.value?.play()
+})
+</script>
 <template>
   <section class="hero">
     <picture
@@ -15,11 +22,13 @@
       >
     </picture>
     <video
+      ref="heroVideo"
       poster="/images/hero/lion.png"
       preload="none"
       class="hero__bg"
-      autoplay
       muted
+      playsinline
+      autoplay
       loop
     >
       <source

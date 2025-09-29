@@ -12,7 +12,6 @@ watch(top, (newvalue) => {
     firstView.value = false
     animeBg.value = true
   }
-  console.log('top', newvalue)
 })
 
 </script>
