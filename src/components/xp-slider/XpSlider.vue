@@ -4,6 +4,8 @@ import {
   useEventListener,
   useElementBounding,
   useWindowScroll,
+  useSwipe,
+  type UseSwipeDirection,
 } from '@vueuse/core'
 import { xpItems } from '@/data'
 import { globalStore } from '@/store'
@@ -98,6 +100,25 @@ useEventListener(
   { passive: false }, // IMPORTANT pour que preventDefault() soit respecté
 )
 
+useSwipe(xpSection, {
+  onSwipeEnd(e: TouchEvent,
+    direction: UseSwipeDirection,
+  ) {
+    console.log('direction', direction)
+    if (direction == 'left' || direction === 'right') {
+      return
+    }
+    userGoingBottom.value = direction === 'up'
+    if (!sliderFitWithTopOfTheViewport.value) {
+      disableSlideTransition.value = true
+      scrollToTopOfXpSection()
+    }
+    if (!disableSlideTransition.value) {
+      handleChangeSlide()
+    }
+  },
+})
+
 // Pour masquer le menu
 const timoutIdentifier = ref()
 const handleForcedHideHeader = () => {
@@ -180,6 +201,16 @@ const handleForcedHideHeader = () => {
   </section>
 </template>
 <style lang="scss" scoped>
+.debugger {
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  color: black;
+}
+
 .xp {
   --transition-timing: all cubic-bezier(0.65, 0.05, 0.36, 1) .5s;
 
@@ -192,27 +223,34 @@ const handleForcedHideHeader = () => {
 
   &__tags {
     display: none;
-    flex-wrap: wrap;
-    max-width: 20.25rem;
+    flex-wrap: nowrap;
+    width: 100%;
     margin-top: 1rem;
     margin-left: auto;
+    overflow-y: auto;
+
+    @include mq(desktop) {
+      flex-wrap: wrap;
+      max-width: 20.25rem;
+      overflow-y: none;
+    }
 
     &.actif {
       display: flex;
     }
 
     > .button {
+      display: block;
+      flex: 1 0 auto;
       margin-right: 5px;
       margin-bottom: 5px;
       padding: 1rem;
-
-      // Font size en 12px
-      // font-size: 0.75rem;
       font-size: 1rem;
     }
   }
 
   &__debugger {
+    display: none;
     position: fixed;
     z-index: 200;
     right: 0;
@@ -333,6 +371,7 @@ const handleForcedHideHeader = () => {
   &__textlist {
     p {
       width: 100%;
+      min-height: 6rem;
       margin-top: 2rem;
       font-size: 1rem;
       font-weight: 300;
@@ -340,6 +379,7 @@ const handleForcedHideHeader = () => {
 
       @include mq(desktop) {
         max-width: 20.25rem;
+        min-height: auto;
         margin-top: 0;
         margin-left: auto;
         font-size: 1.125rem;
