@@ -1,79 +1,41 @@
 <script lang="ts" setup>
 import InfiniteScrollSlider from '@/components/infinite-scroll-slider/InfiniteScrollSlider.vue'
 import ProjectGridBG from './ProjectGridBG.vue'
+import { useI18n } from 'vue-i18n'
+const { tm } = useI18n()
+const projectItems = tm('project.items')
+
 </script>
 <template>
   <section class="project-grid">
     <ProjectGridBG />
     <div class="project-grid__inner">
       <p class="project-grid__title section-title">
-        Nos réussites
+        {{ $t('project.title') }}
       </p>
       <div class="project-grid__list grid">
         <div
-          class="project-item project-item--first"
+          v-for="(item, key) in projectItems"
+          :key="`project-item-${key}`"
+          :class="`project-item ${item.theme}`"
         >
           <div class="project-item__inner">
             <div class="project-item__media">
               <img
-                src="/images/project/project-item-media-1.png"
-                alt="Image verre Schmidt"
+                :src="item.picture.href"
+                :alt="item.picture.alt"
               >
             </div>
             <div class="project-item__content">
               <div>
-                <span class="project-item__number">01</span>
+                <span class="project-item__number">
+                  {{ key + 1 < 10 ? `0${key + 1}` : key + 1 }}
+                </span>
                 <h3 class="project-item__title">
-                  BPCE
+                  {{ item.title }}
                 </h3>
                 <p class="project-item__text">
-                  Nos experts UX/UI, Product et Analytics travaillent avec BPCE depuis 2017 pour optimiser leur performance digitale.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="project-item project-item--second"
-        >
-          <div class="project-item__inner">
-            <div class="project-item__media">
-              <img
-                src="/images/project/project-item-media-2.png"
-                alt="Image verre Schmidt"
-              >
-            </div>
-            <div class="project-item__content">
-              <div>
-                <span class="project-item__number">02</span>
-                <h3 class="project-item__title">
-                  LVMH
-                </h3>
-                <p class="project-item__text">
-                  Depuis 2014, notre design d'expérience accompagne LVMH, reflétant l'excellence initiée avec Louis Vuitton.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="project-item project-item--third"
-        >
-          <div class="project-item__inner">
-            <div class="project-item__media">
-              <img
-                src="/images/project/project-item-media-3.png"
-                alt="Image verre Schmidt"
-              >
-            </div>
-            <div class="project-item__content">
-              <div>
-                <span class="project-item__number">03</span>
-                <h3 class="project-item__title">
-                  NAVBLUE
-                </h3>
-                <p class="project-item__text">
-                  Partenaires de NAVBLUE (Groupe Airbus) depuis 2018, nous créons des produits digitaux qui assurent leur avance technologique.
+                  {{ item.content }}
                 </p>
               </div>
             </div>
@@ -227,7 +189,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
     }
   }
 
-  &--first {
+  &.theme-1 {
     #{$c}__inner {
       padding-left: 0;
 
@@ -270,7 +232,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
     }
   }
 
-  &--second {
+  &.theme-2 {
     #{$c}__inner {
       flex-direction: row-reverse;
       justify-content: space-between;
@@ -318,7 +280,7 @@ import ProjectGridBG from './ProjectGridBG.vue'
     }
   }
 
-  &--third {
+  &.theme-3 {
     #{$c}__inner {
       padding-left: 0;
 

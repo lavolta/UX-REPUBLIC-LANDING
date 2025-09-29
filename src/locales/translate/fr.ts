@@ -118,4 +118,36 @@ export const fr = {
       },
     ],
   },
+  project: {
+    title: 'Nos réussites',
+    items: [
+      {
+        title: 'BPCE',
+        content: 'Nos experts UX/UI, Product et Analytics travaillent avec BPCE depuis 2017 pour optimiser leur performance digitale.',
+        theme: 'theme-1',
+        picture: {
+          alt: '',
+          href: '/images/project/project-item-media-1.png',
+        },
+      },
+      {
+        title: 'LVMH',
+        content: 'Depuis 2014, notre design d\'expérience accompagne LVMH, reflétant l\'excellence initiée avec Louis Vuitton.',
+        theme: 'theme-2',
+        picture: {
+          alt: '',
+          href: '/images/project/project-item-media-2.png',
+        },
+      },
+      {
+        title: 'NAVBLUE',
+        content: 'Partenaires de NAVBLUE (Groupe Airbus) depuis 2018, nous créons des produits digitaux qui assurent leur avance technologique.',
+        theme: 'theme-3',
+        picture: {
+          alt: '',
+          href: '/images/project/project-item-media-3.png',
+        },
+      },
+    ],
+  },
 } satisfies import('vue-i18n').DefineLocaleMessage
