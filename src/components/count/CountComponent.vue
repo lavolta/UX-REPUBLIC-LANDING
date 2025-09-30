@@ -31,7 +31,6 @@ const handleSwitchValueToDisplay = () => {
 }
 
 watch(targetIsVisible, (newValue) => {
-  console.log('targetIsVisible', newValue)
   if (newValue && firstView.value) {
     firstView.value = false
     setTimeout(() => {
