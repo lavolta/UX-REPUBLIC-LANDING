@@ -1,0 +1,44 @@
+@use './mixins/mq' as *;
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+  white-space: nowrap;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-clamp-1 {-webkit-line-clamp: 1;}
+.text-clamp-2 {-webkit-line-clamp: 2;}
+.text-clamp-3 {-webkit-line-clamp: 3;}
+
+.grid {
+  display: grid;
+  grid-gap: 0 11px;
+  grid-template-columns: repeat(12, 1fr);
+
+  @include mq(desktop) {
+    grid-gap: 0 2.85%;
+  }
+}

@@ -1,10 +1,14 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import HomeView from '../HomeView.vue'
+import HomeView from '../HomePage.vue'
 import { fr } from '@/locales'
 
 const HomePageH1Content = fr.hero.title
+
+vi.mock('@unhead/vue', () => ({
+  useHead: vi.fn(), // no-op
+}))
 
 describe('HomeView', () => {
   it('contient un h1', () => {

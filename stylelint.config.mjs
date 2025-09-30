@@ -23,15 +23,16 @@ export default {
   ],
 
   rules: {
+    'no-irregular-whitespace': true,
     'no-empty-source': null,
-    'selector-max-id': 0,
+    'selector-max-id': 1,
     'selector-max-class': 3,
     'selector-max-type': 3,
     'no-descending-specificity': null,
 
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global'] }],
     'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep'] }],
-    'at-rule-no-unknown': [true, { ignoreAtRules: ['use', 'forward', 'theme', 'utility'] }],
+    'at-rule-no-unknown': [true, { ignoreAtRules: ['use', 'forward', 'theme', 'mixin', 'utility', 'include', 'for'] }],
     'declaration-property-value-no-unknown': [
       true,
       {
@@ -72,7 +73,7 @@ export default {
     },
 
     'import-notation': 'string',
-    'max-nesting-depth': 3,
+    'max-nesting-depth': 4,
     'media-feature-range-notation': 'context',
     'media-feature-name-unit-allowed-list': { width: 'rem' },
 

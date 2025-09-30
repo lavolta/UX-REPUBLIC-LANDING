@@ -1,10 +1,8 @@
 import type { RouteRecordRaw } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AboutView from '@/views/AboutView.vue'
+import HomePage from '@/pages/HomePage.vue'
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', component: HomeView },
-  { path: '/about', component: AboutView },
+  { path: '/', component: HomePage },
 ]
 
 export default routes
