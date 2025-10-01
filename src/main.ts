@@ -5,7 +5,6 @@ import routes from './router'
 import { en, fr } from './locales'
 
 // PLUGINS GSAP
-import gsapPlugin from '@/plugins/gsap'
 
 import './assets/scss/main.scss'
 import type { i18nLocalType } from '@/types'
@@ -29,6 +28,5 @@ export const createApp = ViteSSG(
       },
     })
     app.use(i18n)
-    app.use(gsapPlugin)
   },
 )
