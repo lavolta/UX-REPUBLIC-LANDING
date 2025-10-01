@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { onMounted, onBeforeUnmount } from 'vue'
 import { useHead } from '@unhead/vue'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterSection from '@/components/footer/FooterSection.vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
+
 useHead({
   link: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -15,13 +20,26 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   ],
 })
+
+onMounted(() => {
+  ScrollTrigger.normalizeScroll({
+    allowNestedScroll: true,
+    type: 'touch',
+  })
+})
+onBeforeUnmount(() => {
+  ScrollTrigger.getAll().forEach(t => t.kill())
+})
+
 </script>
 <template>
-  <HeaderComponent />
-  <main class="main-section">
-    <RouterView />
-  </main>
-  <FooterSection />
+  <div id="smooth">
+    <HeaderComponent />
+    <main class="main-section">
+      <RouterView />
+    </main>
+    <FooterSection />
+  </div>
 </template>
 
 <style lang="scss" scoped>
