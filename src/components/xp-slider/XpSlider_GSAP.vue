@@ -43,12 +43,10 @@ onMounted(() => {
     onEnter() {
       globalStore.setForcedHideHeader(true)
     },
-    onSnapComplete: ({ progress, direction, isActive }) => console.log(progress, direction, isActive),
     onUpdate(self) {
       const progress = self.progress
       const totalSlides = xpImages.length
       const index = Math.floor(progress * totalSlides)
-      console.log(Math.min(totalSlides - 1, Math.max(0, index)))
       activeSlide.value = Math.min(totalSlides - 1, Math.max(0, index))
     },
     onEnterBack() {
