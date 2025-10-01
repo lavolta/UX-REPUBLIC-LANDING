@@ -104,7 +104,6 @@ useSwipe(xpSection, {
   onSwipeEnd(e: TouchEvent,
     direction: UseSwipeDirection,
   ) {
-    console.log('direction', direction)
     if (direction == 'left' || direction === 'right') {
       return
     }

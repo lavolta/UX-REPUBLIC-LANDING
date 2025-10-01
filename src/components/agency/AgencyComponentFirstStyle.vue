@@ -59,7 +59,6 @@ const setThemeForActifItem = () => {
   activeTheme.value = `theme-${idx}`
 }
 watch(agencySectionInView, (newState) => {
-  console.log('agencySectionInView :', newState)
   if (newState) {
     // snapSectionToTop()
   }
@@ -107,7 +106,6 @@ const randomTilt = (min = -10, max = 10, excludeAbsBelow = 2): number => {
 
 const activeTilt = ref(0)
 const handleClickOnAgencySection = () => {
-  console.log('click')
   let tempActifItem = itemActif.value + 1
   if (tempActifItem > items.value.length - 1) {
     tempActifItem = 0
