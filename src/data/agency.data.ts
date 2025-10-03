@@ -7,7 +7,7 @@ export const agencyItems: AgencyItemInterface[] = [
     email: 'paris@ux-republic.com',
     picture: {
       alt: 'Paris',
-      href: '/images/agencies/paris.png',
+      href: '/images/agencies-gsap/paris.jpg',
     },
   },
   {
@@ -17,7 +17,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-2',
     picture: {
       alt: 'Bordeaux',
-      href: '/images/agencies/bordeaux.png',
+      href: '/images/agencies-gsap/bordeaux.jpg',
     },
   },
   {
@@ -27,7 +27,7 @@ export const agencyItems: AgencyItemInterface[] = [
     email: 'lyon@ux-republic.com',
     picture: {
       alt: 'Lyon',
-      href: '/images/agencies/lyon.png',
+      href: '/images/agencies-gsap/lyon.jpg',
     },
   },
   {
@@ -37,7 +37,7 @@ export const agencyItems: AgencyItemInterface[] = [
     email: 'lille@ux-republic.com',
     picture: {
       alt: 'Lille',
-      href: '/images/agencies/lille.png',
+      href: '/images/agencies-gsap/lille.jpg',
     },
   },
   {
@@ -47,7 +47,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-5',
     picture: {
       alt: 'Lausanne',
-      href: '/images/agencies/lausanne.png',
+      href: '/images/agencies-gsap/lausanne.jpg',
     },
   },
   {
@@ -57,7 +57,7 @@ export const agencyItems: AgencyItemInterface[] = [
     theme: 'theme-6',
     picture: {
       alt: 'Bruxelles',
-      href: '/images/agencies/bruxelles.png',
+      href: '/images/agencies-gsap/bruxelles.jpg',
     },
   },
   {
@@ -67,7 +67,7 @@ export const agencyItems: AgencyItemInterface[] = [
     email: 'luxembourg@ux-republic.com',
     picture: {
       alt: 'Luxembourg',
-      href: '/images/agencies/luxembourg.png',
+      href: '/images/agencies-gsap/luxembourg.jpg',
     },
   },
 ]

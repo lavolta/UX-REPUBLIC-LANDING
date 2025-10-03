@@ -29,6 +29,7 @@ onMounted(() => {
         y: 0,
         duration: 1,
       }, '<')
+      .to({}, { duration: 1 })
   })
   xpTimeLine.to(xpBackgroundImages, { duration: 0.5 })
 
@@ -39,6 +40,7 @@ onMounted(() => {
     pin: true,
     scrub: true,
     invalidateOnRefresh: true,
+    fastScrollEnd: true,
     end: () => '+=' + (xpImages.length * window.innerHeight),
     onEnter() {
       globalStore.setForcedHideHeader(true)
