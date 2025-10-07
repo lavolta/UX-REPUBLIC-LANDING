@@ -22,11 +22,9 @@ onMounted(() => {
     xpTimeLine
       .addLabel(`slide-${i}`)
       .to(xpBackgroundImage, {
-        y: 0,
         duration: 2,
-      })
+      }, `slide-${i}`)
       .to(centerImage, {
-        y: 0,
         duration: 2,
       }, '<')
       .to({}, { duration: 1 })
@@ -36,14 +34,15 @@ onMounted(() => {
     trigger: `#${props.id}`,
     start: 'top top',
     pin: true,
-    scrub: true,
     invalidateOnRefresh: true,
     fastScrollEnd: true,
+    scrub: true,
     end: () => '+=' + ((xpBackgroundImages.length * 2) * window.innerHeight),
     onEnter() {
       globalStore.setForcedHideHeader(true)
     },
     onUpdate(self) {
+      console.log('update')
       const progress = self.progress
       const totalSlides = xpImages.length
       const index = Math.floor(progress * totalSlides)
@@ -228,6 +227,7 @@ onMounted(() => {
       height: 100%;
       object-fit: cover;
       transform: translateY(100%);
+      transition: var(--transition-timing);
 
       &.actif {
         transform: translateY(0);
@@ -396,6 +396,7 @@ onMounted(() => {
       width: 100%;
       height: 100%;
       transform: translateY(100%);
+      transition: var(--transition-timing);
       border-radius: 3px;
 
       &.actif {
