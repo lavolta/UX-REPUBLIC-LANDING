@@ -4,7 +4,7 @@ import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import AgencyComponent from '@/components/agency/AgencyComponent_gsap.vue'
-import XpSlider from '@/components/xp-slider/XpSlider_GSAP.vue'
+import XpSlider from '@/components/xp-slider/XpSlider_GSAP2.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
 useDefaultSeo('home')
 </script>
