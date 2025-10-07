@@ -3,7 +3,7 @@ import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
-import AgencyComponent from '@/components/agency/AgencyComponent.vue'
+import AgencyComponent from '@/components/agency/AgencyComponent_gsap.vue'
 import XpSlider from '@/components/xp-slider/XpSlider_GSAP.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
 useDefaultSeo('home')
@@ -13,6 +13,6 @@ useDefaultSeo('home')
   <PresentationHero />
   <XpSlider id="xpslider-1" />
   <ProjectGrid />
-  <AgencyComponent />
+  <AgencyComponent id-agency="agency-1" />
   <NewsGrid />
 </template>

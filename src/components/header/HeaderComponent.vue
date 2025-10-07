@@ -14,7 +14,7 @@ onMounted(() => {
 })
 
 watchEffect(() => {
-  if (y.value <= 0 && !globalStore.forcedHideHeader) {
+  if (y.value <= 50 && !globalStore.forcedHideHeader) {
     disabledNavMenu.value = false
   }
   else if (directions.bottom && !globalStore.forcedHideHeader) {

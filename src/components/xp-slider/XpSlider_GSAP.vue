@@ -29,6 +29,7 @@ onMounted(() => {
         y: 0,
         duration: 1,
       }, '<')
+      .to({}, { duration: 1 })
   })
   xpTimeLine.to(xpBackgroundImages, { duration: 0.5 })
 
@@ -39,6 +40,7 @@ onMounted(() => {
     pin: true,
     scrub: true,
     invalidateOnRefresh: true,
+    fastScrollEnd: true,
     end: () => '+=' + (xpImages.length * window.innerHeight),
     onEnter() {
       globalStore.setForcedHideHeader(true)
@@ -93,6 +95,7 @@ onMounted(() => {
         <img
           v-for="(item, key) in items"
           :key="`xp-main-picture-${key}`"
+          loading="lazy"
           :src="item.mainpicture.href"
           :alt="item.mainpicture.alt"
           :class="{'actif': activeSlide >= key}"
@@ -131,6 +134,7 @@ onMounted(() => {
         :src="item.secondarypicture.href"
         :alt="item.secondarypicture.alt"
         :class="{'actif': activeSlide >= key}"
+        loading="lazy"
         :style="{zIndex: 10 * key}"
       >
     </div>
