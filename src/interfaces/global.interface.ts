@@ -51,3 +51,17 @@ export interface ProjectItemInterface {
   picture: PictureInterface
   theme: ItemThemeType
 }
+
+export interface UxRepublicArticleInterface {
+  id: number
+  date: string
+  link: string
+  title: {
+    rendered: string
+  }
+  excerpt: {
+    rendered: string
+    key: string
+    format: string
+  }
+}

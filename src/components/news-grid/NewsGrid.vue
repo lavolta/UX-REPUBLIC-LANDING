@@ -7,13 +7,13 @@ import ContactAnimation from '../contact/ContactAnimation.vue'
 import { useI18n } from 'vue-i18n'
 import { onMounted } from 'vue'
 import { cleanDataArcticleFromUxRepublicResponse } from '@/utils/data.utils'
-
+import type { UxRepublicArticleInterface, NewsItemType } from '@/interfaces'
 const { tm, locale } = useI18n()
 const items = tm('news.items')
 
 const gridToDisplay = ref(items)
-const mapFrechDataWithDefaultData = (data) => {
-  const frechData = gridToDisplay.value.reduce((acc, currentItem, currrentItemIndex) => {
+const mapFrechDataWithDefaultData = (data: UxRepublicArticleInterface[]) => {
+  const frechData = gridToDisplay.value.reduce<NewsItemType[]>((acc, currentItem, currrentItemIndex) => {
     if (currentItem.type === 'text') {
       acc.push(cleanDataArcticleFromUxRepublicResponse(data[currrentItemIndex]))
     }
@@ -29,7 +29,7 @@ onMounted(async () => {
     console.log('locale.value', locale.value)
     const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8`
     const response = await fetch(urlToFetch)
-    const data = await response.json()
+    const data: UxRepublicArticleInterface[] = await response.json()
     mapFrechDataWithDefaultData(data)
     if (response.status !== 200) {
       throw new Error('failed to fetch news post')

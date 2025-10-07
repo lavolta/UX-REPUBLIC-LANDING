@@ -1,17 +1,4 @@
-import type { GridItemTextInterface } from '@/interfaces'
-interface UxRepublicArticleInterface {
-  id: number
-  date: string
-  link: string
-  title: {
-    rendered: string
-  }
-  excerpt: {
-    rendered: string
-    key: string
-    format: string
-  }
-}
+import type { GridItemTextInterface, UxRepublicArticleInterface } from '@/interfaces'
 
 export const formatDate = (dateString) => {
   const date = new Date(dateString)
