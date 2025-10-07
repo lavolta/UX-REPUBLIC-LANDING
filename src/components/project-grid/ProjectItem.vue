@@ -20,6 +20,7 @@ const targetIsVisible = useElementVisibility(target, {
     <div class="project-item__inner">
       <div class="project-item__media">
         <img
+          loading="lazy"
           :src="item.picture.href"
           :alt="item.picture.alt"
         >

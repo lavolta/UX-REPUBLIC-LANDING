@@ -28,7 +28,6 @@ onMounted(() => {
       class="hero__bg"
       muted
       playsinline
-      autoplay
       loop
     >
       <source

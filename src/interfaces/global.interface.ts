@@ -42,6 +42,7 @@ export interface AgencyItemInterface {
   email?: string
   theme: ItemThemeType
   picture: PictureInterface
+  pictureM?: PictureInterface
 }
 
 export interface ProjectItemInterface {

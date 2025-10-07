@@ -9,6 +9,10 @@ export const agencyItems: AgencyItemInterface[] = [
       alt: 'Paris',
       href: '/images/agencies-gsap/paris.jpg',
     },
+    pictureM: {
+      alt: 'Paris',
+      href: '/images/agencies-gsap/paris-m.jpg',
+    },
   },
   {
     title: 'Bordeaux',
@@ -18,6 +22,10 @@ export const agencyItems: AgencyItemInterface[] = [
     picture: {
       alt: 'Bordeaux',
       href: '/images/agencies-gsap/bordeaux.jpg',
+    },
+    pictureM: {
+      alt: 'Bordeaux',
+      href: '/images/agencies-gsap/bordeaux-m.jpg',
     },
   },
   {
@@ -29,6 +37,10 @@ export const agencyItems: AgencyItemInterface[] = [
       alt: 'Lyon',
       href: '/images/agencies-gsap/lyon.jpg',
     },
+    pictureM: {
+      alt: 'Lyon',
+      href: '/images/agencies-gsap/lyon-m.jpg',
+    },
   },
   {
     title: 'Lille',
@@ -38,6 +50,10 @@ export const agencyItems: AgencyItemInterface[] = [
     picture: {
       alt: 'Lille',
       href: '/images/agencies-gsap/lille.jpg',
+    },
+    pictureM: {
+      alt: 'Lille',
+      href: '/images/agencies-gsap/lille-m.jpg',
     },
   },
   {
@@ -49,6 +65,10 @@ export const agencyItems: AgencyItemInterface[] = [
       alt: 'Lausanne',
       href: '/images/agencies-gsap/lausanne.jpg',
     },
+    pictureM: {
+      alt: 'Lausanne',
+      href: '/images/agencies-gsap/lausanne-m.jpg',
+    },
   },
   {
     title: 'Bruxelles',
@@ -59,6 +79,10 @@ export const agencyItems: AgencyItemInterface[] = [
       alt: 'Bruxelles',
       href: '/images/agencies-gsap/bruxelles.jpg',
     },
+    pictureM: {
+      alt: 'Bruxelles',
+      href: '/images/agencies-gsap/bruxelles-m.jpg',
+    },
   },
   {
     title: 'Luxembourg',
@@ -68,6 +92,10 @@ export const agencyItems: AgencyItemInterface[] = [
     picture: {
       alt: 'Luxembourg',
       href: '/images/agencies-gsap/luxembourg.jpg',
+    },
+    pictureM: {
+      alt: 'Luxembourg',
+      href: '/images/agencies-gsap/luxembourg-m.jpg',
     },
   },
 ]

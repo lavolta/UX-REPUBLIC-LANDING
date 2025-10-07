@@ -45,7 +45,7 @@ const handleClickOnNavButton = (key) => {
 }
 
 onMounted(() => {
-  const agencyBackgrounds = gsap.utils.toArray(`#${props.idAgency} .agency__bg > img`)
+  const agencyBackgrounds = gsap.utils.toArray(`#${props.idAgency} .agency__bg > *`)
 
   ScrollTrigger.create({
     animation: agencyTimeline,
@@ -151,14 +151,34 @@ onMounted(() => {
       </svg>
     </div>
     <div class="agency__bg">
-      <img
-        v-for="(image, key) in items"
+      <template
+        v-for="(item, key) in items"
         :key="`agency-bg-image-${key}`"
-        :src="image.picture.href"
-        :alt="image.picture.alt"
-        :style="{zIndex: 1 * key}"
-        :class="{'actif': itemActif === key}"
       >
+        <picture
+          v-if="item.pictureM"
+          :style="{zIndex: 1 * key}"
+        >
+          <source
+            :srcset="item.picture.href"
+            media="(width >= 600px)"
+          >
+          <img
+            :src="item.pictureM.href"
+            :alt="item.picture.href"
+            :class="{'actif': itemActif === key}"
+            loading="lazy"
+          >
+        </picture>
+        <img
+          v-else
+          :src="item.picture.href"
+          :alt="item.picture.href"
+          :style="{zIndex: 1 * key}"
+          :class="{'actif': itemActif === key}"
+          loading="lazy"
+        >
+      </template>
     </div>
     <div class="agency__inner">
       <AgencyItemComponent
@@ -251,7 +271,7 @@ onMounted(() => {
       mask-image: url("#agencyMask");
     }
 
-    > img {
+    img {
       display: block;
       position: absolute;
       top: 0;
