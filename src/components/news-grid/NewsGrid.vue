@@ -1,11 +1,44 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
 import NewGridSocialItem from './NewGridSocialItem.vue'
 import ContactAnimation from '../contact/ContactAnimation.vue'
 import { useI18n } from 'vue-i18n'
-const { tm } = useI18n()
+import { onMounted } from 'vue'
+import { cleanDataArcticleFromUxRepublicResponse } from '@/utils/data.utils'
+
+const { tm, locale } = useI18n()
 const items = tm('news.items')
+
+const gridToDisplay = ref(items)
+const mapFrechDataWithDefaultData = (data) => {
+  const frechData = gridToDisplay.value.reduce((acc, currentItem, currrentItemIndex) => {
+    if (currentItem.type === 'text') {
+      acc.push(cleanDataArcticleFromUxRepublicResponse(data[currrentItemIndex]))
+    }
+    else {
+      acc.push(currentItem)
+    }
+    return acc
+  }, [])
+  gridToDisplay.value = frechData
+}
+onMounted(async () => {
+  try {
+    console.log('locale.value', locale.value)
+    const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8`
+    const response = await fetch(urlToFetch)
+    const data = await response.json()
+    mapFrechDataWithDefaultData(data)
+    if (response.status !== 200) {
+      throw new Error('failed to fetch news post')
+    }
+  }
+  catch (error) {
+    console.log('error', error)
+  }
+})
 
 </script>
 <template>
@@ -16,7 +49,7 @@ const items = tm('news.items')
       </p>
       <div class="news__grid">
         <div
-          v-for="(item, key) in items"
+          v-for="(item, key) in gridToDisplay"
           :key="key"
         >
           <NewsGridItemText
