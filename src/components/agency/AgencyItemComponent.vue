@@ -104,14 +104,15 @@ defineProps<{
   }
 
   &__title {
-    margin-bottom: 6.375rem;
+    margin-bottom: 2rem;
     overflow: hidden;
     color: #C5C5C5;
-    font-size: 6rem;
+    font-size: 5rem;
     font-weight: 400;
-    line-height: 10rem;
+    line-height: 7.8rem;
 
     @include mq(desktop) {
+      margin-bottom: 6.375rem;
       font-size: 14.375rem;
       font-weight: 400;
       line-height: 22.4rem;
