@@ -1,16 +1,20 @@
 <script lang="ts" setup>
 import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
 import MobileNavComponent from './MobileNavComponent.vue'
-import gsap from 'gsap'
+import { gsap } from 'gsap'
 import { useI18n } from 'vue-i18n'
 import { useScroll } from '@vueuse/core'
-import { ref, watchEffect, shallowRef, onMounted, computed, watch } from 'vue'
+import { ref, watchEffect, shallowRef, onMounted, watch, useTemplateRef } from 'vue'
 import { globalStore } from '@/store'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import HeaderToggleButton from './HeaderToggleButton.vue'
 const { tm } = useI18n()
 const navItems = tm('header.navigation')
 
 const disabledNavMenu = ref(false)
+
+const mobileNavComponent = useTemplateRef('mobileNavComponent')
+const headerToggleButton = useTemplateRef('headerToggleButton')
 
 const windowTarget = shallowRef<Window | null>(null)
 const { y, directions } = useScroll(windowTarget)
@@ -21,8 +25,6 @@ const masterTimeLine = gsap.timeline({
     ease: 'back.inOut(2)',
   },
 })
-const menuMobileButtonTimeline = gsap.timeline()
-const menuMobileContentTimeLine = gsap.timeline()
 
 masterTimeLine.pause()
 
@@ -35,64 +37,16 @@ const playMasterTimeline = (reversed: boolean) => {
   }
 }
 
-const defineMenuMobileContentTimeLine = () => {
-  const menuNavItems = gsap.utils.toArray(`#mobile-nav .mobile-nav__list li`)
-  menuNavItems.forEach((menuNavItem, index) => {
-    menuMobileContentTimeLine.fromTo(menuNavItem, {
-      opacity: 0,
-      y: 10,
-      duration: 0.25,
-    }, { opacity: 1, y: 0 }, `<+0.${index}`)
-  })
-}
-const defineMenuMobileButtonTimeLine = () => {
-  menuMobileButtonTimeline.to('#span-line-1', {
-    width: 0,
-    duration: 0.25,
-  }).to('#span-line-2', {
-    width: 0,
-    duration: 0.25,
-  }, '<0.1')
-    .to('#span-line-3', {
-      width: 0,
-      duration: 0.25,
-    }, '<0.1').to('#span-line-1', {
-      rotation: 45,
-      top: 5,
-      marginBottom: 0,
-      duration: 0,
-    }, '>').to('#span-line-3', {
-      rotation: -45,
-      top: -5,
-      marginBottom: 0,
-      duration: 0,
-    }, '<').to('#span-line-1', {
-      width: 30,
-      duration: 0.5,
-    }, '<').to('#span-line-3', {
-      width: 30,
-      duration: 0.5,
-    }, '<0.1').to('.mobile-nav', {
-      skewY: 15,
-      yPercent: 20,
-      duration: 0.5,
-      ease: 'expo.inOut',
-    }, '<').to('.mobile-nav', {
-      skewY: 0,
-      yPercent: 100,
-      duration: 0.5,
-      ease: 'expo.inOut',
-    }, '<0.4')
-}
 const defineTimeline = () => {
-  defineMenuMobileButtonTimeLine()
-  defineMenuMobileContentTimeLine()
-  masterTimeLine.add(menuMobileButtonTimeline).add(menuMobileContentTimeLine, '>-0.2')
+  const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
+  const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
+
+  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<')
   masterTimeLine.eventCallback('onReverseComplete', () => {
-    console.log('onReverseComplete')
     ScrollTrigger.refresh()
   })
 }
+
 watch(menuMobileVisible, (newValue) => {
   if (newValue) {
     playMasterTimeline(false)
@@ -107,15 +61,16 @@ const handleMenuMobile = () => {
   menuMobileVisible.value = !menuMobileVisible.value
   globalStore.setGlobalOverflow(menuMobileVisible.value)
 }
-const ariaLabelBtnToggleNavMenu = computed(() => {
-  return menuMobileVisible.value ? 'Fermer menu mobile' : 'Ouvrir menu mobile'
-})
+
 onMounted(() => {
   windowTarget.value = window
   defineTimeline()
 })
 
 watchEffect(() => {
+  if (menuMobileVisible.value) {
+    return
+  }
   if (y.value <= 50 && !globalStore.forcedHideHeader) {
     disabledNavMenu.value = false
   }
@@ -151,19 +106,13 @@ watchEffect(() => {
           {{ item.content }}
         </a>
       </nav>
-      <button
+      <HeaderToggleButton
+        ref="headerToggleButton"
         class="header__toggle"
-        :class="{'header__toggle--open': menuMobileVisible}"
-        :aria-label="ariaLabelBtnToggleNavMenu"
+        :open="menuMobileVisible"
         @click="handleMenuMobile"
-      >
-        <span
-          v-for="index in 3"
-          :id="`span-line-${index}`"
-          :key="`header-toggle-span-line-${index}`"
-        />
-      </button>
-      <MobileNavComponent />
+      />
+      <MobileNavComponent ref="mobileNavComponent" />
     </div>
   </header>
 </template>
@@ -220,38 +169,6 @@ watchEffect(() => {
       border: none;
       background-color: transparent;
       cursor: pointer;
-    }
-  }
-
-  &__toggle {
-    display: flex;
-    position: relative;
-    z-index:200;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    background-color: transparent;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    >span {
-      display: block;
-      position: relative;
-      width: 30px;
-      height: 3px;
-      border-radius: 3px;
-      background-color: var(--color-white);
-
-      &:not(:last-child) {
-        margin-bottom: 4px;
-      }
-    }
-
-    @include mq(desktop) {
-      // display: none;
     }
   }
 

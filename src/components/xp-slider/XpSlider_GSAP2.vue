@@ -37,12 +37,11 @@ onMounted(() => {
     invalidateOnRefresh: true,
     fastScrollEnd: true,
     scrub: true,
-    end: () => '+=' + ((xpBackgroundImages.length * 2) * window.innerHeight),
+    end: () => '+=' + ((xpBackgroundImages.length) * window.innerHeight),
     onEnter() {
       globalStore.setForcedHideHeader(true)
     },
     onUpdate(self) {
-      console.log('update')
       const progress = self.progress
       const totalSlides = xpImages.length
       const index = Math.floor(progress * totalSlides)
