@@ -42,8 +42,12 @@ onMounted(() => {
 .hero {
   position: relative;
   width: 100%;
-  height: 78vh;
+  height: 70svh;
   overflow: hidden;
+
+  @include mq(desktop) {
+    height: 78vh;
+  }
 
   &__img {
     display: block;

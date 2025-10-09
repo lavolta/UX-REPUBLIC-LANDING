@@ -215,10 +215,14 @@ onMounted(() => {
 
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   overflow: hidden;
   background-color: var(--color-background);
   color: var(--color-text-dark);
+
+  @include mq(desktop) {
+    height: 100vh;
+  }
 
   &__mask {
     position: absolute;

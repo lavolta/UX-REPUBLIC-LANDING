@@ -154,10 +154,14 @@ onMounted(() => {
 
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   overscroll-behavior: contain;
   overflow: hidden;
   touch-action: pan-x pan-y;
+
+  @include mq(desktop) {
+    height: 100vh;
+  }
 
   &__tags {
     display: flex;

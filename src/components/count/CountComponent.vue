@@ -93,7 +93,7 @@ watch(targetIsVisible, (newValue) => {
 
     >p {
       margin: 0;
-      margin-bottom: 0.875rem;
+      margin-bottom: 0;
       color: var(--color-white);
       font-size: 1rem;
       font-weight: 200;
@@ -101,14 +101,28 @@ watch(targetIsVisible, (newValue) => {
       letter-spacing: 10%;
       line-height: 119%;
       text-transform: uppercase;
+
+      @include mq(desktop) {
+        margin-bottom: 0.875rem;
+      }
     }
 }
 
 number-flow-vue::part(digit),
 number-flow-vue::part(suffix) {
-color: var(--color-white);
-font-size: 6.25rem;
-font-weight: 200;
-line-height: 1;
+  color: var(--color-white);
+  font-size: 4rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+@include mq(desktop) {
+  number-flow-vue::part(digit),
+  number-flow-vue::part(suffix) {
+  color: var(--color-white);
+  font-size: 6.25rem;
+  font-weight: 200;
+  line-height: 1;
+  }
 }
 </style>
