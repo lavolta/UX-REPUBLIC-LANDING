@@ -14,18 +14,10 @@ const defineMobileTimeLine = () => {
     return
   }
   const menuNavItems = gsap.utils.toArray(mobileNavItems.value)
-
-  mobileNavComponentTimeline.to(mobileNav.value, {
-    skewY: 15,
-    yPercent: 20,
-    duration: 0.5,
-    ease: 'expo.inOut',
-  }).to(mobileNav.value, {
-    skewY: 0,
-    yPercent: 100,
-    duration: 0.5,
-    ease: 'expo.inOut',
-  }, '>-0.1')
+  mobileNavComponentTimeline.to(mobileNav.value, { opacity: 1, duration: 0.1 }, '<').fromTo(mobileNav.value,
+    { skewY: 15, yPercent: -110 },
+    { skewY: 0, yPercent: 0, duration: 1.5, ease: 'expo.inOut' }, '<',
+  )
 
   if (mobileNavItems.value) {
     console.log('jfioejhfeio')
@@ -34,7 +26,7 @@ const defineMobileTimeLine = () => {
         opacity: 0,
         y: 10,
         duration: 0.25,
-      }, { opacity: 1, y: 0 }, index === 0 ? '>' : `<+0.${index}`)
+      }, { opacity: 1, y: 0 }, index === 0 ? '<+1' : `<+0.${index}`)
     })
   }
 }
@@ -76,7 +68,9 @@ defineExpose({
 .mobile-nav {
   position: fixed;
   z-index: 100;
-  transform: translateY(-100%);
+  opacity: 0%;
+
+  // transform: translateY(-110%);
   background-color: transparent;
   background-color: var(--color-bg);
   inset: 0;
