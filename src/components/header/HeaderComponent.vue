@@ -1,19 +1,76 @@
 <script lang="ts" setup>
 import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
+import MobileNavComponent from './MobileNavComponent.vue'
+import { gsap } from 'gsap'
+import { useI18n } from 'vue-i18n'
 import { useScroll } from '@vueuse/core'
-import { ref, watchEffect, shallowRef, onMounted } from 'vue'
+import { ref, watchEffect, shallowRef, onMounted, watch, useTemplateRef } from 'vue'
 import { globalStore } from '@/store'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import HeaderToggleButton from './HeaderToggleButton.vue'
+const { tm } = useI18n()
+const navItems = tm('header.navigation')
 
 const disabledNavMenu = ref(false)
 
+const mobileNavComponent = useTemplateRef('mobileNavComponent')
+const headerToggleButton = useTemplateRef('headerToggleButton')
+
 const windowTarget = shallowRef<Window | null>(null)
 const { y, directions } = useScroll(windowTarget)
+const menuMobileVisible = ref(false)
+
+const masterTimeLine = gsap.timeline({
+  defaults: {
+    ease: 'back.inOut(2)',
+  },
+})
+
+masterTimeLine.pause()
+
+const playMasterTimeline = (reversed: boolean) => {
+  if (reversed) {
+    masterTimeLine.reverse()
+  }
+  else {
+    masterTimeLine.play()
+  }
+}
+
+const defineTimeline = () => {
+  const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
+  const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
+
+  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<')
+  masterTimeLine.eventCallback('onReverseComplete', () => {
+    ScrollTrigger.refresh()
+  })
+}
+
+watch(menuMobileVisible, (newValue) => {
+  if (newValue) {
+    playMasterTimeline(false)
+  }
+  else {
+    playMasterTimeline(true)
+  }
+})
+
+const handleMenuMobile = () => {
+  document.querySelector('html')?.classList.toggle('overflow')
+  menuMobileVisible.value = !menuMobileVisible.value
+  globalStore.setGlobalOverflow(menuMobileVisible.value)
+}
 
 onMounted(() => {
   windowTarget.value = window
+  defineTimeline()
 })
 
 watchEffect(() => {
+  if (menuMobileVisible.value) {
+    return
+  }
   if (y.value <= 50 && !globalStore.forcedHideHeader) {
     disabledNavMenu.value = false
   }
@@ -40,19 +97,22 @@ watchEffect(() => {
         class="header__nav"
       >
         <a
-          href="https://jobs.smile.eu/departments/ux-republic"
+          v-for="(item, key) in navItems"
+          :key="`header-nav-desktop-item-${key}`"
+          :href="item.href"
           target="_blank"
           class="button"
         >
-          Rejoignez-nous
-        </a>
-        <a
-          href="mailto:contact@ux-republic.com"
-          class="button"
-        >
-          Contactez-nous
+          {{ item.content }}
         </a>
       </nav>
+      <HeaderToggleButton
+        ref="headerToggleButton"
+        class="header__toggle"
+        :open="menuMobileVisible"
+        @click="handleMenuMobile"
+      />
+      <MobileNavComponent ref="mobileNavComponent" />
     </div>
   </header>
 </template>
@@ -77,7 +137,7 @@ watchEffect(() => {
 
   &__inner {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     max-width: var(--max-section-width);
@@ -85,6 +145,7 @@ watchEffect(() => {
     padding: 0 2rem;
 
     @include mq(desktop) {
+      align-items: stretch;
       padding: 0;
     }
   }

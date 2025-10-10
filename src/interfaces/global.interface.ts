@@ -65,3 +65,10 @@ export interface UxRepublicArticleInterface {
     format: string
   }
 }
+
+export type NavigationItemType = 'link' | 'button'
+export interface NavigationItem {
+  href: string
+  content: string
+  type: NavigationItemType
+}

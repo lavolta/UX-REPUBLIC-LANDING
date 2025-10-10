@@ -37,12 +37,11 @@ onMounted(() => {
     invalidateOnRefresh: true,
     fastScrollEnd: true,
     scrub: true,
-    end: () => '+=' + ((xpBackgroundImages.length * 2) * window.innerHeight),
+    end: () => '+=' + ((xpBackgroundImages.length) * window.innerHeight),
     onEnter() {
       globalStore.setForcedHideHeader(true)
     },
     onUpdate(self) {
-      console.log('update')
       const progress = self.progress
       const totalSlides = xpImages.length
       const index = Math.floor(progress * totalSlides)
@@ -155,10 +154,14 @@ onMounted(() => {
 
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   overscroll-behavior: contain;
   overflow: hidden;
   touch-action: pan-x pan-y;
+
+  @include mq(desktop) {
+    height: 100vh;
+  }
 
   &__tags {
     display: flex;

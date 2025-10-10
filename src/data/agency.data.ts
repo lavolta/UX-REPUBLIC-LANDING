@@ -86,7 +86,7 @@ export const agencyItems: AgencyItemInterface[] = [
   },
   {
     title: 'Luxembourg',
-    address: '115A, Rue Emile Mark, Oberkorn Differdange 4620 Oberkorn Differdange',
+    address: '115A, Rue Emile Mark, 4620 Oberkorn Differdange',
     theme: 'theme-7',
     email: 'luxembourg@ux-republic.com',
     picture: {
