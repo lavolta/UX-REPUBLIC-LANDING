@@ -1,64 +1,74 @@
 <script lang="ts" setup>
-import { onMounted, ref, useTemplateRef } from 'vue'
+import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
 import { xpItems } from '@/data'
 import { globalStore } from '@/store'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const props = defineProps<{ id: string }>()
 const xpSection = useTemplateRef('xpSection')
 const activeSlide = ref(0)
 const items = ref(xpItems)
-const xpTimeLine = gsap.timeline()
+
+let xpSliderGsapContext: gsap.Context | null = null
+// eslint-disable-next-line
+let xpSliderGsapTimeline: gsap.core.Timeline | null = null
 
 onMounted(() => {
-  const xpBackgroundImages = gsap.utils.toArray(`#${props.id} .xp__bg img`)
-  const xpImages = gsap.utils.toArray(`#${props.id} .xp__picturelist img`)
+  xpSliderGsapContext = gsap.context(() => {
+    const xpBackgroundImages = gsap.utils.toArray(`#${props.id} .xp__bg img`) as HTMLImageElement[]
+    const xpImages = gsap.utils.toArray(`#${props.id} .xp__picturelist img`) as HTMLImageElement[]
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: `#${props.id}`,
+        start: 'top top',
+        pin: true,
+        invalidateOnRefresh: true,
+        fastScrollEnd: true,
+        scrub: true,
+        end: () => '+=' + ((xpBackgroundImages.length) * window.innerHeight),
+        onEnter() {
+          console.log('enter in xp slider')
+          globalStore.setForcedHideHeader(true)
+        },
+        onUpdate(self) {
+          const progress = self.progress
+          const totalSlides = xpImages.length
+          const index = Math.floor(progress * totalSlides)
+          activeSlide.value = Math.min(totalSlides - 1, Math.max(0, index))
+        },
+        onEnterBack() {
+          globalStore.setForcedHideHeader(true)
+        },
+        onLeave() {
+          globalStore.setForcedHideHeader(false)
+        },
+        onLeaveBack() {
+          globalStore.setForcedHideHeader(false)
+        },
+      },
+    })
+    xpSliderGsapTimeline = timeline
 
-  // 1️⃣ Partie scrollée : le fond + images principales
-  xpBackgroundImages.forEach((xpBackgroundImage, i) => {
-    const centerImage = xpImages[i]
+    xpBackgroundImages.forEach((xpBackgroundImage, i) => {
+      const centerImage = xpImages[i]
 
-    xpTimeLine
-      .addLabel(`slide-${i}`)
-      .to(xpBackgroundImage, {
-        y: 0,
-        duration: 2,
-      })
-      .to(centerImage, {
-        y: 0,
-        duration: 2,
-      }, '<')
-      .to({}, { duration: 1 })
+      timeline
+        .addLabel(`slide-${i}`)
+        .to(xpBackgroundImage, {
+          duration: 2,
+        }, `slide-${i}`)
+        .to(centerImage, {
+          duration: 2,
+        }, '<')
+        .to({}, { duration: 1 })
+    })
   })
-  ScrollTrigger.create({
-    animation: xpTimeLine,
-    trigger: `#${props.id}`,
-    start: 'top top',
-    pin: true,
-    scrub: true,
-    invalidateOnRefresh: true,
-    fastScrollEnd: true,
-    end: () => '+=' + ((xpBackgroundImages.length * 2) * window.innerHeight),
-    onEnter() {
-      globalStore.setForcedHideHeader(true)
-    },
-    onUpdate(self) {
-      const progress = self.progress
-      const totalSlides = xpImages.length
-      const index = Math.floor(progress * totalSlides)
-      activeSlide.value = Math.min(totalSlides - 1, Math.max(0, index))
-    },
-    onEnterBack() {
-      globalStore.setForcedHideHeader(true)
-    },
-    onLeave() {
-      globalStore.setForcedHideHeader(false)
-    },
-    onLeaveBack() {
-      globalStore.setForcedHideHeader(false)
-    },
-  })
+})
+
+onUnmounted(() => {
+  if (xpSliderGsapContext) {
+    xpSliderGsapContext.revert()
+  }
 })
 
 </script>
@@ -156,10 +166,14 @@ onMounted(() => {
 
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   overscroll-behavior: contain;
   overflow: hidden;
   touch-action: pan-x pan-y;
+
+  @include mq(desktop) {
+    height: 100vh;
+  }
 
   &__tags {
     display: flex;
@@ -228,6 +242,7 @@ onMounted(() => {
       height: 100%;
       object-fit: cover;
       transform: translateY(100%);
+      transition: var(--transition-timing);
 
       &.actif {
         transform: translateY(0);
@@ -396,6 +411,7 @@ onMounted(() => {
       width: 100%;
       height: 100%;
       transform: translateY(100%);
+      transition: var(--transition-timing);
       border-radius: 3px;
 
       &.actif {

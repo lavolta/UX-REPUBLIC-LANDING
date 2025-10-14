@@ -2,12 +2,12 @@
 import { agencyItems } from '@/data'
 import { globalStore } from '@/store'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useResizeObserver } from '@vueuse/core'
 
 import {
   ref,
   onMounted,
+  onUnmounted,
   useTemplateRef,
 } from 'vue'
 import AgencyItemComponent from './AgencyItemComponent.vue'
@@ -37,7 +37,10 @@ const props = defineProps<{ idAgency: string }>()
 const items = ref(agencyItems)
 
 const itemActif = ref(0)
-const agencyTimeline = gsap.timeline()
+
+let agencyGsapContext: gsap.Context | null = null
+// eslint-disable-next-line
+let agencyGsapTimeline: gsap.core.Timeline | null = null
 
 const isInView = ref(false)
 const handleClickOnNavButton = (key) => {
@@ -45,37 +48,47 @@ const handleClickOnNavButton = (key) => {
 }
 
 onMounted(() => {
-  const agencyBackgrounds = gsap.utils.toArray(`#${props.idAgency} .agency__bg > *`)
-
-  ScrollTrigger.create({
-    animation: agencyTimeline,
-    trigger: `#${props.idAgency}`,
-    id: props.idAgency,
-    start: 'top top',
-    pin: true,
-    invalidateOnRefresh: true,
-    fastScrollEnd: false,
-    end: () => '+=' + (agencyBackgrounds.length * window.innerHeight),
-    onEnter() {
-      globalStore.setForcedHideHeader(true)
-      isInView.value = true
-    },
-    onUpdate(self) {
-      const progress = self.progress
-      const totalSlides = agencyBackgrounds.length
-      const index = Math.floor(progress * totalSlides)
-      itemActif.value = Math.min(totalSlides - 1, Math.max(0, index))
-    },
-    onEnterBack() {
-      globalStore.setForcedHideHeader(true)
-    },
-    onLeave() {
-      globalStore.setForcedHideHeader(false)
-    },
-    onLeaveBack() {
-      globalStore.setForcedHideHeader(false)
-    },
+  agencyGsapContext = gsap.context(() => {
+    const agencyBackgrounds = gsap.utils.toArray(`#${props.idAgency} .agency__bg > *`)
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: `#${props.idAgency}`,
+        id: props.idAgency,
+        start: 'top top',
+        pin: true,
+        invalidateOnRefresh: true,
+        fastScrollEnd: false,
+        end: () => '+=' + (agencyBackgrounds.length * window.innerHeight),
+        onEnter() {
+          console.log('ici 3')
+          globalStore.setForcedHideHeader(true)
+          isInView.value = true
+        },
+        onUpdate(self) {
+          const progress = self.progress
+          const totalSlides = agencyBackgrounds.length
+          const index = Math.floor(progress * totalSlides)
+          itemActif.value = Math.min(totalSlides - 1, Math.max(0, index))
+        },
+        onEnterBack() {
+          console.log('ici 4')
+          globalStore.setForcedHideHeader(true)
+        },
+        onLeave() {
+          globalStore.setForcedHideHeader(false)
+        },
+        onLeaveBack() {
+          globalStore.setForcedHideHeader(false)
+        },
+      },
+    })
+    agencyGsapTimeline = timeline
   })
+})
+onUnmounted(() => {
+  if (agencyGsapContext) {
+    agencyGsapContext.revert()
+  }
 })
 </script>
 

@@ -2,14 +2,12 @@
 import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
 import MobileNavComponent from './MobileNavComponent.vue'
 import { gsap } from 'gsap'
-import { useI18n } from 'vue-i18n'
 import { useScroll } from '@vueuse/core'
 import { ref, watchEffect, shallowRef, onMounted, watch, useTemplateRef } from 'vue'
 import { globalStore } from '@/store'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeaderToggleButton from './HeaderToggleButton.vue'
-const { tm } = useI18n()
-const navItems = tm('header.navigation')
+import HeaderNavComponent from './HeaderNavComponent.vue'
 
 const disabledNavMenu = ref(false)
 
@@ -68,6 +66,7 @@ onMounted(() => {
 })
 
 watchEffect(() => {
+  console.log('globalStore.forcedHideHeader', globalStore.forcedHideHeader)
   if (menuMobileVisible.value) {
     return
   }
@@ -93,26 +92,17 @@ watchEffect(() => {
   >
     <div class="header__inner">
       <StickyLogoHover />
-      <nav
-        class="header__nav"
-      >
-        <a
-          v-for="(item, key) in navItems"
-          :key="`header-nav-desktop-item-${key}`"
-          :href="item.href"
-          target="_blank"
-          class="button"
-        >
-          {{ item.content }}
-        </a>
-      </nav>
+      <HeaderNavComponent class="header__nav" />
       <HeaderToggleButton
         ref="headerToggleButton"
         class="header__toggle"
         :open="menuMobileVisible"
         @click="handleMenuMobile"
       />
-      <MobileNavComponent ref="mobileNavComponent" />
+      <MobileNavComponent
+        ref="mobileNavComponent"
+        class="header__mobile"
+      />
     </div>
   </header>
 </template>
@@ -150,6 +140,14 @@ watchEffect(() => {
     }
   }
 
+  &__toggle {
+    display: block;
+
+    @include mq(desktop) {
+      display: none;
+    }
+  }
+
   &__nav {
     display: none;
     align-items: center;
@@ -157,18 +155,13 @@ watchEffect(() => {
     @include mq(desktop) {
       display: flex;
     }
+  }
 
-    > a,
-    > button {
-      padding: 1rem;
+  &__mobile {
+    display: block;
 
-      @include mq(desktop) {
-        padding: 1rem 1.5625rem;
-      }
-
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
+    @include mq(desktop) {
+      display: none;
     }
   }
 

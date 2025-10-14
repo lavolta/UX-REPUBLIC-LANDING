@@ -71,7 +71,6 @@ export default {
     'declaration-property-unit-disallowed-list': {
       '/^font|^font-size/': ['px'],
     },
-
     'import-notation': 'string',
     'max-nesting-depth': 4,
     'media-feature-range-notation': 'context',

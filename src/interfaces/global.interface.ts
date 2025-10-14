@@ -66,9 +66,19 @@ export interface UxRepublicArticleInterface {
   }
 }
 
-export type NavigationItemType = 'link' | 'button'
-export interface NavigationItem {
+interface NavigationItemInternalLink {
   href: string
   content: string
-  type: NavigationItemType
+  type: 'internal'
 }
+
+interface NavigationItemExternalLink {
+  href: string
+  content: string
+  type: 'link'
+}
+interface NavigationItemButton {
+  content: string
+  type: 'button'
+}
+export type NavigationItem = NavigationItemInternalLink | NavigationItemExternalLink | NavigationItemButton
