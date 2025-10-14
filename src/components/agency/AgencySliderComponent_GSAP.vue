@@ -60,7 +60,6 @@ onMounted(() => {
         fastScrollEnd: false,
         end: () => '+=' + (agencyBackgrounds.length * window.innerHeight),
         onEnter() {
-          console.log('ici 3')
           globalStore.setForcedHideHeader(true)
           isInView.value = true
         },
@@ -71,7 +70,6 @@ onMounted(() => {
           itemActif.value = Math.min(totalSlides - 1, Math.max(0, index))
         },
         onEnterBack() {
-          console.log('ici 4')
           globalStore.setForcedHideHeader(true)
         },
         onLeave() {

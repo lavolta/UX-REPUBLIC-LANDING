@@ -66,7 +66,6 @@ onMounted(() => {
 })
 
 watchEffect(() => {
-  console.log('globalStore.forcedHideHeader', globalStore.forcedHideHeader)
   if (menuMobileVisible.value) {
     return
   }

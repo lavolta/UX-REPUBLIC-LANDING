@@ -49,6 +49,10 @@ onBeforeUnmount(() => {
   margin-bottom: 30.1125rem;
   background-color: var(--color-bg);
 
+  // @include mq(smartphone) {
+  // margin-bottom: 30.1125rem;
+  // }
+
   @include mq(desktop) {
     margin-bottom: 42.3125rem;
   }

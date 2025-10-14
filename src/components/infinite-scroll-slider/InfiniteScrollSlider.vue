@@ -54,18 +54,24 @@ onMounted(() => {
 .scroller {
   $c: &;
 
+  --translate-value: calc(-50.25% - 1rem);
+
   @keyframes scroll {
     to {
       // 28 -> -14.29% | 16 -> -25%  | 8 -> -50%
-      transform: translateX(calc(-50.25% - 1rem));
+      transform: translateX(var(--translate-value));
     }
   }
 
   position: relative;
   z-index:2;
   width: 100%;
-  height: 3.375rem;
+  height: 2rem;
   overflow: hidden;
+
+  @include mq(smartphone) {
+    height: 3.375rem;
+  }
 
   &.disabled-animation {
     height: auto;
@@ -92,7 +98,18 @@ onMounted(() => {
   &__inner {
     display: flex;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
+    height: 100%;
+
+    @include mq(smartphone) {
+      gap: 4rem;
+      height: auto;
+    }
+
+    > img {
+      display: block;
+      height: 100%;
+    }
   }
 
 }

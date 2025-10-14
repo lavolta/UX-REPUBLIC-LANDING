@@ -24,7 +24,11 @@ import CountComponent from '../count/CountComponent.vue'
   width: 100%;
   max-width: var(--max-section-width);
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 4rem 1rem;
+
+  @include mq(smartphone) {
+    padding: 4rem 2rem;
+  }
 
   @include mq(desktop) {
     padding: 7.25rem 0 15.9375rem;
@@ -62,9 +66,14 @@ import CountComponent from '../count/CountComponent.vue'
   &__content {
     p {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 200;
-      line-height: 2rem;
+      line-height: 1.3;
+
+      @include mq(smartphone) {
+        font-size: 1.2rem;
+        line-height: 2rem;
+      }
 
       @include mq(desktop) {
         font-size: 2rem;

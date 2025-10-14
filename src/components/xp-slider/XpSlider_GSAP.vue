@@ -27,7 +27,6 @@ onMounted(() => {
         scrub: true,
         end: () => '+=' + ((xpBackgroundImages.length) * window.innerHeight),
         onEnter() {
-          console.log('enter in xp slider')
           globalStore.setForcedHideHeader(true)
         },
         onUpdate(self) {
@@ -195,8 +194,13 @@ onUnmounted(() => {
       flex: 1 0 auto;
       margin-right: 5px;
       margin-bottom: 5px;
-      padding: 1rem;
-      font-size: 1rem;
+      padding: .75rem;
+      font-size: .75rem;
+
+      @include mq(smartphone) {
+        padding: 1rem;
+        font-size: 1rem;
+      }
 
       @include mq(desktop) {
         flex: 0 1 auto;
@@ -218,10 +222,15 @@ onUnmounted(() => {
   &__sectiontitle {
     position: absolute;
     z-index: 3;
-    top: 3.125rem;
-    left: 2rem;
+    top: 2rem;
+    left: 1rem;
     width: 100%;
     max-width: var(--max-section-width);
+
+    @include mq(smartphone) {
+      top: 3.125rem;
+      left: 2rem;
+    }
 
     @include mq(desktop) {
       left: 50%;
@@ -261,7 +270,11 @@ onUnmounted(() => {
     max-width: var(--max-section-width);
     height: 100%;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
+
+    @include mq(smartphone) {
+      padding: 2rem;
+    }
 
     @include mq(desktop) {
       flex-flow: row nowrap;
@@ -284,7 +297,11 @@ onUnmounted(() => {
   &__titlelist {
     position: relative;
     height: 110px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+
+    @include mq(smartphone) {
+      margin-bottom: 2rem;
+    }
 
     > div {
       display: none;
@@ -388,9 +405,14 @@ onUnmounted(() => {
 
   &__picturelist {
     position: relative;
-    width: 15rem!important;
-    height: 15rem;
+    width: 10rem!important;
+    height: 10rem;
     overflow: hidden;
+
+    @include mq(smartphone) {
+      width: 15rem!important;
+      height: 15rem;
+    }
 
     @include mq(tablet) {
       width: 50%!important;

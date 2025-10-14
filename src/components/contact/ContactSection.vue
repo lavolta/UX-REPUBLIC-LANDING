@@ -16,13 +16,12 @@
       >
         Contactez-nous
       </a>
-      <a
-        href="https://share.hsforms.com/1yebtsQyRStqLl6yNujF0fw3n0wx"
-        target="_blank"
+      <RouterLink
+        to="/contact"
         class="button"
       >
         Votre projet
-      </a>
+      </RouterLink>
     </div>
   </div>
 </template>

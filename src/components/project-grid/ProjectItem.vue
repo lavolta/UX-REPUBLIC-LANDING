@@ -160,7 +160,11 @@ const targetIsVisible = useElementVisibility(target, {
 
   &__content {
     width: 50%;
-    padding-top: 4rem;
+    padding-top: 2rem;
+
+    @include mq(smartphone) {
+      padding-top: 4rem;
+    }
 
     @include mq(tablet) {
       width: 66.66%;
@@ -174,13 +178,17 @@ const targetIsVisible = useElementVisibility(target, {
 
   &__number {
       display: block;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       transform: translateY(-50px);
       transition: all var(--bezier) .5s;
       transition-delay: .5s;
       opacity: 0%;
       font-size: 1rem;
       font-weight: 300;
+
+      @include mq(smartphone) {
+        margin-bottom: 1rem;
+      }
 
       @include mq(desktop) {
         margin-bottom: 2.25rem;
@@ -191,9 +199,9 @@ const targetIsVisible = useElementVisibility(target, {
   &__title {
     margin-bottom: 1rem;
     overflow: hidden;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 400;
-    line-height: 2rem;
+    line-height: 1.2;
 
     > span {
       display: block;
@@ -201,6 +209,12 @@ const targetIsVisible = useElementVisibility(target, {
       transform-origin: bottom left;
       transition: transform var(--bezier) .5s;
       transition-delay: .5s;
+    }
+
+    @include mq(smartphone) {
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 2rem;
     }
 
     @include mq(desktop) {
@@ -212,9 +226,14 @@ const targetIsVisible = useElementVisibility(target, {
 
   &__text {
     overflow: hidden;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 300;
-    line-height: 1.8rem;
+    line-height: 1.3rem;
+
+    @include mq(smartphone) {
+      font-size: 1rem;
+      line-height: 1.8rem;
+    }
 
     > span {
       display: block;
@@ -263,10 +282,16 @@ const targetIsVisible = useElementVisibility(target, {
     }
     #{$c}__content {
       width: 50%;
-      padding-left: 2rem;
+      padding-left: 1rem;
+      text-align: right;
+
+      @include mq(smartphone) {
+        padding-left: 2rem;
+      }
 
       @include mq(tablet) {
         width: calc(66.66% - 2.93rem);
+        text-align: left;
       }
 
       @include mq(desktop) {
@@ -303,8 +328,14 @@ const targetIsVisible = useElementVisibility(target, {
     }
     #{$c}__content {
       width: 50%;
-      padding-top: 4rem;
+      padding-top: 2rem;
+      padding-right: 1rem;
       padding-left: 0;
+
+      @include mq(smartphone) {
+        padding-top: 2rem;
+        padding-right: 0;
+      }
 
       @include mq(tablet) {
         width: calc(66.66% - 2.93rem);
@@ -345,7 +376,11 @@ const targetIsVisible = useElementVisibility(target, {
       }
     }
     #{$c}__content {
-      padding-left: 2rem;
+      padding-left: 1rem;
+
+      @include mq(smartphone) {
+        padding-left: 2rem;
+      }
 
       @include mq(tablet) {
         padding-left: 4.93rem;
