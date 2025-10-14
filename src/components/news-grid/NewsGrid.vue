@@ -26,7 +26,6 @@ const mapFrechDataWithDefaultData = (data: UxRepublicArticleInterface[]) => {
 }
 onMounted(async () => {
   try {
-    console.log('locale.value', locale.value)
     const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8`
     const response = await fetch(urlToFetch)
     const data: UxRepublicArticleInterface[] = await response.json()
@@ -95,7 +94,11 @@ onMounted(async () => {
 
     // max-width: 1356px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 4rem 1rem;
+
+    @include mq(smartphone) {
+      padding: 4rem 2rem;
+    }
 
     @include mq(desktop) {
       padding: 9.1875rem 0 23.3125rem;

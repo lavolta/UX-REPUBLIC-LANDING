@@ -19,8 +19,9 @@ const switchIndex = () => {
 </script>
 
 <template>
-  <div
+  <RouterLink
     class="sticky-logo"
+    to="/"
   >
     <svg
       width="76"
@@ -48,7 +49,7 @@ const switchIndex = () => {
         fill="url(#texture)"
       />
     </svg>
-  </div>
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>

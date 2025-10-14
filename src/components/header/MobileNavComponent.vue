@@ -20,7 +20,6 @@ const defineMobileTimeLine = () => {
   )
 
   if (mobileNavItems.value) {
-    console.log('jfioejhfeio')
     menuNavItems.forEach((menuNavItem, index) => {
       mobileNavComponentTimeline.fromTo(menuNavItem, {
         opacity: 0,

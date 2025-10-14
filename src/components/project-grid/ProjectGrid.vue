@@ -29,8 +29,12 @@ const projectItems = tm('project.items')
 <style lang="scss" scoped>
 .project-grid {
   position: relative;
-  padding: 4rem 2rem;
+  padding: 4rem 1rem;
   overflow: hidden;
+
+  @include mq(smartphone) {
+    padding: 4rem 2rem;
+  }
 
   @include mq(desktop) {
     padding: 130px 0 190px;
@@ -41,7 +45,11 @@ const projectItems = tm('project.items')
     width: 100%;
     max-width: var(--max-section-width);
     margin: 0 auto;
-    padding-bottom:9.375rem;
+    padding-bottom:6rem;
+
+    @include mq(smartphone) {
+      padding-bottom:9.375rem;
+    }
   }
 
   &__title {
@@ -74,7 +82,11 @@ const projectItems = tm('project.items')
       &:nth-child(3) {grid-area: i3;}
 
       &:not(:last-child) {
-        margin-bottom: 8rem;
+        margin-bottom: 4rem;
+
+        @include mq(smartphone) {
+          margin-bottom: 8rem;
+        }
 
         @include mq(desktop) {
           margin-bottom: 4.25rem;

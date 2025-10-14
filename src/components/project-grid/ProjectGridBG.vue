@@ -54,7 +54,11 @@ watch(top, (newvalue) => {
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    padding: 0 2rem;
+    padding: 0 1rem;
+
+    @include mq(smartphone) {
+      padding: 0 2rem;
+    }
 
     @include mq(desktop) {
       display: grid;
