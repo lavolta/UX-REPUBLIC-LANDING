@@ -2,10 +2,11 @@
 import { onMounted, onBeforeUnmount } from 'vue'
 import { useHead } from '@unhead/vue'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
-import FooterSection from '@/components/footer/FooterSection.vue'
+import FooterSection from '@/components/footer/FooterComponent.vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-gsap.registerPlugin(ScrollTrigger)
+import { ScrollSmoother } from 'gsap/ScrollSmoother'
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 useHead({
   link: [
@@ -22,6 +23,9 @@ useHead({
 })
 
 onMounted(() => {
+  ScrollSmoother.create({
+    smooth: 1,
+  })
   ScrollTrigger.normalizeScroll({
     allowNestedScroll: true,
     type: 'touch',
@@ -33,28 +37,25 @@ onBeforeUnmount(() => {
 
 </script>
 <template>
-  <div id="smooth">
-    <HeaderComponent />
-    <main class="main-section">
-      <RouterView />
-    </main>
-    <FooterSection />
+  <HeaderComponent />
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main class="main-section">
+        <RouterView />
+      </main>
+      <FooterSection />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+// #smooth {
+//   overflow: hidden;
+// }
+
 .main-section {
   position: relative;
   z-index: 10;
-  margin-bottom: 30.1125rem;
   background-color: var(--color-bg);
-
-  // @include mq(smartphone) {
-  // margin-bottom: 30.1125rem;
-  // }
-
-  @include mq(desktop) {
-    margin-bottom: 42.3125rem;
-  }
 }
 </style>

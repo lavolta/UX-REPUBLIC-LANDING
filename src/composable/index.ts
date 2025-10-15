@@ -1,2 +1,2 @@
 export * from './useDefaultSeo'
-export * from './useGsap'
+export * from './usePagePosition'
