@@ -6,34 +6,67 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onMounted, onUnmounted } from 'vue'
 import { useTemplateRef } from 'vue'
+import StarsIcon from '../icons/StarsIcon.vue'
+
 const footerSection = useTemplateRef('footerSection')
 const footerMask = useTemplateRef('footerMask')
+const footerTitle = useTemplateRef('footerTitle')
 
 let footergsapContext: gsap.Context | null = null
 
 onMounted(() => {
   footergsapContext = gsap.context(() => {
+    const footerTimeline = gsap.timeline()
+    const footerStars = gsap.utils.toArray(`#footerTitle .footer-section__stars`) as HTMLOrSVGElement[]
+
+    footerTimeline.to(footerMask.value, {
+      bottom: '100%',
+      duration: 200,
+      ease: 'power1',
+    })
+    footerTimeline.to(footerTitle.value, {
+      translateY: '20%',
+      duration: 200,
+      ease: 'power1',
+    }, '>')
+    footerStars.forEach((star) => {
+      footerTimeline.to(
+        star,
+        {
+          rotation: 90,
+          duration: 250,
+          ease: 'power1',
+        },
+        '<',
+      )
+    })
     ScrollTrigger.create({
+      animation: footerTimeline,
       trigger: footerSection.value,
-      start: 'top 80%', // quand le haut du footer atteint 70% de l’écran
-      scrub: 2,
+      start: 'top-=50% 30%', // quand le haut du footer atteint 70% de l’écran
+      end: '100% 100%',
+      scrub: 4,
       onEnter: () => {
+        console.log('onEnter footer')
         // lancer la timeline à ce moment
-        gsap.to(footerMask.value, {
-          bottom: '100%',
-          duration: 1,
-          ease: 'power2.out',
-        })
+        // gsap.to(footerMask.value, {
+        //   bottom: '100%',
+        //   duration: 1,
+        //   ease: 'power2.out',
+        // })
+      },
+      onLeave: () => {
+        console.log('onLeave footer')
       },
       onLeaveBack: () => {
-        console.log('onLeaveBack')
-        gsap.to(footerMask.value, {
-          bottom: '0%',
-          duration: 1,
-          ease: 'power2.out',
-        })
+        console.log('onLeaveBack footer')
+        // console.log('onLeaveBack')
+        // gsap.to(footerMask.value, {
+        //   bottom: '0%',
+        //   duration: 1,
+        //   ease: 'power2.out',
+        // })
       },
-      toggleActions: 'play reverse play reverse',
     })
   })
 })
@@ -49,12 +82,32 @@ onUnmounted(() => {
     ref="footerSection"
     class="footer-section"
   >
+    <div
+      id="footerTitle"
+      ref="footerTitle"
+      class="footer-section__title"
+    >
+      <div class="footer-section__titleinner">
+        <div
+          v-for="item in 3"
+          :key="`footer-section__title${item}`"
+          :class="{'red': item === 2}"
+        >
+          <span>contactez-nous</span>
+          <div class="footer-section__stars">
+            <StarsIcon />
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="footer-section__inner">
-      <div
-        ref="footerMask"
-        class="footer-section__mask"
-      />
-      <ContactSection />
+      <div>
+        <div
+          ref="footerMask"
+          class="footer-section__mask"
+        />
+        <ContactSection />
+      </div>
       <FooterNav />
     </div>
   </footer>
@@ -64,9 +117,17 @@ onUnmounted(() => {
 .footer-section {
   $c: &;
 
+  --translate-value: calc(-33% - 2rem);
+
+  @keyframes scroll {
+    to {
+      transform: translateX(var(--translate-value));
+    }
+  }
+
   position: relative;
+  z-index: 20;
   width: 100%;
-  overflow: hidden;
   transition: transform ease-in .3s;
   background: var(--color-bg-footer);
 
@@ -79,6 +140,7 @@ onUnmounted(() => {
     max-width: var(--max-section-width);
     margin: 0 auto;
     padding: 4rem 2rem;
+    overflow: hidden;
 
     @include mq(desktop) {
       padding: 28.125rem 0 4rem;
@@ -94,8 +156,61 @@ onUnmounted(() => {
     width: 100%;
 
     // background-color: red;
-
     background-color: var(--color-bg);
+  }
+
+  &__title {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    color: var(--color-bg-footer);
+
+  }
+
+  &__titleinner {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    width: max-content;
+    animation: scroll 60s linear infinite;
+
+    > div {
+      display: flex;
+      align-items: center;
+
+      // &.red { background-color: red;}
+      > div {
+        margin-left: 2rem;
+      }
+
+      span {
+        display: block;
+
+        // color: var(--color-bg-footer);
+        font-size: 3.1rem;
+        font-weight: 400;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+
+        @include mq(smartphone) {
+          font-size: 3.7rem;
+        }
+
+        @include mq(desktop) {
+          font-size: 12.075rem;
+        }
+
+      }
+
+      svg {
+        display: block;
+        flex: 0 0 auto;
+        width: 9rem;
+      }
     }
+  }
 }
 </style>

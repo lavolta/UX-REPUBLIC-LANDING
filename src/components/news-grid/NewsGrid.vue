@@ -99,7 +99,7 @@ onMounted(async () => {
     }
 
     @include mq(desktop) {
-      padding: 9.1875rem 0 23.3125rem;
+      padding: 9.1875rem 0 19rem;
     }
 
   }
