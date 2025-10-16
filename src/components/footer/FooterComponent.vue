@@ -19,11 +19,11 @@ onMounted(() => {
     const footerTimeline = gsap.timeline()
     const footerStars = gsap.utils.toArray(`#footerTitle .footer-section__stars`) as HTMLOrSVGElement[]
 
-    footerTimeline.to(footerMask.value, {
-      bottom: '100%',
-      duration: 200,
-      ease: 'power1',
-    })
+    // footerTimeline.to(footerMask.value, {
+    //   bottom: '100%',
+    //   duration: 200,
+    //   ease: 'power1',
+    // })
     footerTimeline.to(footerTitle.value, {
       translateY: '20%',
       duration: 200,
@@ -47,7 +47,6 @@ onMounted(() => {
       end: '100% 100%',
       scrub: 4,
       onEnter: () => {
-        console.log('onEnter footer')
         // lancer la timeline à ce moment
         // gsap.to(footerMask.value, {
         //   bottom: '100%',
@@ -56,11 +55,8 @@ onMounted(() => {
         // })
       },
       onLeave: () => {
-        console.log('onLeave footer')
       },
       onLeaveBack: () => {
-        console.log('onLeaveBack footer')
-        // console.log('onLeaveBack')
         // gsap.to(footerMask.value, {
         //   bottom: '0%',
         //   duration: 1,
@@ -89,7 +85,7 @@ onUnmounted(() => {
     >
       <div class="footer-section__titleinner">
         <div
-          v-for="item in 3"
+          v-for="item in 4"
           :key="`footer-section__title${item}`"
           :class="{'red': item === 2}"
         >
@@ -117,7 +113,11 @@ onUnmounted(() => {
 .footer-section {
   $c: &;
 
-  --translate-value: calc(-33% - 2rem);
+  --translate-value: calc(-25% - 5px);
+
+  @include mq(desktop) {
+    --translate-value: calc(-25% - 10px);
+  }
 
   @keyframes scroll {
     to {
@@ -148,6 +148,7 @@ onUnmounted(() => {
   }
 
   &__mask {
+    display: none;
     position: absolute;
     z-index: 2;
     top: 0;
@@ -164,6 +165,7 @@ onUnmounted(() => {
     bottom: 100%;
     left: 0;
     width: 100%;
+    overflow: hidden;
     transform: translateY(100%);
     color: var(--color-bg-footer);
 
@@ -171,18 +173,27 @@ onUnmounted(() => {
 
   &__titleinner {
     display: flex;
-    gap: 2rem;
     flex-wrap: nowrap;
     width: max-content;
     animation: scroll 60s linear infinite;
+    gap: 1rem;
+
+    @include mq(desktop) {
+        gap: 2rem;
+    }
 
     > div {
       display: flex;
       align-items: center;
 
-      // &.red { background-color: red;}
+      // &.red { background-color: red; }
+
       > div {
-        margin-left: 2rem;
+        margin-left: 1rem;
+
+        @include mq(desktop) {
+          margin-left: 2rem;
+        }
       }
 
       span {
@@ -191,12 +202,13 @@ onUnmounted(() => {
         // color: var(--color-bg-footer);
         font-size: 3.1rem;
         font-weight: 400;
-        line-height: 1;
+        line-height: 0;
         text-align: center;
         white-space: nowrap;
 
         @include mq(smartphone) {
           font-size: 3.7rem;
+          line-height: 1;
         }
 
         @include mq(desktop) {
@@ -208,7 +220,11 @@ onUnmounted(() => {
       svg {
         display: block;
         flex: 0 0 auto;
-        width: 9rem;
+        width: 3rem;
+
+        @include mq(desktop) {
+          width: 9rem;
+        }
       }
     }
   }
