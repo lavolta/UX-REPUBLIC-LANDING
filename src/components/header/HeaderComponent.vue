@@ -113,7 +113,7 @@ watchEffect(() => {
   --nav-translate-y: calc(-100% - var(--header-vertical-padding));
 
   position: fixed;
-  z-index: 20;
+  z-index: 40;
   top: 0;
   left: 0;
   width: 100%;

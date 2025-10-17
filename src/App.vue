@@ -6,6 +6,7 @@ import FooterSection from '@/components/footer/FooterComponent.vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
+import { globalStore } from './store'
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 useHead({
@@ -38,24 +39,36 @@ onBeforeUnmount(() => {
 </script>
 <template>
   <HeaderComponent />
-  <div id="smooth-wrapper">
-    <div id="smooth-content">
-      <main class="main-section">
-        <RouterView />
-      </main>
-      <FooterSection />
+  <div class="main-section">
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <main :style="{'margin-bottom': `${globalStore.footerHeight}px`}">
+          <RouterView />
+        </main>
+        <div />
+      </div>
     </div>
   </div>
+  <FooterSection />
 </template>
 
 <style lang="scss" scoped>
-// #smooth {
-//   overflow: hidden;
-// }
+#smooth-content {
+  overflow: hidden;
+
+  >div {
+    height: 1px;
+    border-color: var(--color-bg-footer);
+  }
+}
 
 .main-section {
   position: relative;
-  z-index: 10;
-  background-color: var(--color-bg);
+  z-index: 30;
+
+  main {
+    // margin-bottom: 684px;
+    background-color: var(--color-bg);
+  }
 }
 </style>
