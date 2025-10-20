@@ -10,6 +10,10 @@ export const en = {
       title: 'The future is the republic',
       description: 'Description dans le head pour la page Accueil EN.',
     },
+    contact: {
+      title: 'The future is the republic | contact',
+      description: 'Description dans le head pour la page Contact EN.',
+    },
   },
   hero: {
     title: 'Hero title from "en" file',
@@ -155,5 +159,8 @@ export const en = {
         },
       },
     ],
+  },
+  footer: {
+    infiniteTitle: 'contact us',
   },
 } satisfies import('vue-i18n').DefineLocaleMessage

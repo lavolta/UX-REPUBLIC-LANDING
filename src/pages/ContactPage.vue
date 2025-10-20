@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
-// import { useHead } from '@unhead/vue'
+import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import { onMounted } from 'vue'
+import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
+import StarsIcon from '@/components/icons/StarsIcon.vue'
+useDefaultSeo('contact')
 const generateHbsptForm = () => {
   if (window) {
     window.hbspt.forms.create({
@@ -42,6 +45,12 @@ onMounted(() => {
       </div>
     </div>
   </div>
+  <InfiniteScrollText id="contacteznousinfinitescrollcontentcontact">
+    {{ $t('footer.infiniteTitle') }}
+    <template #icon>
+      <StarsIcon />
+    </template>
+  </InfiniteScrollText>
 </template>
 <style lang="scss">
 .form {

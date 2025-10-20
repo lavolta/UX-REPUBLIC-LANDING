@@ -18,7 +18,7 @@ useDefaultSeo('home')
   <AgencySlider id-agency="agency-1" />
   <NewsGrid />
   <InfiniteScrollText id="contacteznousinfinitescrollcontent">
-    contactez-nous
+    {{ $t('footer.infiniteTitle') }}
     <template #icon>
       <StarsIcon />
     </template>

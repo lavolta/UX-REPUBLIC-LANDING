@@ -46,8 +46,12 @@ watch(footerHeight, (newValue) => {
     width: 100%;
     max-width: var(--max-section-width);
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 2rem 1rem;
     overflow: hidden;
+
+    @include mq(smartphone) {
+      padding: 4rem 2rem;
+    }
 
     @include mq(desktop) {
       padding: 28.125rem 0 4rem;

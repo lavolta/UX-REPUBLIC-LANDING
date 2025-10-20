@@ -6,13 +6,12 @@ interface IniniteScrollTextPropsInterface {
   revealTextOnScroll?: boolean
   id: string
 }
-
 const props = withDefaults(defineProps<IniniteScrollTextPropsInterface>(), {
   revealTextOnScroll: true,
 })
+
 const infiniteScrollContent = useTemplateRef('infiniteScrollContent')
 let infiniteScrollContentContext: gsap.Context | null = null
-
 onMounted(() => {
   infiniteScrollContentContext = gsap.context(() => {
     const infiniteScrollContentTimeline = gsap.timeline({
@@ -46,6 +45,8 @@ onMounted(() => {
 onUnmounted(() => {
   if (infiniteScrollContentContext) {
     infiniteScrollContentContext.revert()
+    infiniteScrollContentContext.clear()
+    infiniteScrollContentContext.kill()
   }
 })
 </script>

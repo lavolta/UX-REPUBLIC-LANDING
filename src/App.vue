@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, watch } from 'vue'
 import { useHead } from '@unhead/vue'
+import { gsap } from 'gsap'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterSection from '@/components/footer/FooterComponent.vue'
-import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { globalStore } from './store'
+import { useElementSize } from '@vueuse/core'
+import { useTemplateRef } from 'vue'
+const mainContent = useTemplateRef('mainContent')
+const { height: PageHeight } = useElementSize(mainContent)
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
-
+watch(PageHeight, () => {
+  ScrollTrigger.refresh()
+})
 useHead({
   link: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -42,7 +48,10 @@ onBeforeUnmount(() => {
   <div class="main-section">
     <div id="smooth-wrapper">
       <div id="smooth-content">
-        <main :style="{'margin-bottom': `${globalStore.footerHeight}px`}">
+        <main
+          ref="mainContent"
+          :style="{'margin-bottom': `${globalStore.footerHeight}px`}"
+        >
           <RouterView />
         </main>
         <div />
