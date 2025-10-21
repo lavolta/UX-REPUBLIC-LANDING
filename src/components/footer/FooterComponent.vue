@@ -1,15 +1,25 @@
 <!-- components/footer/FooterSection.vue -->
 <script setup lang="ts">
-import { watch } from 'vue'
+import { watch, defineExpose } from 'vue'
 import ContactSection from '@/components/contact/ContactSection.vue'
 import FooterNav from '@/components/footer/FooterNav.vue'
 import { useElementBounding } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
 import { globalStore } from '@/store'
+
 const footerSection = useTemplateRef('footerSection')
+const footerContact = useTemplateRef('footerContact')
+const footerNav = useTemplateRef('footerNav')
+
 const { height: footerHeight } = useElementBounding(footerSection)
+
 watch(footerHeight, (newValue) => {
   globalStore.setFooterHeight(newValue)
+})
+
+defineExpose({
+  footerContact,
+  footerNav,
 })
 </script>
 
@@ -20,9 +30,9 @@ watch(footerHeight, (newValue) => {
   >
     <div class="footer-section__inner">
       <div>
-        <ContactSection />
+        <ContactSection ref="footerContact" />
       </div>
-      <FooterNav />
+      <FooterNav ref="footerNav" />
     </div>
   </footer>
 </template>
@@ -31,11 +41,6 @@ watch(footerHeight, (newValue) => {
 .footer-section {
   $c: &;
 
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  transition: transform ease-in .3s;
   background: var(--color-bg-footer);
 
   .contact {

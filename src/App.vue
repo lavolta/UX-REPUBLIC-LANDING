@@ -6,15 +6,22 @@ import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterComponent from '@/components/footer/FooterComponent.vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
-import { globalStore } from './store'
 import { useElementSize } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
+
 const mainContent = useTemplateRef('mainContent')
+const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
+
 const { height: PageHeight } = useElementSize(mainContent)
+
+let globalAppGsapContext: gsap.Context | null = null
+
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+
 watch(PageHeight, () => {
   ScrollTrigger.refresh()
 })
+
 useHead({
   link: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -37,9 +44,49 @@ onMounted(() => {
     allowNestedScroll: true,
     type: 'touch',
   })
+  const footer = footerContent.value
+
+  if (!footer) return
+
+  globalAppGsapContext = gsap.context(() => {
+    const footerTimeLine = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#footerComponent',
+        start: 'bottom-=50% 50%',
+        end: 'bottom+=100% bottom',
+        scrub: 3,
+      },
+    })
+
+    footerTimeLine.to('#footerComponent', {
+      translateY: 0,
+      ease: 'power1',
+      duration: 4000,
+    }, '<')
+
+    const footerContact = document.querySelector('#footerComponent .contact')
+    const footerNav = document.querySelector('#footerComponent .footer-container')
+
+    if (!footerContact && !footerNav) return
+
+    footerTimeLine.fromTo(footerContact,
+      { opacity: 0, translateY: 100 },
+      { opacity: 1, translateY: 0, duration: 1000, ease: 'power1' },
+      '>',
+    )
+
+    footerTimeLine.fromTo(footerNav,
+      { opacity: 0, translateY: 100 },
+      { opacity: 1, translateY: 0, duration: 2000, ease: 'power1' },
+      '<',
+    )
+  })
 })
 onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach(t => t.kill())
+  if (globalAppGsapContext) {
+    globalAppGsapContext.revert()
+  }
 })
 
 </script>
@@ -50,35 +97,40 @@ onBeforeUnmount(() => {
       <div id="smooth-content">
         <main
           ref="mainContent"
-          :style="{'margin-bottom': `${globalStore.footerHeight}px`}"
         >
           <RouterView />
         </main>
+        <FooterComponent
+          id="footerComponent"
+          ref="footerComponent"
+          class="footer"
+        />
         <div />
       </div>
     </div>
   </div>
-  <FooterComponent />
 </template>
 
 <style lang="scss" scoped>
 #smooth-content {
   overflow: hidden;
-
-  >div {
-    height: 1px;
-    background-color: var(--color-bg-footer);
-  }
 }
 
 .main-section {
   position: relative;
-  z-index: 30;
-  pointer-events: none;
 
   main {
+    position: relative;
+    z-index: 10;
+
     // margin-bottom: 684px;
     background-color: var(--color-bg);
   }
+}
+
+.footer {
+  position: relative;
+  z-index: 9;
+  transform: translateY(-100%);
 }
 </style>
