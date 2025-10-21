@@ -1,11 +1,26 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, watch } from 'vue'
 import { useHead } from '@unhead/vue'
-import HeaderComponent from '@/components/header/HeaderComponent.vue'
-import FooterSection from '@/components/footer/FooterSection.vue'
 import { gsap } from 'gsap'
+import HeaderComponent from '@/components/header/HeaderComponent.vue'
+import FooterComponent from '@/components/footer/FooterComponent.vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-gsap.registerPlugin(ScrollTrigger)
+import { ScrollSmoother } from 'gsap/ScrollSmoother'
+import { useElementSize } from '@vueuse/core'
+import { useTemplateRef } from 'vue'
+
+const mainContent = useTemplateRef('mainContent')
+const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
+
+const { height: PageHeight } = useElementSize(mainContent)
+
+let globalAppGsapContext: gsap.Context | null = null
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+
+watch(PageHeight, () => {
+  ScrollTrigger.refresh()
+})
 
 useHead({
   link: [
@@ -22,39 +37,100 @@ useHead({
 })
 
 onMounted(() => {
+  ScrollSmoother.create({
+    smooth: 1,
+  })
   ScrollTrigger.normalizeScroll({
     allowNestedScroll: true,
     type: 'touch',
   })
+  const footer = footerContent.value
+
+  if (!footer) return
+
+  globalAppGsapContext = gsap.context(() => {
+    const footerTimeLine = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#footerComponent',
+        start: 'bottom-=50% 50%',
+        end: 'bottom+=100% bottom',
+        scrub: 3,
+      },
+    })
+
+    footerTimeLine.to('#footerComponent', {
+      translateY: 0,
+      ease: 'power1',
+      duration: 4000,
+    }, '<')
+
+    const footerContact = document.querySelector('#footerComponent .contact')
+    const footerNav = document.querySelector('#footerComponent .footer-container')
+
+    if (!footerContact && !footerNav) return
+
+    footerTimeLine.fromTo(footerContact,
+      { opacity: 0, translateY: 100 },
+      { opacity: 1, translateY: 0, duration: 1000, ease: 'power1' },
+      '>',
+    )
+
+    footerTimeLine.fromTo(footerNav,
+      { opacity: 0, translateY: 100 },
+      { opacity: 1, translateY: 0, duration: 2000, ease: 'power1' },
+      '<',
+    )
+  })
 })
 onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach(t => t.kill())
+  if (globalAppGsapContext) {
+    globalAppGsapContext.revert()
+  }
 })
 
 </script>
 <template>
-  <div id="smooth">
-    <HeaderComponent />
-    <main class="main-section">
-      <RouterView />
-    </main>
-    <FooterSection />
+  <HeaderComponent />
+  <div class="main-section">
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <main
+          ref="mainContent"
+        >
+          <RouterView />
+        </main>
+        <FooterComponent
+          id="footerComponent"
+          ref="footerComponent"
+          class="footer"
+        />
+        <div />
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+#smooth-content {
+  overflow: hidden;
+}
+
 .main-section {
   position: relative;
-  z-index: 10;
-  margin-bottom: 30.1125rem;
-  background-color: var(--color-bg);
 
-  // @include mq(smartphone) {
-  // margin-bottom: 30.1125rem;
-  // }
+  main {
+    position: relative;
+    z-index: 10;
 
-  @include mq(desktop) {
-    margin-bottom: 42.3125rem;
+    // margin-bottom: 684px;
+    background-color: var(--color-bg);
   }
+}
+
+.footer {
+  position: relative;
+  z-index: 9;
+  transform: translateY(-100%);
 }
 </style>

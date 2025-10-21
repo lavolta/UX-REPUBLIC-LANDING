@@ -3,6 +3,14 @@ import { reactive } from 'vue'
 export const globalStore = reactive({
   forcedHideHeader: false,
   globalOverflow: false,
+  footerHeight: 0,
+  pageHeight: 0,
+  setPageHeight(value: number) {
+    this.pageHeight = value
+  },
+  setFooterHeight(value: number) {
+    this.footerHeight = value
+  },
   setForcedHideHeader(value: boolean) {
     this.forcedHideHeader = value
   },

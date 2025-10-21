@@ -10,12 +10,12 @@
       votre expérience digitale ?
     </h2>
     <div class="contact__cta">
-      <a
-        href="mailto:contact@ux-republic.com"
+      <RouterLink
+        to="/contact"
         class="button"
       >
         Contactez-nous
-      </a>
+      </RouterLink>
       <RouterLink
         to="/contact"
         class="button"

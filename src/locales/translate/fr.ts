@@ -18,6 +18,10 @@ export const fr = {
       title: 'The future is the republic',
       description: 'Description dans le head pour la page Accueil FR.',
     },
+    contact: {
+      title: 'The future is the republic | contact',
+      description: 'Description dans le head pour la page Contact FR.',
+    },
   },
   hero: {
     title: 'Hero titre "fr" file',
@@ -163,5 +167,8 @@ export const fr = {
         },
       },
     ],
+  },
+  footer: {
+    infiniteTitle: 'contactez-nous',
   },
 } satisfies import('vue-i18n').DefineLocaleMessage

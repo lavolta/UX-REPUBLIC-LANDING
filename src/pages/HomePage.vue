@@ -6,6 +6,8 @@ import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import AgencySlider from '@/components/agency/AgencySliderComponent_GSAP.vue'
 import XpSlider from '@/components/xp-slider/XpSlider_GSAP.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
+import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
+import StarsIcon from '@/components/icons/StarsIcon.vue'
 useDefaultSeo('home')
 </script>
 <template>
@@ -15,4 +17,10 @@ useDefaultSeo('home')
   <ProjectGrid />
   <AgencySlider id-agency="agency-1" />
   <NewsGrid />
+  <InfiniteScrollText id="contacteznousinfinitescrollcontent">
+    {{ $t('footer.infiniteTitle') }}
+    <template #icon>
+      <StarsIcon />
+    </template>
+  </InfiniteScrollText>
 </template>

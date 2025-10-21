@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
 import NewGridSocialItem from './NewGridSocialItem.vue'
-import ContactAnimation from '../contact/ContactAnimation.vue'
 import { useI18n } from 'vue-i18n'
 import { onMounted } from 'vue'
 import { cleanDataArcticleFromUxRepublicResponse } from '@/utils/data.utils'
@@ -70,7 +69,6 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-    <ContactAnimation />
   </section>
 </template>
 <style lang="scss" scoped>
@@ -101,7 +99,7 @@ onMounted(async () => {
     }
 
     @include mq(desktop) {
-      padding: 9.1875rem 0 23.3125rem;
+      padding: 9.1875rem 0;
     }
 
   }
