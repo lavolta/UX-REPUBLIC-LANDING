@@ -3,7 +3,7 @@ import { onMounted, onBeforeUnmount, watch } from 'vue'
 import { useHead } from '@unhead/vue'
 import { gsap } from 'gsap'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
-import FooterSection from '@/components/footer/FooterComponent.vue'
+import FooterComponent from '@/components/footer/FooterComponent.vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { globalStore } from './store'
@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
   </div>
-  <FooterSection />
+  <FooterComponent />
 </template>
 
 <style lang="scss" scoped>
@@ -67,13 +67,14 @@ onBeforeUnmount(() => {
 
   >div {
     height: 1px;
-    border-color: var(--color-bg-footer);
+    background-color: var(--color-bg-footer);
   }
 }
 
 .main-section {
   position: relative;
   z-index: 30;
+  pointer-events: none;
 
   main {
     // margin-bottom: 684px;
