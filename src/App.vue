@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, watch } from 'vue'
+import { onMounted, onBeforeUnmount, watch, ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { gsap } from 'gsap'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
@@ -8,11 +8,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { useElementSize } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
+import TransitionComponent from './components/transition-component/TransitionComponent.vue'
+import { globalStore } from '@/store'
 
 const mainContent = useTemplateRef('mainContent')
 const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
 
 const { height: PageHeight } = useElementSize(mainContent)
+const firstLoad = ref(true)
 
 let globalAppGsapContext: gsap.Context | null = null
 
@@ -81,6 +84,9 @@ onMounted(() => {
       '<',
     )
   })
+  if (firstLoad.value) {
+    globalStore.setDisplayTransitionPanel(true)
+  }
 })
 onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach(t => t.kill())
@@ -88,24 +94,36 @@ onBeforeUnmount(() => {
     globalAppGsapContext.revert()
   }
 })
-
+const handleTransitionCompleted = () => {
+  firstLoad.value = false
+  // globalStore.setDisplayTransitionPanel(false)
+}
 </script>
 <template>
-  <HeaderComponent />
-  <div class="main-section">
-    <div id="smooth-wrapper">
-      <div id="smooth-content">
-        <main
-          ref="mainContent"
-        >
-          <RouterView />
-        </main>
-        <FooterComponent
-          id="footerComponent"
-          ref="footerComponent"
-          class="footer"
-        />
-        <div />
+  <TransitionComponent
+    :display-transition-component="globalStore.displayTransitionPanel"
+    @complet="handleTransitionCompleted"
+  />
+  <div
+    class="content"
+    :class="{'first-load': firstLoad}"
+  >
+    <HeaderComponent />
+    <div class="main-section">
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <main
+            ref="mainContent"
+          >
+            <RouterView />
+          </main>
+          <FooterComponent
+            id="footerComponent"
+            ref="footerComponent"
+            class="footer"
+          />
+          <div />
+        </div>
       </div>
     </div>
   </div>
@@ -114,6 +132,16 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 #smooth-content {
   overflow: hidden;
+}
+
+.content {
+  background-color: var(--color-bg-footer);
+
+  &.first-load {
+    > * {
+      opacity: 0%;
+    }
+  }
 }
 
 .main-section {

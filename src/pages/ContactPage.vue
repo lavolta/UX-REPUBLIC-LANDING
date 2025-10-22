@@ -4,7 +4,9 @@ import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import { onMounted } from 'vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
+import { usePageTransition } from '@/composable'
 useDefaultSeo('contact')
+usePageTransition()
 const generateHbsptForm = () => {
   if (window) {
     window.hbspt.forms.create({
@@ -15,6 +17,7 @@ const generateHbsptForm = () => {
       onFormReady(formulaire: HTMLFormElement) {
         const submitButton = formulaire.querySelector('.actions input')
         submitButton?.classList.add('button')
+        // globalStore.setDisplayTransitionPanel(false)
       },
     })
   }

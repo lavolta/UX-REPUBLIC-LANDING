@@ -14,6 +14,7 @@ const defineMobileTimeLine = () => {
     return
   }
   const menuNavItems = gsap.utils.toArray(mobileNavItems.value)
+
   mobileNavComponentTimeline.to(mobileNav.value, { opacity: 1, duration: 0.1 }, '<').fromTo(mobileNav.value,
     { skewY: 15, yPercent: -110 },
     { skewY: 0, yPercent: 0, duration: 1.5, ease: 'expo.inOut' }, '<',

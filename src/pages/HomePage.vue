@@ -8,7 +8,11 @@ import XpSlider from '@/components/xp-slider/XpSlider_GSAP.vue'
 import { useDefaultSeo } from '@/composable/useDefaultSeo'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
+import { usePageTransition } from '@/composable'
+
 useDefaultSeo('home')
+usePageTransition()
+
 </script>
 <template>
   <HeroBanner />

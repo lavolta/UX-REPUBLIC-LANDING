@@ -4,9 +4,14 @@ export const globalStore = reactive({
   forcedHideHeader: false,
   globalOverflow: false,
   footerHeight: 0,
-  pageHeight: 0,
-  setPageHeight(value: number) {
-    this.pageHeight = value
+  readyToSwitchTransitionPanel: false,
+  displayTransitionPanel: false,
+
+  setDisplayTransitionPanel(value: boolean) {
+    this.displayTransitionPanel = value
+  },
+  setReadyToSwitchTransitionPanel(value: boolean) {
+    this.readyToSwitchTransitionPanel = value
   },
   setFooterHeight(value: number) {
     this.footerHeight = value
