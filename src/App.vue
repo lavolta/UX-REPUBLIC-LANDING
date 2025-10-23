@@ -4,10 +4,14 @@ import { useHead } from '@unhead/vue'
 import { gsap } from 'gsap'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterComponent from '@/components/footer/FooterComponent.vue'
+import WelcomeComponent from '@/components/welcome/WelcomeComponent.vue'
+
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { useElementSize } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
+
+import { transitionStore } from '@/store'
 
 const mainContent = useTemplateRef('mainContent')
 const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
@@ -55,6 +59,7 @@ onMounted(() => {
         start: 'bottom-=50% 50%',
         end: 'bottom+=100% bottom',
         scrub: 3,
+        once: true,
       },
     })
 
@@ -82,6 +87,7 @@ onMounted(() => {
     )
   })
 })
+
 onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach(t => t.kill())
   if (globalAppGsapContext) {
@@ -91,6 +97,7 @@ onBeforeUnmount(() => {
 
 </script>
 <template>
+  <WelcomeComponent v-if="transitionStore.state.welcomeAnimation" />
   <HeaderComponent />
   <div class="main-section">
     <div id="smooth-wrapper">

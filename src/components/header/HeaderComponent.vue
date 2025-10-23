@@ -131,7 +131,11 @@ watchEffect(() => {
     width: 100%;
     max-width: var(--max-section-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
+
+    @include mq(desktop) {
+      padding: 0 2rem;
+    }
 
     @include mq(desktop) {
       align-items: stretch;
@@ -140,7 +144,7 @@ watchEffect(() => {
   }
 
   &__toggle {
-    display: block;
+    display: flex;
 
     @include mq(desktop) {
       display: none;
