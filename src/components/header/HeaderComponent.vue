@@ -3,24 +3,43 @@ import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
 import MobileNavComponent from './MobileNavComponent.vue'
 import { gsap } from 'gsap'
 import { useScroll } from '@vueuse/core'
-import { ref, watchEffect, shallowRef, onMounted, watch, useTemplateRef } from 'vue'
+import {
+  ref,
+  watchEffect,
+  shallowRef,
+  onMounted,
+  watch,
+  useTemplateRef,
+  nextTick,
+} from 'vue'
 import { globalStore } from '@/store'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeaderToggleButton from './HeaderToggleButton.vue'
 import HeaderNavComponent from './HeaderNavComponent.vue'
 
 const disabledNavMenu = ref(false)
-
 const mobileNavComponent = useTemplateRef('mobileNavComponent')
 const headerToggleButton = useTemplateRef('headerToggleButton')
 
 const windowTarget = shallowRef<Window | null>(null)
 const { y, directions } = useScroll(windowTarget)
 const menuMobileVisible = ref(false)
+const displayMenuMobile = ref(false)
 
 const masterTimeLine = gsap.timeline({
   defaults: {
     ease: 'back.inOut(2)',
+  },
+  onStart() {
+    console.log('masterTimeline on start')
+    displayMenuMobile.value = true
+  },
+  onComplete() {
+    console.log('complet animation')
+  },
+  onReverseComplete() {
+    console.log('masterTimeline reverse completed')
+    displayMenuMobile.value = false
   },
 })
 
@@ -38,9 +57,11 @@ const playMasterTimeline = (reversed: boolean) => {
 const defineTimeline = () => {
   const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
   const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
-
+  console.log('mobileNavTimeline', mobileNavTimeline)
   masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<')
   masterTimeLine.eventCallback('onReverseComplete', () => {
+    console.log('reverse completed')
+    displayMenuMobile.value = false
     ScrollTrigger.refresh()
   })
 }
@@ -60,8 +81,9 @@ const handleMenuMobile = () => {
   globalStore.setGlobalOverflow(menuMobileVisible.value)
 }
 
-onMounted(() => {
+onMounted(async () => {
   windowTarget.value = window
+  await nextTick()
   defineTimeline()
 })
 
@@ -101,6 +123,7 @@ watchEffect(() => {
       <MobileNavComponent
         ref="mobileNavComponent"
         class="header__mobile"
+        :class="{'disabled': !displayMenuMobile}"
       />
     </div>
   </header>
@@ -140,7 +163,7 @@ watchEffect(() => {
   }
 
   &__toggle {
-    display: block;
+    display: flex;
 
     @include mq(desktop) {
       display: none;
@@ -160,6 +183,10 @@ watchEffect(() => {
     display: block;
 
     @include mq(desktop) {
+      display: none;
+    }
+
+    &.disabled {
       display: none;
     }
   }

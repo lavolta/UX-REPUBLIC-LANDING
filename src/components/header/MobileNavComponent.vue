@@ -1,24 +1,28 @@
 <script lang="ts" setup>
-import { onMounted, useTemplateRef } from 'vue'
+import { onMounted, useTemplateRef, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
+import BgCanvas from '@/components/bg-canvas/BgCanvas.vue'
 
 const { tm } = useI18n()
 const items = tm('header.navigation')
 const mobileNavComponentTimeline = gsap.timeline()
 const mobileNav = useTemplateRef('mobileNav')
 const mobileNavItems = useTemplateRef('mobileNavItems')
+const bgCanvas = useTemplateRef('bgCanvas')
 
 const defineMobileTimeLine = () => {
-  if (!mobileNav) {
+  console.log('11')
+  if (!mobileNav.value) {
     return
   }
+  console.log('22')
+  console.log('bgCanvas.value', bgCanvas.value.canvasGsapTimeline)
+  if (bgCanvas.value?.canvasGsapTimeline) {
+    console.log('bgCanvas.value.canvasGsapTimeline', bgCanvas.value.canvasGsapTimeline)
+    mobileNavComponentTimeline.add(bgCanvas.value.canvasGsapTimeline)
+  }
   const menuNavItems = gsap.utils.toArray(mobileNavItems.value)
-  mobileNavComponentTimeline.to(mobileNav.value, { opacity: 1, duration: 0.1 }, '<').fromTo(mobileNav.value,
-    { skewY: 15, yPercent: -110 },
-    { skewY: 0, yPercent: 0, duration: 1.5, ease: 'expo.inOut' }, '<',
-  )
-
   if (mobileNavItems.value) {
     menuNavItems.forEach((menuNavItem, index) => {
       mobileNavComponentTimeline.fromTo(menuNavItem, {
@@ -30,7 +34,8 @@ const defineMobileTimeLine = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
   defineMobileTimeLine()
 })
 
@@ -43,6 +48,10 @@ defineExpose({
     ref="mobileNav"
     class="mobile-nav"
   >
+    <BgCanvas
+      ref="bgCanvas"
+      class="mobile-nav__canvas"
+    />
     <div class="mobile-nav__inner">
       <nav class="mobile-nav__list">
         <ul>
@@ -93,6 +102,13 @@ defineExpose({
         display: block;
       }
     }
+  }
+
+  &__canvas {
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    height: 100svh;
   }
 }
 </style>
