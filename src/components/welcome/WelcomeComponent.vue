@@ -4,12 +4,18 @@ import {
   useTemplateRef,
   onMounted,
   onUnmounted,
+  defineEmits,
 } from 'vue'
 import { gsap } from 'gsap'
 import { transitionStore } from '@/store'
+
 const welcomeContainer = useTemplateRef('welcomeContainer')
 const welcomeLogo = useTemplateRef('welcomeLogo')
+const emit = defineEmits<{
+  (e: 'start'): void
+}>()
 let welcomeGsapContext: gsap.Context | null = null
+
 onMounted(() => {
   welcomeGsapContext = gsap.context(() => {
     const timeline = gsap.timeline({
@@ -22,6 +28,9 @@ onMounted(() => {
       ease: 'power1',
       duration: 0.5,
       delay: 1,
+      onComplete() {
+        emit('start')
+      },
     }).to('.welcome__logo', {
       top: 0,
       ease: 'power3',
@@ -30,11 +39,13 @@ onMounted(() => {
     }, '>').to('.welcome', { opacity: 0, duration: 0.5, ease: 'power1' }, '>')
   })
 })
+
 onUnmounted(() => {
   if (welcomeGsapContext) {
     welcomeGsapContext.revert()
   }
 })
+
 </script>
 
 <template>

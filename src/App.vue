@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, watch } from 'vue'
+import {
+  onMounted,
+  onBeforeUnmount,
+  watch,
+  ref,
+} from 'vue'
 import { useHead } from '@unhead/vue'
 import { gsap } from 'gsap'
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
@@ -19,6 +24,7 @@ const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('foot
 const { height: PageHeight } = useElementSize(mainContent)
 
 let globalAppGsapContext: gsap.Context | null = null
+const scrollSmoother = ref<ReturnType<typeof ScrollSmoother.create> | null>(null)
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
@@ -41,7 +47,7 @@ useHead({
 })
 
 onMounted(() => {
-  ScrollSmoother.create({
+  scrollSmoother.value = ScrollSmoother.create({
     smooth: 1,
   })
   ScrollTrigger.normalizeScroll({
@@ -94,10 +100,22 @@ onBeforeUnmount(() => {
     globalAppGsapContext.revert()
   }
 })
-
+const handleStart = () => {
+  if (!window) return
+  window.scroll({
+    top: 0,
+    behavior: 'instant',
+  })
+  if (!scrollSmoother.value) return
+  scrollSmoother.value.scrollTop(0)
+  scrollSmoother.value.refresh()
+}
 </script>
 <template>
-  <WelcomeComponent v-if="transitionStore.state.welcomeAnimation" />
+  <WelcomeComponent
+    v-if="transitionStore.state.welcomeAnimation"
+    @start="handleStart"
+  />
   <HeaderComponent />
   <div class="main-section">
     <div id="smooth-wrapper">
