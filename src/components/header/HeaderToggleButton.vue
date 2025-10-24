@@ -19,33 +19,27 @@ const initTimeline = () => {
     return
   }
   const [span1, span2, span3] = spanLines.value
-  buttonTimeLine.to(span1, {
+  buttonTimeLine.to([span1, span2, span3], {
     width: 0,
-    duration: 0.25,
-  }).to(span2, {
-    width: 0,
-    duration: 0.25,
-  }, '<0.1')
-    .to(span3, {
-      width: 0,
-      duration: 0.25,
-    }, '<0.1').to(span1, {
-      rotation: 45,
-      top: 5,
-      marginBottom: 0,
-      duration: 0,
-    }, '>').to(span3, {
-      rotation: -45,
-      top: -5,
-      marginBottom: 0,
-      duration: 0,
-    }, '<').to(span1, {
-      width: 30,
-      duration: 0.5,
-    }, '<').to(span3, {
-      width: 30,
-      duration: 0.5,
-    }, '<0.1')
+    duration: 0.3,
+    ease: 'power1',
+    stagger: 0.1,
+  }).to(span1, {
+    rotation: 45,
+    top: 5,
+    marginBottom: 0,
+    duration: 0,
+  }, '>').to(span3, {
+    rotation: -45,
+    top: -5,
+    marginBottom: 0,
+    duration: 0,
+  }, '<').to([span1, span3], {
+    width: 30,
+    duration: 0.3,
+    ease: 'power1',
+    stagger: 0.1,
+  }, '>')
 }
 
 onMounted(() => {
