@@ -52,11 +52,19 @@ defineExpose({
             ref="mobileNavItems"
           >
             <a
+              v-if="item.type === 'link'"
               :href="item.href"
               class="button"
             >
               {{ item.content }}
             </a>
+            <router-link
+              v-else-if="item.type === 'internal'"
+              :to="item.href"
+              class="button"
+            >
+              {{ item.content }}
+            </router-link>
           </li>
         </ul>
       </nav>

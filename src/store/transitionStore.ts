@@ -1,22 +1,32 @@
 import { reactive } from 'vue'
 
-type stateType = 'transitioning' | 'startTransition' | 'welcomeAnimation'
+type stateType = 'readyToNextPage' | 'displayTransitionScreen' | 'displayTransitionLeave' | 'welcomeAnimation' | 'transitionInProgress'
 
 interface TransitionStateInterface {
-  transitioning: boolean
-  startTransition: boolean
+  readyToNextPage: boolean
+  transitionInProgress: boolean
+  displayTransitionScreen: boolean
+  displayTransitionLeave: boolean
   welcomeAnimation: boolean
 }
 interface TransitionStoreInterface {
   state: TransitionStateInterface
   setStateTransition: (type: stateType, value: boolean) => void
+  resetTransitionState: () => void
 }
 
 export const transitionStore = reactive<TransitionStoreInterface>({
   state: {
-    transitioning: false,
-    startTransition: false,
+    readyToNextPage: false,
+    displayTransitionScreen: false,
+    displayTransitionLeave: false,
+    transitionInProgress: false,
     welcomeAnimation: true,
+  },
+  resetTransitionState() {
+    this.state.readyToNextPage = false
+    this.state.displayTransitionLeave = false
+    this.state.displayTransitionScreen = false
   },
   setStateTransition(type: stateType, value: boolean) {
     this.state[type] = value
