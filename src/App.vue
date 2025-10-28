@@ -10,9 +10,10 @@ import { useHead } from '@unhead/vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
+
 import { useElementSize } from '@vueuse/core'
 
-import { transitionStore } from '@/store'
+import { globalStore, transitionStore } from '@/store'
 
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterComponent from '@/components/footer/FooterComponent.vue'
@@ -51,6 +52,8 @@ onMounted(() => {
   scrollSmoother.value = ScrollSmoother.create({
     smooth: 1,
   })
+  globalStore.setScrollSmoother(scrollSmoother.value)
+
   ScrollTrigger.normalizeScroll({
     allowNestedScroll: true,
     type: 'touch',
@@ -97,6 +100,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach(t => t.kill())
+
   if (globalAppGsapContext) {
     globalAppGsapContext.revert()
   }

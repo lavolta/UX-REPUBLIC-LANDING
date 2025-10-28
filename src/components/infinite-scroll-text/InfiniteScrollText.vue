@@ -132,6 +132,8 @@ onUnmounted(() => {
   }
 
   &__picto {
+    position: relative;
+    top: 3px;
     margin-left: 1rem;
     color: var(--color-bg-footer);
 
@@ -146,6 +148,7 @@ onUnmounted(() => {
     }
 
     @include mq(desktop) {
+      top: 18px;
       margin-left: 2rem;
     }
   }

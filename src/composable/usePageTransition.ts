@@ -13,14 +13,12 @@ export function usePageTransition() {
   const goNext = ref(false)
   watch(() => transitionStore.state.readyToNextPage, (ready) => {
     if (ready && pendingRoute.value) {
-      console.log('coucou je suis pret a changer la page')
       goNext.value = true
       router.push(pendingRoute.value.fullPath)
       pendingRoute.value = null
     }
   })
   onBeforeRouteLeave(async (to, from, next) => {
-    console.log('onBeforeRouteLeave')
     if (goNext.value) {
       goNext.value = false
       next()
@@ -33,7 +31,6 @@ export function usePageTransition() {
   })
   onMounted(() => {
     if (transitionStore.state.transitionInProgress) {
-      console.log('transition en court et besoin de se terminer')
       transitionStore.setStateTransition('displayTransitionLeave', true)
     }
   })
