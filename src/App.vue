@@ -4,19 +4,20 @@ import {
   onBeforeUnmount,
   watch,
   ref,
+  useTemplateRef,
 } from 'vue'
 import { useHead } from '@unhead/vue'
 import { gsap } from 'gsap'
-import HeaderComponent from '@/components/header/HeaderComponent.vue'
-import FooterComponent from '@/components/footer/FooterComponent.vue'
-import WelcomeComponent from '@/components/welcome/WelcomeComponent.vue'
-
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { useElementSize } from '@vueuse/core'
-import { useTemplateRef } from 'vue'
 
 import { transitionStore } from '@/store'
+
+import HeaderComponent from '@/components/header/HeaderComponent.vue'
+import FooterComponent from '@/components/footer/FooterComponent.vue'
+import WelcomeComponent from '@/components/welcome/WelcomeComponent.vue'
+import TransitionScreen from '@/components/transition-screen/TransitionScreen.vue'
 
 const mainContent = useTemplateRef('mainContent')
 const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
@@ -100,7 +101,8 @@ onBeforeUnmount(() => {
     globalAppGsapContext.revert()
   }
 })
-const handleStart = () => {
+
+const handleScrollOnTopWindow = () => {
   if (!window) return
   window.scroll({
     top: 0,
@@ -110,11 +112,28 @@ const handleStart = () => {
   scrollSmoother.value.scrollTop(0)
   scrollSmoother.value.refresh()
 }
+
+const handleEndTransitionEnterAnimation = () => {
+  handleScrollOnTopWindow()
+  transitionStore.setStateTransition('readyToNextPage', true)
+}
+const handleEndTransitionLeave = () => {
+  transitionStore.resetTransitionState()
+}
 </script>
+
 <template>
+  <TransitionScreen
+    v-if="transitionStore.state.displayTransitionScreen"
+    :play-transition-leave="transitionStore.state.displayTransitionLeave"
+    @start="transitionStore.setStateTransition('transitionInProgress', true)"
+    @end-transition-enter="handleEndTransitionEnterAnimation"
+    @end-transition-leave="handleEndTransitionLeave"
+  />
+
   <WelcomeComponent
     v-if="transitionStore.state.welcomeAnimation"
-    @start="handleStart"
+    @start="handleScrollOnTopWindow"
   />
   <HeaderComponent />
   <div class="main-section">

@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
-import { useDefaultSeo } from '@/composable/useDefaultSeo'
+import { useDefaultSeo, usePageTransition } from '@/composable'
 import { onMounted } from 'vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
+
 useDefaultSeo('contact')
+usePageTransition()
+
 const generateHbsptForm = () => {
   if (window) {
     window.hbspt.forms.create({
