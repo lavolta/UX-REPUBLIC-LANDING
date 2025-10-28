@@ -1,7 +1,6 @@
 export const en = {
   header: {
     navigation: [
-      { content: 'Rejoignez-nous', type: 'link', href: 'https://jobs.smile.eu/departments/ux-republic' },
       { content: 'Contactez-nous', type: 'link', href: 'mailto:contact@ux-republic.com' },
     ],
   },

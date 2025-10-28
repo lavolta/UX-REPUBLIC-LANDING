@@ -2,11 +2,6 @@ export const fr = {
   header: {
     navigation: [
       {
-        content: 'Rejoignez-nous',
-        type: 'link',
-        href: 'https://jobs.smile.eu/departments/ux-republic',
-      },
-      {
         content: 'Contactez-nous',
         type: 'internal',
         href: '/contact',

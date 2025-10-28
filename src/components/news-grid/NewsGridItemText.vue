@@ -3,10 +3,12 @@ import type { GridItemTextInterface } from '@/interfaces'
 withDefaults(defineProps<{
   noLeftPadding?: boolean
   noRightPadding?: boolean
+  displayText?: boolean
   item: GridItemTextInterface
 }>(), {
   noLeftPadding: false,
   noRightPadding: false,
+  displayText: false,
 })
 </script>
 <template>
@@ -18,11 +20,11 @@ withDefaults(defineProps<{
     }"
   >
     <div>
-      <h3 class="news-grid-item__title text-clamp text-clamp-1">
+      <h3 class="news-grid-item__title text-clamp">
         {{ item.title }}
       </h3>
       <p
-        v-if="item.text.length > 0"
+        v-if="displayText && item.text.length > 0"
         class="news-grid-item__text text-clamp text-clamp-3"
       >
         {{ item.text }}
