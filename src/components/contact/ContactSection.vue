@@ -16,12 +16,13 @@
       >
         Contactez-nous
       </RouterLink>
-      <RouterLink
-        to="/contact"
+      <a
+        href="https://jobs.smile.eu/departments/ux-republic"
+        target="_blank"
         class="button"
       >
-        Votre projet
-      </RouterLink>
+        Rejoignez-nous
+      </a>
     </div>
   </div>
 </template>
