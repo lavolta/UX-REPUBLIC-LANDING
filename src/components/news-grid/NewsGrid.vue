@@ -114,13 +114,26 @@ onMounted(async () => {
 
   &__grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    gap: 1rem;
+
+    @include mq(tablet) {
+      flex-wrap: wrap;
+      overflow-y: hidden;
+      gap: 0;
+    }
 
     > div {
       position: relative;
+      flex: 0 0 90%;
       width: var(--item-size);
       padding-top: var(--item-size);
       border: 1px solid var(--color-border);
+
+      @include mq(tablet) {
+        flex: 0 0 auto;
+      }
 
       @include mq(desktop) {
         border: none;

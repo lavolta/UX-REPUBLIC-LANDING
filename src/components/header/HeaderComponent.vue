@@ -133,7 +133,7 @@ watchEffect(() => {
     margin: 0 auto;
     padding: 0 1rem;
 
-    @include mq(desktop) {
+    @include mq(smartphone) {
       padding: 0 2rem;
     }
 
