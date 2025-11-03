@@ -9,6 +9,7 @@ export interface StackSliderState {
   nextIndex: number
   allowScroll: boolean
   isTransitionning: boolean
+  direction: 'down' | 'up'
 }
 
 export interface StackSliderTimelineDefaultSettingsInterface {

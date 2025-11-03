@@ -11,16 +11,16 @@ import type {
   StackSliderState,
   StackSliderObbserverType,
 } from './StackSlider.interface'
+
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
-
 import { globalStore } from '@/store'
 
 const props = defineProps<StackSliderPropsInterface>()
 
 const stackDebug = ref({
-  displayDebug: true,
+  displayDebug: false,
   stackSliderEnter: false,
 })
 
@@ -50,11 +50,6 @@ const stackSliderConfig: StackSliderConfig = {
 let stackSliderContext: gsap.Context | null = null
 let stackSliderObserver: StackSliderObbserverType = null
 let stackSliderScrollTrigger: ScrollTrigger | null = null
-
-const scrollTimeout = gsap.delayedCall(1, () => {
-  stackSliderState.value.allowScroll = true
-}).pause()
-
 let stackSliderItems: HTMLElement[] | null = null
 
 let stackSliderItemImageBg: HTMLElement[] | null = null
@@ -62,19 +57,6 @@ let stackSliderItemOuter: HTMLElement[] | null = null
 let stackSliderItemInner: HTMLElement[] | null = null
 let stackSliderItemTitle: HTMLElement[] | null = null
 let stackSliderItemTitlesSplitted: SplitText[] | null = null
-
-const handleSlideIn = () => {
-  if (!stackSliderItems) return
-  const tempIndex = stackSliderState.value.currentIndex + 1
-
-  if (tempIndex >= stackSliderItems.length) {
-    stackSliderObserver?.disable()
-    return
-  }
-  stackSliderState.value.isTransitionning = true
-  stackSliderState.value.nextIndex = tempIndex
-  slideIn()
-}
 
 const handleSplitTitle = () => {
   if (!stackSliderItemTitle) return
@@ -84,8 +66,8 @@ const handleSplitTitle = () => {
       linesClass: 'clip-text',
     })
   })
+  console.log('stackSliderItemTitlesSplitted', stackSliderItemTitlesSplitted)
 }
-
 const revealSectionHeading = () => {
   if (!stackSliderItemTitlesSplitted) return
   return gsap.to(stackSliderItemTitlesSplitted[stackSliderState.value.nextIndex][stackSliderConfig.itemTitleAnimationType], {
@@ -100,7 +82,21 @@ const revealSectionHeading = () => {
   })
 }
 
+const handleSlideIn = () => {
+  if (!stackSliderItems) return
+  console.log('handle Slide In')
+  const tempIndex = stackSliderState.value.currentIndex + 1
+
+  if (tempIndex >= stackSliderItems.length) {
+    stackSliderObserver?.disable()
+    return
+  }
+  stackSliderState.value.isTransitionning = true
+  stackSliderState.value.nextIndex = tempIndex
+  slideIn()
+}
 const slideIn = () => {
+  console.log('slide in')
   if (!stackSliderItems || !stackSliderItemImageBg || !stackSliderItemOuter || !stackSliderItemInner) return
 
   const current = stackSliderState.value.currentIndex
@@ -143,6 +139,7 @@ const slideIn = () => {
 }
 
 const handleSlideOut = () => {
+  console.log('handle Slide Out')
   if (!stackSliderItems) return
   const tempIndex = stackSliderState.value.currentIndex - 1
   if (tempIndex < 0) {
@@ -153,8 +150,8 @@ const handleSlideOut = () => {
   stackSliderState.value.nextIndex = tempIndex
   slideOut()
 }
-
 const slideOut = () => {
+  console.log('slide out')
   if (!stackSliderItems || !stackSliderItemImageBg || !stackSliderItemOuter || !stackSliderItemInner) return
 
   const current = stackSliderState.value.currentIndex
@@ -189,6 +186,19 @@ const slideOut = () => {
   }
 }
 
+const isMobileDevice = ref<boolean | null>(null)
+const isTouchDevice = () => {
+  if (typeof window === 'undefined') return false
+  // Vérifie la présence d'un écran tactile (mobile ou tablette)
+  return (
+    ('ontouchstart' in window && navigator.maxTouchPoints > 0)
+    || navigator.userAgent.toLowerCase().includes('mobile')
+    || navigator.userAgent.toLowerCase().includes('android')
+    || navigator.userAgent.toLowerCase().includes('iphone')
+    || navigator.userAgent.toLowerCase().includes('ipad')
+  )
+}
+
 const createStackSliderObserver = () => {
   if (stackSliderObserver) return
   stackSliderObserver = ScrollTrigger.observe({
@@ -197,9 +207,10 @@ const createStackSliderObserver = () => {
     tolerance: 10,
     onEnable(self) {
       globalStore.setForcedHideHeader(true)
-      stackSliderState.value.allowScroll = false
-      scrollTimeout.restart(true)
+      console.log('enable observer')
+      console.log('self', self)
       const savedScroll = self.scrollY()
+      console.log('savedScroll', savedScroll)
       self._restoreScroll = () => self.scrollY(savedScroll)
       document.addEventListener('scroll', self._restoreScroll, { passive: false })
     },
@@ -208,12 +219,22 @@ const createStackSliderObserver = () => {
       document.removeEventListener('scroll', self._restoreScroll)
     },
     onUp() {
-      if (!stackSliderState.value.isTransitionning && stackSliderState.value.allowScroll) {
+      console.log('up', self)
+      if (stackSliderState.value.isTransitionning) return
+      if (isMobileDevice.value) {
+        handleSlideIn()
+      }
+      else {
         handleSlideOut()
       }
     },
     onDown() {
-      if (!stackSliderState.value.isTransitionning && stackSliderState.value.allowScroll) {
+      console.log('down')
+      if (stackSliderState.value.isTransitionning) return
+      if (isMobileDevice.value) {
+        handleSlideOut()
+      }
+      else {
         handleSlideIn()
       }
     },
@@ -227,7 +248,6 @@ const createStackSliderScrollTriger = () => {
     start: 'top top',
     pin: true,
     end: '+=200',
-    markers: true,
     onEnter(self) {
       stackDebug.value.stackSliderEnter = true
       if (stackSliderObserver?.isEnabled) return
@@ -246,6 +266,7 @@ const createStackSliderScrollTriger = () => {
       if (stackSliderObserver?.isEnabled) return
       self.scroll(self.end - 1)
       switchStackSliderObserver(true)
+      console.log('stackslider enterBack')
     },
   })
 }
@@ -281,7 +302,7 @@ const handleSetDefaultGsapValue = () => {
 onMounted(() => {
   handleSetDefaultGsapValue()
   createStackSliderObserver()
-
+  isMobileDevice.value = isTouchDevice()
   stackSliderContext = gsap.context(() => {
     createStackSliderScrollTriger()
   })
@@ -307,9 +328,8 @@ onUnmounted(() => {
       v-if="stackDebug.displayDebug"
       class="stackslider__debugger"
     >
-      {{ stackDebug.stackSliderEnter ? 'in' : 'out' }}
       <p>
-        isTransitionning: {{ stackSliderState.isTransitionning }}
+        {{ globalStore.windowHeight }}
       </p>
     </div>
     <div class="stackslider__content">
@@ -370,7 +390,7 @@ onUnmounted(() => {
 .stackslider {
   position: relative;
   width: 100%;
-  height: 100svh;
+  height: var(--window-height);
   overflow: hidden;
 
   @include mq(desktop) {
@@ -400,7 +420,7 @@ onUnmounted(() => {
     justify-content: center;
     width: 100%;
     height: 100%;
-    min-height: 100svh;
+    min-height: var(--window-height);
     will-change: transform;
 
     @include mq(desktop) {
@@ -409,10 +429,27 @@ onUnmounted(() => {
 
     --bg-gradient: radial-gradient(circle,rgb(0 0 0 / 40%) 0%, rgb(0 0 0 / 0%) 100%);
 
+    &__inner {
+      padding: 2.06rem 1.25rem;
+
+      @include mq(desktop) {
+        padding: 0;
+      }
+    }
+
+    &__left {
+      margin-bottom: 1.743rem;
+
+      @include mq(desktop) {
+        margin-bottom: 0;
+      }
+    }
+
     &__content {
       display: flex;
       position: relative;
       z-index: 4;
+      flex-flow: column wrap;
       align-items: center;
       justify-content: center;
       width: 100%;
@@ -420,15 +457,24 @@ onUnmounted(() => {
       height: 100%;
       margin: 0 auto;
 
+      @include mq(desktop) {
+        flex-flow: row nowrap;
+        justify-content: center;
+      }
+
       > div {
-        width: 33.33%;
+        width: 100%;
+
+        @include mq(desktop) {
+          width: 33.33%;
+        }
       }
     }
 
     &__number {
       display: block;
       position: relative;
-      margin-bottom: 1rem;
+      margin-bottom: 1.6875rem;
       font-size: 1rem;
       font-weight: 200;
 
@@ -438,9 +484,12 @@ onUnmounted(() => {
     }
 
     &__title {
-      font-size: 1.19rem;
+      // line-height: 1.41rem;
+        font-size: 2.375rem;
+
+      // font-size: 1.19rem;
       font-weight: 400;
-      line-height: 1.41rem;
+        line-height: 2.8125rem;
 
       @include mq(desktop) {
         font-size: 2.375rem;
@@ -454,8 +503,15 @@ onUnmounted(() => {
 
     &__center {
       position: relative;
-      flex: 0 0 33.33%;
-      padding-top: 33.33%;
+      flex: 0 0 auto;
+      padding-top: 100%;
+      overflow: hidden;
+      border-radius:  3px;
+
+      @include mq(desktop) {
+        flex: 0 0 33.33%;
+        padding-top: 33.33%;
+      }
 
       >img {
         display: block;
@@ -477,14 +533,20 @@ onUnmounted(() => {
     }
 
     &__text {
+      // display: none;
+
+      // @include mq(smartphone) {
+      //   display: block;
+      // }
+
       p {
-        min-height: 6rem;
-        font-size: 1rem;
+        // min-height: 6rem;
+        font-size: 1.375rem;
         font-weight: 300;
-        line-height: 1.5rem;
+        line-height: 1.875rem;
 
         @include mq(desktop) {
-          min-height: auto;
+          // min-height: auto;
           margin-top: 0;
           margin-left: auto;
           font-size: 1.125rem;
@@ -494,39 +556,40 @@ onUnmounted(() => {
       }
     }
 
-  &__tags {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    margin-top: 1rem;
-    margin-left: auto;
-    overflow-x: auto;
-    transform: translateY(10px);
-
-    @include mq(desktop) {
-      flex-wrap: wrap;
-      max-width: 20.25rem;
-      overflow-x: none;
-    }
-
-    > .button {
-      display: block;
-      flex: 1 0 auto;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      padding: .75rem;
-      font-size: .75rem;
-
-      @include mq(smartphone) {
-        padding: 1rem;
-        font-size: 1rem;
-      }
+    &__tags {
+      display: none;
+      flex-wrap: nowrap;
+      width: 100%;
+      margin-top: 1rem;
+      margin-left: auto;
+      overflow-x: auto;
+      transform: translateY(10px);
 
       @include mq(desktop) {
-        flex: 0 1 auto;
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 20.25rem;
+        overflow-x: none;
+      }
+
+      > .button {
+        display: block;
+        flex: 1 0 auto;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: .75rem;
+        font-size: .75rem;
+
+        @include mq(smartphone) {
+          padding: 1rem;
+          font-size: 1rem;
+        }
+
+        @include mq(desktop) {
+          flex: 0 1 auto;
+        }
       }
     }
-  }
 
     &__bg {
       position: absolute;

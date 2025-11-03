@@ -11,7 +11,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 
-import { useElementSize } from '@vueuse/core'
+import { useElementSize, useWindowSize } from '@vueuse/core'
 
 import { globalStore, transitionStore } from '@/store'
 
@@ -24,6 +24,7 @@ const mainContent = useTemplateRef('mainContent')
 const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
 
 const { height: PageHeight } = useElementSize(mainContent)
+const { height: windowHeight } = useWindowSize()
 
 let globalAppGsapContext: gsap.Context | null = null
 const scrollSmoother = ref<ReturnType<typeof ScrollSmoother.create> | null>(null)
@@ -31,7 +32,12 @@ const scrollSmoother = ref<ReturnType<typeof ScrollSmoother.create> | null>(null
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 watch(PageHeight, () => {
-  ScrollTrigger.refresh()
+  globalStore.setPageHeight(PageHeight.value)
+})
+
+watch(windowHeight, () => {
+  globalStore.setWindowHeight(windowHeight.value)
+  document.documentElement.style.setProperty('--window-height', `${windowHeight.value}px`)
 })
 
 useHead({
@@ -50,15 +56,20 @@ useHead({
 })
 
 onMounted(() => {
+  window.addEventListener('touchend', () => {
+    globalStore.setPageHeight(window.innerHeight)
+  })
   scrollSmoother.value = ScrollSmoother.create({
     smooth: 1,
+
   })
   globalStore.setScrollSmoother(scrollSmoother.value)
 
-  ScrollTrigger.normalizeScroll({
-    allowNestedScroll: true,
-    type: 'touch',
-  })
+  // ScrollTrigger.normalizeScroll({
+  //   allowNestedScroll: true,
+  //   type: 'touch',
+  // })
+
   const footer = footerContent.value
 
   if (!footer) return
