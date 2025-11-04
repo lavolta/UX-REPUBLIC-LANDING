@@ -227,7 +227,6 @@ const createStackSliderScrollTriger = () => {
     start: 'top top',
     pin: true,
     end: '+=200',
-    markers: true,
     onEnter(self) {
       stackDebug.value.stackSliderEnter = true
       if (stackSliderObserver?.isEnabled) return

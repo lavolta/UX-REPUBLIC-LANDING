@@ -14,7 +14,6 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { useElementSize, useWindowSize } from '@vueuse/core'
 
 import { globalStore, transitionStore } from '@/store'
-
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterComponent from '@/components/footer/FooterComponent.vue'
 import WelcomeComponent from '@/components/welcome/WelcomeComponent.vue'
@@ -65,10 +64,12 @@ onMounted(() => {
   })
   globalStore.setScrollSmoother(scrollSmoother.value)
 
-  // ScrollTrigger.normalizeScroll({
-  //   allowNestedScroll: true,
-  //   type: 'touch',
-  // })
+  // if (/iP(ad|hone)|Android/.test(navigator.userAgent)) {
+  //   ScrollTrigger.normalizeScroll({
+  //     allowNestedScroll: true,
+  //     type: 'touch',
+  //   })
+  // }
 
   const footer = footerContent.value
 
@@ -78,8 +79,8 @@ onMounted(() => {
     const footerTimeLine = gsap.timeline({
       scrollTrigger: {
         trigger: '#footerComponent',
-        start: 'bottom-=50% 50%',
-        end: 'bottom+=100% bottom',
+        start: () => window.innerWidth < 768 ? 'top 75%' : 'bottom-=50% 50%',
+        end: () => window.innerWidth < 768 ? 'bottom 90%' : 'bottom+=100% bottom',
         scrub: 3,
         once: true,
       },

@@ -66,7 +66,6 @@ const handleSplitTitle = () => {
       linesClass: 'clip-text',
     })
   })
-  console.log('stackSliderItemTitlesSplitted', stackSliderItemTitlesSplitted)
 }
 const revealSectionHeading = () => {
   if (!stackSliderItemTitlesSplitted) return
@@ -84,7 +83,6 @@ const revealSectionHeading = () => {
 
 const handleSlideIn = () => {
   if (!stackSliderItems) return
-  console.log('handle Slide In')
   const tempIndex = stackSliderState.value.currentIndex + 1
 
   if (tempIndex >= stackSliderItems.length) {
@@ -96,7 +94,6 @@ const handleSlideIn = () => {
   slideIn()
 }
 const slideIn = () => {
-  console.log('slide in')
   if (!stackSliderItems || !stackSliderItemImageBg || !stackSliderItemOuter || !stackSliderItemInner) return
 
   const current = stackSliderState.value.currentIndex
@@ -139,7 +136,6 @@ const slideIn = () => {
 }
 
 const handleSlideOut = () => {
-  console.log('handle Slide Out')
   if (!stackSliderItems) return
   const tempIndex = stackSliderState.value.currentIndex - 1
   if (tempIndex < 0) {
@@ -151,7 +147,6 @@ const handleSlideOut = () => {
   slideOut()
 }
 const slideOut = () => {
-  console.log('slide out')
   if (!stackSliderItems || !stackSliderItemImageBg || !stackSliderItemOuter || !stackSliderItemInner) return
 
   const current = stackSliderState.value.currentIndex
@@ -207,10 +202,7 @@ const createStackSliderObserver = () => {
     tolerance: 10,
     onEnable(self) {
       globalStore.setForcedHideHeader(true)
-      console.log('enable observer')
-      console.log('self', self)
       const savedScroll = self.scrollY()
-      console.log('savedScroll', savedScroll)
       self._restoreScroll = () => self.scrollY(savedScroll)
       document.addEventListener('scroll', self._restoreScroll, { passive: false })
     },
@@ -219,7 +211,6 @@ const createStackSliderObserver = () => {
       document.removeEventListener('scroll', self._restoreScroll)
     },
     onUp() {
-      console.log('up', self)
       if (stackSliderState.value.isTransitionning) return
       if (isMobileDevice.value) {
         handleSlideIn()
@@ -229,7 +220,6 @@ const createStackSliderObserver = () => {
       }
     },
     onDown() {
-      console.log('down')
       if (stackSliderState.value.isTransitionning) return
       if (isMobileDevice.value) {
         handleSlideOut()
@@ -266,7 +256,6 @@ const createStackSliderScrollTriger = () => {
       if (stackSliderObserver?.isEnabled) return
       self.scroll(self.end - 1)
       switchStackSliderObserver(true)
-      console.log('stackslider enterBack')
     },
   })
 }
@@ -533,11 +522,11 @@ onUnmounted(() => {
     }
 
     &__text {
-      // display: none;
+      display: none;
 
-      // @include mq(smartphone) {
-      //   display: block;
-      // }
+      @include mq(xsphone) {
+        display: block;
+      }
 
       p {
         // min-height: 6rem;
