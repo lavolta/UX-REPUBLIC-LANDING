@@ -9,10 +9,10 @@ interface ItemsNumber {
   suffix: string
 }
 const items = ref<ItemsNumber[]>([
-  { title: 'Années', value: 12, displayValue: 10, suffix: '' },
-  { title: 'Collaborateurs', value: 100, displayValue: 50, suffix: '+' },
-  { title: 'Projets', value: 950, displayValue: 800, suffix: '+' },
-  { title: 'Pays', value: 4, displayValue: 0, suffix: '' },
+  { title: 'ans au service de l\'UX', value: 12, displayValue: 10, suffix: '' },
+  { title: 'Collaborateurs passionnés', value: 100, displayValue: 50, suffix: '+' },
+  { title: 'Missions réalisées', value: 950, displayValue: 800, suffix: '+' },
+  { title: 'Bureaux en Europe', value: 4, displayValue: 0, suffix: '' },
 ])
 
 const firstView = ref(true)
