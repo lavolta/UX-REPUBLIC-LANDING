@@ -11,10 +11,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 
-import { useElementSize } from '@vueuse/core'
+import { useElementSize, useWindowSize } from '@vueuse/core'
 
 import { globalStore, transitionStore } from '@/store'
-
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterComponent from '@/components/footer/FooterComponent.vue'
 import WelcomeComponent from '@/components/welcome/WelcomeComponent.vue'
@@ -24,6 +23,7 @@ const mainContent = useTemplateRef('mainContent')
 const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
 
 const { height: PageHeight } = useElementSize(mainContent)
+const { height: windowHeight } = useWindowSize()
 
 let globalAppGsapContext: gsap.Context | null = null
 const scrollSmoother = ref<ReturnType<typeof ScrollSmoother.create> | null>(null)
@@ -31,7 +31,12 @@ const scrollSmoother = ref<ReturnType<typeof ScrollSmoother.create> | null>(null
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 watch(PageHeight, () => {
-  ScrollTrigger.refresh()
+  globalStore.setPageHeight(PageHeight.value)
+})
+
+watch(windowHeight, () => {
+  globalStore.setWindowHeight(windowHeight.value)
+  document.documentElement.style.setProperty('--window-height', `${windowHeight.value}px`)
 })
 
 useHead({
@@ -44,20 +49,25 @@ useHead({
     },
   ],
   meta: [
+    { name: 'robots', content: 'noindex, follow' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   ],
 })
 
 onMounted(() => {
+  window.addEventListener('touchend', () => {
+    globalStore.setPageHeight(window.innerHeight)
+  })
   scrollSmoother.value = ScrollSmoother.create({
     smooth: 1,
+    smoothTouch: 1,
   })
   globalStore.setScrollSmoother(scrollSmoother.value)
 
-  ScrollTrigger.normalizeScroll({
-    allowNestedScroll: true,
-    type: 'touch',
-  })
+  if (/iP(ad|hone)/.test(navigator.userAgent)) {
+    globalStore.setIsIOS(true)
+  }
+
   const footer = footerContent.value
 
   if (!footer) return
@@ -66,8 +76,8 @@ onMounted(() => {
     const footerTimeLine = gsap.timeline({
       scrollTrigger: {
         trigger: '#footerComponent',
-        start: 'bottom-=50% 50%',
-        end: 'bottom+=100% bottom',
+        start: () => window.innerWidth < 768 ? 'top 75%' : 'bottom-=50% 50%',
+        end: () => window.innerWidth < 768 ? 'bottom 90%' : 'bottom+=100% bottom',
         scrub: 3,
         once: true,
       },

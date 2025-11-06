@@ -95,20 +95,6 @@ const disabledAutoSlide = () => {
   }
 }
 
-// watch(itemActif, async (newIndex) => {
-//   await nextTick()
-//   const navEl = agencyNav.value
-//   if (!navEl) return
-
-//   const activeBtn = navEl.querySelector('.agency__cta.actif') as HTMLElement | null
-//   if (activeBtn) {
-//     activeBtn.scrollIntoView({
-//       behavior: 'smooth',
-//       inline: 'start',
-//     })
-//   }
-// })
-
 watch(itemActif, async (newIndex) => {
   await nextTick()
   const navEl = agencyNav.value
@@ -304,7 +290,7 @@ onUnmounted(() => {
 
   position: relative;
   width: 100%;
-  height: 100svh;
+  height: var(--window-height);
   overflow: hidden;
   background-color: var(--color-background);
   color: var(--color-text-dark);
@@ -370,7 +356,7 @@ onUnmounted(() => {
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh;
+      height: var(--window-height);
       transform: scale(1.1);
       transition: var(--animation);
       opacity: 0%;
