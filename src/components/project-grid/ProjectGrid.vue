@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import InfiniteScrollSlider from '@/components/infinite-scroll-slider/InfiniteScrollSlider.vue'
 import ProjectGridBG from './ProjectGridBG.vue'
-import ProjectItem from './ProjectItem.vue'
+import ProjectItem from './ProjectItem2.vue'
 import { useI18n } from 'vue-i18n'
 const { tm } = useI18n()
 const projectItems = tm('project.items')

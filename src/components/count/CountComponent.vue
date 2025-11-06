@@ -8,6 +8,9 @@ interface ItemsNumber {
   displayValue: number
   suffix: string
 }
+defineProps<{
+  theme: 'white' | 'black'
+}>()
 const items = ref<ItemsNumber[]>([
   { title: 'ans au service de l\'UX', value: 12, displayValue: 10, suffix: '' },
   { title: 'Collaborateurs passionnés', value: 100, displayValue: 50, suffix: '+' },
@@ -42,7 +45,7 @@ watch(targetIsVisible, (newValue) => {
 <template>
   <div
     ref="countSection"
-    class="count"
+    :class="['count', `count--${theme}`]"
   >
     <div
       v-for="(item, key) in items"
@@ -51,7 +54,7 @@ watch(targetIsVisible, (newValue) => {
     >
       <div
 
-        class="count-item"
+        :class="['count-item', `count-item--${theme}`]"
       >
         <p>{{ item.title }}</p>
         <NumberFlow
@@ -84,17 +87,25 @@ watch(targetIsVisible, (newValue) => {
 
 .count-item {
     padding: 1.5625rem 0;
+    border-top: solid 1px var(--color-btn-border);
+    color: var(--color-white);
 
     @include mq(desktop) {
       padding-bottom: 0;
     }
 
-    border-top: solid 1px var(--color-btn-border);
+    &--black {
+      color: var(--color-text-dark);
 
-    >p {
+      number-flow-vue::part(digit),
+      number-flow-vue::part(suffix) {
+        color: var(--color-text-dark);
+      }
+    }
+
+    > p {
       margin: 0;
       margin-bottom: 0;
-      color: var(--color-white);
       font-size: 1rem;
       font-weight: 200;
       letter-spacing: 1px;
