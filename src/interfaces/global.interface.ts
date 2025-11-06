@@ -47,6 +47,7 @@ export interface AgencyItemInterface {
 
 export interface ProjectItemInterface {
   title: string
+  subtitle?: string
   content: string
   picture: PictureInterface
   theme: ItemThemeType
