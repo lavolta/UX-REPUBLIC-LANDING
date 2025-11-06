@@ -9,9 +9,11 @@ import {
   usePageTransition,
   useDefaultSeo,
 } from '@/composable'
+
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
-import StackSlider from '@/components/stack-slider/StackSlider2.vue'
+import StackSlider from '@/components/stack-slider/StackSlider3.vue'
+
 useDefaultSeo('home')
 usePageTransition()
 </script>

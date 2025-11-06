@@ -60,16 +60,19 @@ onMounted(() => {
   })
   scrollSmoother.value = ScrollSmoother.create({
     smooth: 1,
-
+    smoothTouch: 1,
   })
   globalStore.setScrollSmoother(scrollSmoother.value)
 
-  // if (/iP(ad|hone)|Android/.test(navigator.userAgent)) {
-  //   ScrollTrigger.normalizeScroll({
-  //     allowNestedScroll: true,
-  //     type: 'touch',
-  //   })
-  // }
+  if (/iP(ad|hone)/.test(navigator.userAgent)) {
+    console.log('iphone device')
+    // ScrollTrigger.normalizeScroll({
+    //   allowNestedScroll: true,
+    //   type: 'touch',
+    // })
+    // ScrollTrigger.config({ ignoreMobileResize: true })
+    globalStore.setIsIOS(true)
+  }
 
   const footer = footerContent.value
 

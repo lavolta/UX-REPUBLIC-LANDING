@@ -81,6 +81,7 @@ interface NavigationItemButton {
   content: string
   type: 'button'
 }
+
 export type NavigationItem = NavigationItemInternalLink | NavigationItemExternalLink | NavigationItemButton
 
 export interface SeoPageInterface {

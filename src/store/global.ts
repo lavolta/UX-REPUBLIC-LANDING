@@ -10,12 +10,14 @@ interface GlobalStoreInterface {
   pageHeight: number
   windowHeight: number
   scrollSmoother: ScrollSmootherType
+  isIOS: boolean
   setScrollSmoother: (scrollSmoother: ScrollSmootherType) => void
   setPageHeight: (value: number) => void
   setFooterHeight: (value: number) => void
   setForcedHideHeader: (value: boolean) => void
   setGlobalOverflow: (value: boolean) => void
   setWindowHeight: (value: number) => void
+  setIsIOS: (value: boolean) => void
 }
 export const globalStore = reactive<GlobalStoreInterface>({
   forcedHideHeader: false,
@@ -24,6 +26,10 @@ export const globalStore = reactive<GlobalStoreInterface>({
   pageHeight: 0,
   windowHeight: 0,
   scrollSmoother: null,
+  isIOS: false,
+  setIsIOS(value: boolean) {
+    this.isIOS = value
+  },
   setScrollSmoother(value: ScrollSmootherType) {
     this.scrollSmoother = value
   },
