@@ -4,15 +4,14 @@ import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import AgencySlider from '@/components/agency/AgencySliderComponent2.vue'
+import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
+import StarsIcon from '@/components/icons/StarsIcon.vue'
+import StackSlider from '@/components/stack-slider/StackSlider4.vue'
 
 import {
   usePageTransition,
   useDefaultSeo,
 } from '@/composable'
-
-import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
-import StarsIcon from '@/components/icons/StarsIcon.vue'
-import StackSlider from '@/components/stack-slider/StackSlider3.vue'
 
 useDefaultSeo('home')
 usePageTransition()
