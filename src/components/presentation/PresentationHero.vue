@@ -55,8 +55,14 @@ defineProps<{
       margin-bottom: 0;
     }
 
+    padding: 7rem 1rem;
+
+    @include mq(smartphone) {
+      padding: 7rem 2rem;
+    }
+
     @include mq(desktop) {
-      padding: 7.25rem 0;
+      padding: 11rem 0;
     }
   }
 

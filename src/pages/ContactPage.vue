@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
-import { useDefaultSeo, usePageTransition } from '@/composable'
 import { onMounted } from 'vue'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useDefaultSeo, usePageTransition } from '@/composable'
+import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
 
@@ -18,6 +19,7 @@ const generateHbsptForm = () => {
       onFormReady(formulaire: HTMLFormElement) {
         const submitButton = formulaire.querySelector('.actions input')
         submitButton?.classList.add('button')
+        ScrollTrigger.refresh()
       },
     })
   }

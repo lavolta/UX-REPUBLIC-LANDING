@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, useTemplateRef, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 interface IniniteScrollTextPropsInterface {
   revealTextOnScroll?: boolean
@@ -12,16 +13,10 @@ const props = withDefaults(defineProps<IniniteScrollTextPropsInterface>(), {
 
 const infiniteScrollContent = useTemplateRef('infiniteScrollContent')
 let infiniteScrollContentContext: gsap.Context | null = null
+
 onMounted(() => {
   infiniteScrollContentContext = gsap.context(() => {
-    const infiniteScrollContentTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: `#${props.id}`,
-        start: 'top 80%',
-        end: 'bottom 50%',
-        scrub: 4,
-      },
-    })
+    const infiniteScrollContentTimeline = gsap.timeline()
     const contentpictos = gsap.utils.toArray(`#${props.id} .infinite-scroll-content__picto`) as HTMLOrSVGElement[]
 
     infiniteScrollContentTimeline.to(infiniteScrollContent.value, {
@@ -40,19 +35,24 @@ onMounted(() => {
         '<',
       )
     })
+    ScrollTrigger.create({
+      trigger: `#${props.id}`,
+      start: 'top 80%',
+      end: 'bottom 50%',
+      scrub: 4,
+      animation: infiniteScrollContentTimeline,
+    })
   })
 })
 onUnmounted(() => {
   if (infiniteScrollContentContext) {
     infiniteScrollContentContext.revert()
-    infiniteScrollContentContext.clear()
-    infiniteScrollContentContext.kill()
   }
 })
 </script>
 <template>
   <div
-    :id
+    :id="id"
     class="infinite-scroll-content"
   >
     <div ref="infiniteScrollContent">
