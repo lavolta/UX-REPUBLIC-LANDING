@@ -125,7 +125,7 @@ onMounted(() => {
         trigger: `#${props.idAgency}`,
         id: props.idAgency,
         start: 'top top',
-        end: '+=60% -=10',
+        end: '+=60% top',
         markers: true,
         onEnter() {
           globalStore.setForcedHideHeader(true)
@@ -145,7 +145,6 @@ onMounted(() => {
         },
         onLeaveBack() {
           globalStore.setForcedHideHeader(false)
-          displayNav.value = false
           disabledAutoSlide()
         },
       })
