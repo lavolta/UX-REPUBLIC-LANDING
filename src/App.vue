@@ -117,14 +117,18 @@ onBeforeUnmount(() => {
 })
 
 const handleScrollOnTopWindow = () => {
-  if (!window) return
-  window.scroll({
-    top: 0,
-    behavior: 'instant',
-  })
-  if (!scrollSmoother.value) return
-  scrollSmoother.value.scrollTop(0)
-  scrollSmoother.value.refresh()
+  ScrollTrigger.disable()
+  if (window) {
+    window.scroll({
+      top: 0,
+      behavior: 'instant',
+    })
+  }
+  if (scrollSmoother.value) {
+    scrollSmoother.value.scrollTop(0)
+    scrollSmoother.value.refresh()
+  }
+  ScrollTrigger.enable()
 }
 
 const handleEndTransitionEnterAnimation = () => {

@@ -196,7 +196,6 @@ const targetIsVisible = useElementVisibility(target, {
 
       @include mq(desktop) {
         margin-bottom: 2.25rem;
-        font-size: 1.25rem;
       }
   }
 

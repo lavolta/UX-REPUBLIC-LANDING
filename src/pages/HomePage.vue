@@ -3,7 +3,7 @@ import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
 import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
-import AgencySlider from '@/components/agency/AgencySliderComponent2.vue'
+import AgencySlider from '@/components/agency/AgencySliderComponent3.vue'
 import CountComponent from '@/components/count/CountComponent.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
@@ -35,7 +35,7 @@ usePageTransition()
   />
   <PresentationHero background-color="white">
     <template #title>
-      TITRE
+      Propulsez votre croissance
     </template>
     <template #content>
       Vous cherchez un partenaire pour aller au-delà du simple digital, captiver vos utilisateurs et propulser votre croissance ?

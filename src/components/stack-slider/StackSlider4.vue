@@ -27,9 +27,7 @@ type GoToType = 'next' | 'prev'
 const handleSwipeCurrentItem = (goTo: GoToType) => {
   if (!stackSliderItems) return
   globalStore.setForcedHideHeader(true)
-  console.log('stackSliderState.value.isTransitionning', stackSliderState.value.isTransitionning)
   if (stackSliderState.value.isTransitionning) return
-  console.log('ici')
   const goToNextSlide = goTo === 'next'
   const tempIndex = goToNextSlide ? stackSliderState.value.currentIndex + 1 : stackSliderState.value.currentIndex - 1
   stackSliderState.value.isTransitionning = true
@@ -425,7 +423,6 @@ const handleSetDefaultGsapValue = () => {
 }
 
 const handleClickOnDot = (value: number) => {
-  console.log('click on dot', value)
   const tempIndex = stackSliderState.value.currentIndex
   const goToNextItem = value > tempIndex
   stackSliderState.value.nextIndex = value
