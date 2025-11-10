@@ -132,6 +132,7 @@ const handleScrollOnTopWindow = () => {
 }
 
 const handleEndTransitionEnterAnimation = () => {
+  transitionStore.setStateTransition('forceCloseNavMenu', true)
   handleScrollOnTopWindow()
   transitionStore.setStateTransition('readyToNextPage', true)
 }

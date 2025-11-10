@@ -126,7 +126,6 @@ onMounted(() => {
         id: props.idAgency,
         start: 'top top',
         end: '+=60% top',
-        markers: true,
         onEnter() {
           globalStore.setForcedHideHeader(true)
           isInView.value = true
@@ -552,7 +551,7 @@ onUnmounted(() => {
           position: absolute;
           z-index: 1;
           width: 100%;
-          transform: translateY(100%);
+          transform: translateY(calc(100% + 2px));
           transition: all ease-in .2s;
           background-color: white;
           inset: 0;

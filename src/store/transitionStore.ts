@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
-type stateType = 'readyToNextPage' | 'displayTransitionScreen' | 'displayTransitionLeave' | 'welcomeAnimation' | 'transitionInProgress'
+type stateType = 'readyToNextPage' | 'displayTransitionScreen' | 'displayTransitionLeave' | 'welcomeAnimation' | 'transitionInProgress' | 'forceCloseNavMenu'
 
 interface TransitionStateInterface {
   readyToNextPage: boolean
@@ -8,6 +8,7 @@ interface TransitionStateInterface {
   displayTransitionScreen: boolean
   displayTransitionLeave: boolean
   welcomeAnimation: boolean
+  forceCloseNavMenu: boolean
 }
 interface TransitionStoreInterface {
   state: TransitionStateInterface
@@ -22,6 +23,7 @@ export const transitionStore = reactive<TransitionStoreInterface>({
     displayTransitionLeave: false,
     transitionInProgress: false,
     welcomeAnimation: true,
+    forceCloseNavMenu: false,
   },
   resetTransitionState() {
     this.state.readyToNextPage = false
