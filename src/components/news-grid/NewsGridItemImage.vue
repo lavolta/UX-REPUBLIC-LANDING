@@ -7,6 +7,7 @@ defineProps<{ picture: PictureInterface }>()
     <img
       :src="picture.href"
       :alt="picture.alt"
+      loading="lazy"
     >
   </div>
 </template>

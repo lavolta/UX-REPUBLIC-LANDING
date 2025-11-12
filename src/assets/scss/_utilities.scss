@@ -1,5 +1,10 @@
 @use './mixins/mq' as *;
 
+.overflow {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

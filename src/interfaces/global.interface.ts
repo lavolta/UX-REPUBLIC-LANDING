@@ -42,11 +42,50 @@ export interface AgencyItemInterface {
   email?: string
   theme: ItemThemeType
   picture: PictureInterface
+  pictureM?: PictureInterface
 }
 
 export interface ProjectItemInterface {
   title: string
+  subtitle?: string
   content: string
   picture: PictureInterface
   theme: ItemThemeType
+}
+
+export interface UxRepublicArticleInterface {
+  id: number
+  date: string
+  link: string
+  title: {
+    rendered: string
+  }
+  excerpt: {
+    rendered: string
+    key: string
+    format: string
+  }
+}
+
+interface NavigationItemInternalLink {
+  href: string
+  content: string
+  type: 'internal'
+}
+
+interface NavigationItemExternalLink {
+  href: string
+  content: string
+  type: 'link'
+}
+interface NavigationItemButton {
+  content: string
+  type: 'button'
+}
+
+export type NavigationItem = NavigationItemInternalLink | NavigationItemExternalLink | NavigationItemButton
+
+export interface SeoPageInterface {
+  title: string
+  description: string
 }

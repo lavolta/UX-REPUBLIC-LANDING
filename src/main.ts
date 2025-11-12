@@ -4,6 +4,8 @@ import App from './App.vue'
 import routes from './router'
 import { en, fr } from './locales'
 
+// PLUGINS GSAP
+
 import './assets/scss/main.scss'
 import type { i18nLocalType } from '@/types'
 type MessageSchema = import('vue-i18n').DefineLocaleMessage
@@ -25,7 +27,6 @@ export const createApp = ViteSSG(
         en,
       },
     })
-
     app.use(i18n)
   },
 )
