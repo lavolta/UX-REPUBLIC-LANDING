@@ -58,8 +58,7 @@ watch(menuMobileVisible, (newValue) => {
     playMasterTimeline(true)
   }
 })
-watch (() => transitionStore.state.forceCloseNavMenu, (newValue) => {
-  console.log('starting close navigation menu', newValue)
+watch (() => transitionStore.state.forceCloseNavMenu, () => {
   if (menuMobileVisible.value) {
     forceHideMenuMobile()
   }
