@@ -20,12 +20,10 @@ import WelcomeComponent from '@/components/welcome/WelcomeComponent.vue'
 import TransitionScreen from '@/components/transition-screen/TransitionScreen.vue'
 
 const mainContent = useTemplateRef('mainContent')
-const footerContent = useTemplateRef<InstanceType<typeof FooterComponent>>('footerComponent')
 
 const { height: PageHeight } = useElementSize(mainContent)
 const { height: windowHeight } = useWindowSize()
 
-let globalAppGsapContext: gsap.Context | null = null
 const scrollSmoother = ref<ReturnType<typeof ScrollSmoother.create> | null>(null)
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
@@ -67,56 +65,14 @@ onMounted(() => {
   if (/iP(ad|hone)/.test(navigator.userAgent)) {
     globalStore.setIsIOS(true)
   }
-
-  const footer = footerContent.value
-
-  if (!footer) return
-
-  globalAppGsapContext = gsap.context(() => {
-    const footerTimeLine = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#footerComponent',
-        start: () => window.innerWidth < 768 ? 'top 75%' : 'bottom-=50% 50%',
-        end: () => window.innerWidth < 768 ? 'bottom 90%' : 'bottom+=100% bottom',
-        scrub: 3,
-        once: true,
-      },
-    })
-
-    footerTimeLine.to('#footerComponent', {
-      translateY: 0,
-      ease: 'power1',
-      duration: 4000,
-    }, '<')
-
-    const footerContact = document.querySelector('#footerComponent .contact')
-    const footerNav = document.querySelector('#footerComponent .footer-container')
-
-    if (!footerContact && !footerNav) return
-
-    footerTimeLine.fromTo(footerContact,
-      { opacity: 0, translateY: 100 },
-      { opacity: 1, translateY: 0, duration: 1000, ease: 'power1' },
-      '>',
-    )
-
-    footerTimeLine.fromTo(footerNav,
-      { opacity: 0, translateY: 100 },
-      { opacity: 1, translateY: 0, duration: 2000, ease: 'power1' },
-      '<',
-    )
-  })
 })
 
 onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach(t => t.kill())
-
-  if (globalAppGsapContext) {
-    globalAppGsapContext.revert()
-  }
 })
 
 const handleScrollOnTopWindow = () => {
+  if (window && window.scrollY === 0) return
   ScrollTrigger.disable()
   if (window) {
     window.scroll({
@@ -132,6 +88,7 @@ const handleScrollOnTopWindow = () => {
 }
 
 const handleEndTransitionEnterAnimation = () => {
+  transitionStore.setStateTransition('forceCloseNavMenu', true)
   handleScrollOnTopWindow()
   transitionStore.setStateTransition('readyToNextPage', true)
 }
@@ -163,8 +120,6 @@ const handleEndTransitionLeave = () => {
           <RouterView />
         </main>
         <FooterComponent
-          id="footerComponent"
-          ref="footerComponent"
           class="footer"
         />
         <div />
@@ -188,11 +143,5 @@ const handleEndTransitionLeave = () => {
     // margin-bottom: 684px;
     background-color: var(--color-bg);
   }
-}
-
-.footer {
-  position: relative;
-  z-index: 9;
-  transform: translateY(-100%);
 }
 </style>

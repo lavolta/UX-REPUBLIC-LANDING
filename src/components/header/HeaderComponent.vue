@@ -4,8 +4,7 @@ import MobileNavComponent from './MobileNavComponent.vue'
 import { gsap } from 'gsap'
 import { useScroll } from '@vueuse/core'
 import { ref, watchEffect, shallowRef, onMounted, watch, useTemplateRef } from 'vue'
-import { globalStore } from '@/store'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { globalStore, transitionStore } from '@/store'
 import HeaderToggleButton from './HeaderToggleButton.vue'
 import HeaderNavComponent from './HeaderNavComponent.vue'
 
@@ -26,6 +25,12 @@ const masterTimeLine = gsap.timeline({
 
 masterTimeLine.pause()
 
+const forceHideMenuMobile = () => {
+  document.querySelector('html')?.classList.remove('overflow')
+  masterTimeLine.seek(0)
+  menuMobileVisible.value = false
+}
+
 const playMasterTimeline = (reversed: boolean) => {
   if (reversed) {
     masterTimeLine.reverse()
@@ -40,9 +45,9 @@ const defineTimeline = () => {
   const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
 
   masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<')
-  masterTimeLine.eventCallback('onReverseComplete', () => {
-    ScrollTrigger.refresh()
-  })
+  // masterTimeLine.eventCallback('onReverseComplete', () => {
+  //   ScrollTrigger.refresh()
+  // })
 }
 
 watch(menuMobileVisible, (newValue) => {
@@ -53,7 +58,12 @@ watch(menuMobileVisible, (newValue) => {
     playMasterTimeline(true)
   }
 })
-
+watch (() => transitionStore.state.forceCloseNavMenu, () => {
+  if (menuMobileVisible.value) {
+    forceHideMenuMobile()
+  }
+  transitionStore.setStateTransition('forceCloseNavMenu', false)
+})
 const handleMenuMobile = () => {
   document.querySelector('html')?.classList.toggle('overflow')
   menuMobileVisible.value = !menuMobileVisible.value

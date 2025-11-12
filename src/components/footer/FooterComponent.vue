@@ -1,38 +1,78 @@
 <!-- components/footer/FooterSection.vue -->
 <script setup lang="ts">
-import { watch, defineExpose } from 'vue'
+import { watch, onMounted, onUnmounted } from 'vue'
 import ContactSection from '@/components/contact/ContactSection.vue'
 import FooterNav from '@/components/footer/FooterNav.vue'
 import { useElementBounding } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
 import { globalStore } from '@/store'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const footerSection = useTemplateRef('footerSection')
-const footerContact = useTemplateRef('footerContact')
-const footerNav = useTemplateRef('footerNav')
+
+let footerGsapContext: gsap.Context | null = null
 
 const { height: footerHeight } = useElementBounding(footerSection)
 
 watch(footerHeight, (newValue) => {
   globalStore.setFooterHeight(newValue)
 })
+onMounted(() => {
+  footerGsapContext = gsap.context(() => {
+    const footerTimeLine = gsap.timeline()
+    footerTimeLine.fromTo(footerSection.value, {
+      translateY: '-100%',
+    }, {
+      translateY: '0%',
+      ease: 'power1',
+      duration: 4000,
+    }, '<')
 
-defineExpose({
-  footerContact,
-  footerNav,
+    footerTimeLine.fromTo('#footer-contact',
+      { opacity: 0, translateY: 100 },
+      { opacity: 1, translateY: 0, duration: 1000, ease: 'power1' },
+      '>',
+    )
+
+    footerTimeLine.fromTo('#footer-nav',
+      { opacity: 0, translateY: 100 },
+      { opacity: 1, translateY: 0, duration: 2000, ease: 'power1' },
+      '<',
+    )
+
+    ScrollTrigger.create({
+      trigger: '#footerSection',
+      start: () => window.innerWidth < 768 ? 'top top' : 'bottom-=50% 50%',
+      end: () => window.innerWidth < 768 ? 'top 90%' : 'bottom+=100% bottom',
+      scrub: 3,
+      animation: footerTimeLine,
+      once: true,
+    })
+  })
+})
+onUnmounted(() => {
+  if (footerGsapContext) {
+    footerGsapContext.revert()
+  }
 })
 </script>
 
 <template>
   <footer
+    id="footerSection"
     ref="footerSection"
     class="footer-section"
   >
     <div class="footer-section__inner">
       <div>
-        <ContactSection ref="footerContact" />
+        <ContactSection
+          id="footer-contact"
+        />
       </div>
-      <FooterNav ref="footerNav" />
+      <FooterNav
+        id="footer-nav"
+      />
     </div>
   </footer>
 </template>
@@ -41,6 +81,10 @@ defineExpose({
 .footer-section {
   $c: &;
 
+  position: relative;
+  z-index: 9;
+
+  // transform: translateY(-100%);
   background: var(--color-bg-footer);
 
   .contact {
@@ -73,5 +117,11 @@ defineExpose({
     color: var(--color-bg-footer);
 
   }
+}
+
+#footer-contact,
+#footer-nav {
+  transform: translateY(-100px);
+  opacity: 0%;
 }
 </style>
