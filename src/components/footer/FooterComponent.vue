@@ -41,14 +41,17 @@ onMounted(() => {
       '<',
     )
 
-    ScrollTrigger.create({
+    const test = ScrollTrigger.create({
       trigger: '#footerSection',
-      start: () => window.innerWidth < 768 ? 'top top' : 'bottom-=50% 50%',
-      end: () => window.innerWidth < 768 ? 'top 90%' : 'bottom+=100% bottom',
+      start: () => window.innerWidth < 768 ? `top top ` : 'bottom-=50% 50%',
+      end: () => window.innerWidth < 768 ? `bottom-=20% bottom` : 'bottom+=100% bottom',
       scrub: 3,
       animation: footerTimeLine,
       once: true,
     })
+    setTimeout(() => {
+      test.refresh()
+    }, 3000)
   })
 })
 onUnmounted(() => {

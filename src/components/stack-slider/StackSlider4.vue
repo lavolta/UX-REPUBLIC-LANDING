@@ -271,6 +271,7 @@ const slideOutIOS = () => {
     tl.add(headingTween, '>-1')
   }
 }
+
 const slideOut = () => {
   if (!stackSliderItems || !stackSliderItemImageBg || !stackSliderItemOuter || !stackSliderItemInner) return
 
@@ -502,9 +503,9 @@ onUnmounted(() => {
                   <span
                     v-for="(tag, keyTag) in item.tags"
                     :key="`stackslider-item-tag-${key}-${keyTag}`"
-                    class="stackslider-item__tag"
+                    class="stackslider-item__tag button"
                   >
-                    #{{ tag }}
+                    <span>#</span>{{ tag }}
                   </span>
                 </div>
               </div>
@@ -548,7 +549,7 @@ onUnmounted(() => {
   }
 
   &__title {
-    display: none;
+    // display: none;
     position: absolute;
     z-index: 2;
     top: 3.125rem;
@@ -563,6 +564,15 @@ onUnmounted(() => {
       width: 100%;
       max-width: var(--max-section-width);
       margin: 0 auto;
+      padding: 0 1rem;
+
+      @include mq(smartphone) {
+        padding: 0 2rem;
+      }
+
+      @include mq(desktop) {
+        padding: 0;
+      }
     }
   }
 
@@ -794,7 +804,34 @@ onUnmounted(() => {
       margin-top: 1rem;
       margin-left: auto;
 
+      .button {
+        padding: 0;
+        border: none;
+
+        &::after {
+          display: none;
+
+          @include mq(desktop) {
+            display: block;
+          }
+        }
+
+        @include mq(desktop) {
+         padding: 0.8125rem 1rem;
+         border: 1px solid var(--color-btn-border);
+        }
+
+        span {
+          display: inline-block;
+
+          @include mq(desktop) {
+            display: none;
+          }
+        }
+      }
+
       @include mq(desktop) {
+        align-items: flex-start;
         justify-content: flex-start;
         max-width: 20.25rem;
       }
@@ -807,11 +844,17 @@ onUnmounted(() => {
       text-transform: uppercase;
       white-space: nowrap ;
 
+      @include mq(desktop) {
+        font-size: 0.8rem;
+        text-transform: capitalize;
+      }
+
       &:not(:last-child) {
         margin: 0 5px;
+        margin-bottom: 5px;
 
         @include mq(desktop) {
-          margin: 0 10px 0 0;
+          margin: 0 10px 10px 0;
         }
       }
     }

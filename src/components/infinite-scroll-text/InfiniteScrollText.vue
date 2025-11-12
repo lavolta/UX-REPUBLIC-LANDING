@@ -35,13 +35,17 @@ onMounted(() => {
         '<',
       )
     })
-    ScrollTrigger.create({
+    const scrolltriger = ScrollTrigger.create({
       trigger: `#${props.id}`,
       start: 'top 80%',
       end: 'bottom 50%',
       scrub: 4,
       animation: infiniteScrollContentTimeline,
     })
+
+    setTimeout(() => {
+      scrolltriger.refresh()
+    }, 3000)
   })
 })
 onUnmounted(() => {
