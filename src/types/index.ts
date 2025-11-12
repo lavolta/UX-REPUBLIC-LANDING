@@ -1,2 +1,3 @@
 export * from './i18n.types'
-export type PageType = 'home' | 'about'
+export * from './vue-gsap'
+export type PageType = 'home' | 'about' | 'contact'

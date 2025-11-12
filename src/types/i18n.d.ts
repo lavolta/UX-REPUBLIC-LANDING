@@ -1,13 +1,24 @@
 import 'vue-i18n'
-import type { CardExpertInterface, HeroBannerTextInterface, NewsItemType, ProjectItemInterface } from '@/interfaces'
+import type {
+  CardExpertInterface,
+  HeroBannerTextInterface,
+  NewsItemType,
+  ProjectItemInterface,
+  NavigationItem,
+  SeoPageInterface,
+} from '@/interfaces'
 // https://vue-i18n.intlify.dev/guide/advanced/typescript
 declare module 'vue-i18n' {
   export interface DefineLocaleMessage {
+    footer: {
+      infiniteTitle: string
+    }
     seo: {
-      home: {
-        title: string
-        description: string
-      }
+      home: SeoPageInterface
+      contact: SeoPageInterface
+    }
+    header: {
+      navigation: NavigationItem[]
     }
     hero: {
       title: string

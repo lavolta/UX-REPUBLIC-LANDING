@@ -1,8 +1,21 @@
 export const fr = {
+  header: {
+    navigation: [
+      {
+        content: 'Contactez-nous',
+        type: 'internal',
+        href: '/contact',
+      },
+    ],
+  },
   seo: {
     home: {
       title: 'The future is the republic',
       description: 'Description dans le head pour la page Accueil FR.',
+    },
+    contact: {
+      title: 'The future is the republic | contact',
+      description: 'Description dans le head pour la page Contact FR.',
     },
   },
   hero: {
@@ -123,6 +136,7 @@ export const fr = {
     items: [
       {
         title: 'BPCE',
+        subtitle: 'Une fidélité bâtie sur la confiance',
         content: 'Nos experts UX/UI, Product et Analytics travaillent avec BPCE depuis 2017 pour optimiser leur performance digitale.',
         theme: 'theme-1',
         picture: {
@@ -132,6 +146,7 @@ export const fr = {
       },
       {
         title: 'LVMH',
+        subtitle: 'Au service d\'une excellence durable',
         content: 'Depuis 2014, notre design d\'expérience accompagne LVMH, reflétant l\'excellence initiée avec Louis Vuitton.',
         theme: 'theme-2',
         picture: {
@@ -141,6 +156,7 @@ export const fr = {
       },
       {
         title: 'NAVBLUE',
+        subtitle: 'L\'innovation au long cours',
         content: 'Partenaires de NAVBLUE (Groupe Airbus) depuis 2018, nous créons des produits digitaux qui assurent leur avance technologique.',
         theme: 'theme-3',
         picture: {
@@ -149,5 +165,8 @@ export const fr = {
         },
       },
     ],
+  },
+  footer: {
+    infiniteTitle: 'contactez-nous',
   },
 } satisfies import('vue-i18n').DefineLocaleMessage

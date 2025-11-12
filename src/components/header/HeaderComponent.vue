@@ -1,20 +1,85 @@
 <script lang="ts" setup>
 import StickyLogoHover from '@/components/logo/StickyLogoHover.vue'
+import MobileNavComponent from './MobileNavComponent.vue'
+import { gsap } from 'gsap'
 import { useScroll } from '@vueuse/core'
-import { ref, watchEffect, shallowRef, onMounted } from 'vue'
-import { globalStore } from '@/store'
+import { ref, watchEffect, shallowRef, onMounted, watch, useTemplateRef } from 'vue'
+import { globalStore, transitionStore } from '@/store'
+import HeaderToggleButton from './HeaderToggleButton.vue'
+import HeaderNavComponent from './HeaderNavComponent.vue'
 
 const disabledNavMenu = ref(false)
 
+const mobileNavComponent = useTemplateRef('mobileNavComponent')
+const headerToggleButton = useTemplateRef('headerToggleButton')
+
 const windowTarget = shallowRef<Window | null>(null)
 const { y, directions } = useScroll(windowTarget)
+const menuMobileVisible = ref(false)
+
+const masterTimeLine = gsap.timeline({
+  defaults: {
+    ease: 'back.inOut(2)',
+  },
+})
+
+masterTimeLine.pause()
+
+const forceHideMenuMobile = () => {
+  document.querySelector('html')?.classList.remove('overflow')
+  masterTimeLine.seek(0)
+  menuMobileVisible.value = false
+}
+
+const playMasterTimeline = (reversed: boolean) => {
+  if (reversed) {
+    masterTimeLine.reverse()
+  }
+  else {
+    masterTimeLine.play()
+  }
+}
+
+const defineTimeline = () => {
+  const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
+  const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
+
+  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<')
+  // masterTimeLine.eventCallback('onReverseComplete', () => {
+  //   ScrollTrigger.refresh()
+  // })
+}
+
+watch(menuMobileVisible, (newValue) => {
+  if (newValue) {
+    playMasterTimeline(false)
+  }
+  else {
+    playMasterTimeline(true)
+  }
+})
+watch (() => transitionStore.state.forceCloseNavMenu, () => {
+  if (menuMobileVisible.value) {
+    forceHideMenuMobile()
+  }
+  transitionStore.setStateTransition('forceCloseNavMenu', false)
+})
+const handleMenuMobile = () => {
+  document.querySelector('html')?.classList.toggle('overflow')
+  menuMobileVisible.value = !menuMobileVisible.value
+  globalStore.setGlobalOverflow(menuMobileVisible.value)
+}
 
 onMounted(() => {
   windowTarget.value = window
+  defineTimeline()
 })
 
 watchEffect(() => {
-  if (y.value <= 0 && !globalStore.forcedHideHeader) {
+  if (menuMobileVisible.value) {
+    return
+  }
+  if (y.value <= 50 && !globalStore.forcedHideHeader) {
     disabledNavMenu.value = false
   }
   else if (directions.bottom && !globalStore.forcedHideHeader) {
@@ -36,23 +101,17 @@ watchEffect(() => {
   >
     <div class="header__inner">
       <StickyLogoHover />
-      <nav
-        class="header__nav"
-      >
-        <a
-          href="https://jobs.smile.eu/departments/ux-republic"
-          target="_blank"
-          class="button"
-        >
-          Rejoignez-nous
-        </a>
-        <a
-          href="mailto:contact@ux-republic.com"
-          class="button"
-        >
-          Contactez-nous
-        </a>
-      </nav>
+      <HeaderNavComponent class="header__nav" />
+      <HeaderToggleButton
+        ref="headerToggleButton"
+        class="header__toggle"
+        :open="menuMobileVisible"
+        @click="handleMenuMobile"
+      />
+      <MobileNavComponent
+        ref="mobileNavComponent"
+        class="header__mobile"
+      />
     </div>
   </header>
 </template>
@@ -64,7 +123,7 @@ watchEffect(() => {
   --nav-translate-y: calc(-100% - var(--header-vertical-padding));
 
   position: fixed;
-  z-index: 20;
+  z-index: 40;
   top: 0;
   left: 0;
   width: 100%;
@@ -77,15 +136,28 @@ watchEffect(() => {
 
   &__inner {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     max-width: var(--max-section-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
+
+    @include mq(smartphone) {
+      padding: 0 2rem;
+    }
 
     @include mq(desktop) {
+      align-items: stretch;
       padding: 0;
+    }
+  }
+
+  &__toggle {
+    display: flex;
+
+    @include mq(desktop) {
+      display: none;
     }
   }
 
@@ -96,18 +168,13 @@ watchEffect(() => {
     @include mq(desktop) {
       display: flex;
     }
+  }
 
-    > a,
-    > button {
-      padding: 1rem;
+  &__mobile {
+    display: block;
 
-      @include mq(desktop) {
-        padding: 1rem 1.5625rem;
-      }
-
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
+    @include mq(desktop) {
+      display: none;
     }
   }
 

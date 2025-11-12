@@ -1,11 +1,42 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
 import NewGridSocialItem from './NewGridSocialItem.vue'
-import ContactAnimation from '../contact/ContactAnimation.vue'
 import { useI18n } from 'vue-i18n'
-const { tm } = useI18n()
+import { onMounted } from 'vue'
+import { cleanDataArcticleFromUxRepublicResponse } from '@/utils/data.utils'
+import type { UxRepublicArticleInterface, NewsItemType } from '@/interfaces'
+const { tm, locale } = useI18n()
 const items = tm('news.items')
+
+const gridToDisplay = ref(items)
+const mapFrechDataWithDefaultData = (data: UxRepublicArticleInterface[]) => {
+  const frechData = gridToDisplay.value.reduce<NewsItemType[]>((acc, currentItem, currrentItemIndex) => {
+    if (currentItem.type === 'text') {
+      acc.push(cleanDataArcticleFromUxRepublicResponse(data[currrentItemIndex]))
+    }
+    else {
+      acc.push(currentItem)
+    }
+    return acc
+  }, [])
+  gridToDisplay.value = frechData
+}
+onMounted(async () => {
+  try {
+    const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8`
+    const response = await fetch(urlToFetch)
+    const data: UxRepublicArticleInterface[] = await response.json()
+    mapFrechDataWithDefaultData(data)
+    if (response.status !== 200) {
+      throw new Error('failed to fetch news post')
+    }
+  }
+  catch (error) {
+    console.log('error', error)
+  }
+})
 
 </script>
 <template>
@@ -16,7 +47,7 @@ const items = tm('news.items')
       </p>
       <div class="news__grid">
         <div
-          v-for="(item, key) in items"
+          v-for="(item, key) in gridToDisplay"
           :key="key"
         >
           <NewsGridItemText
@@ -38,7 +69,6 @@ const items = tm('news.items')
         </div>
       </div>
     </div>
-    <ContactAnimation />
   </section>
 </template>
 <style lang="scss" scoped>
@@ -62,10 +92,14 @@ const items = tm('news.items')
 
     // max-width: 1356px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 4rem 1rem;
+
+    @include mq(smartphone) {
+      padding: 4rem 2rem;
+    }
 
     @include mq(desktop) {
-      padding: 9.1875rem 0 23.3125rem;
+      padding: 9.1875rem 0;
     }
 
   }
@@ -80,13 +114,26 @@ const items = tm('news.items')
 
   &__grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    gap: 1rem;
+
+    @include mq(tablet) {
+      flex-wrap: wrap;
+      overflow-y: hidden;
+      gap: 0;
+    }
 
     > div {
       position: relative;
+      flex: 0 0 90%;
       width: var(--item-size);
       padding-top: var(--item-size);
       border: 1px solid var(--color-border);
+
+      @include mq(tablet) {
+        flex: 0 0 auto;
+      }
 
       @include mq(desktop) {
         border: none;

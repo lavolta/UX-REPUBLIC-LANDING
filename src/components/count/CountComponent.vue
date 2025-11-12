@@ -8,11 +8,14 @@ interface ItemsNumber {
   displayValue: number
   suffix: string
 }
+defineProps<{
+  theme: 'white' | 'black'
+}>()
 const items = ref<ItemsNumber[]>([
-  { title: 'Années', value: 12, displayValue: 10, suffix: '' },
-  { title: 'Collaborateurs', value: 100, displayValue: 50, suffix: '+' },
-  { title: 'Projets', value: 950, displayValue: 800, suffix: '+' },
-  { title: 'Pays', value: 4, displayValue: 0, suffix: '' },
+  { title: 'ans au service de l\'UX', value: 12, displayValue: 10, suffix: '' },
+  { title: 'Collaborateurs passionnés', value: 100, displayValue: 50, suffix: '+' },
+  { title: 'Missions réalisées', value: 950, displayValue: 800, suffix: '+' },
+  { title: 'Bureaux en Europe', value: 4, displayValue: 0, suffix: '' },
 ])
 
 const firstView = ref(true)
@@ -31,7 +34,6 @@ const handleSwitchValueToDisplay = () => {
 }
 
 watch(targetIsVisible, (newValue) => {
-  console.log('targetIsVisible', newValue)
   if (newValue && firstView.value) {
     firstView.value = false
     setTimeout(() => {
@@ -43,7 +45,7 @@ watch(targetIsVisible, (newValue) => {
 <template>
   <div
     ref="countSection"
-    class="count"
+    :class="['count', `count--${theme}`]"
   >
     <div
       v-for="(item, key) in items"
@@ -52,7 +54,7 @@ watch(targetIsVisible, (newValue) => {
     >
       <div
 
-        class="count-item"
+        :class="['count-item', `count-item--${theme}`]"
       >
         <p>{{ item.title }}</p>
         <NumberFlow
@@ -85,31 +87,53 @@ watch(targetIsVisible, (newValue) => {
 
 .count-item {
     padding: 1.5625rem 0;
+    border-top: solid 1px var(--color-btn-border);
+    color: var(--color-white);
 
     @include mq(desktop) {
       padding-bottom: 0;
     }
 
-    border-top: solid 1px var(--color-btn-border);
+    &--black {
+      color: var(--color-text-dark);
 
-    >p {
+      number-flow-vue::part(digit),
+      number-flow-vue::part(suffix) {
+        color: var(--color-text-dark);
+      }
+    }
+
+    > p {
       margin: 0;
-      margin-bottom: 0.875rem;
-      color: var(--color-white);
+      margin-bottom: 0;
       font-size: 1rem;
       font-weight: 200;
       letter-spacing: 1px;
       letter-spacing: 10%;
       line-height: 119%;
       text-transform: uppercase;
+
+      @include mq(desktop) {
+        margin-bottom: 0.875rem;
+      }
     }
 }
 
 number-flow-vue::part(digit),
 number-flow-vue::part(suffix) {
-color: var(--color-white);
-font-size: 6.25rem;
-font-weight: 200;
-line-height: 1;
+  color: var(--color-white);
+  font-size: 4rem;
+  font-weight: 200;
+  line-height: 1;
+}
+
+@include mq(desktop) {
+  number-flow-vue::part(digit),
+  number-flow-vue::part(suffix) {
+  color: var(--color-white);
+  font-size: 6.25rem;
+  font-weight: 200;
+  line-height: 1;
+  }
 }
 </style>
