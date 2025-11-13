@@ -6,10 +6,21 @@ export const fr = {
         type: 'anchor',
         href: '/#uxrepublic',
       },
+
       {
-        content: 'No expértises en action',
+        content: 'Nos expértises en action',
         type: 'anchor',
         href: '/#expert',
+      },
+      {
+        content: 'Propulsez votre croissance',
+        type: 'anchor',
+        href: '/#croissance',
+      },
+      {
+        content: 'Actualités',
+        type: 'anchor',
+        href: '/#actus',
       },
       {
         content: 'Contactez-nous',

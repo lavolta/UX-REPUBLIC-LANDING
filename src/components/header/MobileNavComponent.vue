@@ -1,8 +1,10 @@
 <script lang="ts" setup>
-import { onMounted, useTemplateRef } from 'vue'
+import { onMounted, useTemplateRef, defineEmits } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
-
+defineEmits<{
+  (e: 'click', value: string): void
+}>()
 const { tm } = useI18n()
 const items = tm('header.navigation')
 const mobileNavComponentTimeline = gsap.timeline()
@@ -62,6 +64,7 @@ defineExpose({
               v-else-if="item.type === 'internal' || item.type === 'anchor'"
               :to="item.href"
               :class="['button', {'anchor': item.type === 'anchor'}, {'internal': item.type === 'internal'}]"
+              @click="$emit('click', item.type)"
             >
               {{ item.content }}
             </router-link>

@@ -10,6 +10,7 @@ import { useHead } from '@unhead/vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 import { useElementSize, useWindowSize } from '@vueuse/core'
 
@@ -26,7 +27,7 @@ const { height: windowHeight } = useWindowSize()
 
 const scrollSmoother = ref<ReturnType<typeof ScrollSmoother.create> | null>(null)
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin)
 
 watch(PageHeight, () => {
   globalStore.setPageHeight(PageHeight.value)

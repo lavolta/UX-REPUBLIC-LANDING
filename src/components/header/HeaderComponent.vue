@@ -19,7 +19,7 @@ const menuMobileVisible = ref(false)
 
 const masterTimeLine = gsap.timeline({
   defaults: {
-    ease: 'back.inOut(2)',
+    ease: 'back.inOut',
   },
 })
 
@@ -62,7 +62,7 @@ watch (() => transitionStore.state.forceCloseNavMenu, () => {
   transitionStore.setStateTransition('forceCloseNavMenu', false)
 })
 const handleMenuMobile = () => {
-  document.querySelector('html')?.classList.toggle('overflow')
+  // document.querySelector('html')?.classList.toggle('overflow')
   menuMobileVisible.value = !menuMobileVisible.value
   globalStore.setGlobalOverflow(menuMobileVisible.value)
 }
@@ -89,7 +89,18 @@ watchEffect(() => {
     disabledNavMenu.value = true
   }
 })
-
+const timeoutid = ref<null | number>(null)
+const handleClickOnMenuItem = (typeOfItem: string) => {
+  if (typeOfItem === 'anchor') {
+    playMasterTimeline(true)
+    if (timeoutid.value) {
+      clearTimeout(timeoutid.value)
+    }
+    timeoutid.value = setTimeout(() => {
+      menuMobileVisible.value = false
+    }, 1000)
+  }
+}
 </script>
 <template>
   <header
@@ -109,6 +120,7 @@ watchEffect(() => {
         <MobileNavComponent
           ref="mobileNavComponent"
           class="header__mobile"
+          @click="handleClickOnMenuItem"
         />
       </div>
     </div>

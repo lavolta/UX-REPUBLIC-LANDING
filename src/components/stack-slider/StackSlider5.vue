@@ -399,6 +399,7 @@ const createStackSliderScrollTriger = (isDesktop: boolean) => {
 }
 
 const switchStackSliderObserver = (enableObserver: boolean) => {
+  if (globalStore.disabledObserver) return
   if (!stackSliderObserver) return
   if (enableObserver) {
     stackSliderObserver.enable()

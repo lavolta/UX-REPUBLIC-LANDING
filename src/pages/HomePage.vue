@@ -33,10 +33,13 @@ usePageTransition()
     </template>
   </PresentationHero>
   <StackSlider
-    id="agencyStackSlider"
+    id="expert"
     title="Nos expertises en action"
   />
-  <PresentationHero background-color="white">
+  <PresentationHero
+    id="croissance"
+    background-color="white"
+  >
     <template #title>
       Propulsez votre croissance
     </template>
@@ -47,7 +50,7 @@ usePageTransition()
   </PresentationHero>
   <ProjectGrid />
   <AgencySlider id-agency="agency-1" />
-  <NewsGrid />
+  <NewsGrid id="actus" />
   <InfiniteScrollText id="contacteznousinfinitescrollcontent">
     {{ $t('footer.infiniteTitle') }}
     <template #icon>
