@@ -19,7 +19,7 @@ const menuMobileVisible = ref(false)
 
 const masterTimeLine = gsap.timeline({
   defaults: {
-    ease: 'back.inOut',
+    ease: 'power1',
   },
 })
 
@@ -43,8 +43,9 @@ const playMasterTimeline = (reversed: boolean) => {
 const defineTimeline = () => {
   const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
   const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
-
-  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<').add(gsap.to('.header__toggle span', { backgroundColor: '#181C23', ease: 'power1', duration: 0.5 }), '<+=0.5')
+  console.log('mobileNavTimeline', mobileNavTimeline)
+  console.log('headerToggleButtonTimeline', headerToggleButtonTimeline)
+  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<+0.3')
 }
 
 watch(menuMobileVisible, (newValue) => {

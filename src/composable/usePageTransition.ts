@@ -8,6 +8,7 @@ import {
 import { globalStore, transitionStore } from '@/store'
 import { watch, ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
+
 export function usePageTransition() {
   const pendingRoute = ref<RouteLocationNormalizedLoaded | null>(null)
   const router = useRouter()

@@ -16,19 +16,30 @@ const defineMobileTimeLine = () => {
     return
   }
   const menuNavItems = gsap.utils.toArray(mobileNavItems.value)
-  mobileNavComponentTimeline.to(mobileNav.value, { opacity: 1, duration: 0.1 }, '<').fromTo(mobileNav.value,
-    { yPercent: -110 },
-    { yPercent: 0, duration: 1.5, ease: 'expo.inOut' }, '<',
+  mobileNavComponentTimeline.fromTo(mobileNav.value,
+    { yPercent: -100 },
+    { yPercent: 0, duration: 0.5, ease: 'slow' }, '<',
   )
 
   if (mobileNavItems.value) {
-    menuNavItems.forEach((menuNavItem, index) => {
-      mobileNavComponentTimeline.fromTo(menuNavItem, {
-        opacity: 0,
-        y: 10,
-        duration: 0.25,
-      }, { opacity: 1, y: 0 }, index === 0 ? '<+1' : `<+0.${index}`)
-    })
+    mobileNavComponentTimeline.fromTo([menuNavItems], {
+      opacity: 0,
+      translateY: 100,
+    }, {
+      opacity: 1,
+      translateY: 0,
+      stagger: 0.05,
+      ease: 'back.inOut',
+      duration: 0.5,
+    }, '>-=0.2')
+    // menuNavItems.forEach((menuNavItem, index) => {
+    //   mobileNavComponentTimeline.fromTo(menuNavItem, {
+    //     opacity: 0,
+    //     y: 10,
+    //     duration: 0.1,
+    //     stagger: 0.01,
+    //   }, { opacity: 1, y: 0 }, index === 0 ? '>' : `<+0.03`)
+    // })
   }
 }
 
@@ -79,7 +90,6 @@ defineExpose({
   /* stylelint-disable max-nesting-depth, selector-class-pattern */
   position: fixed;
   z-index: 100;
-  opacity: 0%;
 
   // transform: translateY(-110%);
   background-color: transparent;
