@@ -2,6 +2,16 @@ export const fr = {
   header: {
     navigation: [
       {
+        content: 'Ux-Republic',
+        type: 'anchor',
+        href: '/#uxrepublic',
+      },
+      {
+        content: 'No expértises en action',
+        type: 'anchor',
+        href: '/#expert',
+      },
+      {
         content: 'Contactez-nous',
         type: 'internal',
         href: '/contact',

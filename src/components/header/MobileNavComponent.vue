@@ -15,8 +15,8 @@ const defineMobileTimeLine = () => {
   }
   const menuNavItems = gsap.utils.toArray(mobileNavItems.value)
   mobileNavComponentTimeline.to(mobileNav.value, { opacity: 1, duration: 0.1 }, '<').fromTo(mobileNav.value,
-    { skewY: 15, yPercent: -110 },
-    { skewY: 0, yPercent: 0, duration: 1.5, ease: 'expo.inOut' }, '<',
+    { yPercent: -110 },
+    { yPercent: 0, duration: 1.5, ease: 'expo.inOut' }, '<',
   )
 
   if (mobileNavItems.value) {
@@ -59,9 +59,9 @@ defineExpose({
               {{ item.content }}
             </a>
             <router-link
-              v-else-if="item.type === 'internal'"
+              v-else-if="item.type === 'internal' || item.type === 'anchor'"
               :to="item.href"
-              class="button"
+              :class="['button', {'anchor': item.type === 'anchor'}, {'internal': item.type === 'internal'}]"
             >
               {{ item.content }}
             </router-link>
@@ -73,13 +73,14 @@ defineExpose({
 </template>
 <style lang="scss" scoped>
 .mobile-nav {
+  /* stylelint-disable max-nesting-depth, selector-class-pattern */
   position: fixed;
   z-index: 100;
   opacity: 0%;
 
   // transform: translateY(-110%);
   background-color: transparent;
-  background-color: var(--color-bg);
+  background-color: var(--color-white);
   inset: 0;
 
   &__inner {
@@ -99,6 +100,16 @@ defineExpose({
 
       .button {
         display: block;
+        color: var(--color-bg);
+        text-align: center;
+
+        &.internal {
+          display: block;
+
+          @include mq(desktop) {
+            display: none;
+          }
+        }
       }
     }
   }

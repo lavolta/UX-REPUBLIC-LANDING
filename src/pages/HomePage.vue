@@ -7,7 +7,7 @@ import AgencySlider from '@/components/agency/AgencySliderComponent3.vue'
 import CountComponent from '@/components/count/CountComponent.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
-import StackSlider from '@/components/stack-slider/StackSlider4.vue'
+import StackSlider from '@/components/stack-slider/StackSlider5.vue'
 import {
   usePageTransition,
   useDefaultSeo,
@@ -18,7 +18,10 @@ usePageTransition()
 </script>
 <template>
   <HeroBanner />
-  <PresentationHero background-color="black">
+  <PresentationHero
+    id="uxrepublic"
+    background-color="black"
+  >
     <template #title>
       UX-REPUBLIC
     </template>

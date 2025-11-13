@@ -43,7 +43,7 @@ onMounted(() => {
 
     const test = ScrollTrigger.create({
       trigger: '#footerSection',
-      start: () => window.innerWidth < 768 ? `top top ` : 'bottom-=50% 50%',
+      start: () => window.innerWidth < 768 ? `top top+=${footerHeight.value}px ` : 'bottom-=50% 50%',
       end: () => window.innerWidth < 768 ? `bottom-=20% bottom` : 'bottom+=100% bottom',
       scrub: 3,
       animation: footerTimeLine,

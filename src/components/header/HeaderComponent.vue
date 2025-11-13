@@ -44,10 +44,7 @@ const defineTimeline = () => {
   const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
   const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
 
-  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<')
-  // masterTimeLine.eventCallback('onReverseComplete', () => {
-  //   ScrollTrigger.refresh()
-  // })
+  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<').add(gsap.to('.header__toggle span', { backgroundColor: '#181C23', ease: 'power1', duration: 0.5 }), '<+=0.5')
 }
 
 watch(menuMobileVisible, (newValue) => {
@@ -101,17 +98,19 @@ watchEffect(() => {
   >
     <div class="header__inner">
       <StickyLogoHover />
-      <HeaderNavComponent class="header__nav" />
-      <HeaderToggleButton
-        ref="headerToggleButton"
-        class="header__toggle"
-        :open="menuMobileVisible"
-        @click="handleMenuMobile"
-      />
-      <MobileNavComponent
-        ref="mobileNavComponent"
-        class="header__mobile"
-      />
+      <div class="header__right">
+        <HeaderNavComponent class="header__nav" />
+        <HeaderToggleButton
+          ref="headerToggleButton"
+          class="header__toggle"
+          :open="menuMobileVisible"
+          @click="handleMenuMobile"
+        />
+        <MobileNavComponent
+          ref="mobileNavComponent"
+          class="header__mobile"
+        />
+      </div>
     </div>
   </header>
 </template>
@@ -153,29 +152,35 @@ watchEffect(() => {
     }
   }
 
+  &__right {
+    display: flex;
+  }
+
   &__toggle {
     display: flex;
 
-    @include mq(desktop) {
-      display: none;
-    }
+    // @include mq(desktop) {
+    //   display: none;
+    // }
   }
 
   &__nav {
     display: none;
     align-items: center;
+    margin-right: 0;
 
     @include mq(desktop) {
       display: flex;
+      margin-right: 1rem;
     }
   }
 
   &__mobile {
     display: block;
 
-    @include mq(desktop) {
-      display: none;
-    }
+    // @include mq(desktop) {
+    //   display: none;
+    // }
   }
 
   .sticky-logo {
