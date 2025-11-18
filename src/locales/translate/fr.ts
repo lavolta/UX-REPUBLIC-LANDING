@@ -18,6 +18,16 @@ export const fr = {
         href: '/#croissance',
       },
       {
+        content: 'Nos réussites',
+        type: 'anchor',
+        href: '/#reussites',
+      },
+      {
+        content: 'Nos agences',
+        type: 'anchor',
+        href: '/#nos-agences',
+      },
+      {
         content: 'Actualités',
         type: 'anchor',
         href: '/#actus',

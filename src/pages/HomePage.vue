@@ -48,8 +48,10 @@ usePageTransition()
       Depuis plus de 12 ans, nos expertises transforment l'Expérience Utilisateur en un véritable levier stratégique.
     </template>
   </PresentationHero>
-  <ProjectGrid />
-  <AgencySlider id-agency="agency-1" />
+  <ProjectGrid id="reussites" />
+  <AgencySlider
+    id-agency="nos-agences"
+  />
   <NewsGrid id="actus" />
   <InfiniteScrollText id="contacteznousinfinitescrollcontent">
     {{ $t('footer.infiniteTitle') }}
