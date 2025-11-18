@@ -4,7 +4,6 @@ import {
   useTemplateRef,
   onMounted,
   onUnmounted,
-  defineEmits,
 } from 'vue'
 import { gsap } from 'gsap'
 import { transitionStore } from '@/store'

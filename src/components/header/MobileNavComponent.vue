@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, useTemplateRef, defineEmits } from 'vue'
+import { onMounted, useTemplateRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
 defineEmits<{

@@ -43,8 +43,6 @@ const playMasterTimeline = (reversed: boolean) => {
 const defineTimeline = () => {
   const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
   const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
-  console.log('mobileNavTimeline', mobileNavTimeline)
-  console.log('headerToggleButtonTimeline', headerToggleButtonTimeline)
   masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<+0.3')
 }
 

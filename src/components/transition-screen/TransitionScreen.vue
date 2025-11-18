@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import {
   onMounted,
-  defineEmits,
   nextTick,
   watchEffect,
 } from 'vue'
