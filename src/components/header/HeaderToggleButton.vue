@@ -29,11 +29,13 @@ const initTimeline = () => {
     top: 5,
     marginBottom: 0,
     duration: 0,
+    backgroundColor: '#181C23',
   }, '>').to(span3, {
     rotation: -45,
     top: -5,
     marginBottom: 0,
     duration: 0,
+    backgroundColor: '#181C23',
   }, '<').to([span1, span3], {
     width: 30,
     duration: 0.3,
@@ -94,8 +96,5 @@ button {
     }
   }
 
-  @include mq(desktop) {
-    display: none;
-  }
 }
 </style>

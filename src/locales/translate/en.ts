@@ -1,7 +1,21 @@
 export const en = {
   header: {
     navigation: [
-      { content: 'Contactez-nous', type: 'link', href: 'mailto:contact@ux-republic.com' },
+      {
+        content: 'Ux-Republic',
+        type: 'anchor',
+        href: '#uxrepublic',
+      },
+      {
+        content: 'No expértises en action',
+        type: 'anchor',
+        href: '#expert',
+      },
+      {
+        content: 'Contactez-nous',
+        type: 'internal',
+        href: '/contact',
+      },
     ],
   },
   seo: {

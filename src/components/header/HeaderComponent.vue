@@ -19,7 +19,7 @@ const menuMobileVisible = ref(false)
 
 const masterTimeLine = gsap.timeline({
   defaults: {
-    ease: 'back.inOut(2)',
+    ease: 'power1',
   },
 })
 
@@ -43,11 +43,9 @@ const playMasterTimeline = (reversed: boolean) => {
 const defineTimeline = () => {
   const mobileNavTimeline = mobileNavComponent.value?.mobileNavComponentTimeline ?? ''
   const headerToggleButtonTimeline = headerToggleButton.value?.buttonTimeLine ?? ''
-
-  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<')
-  // masterTimeLine.eventCallback('onReverseComplete', () => {
-  //   ScrollTrigger.refresh()
-  // })
+  console.log('mobileNavTimeline', mobileNavTimeline)
+  console.log('headerToggleButtonTimeline', headerToggleButtonTimeline)
+  masterTimeLine.add(headerToggleButtonTimeline).add(mobileNavTimeline, '<+0.3')
 }
 
 watch(menuMobileVisible, (newValue) => {
@@ -65,7 +63,7 @@ watch (() => transitionStore.state.forceCloseNavMenu, () => {
   transitionStore.setStateTransition('forceCloseNavMenu', false)
 })
 const handleMenuMobile = () => {
-  document.querySelector('html')?.classList.toggle('overflow')
+  // document.querySelector('html')?.classList.toggle('overflow')
   menuMobileVisible.value = !menuMobileVisible.value
   globalStore.setGlobalOverflow(menuMobileVisible.value)
 }
@@ -92,7 +90,18 @@ watchEffect(() => {
     disabledNavMenu.value = true
   }
 })
-
+const timeoutid = ref<null | number>(null)
+const handleClickOnMenuItem = (typeOfItem: string) => {
+  if (typeOfItem === 'anchor') {
+    playMasterTimeline(true)
+    if (timeoutid.value) {
+      clearTimeout(timeoutid.value)
+    }
+    timeoutid.value = setTimeout(() => {
+      menuMobileVisible.value = false
+    }, 1000)
+  }
+}
 </script>
 <template>
   <header
@@ -101,17 +110,20 @@ watchEffect(() => {
   >
     <div class="header__inner">
       <StickyLogoHover />
-      <HeaderNavComponent class="header__nav" />
-      <HeaderToggleButton
-        ref="headerToggleButton"
-        class="header__toggle"
-        :open="menuMobileVisible"
-        @click="handleMenuMobile"
-      />
-      <MobileNavComponent
-        ref="mobileNavComponent"
-        class="header__mobile"
-      />
+      <div class="header__right">
+        <HeaderNavComponent class="header__nav" />
+        <HeaderToggleButton
+          ref="headerToggleButton"
+          class="header__toggle"
+          :open="menuMobileVisible"
+          @click="handleMenuMobile"
+        />
+        <MobileNavComponent
+          ref="mobileNavComponent"
+          class="header__mobile"
+          @click="handleClickOnMenuItem"
+        />
+      </div>
     </div>
   </header>
 </template>
@@ -153,29 +165,35 @@ watchEffect(() => {
     }
   }
 
+  &__right {
+    display: flex;
+  }
+
   &__toggle {
     display: flex;
 
-    @include mq(desktop) {
-      display: none;
-    }
+    // @include mq(desktop) {
+    //   display: none;
+    // }
   }
 
   &__nav {
     display: none;
     align-items: center;
+    margin-right: 0;
 
     @include mq(desktop) {
       display: flex;
+      margin-right: 1rem;
     }
   }
 
   &__mobile {
     display: block;
 
-    @include mq(desktop) {
-      display: none;
-    }
+    // @include mq(desktop) {
+    //   display: none;
+    // }
   }
 
   .sticky-logo {
