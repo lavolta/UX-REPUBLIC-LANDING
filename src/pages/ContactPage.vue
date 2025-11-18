@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useDefaultSeo, usePageTransition } from '@/composable'
-import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner2.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
 
