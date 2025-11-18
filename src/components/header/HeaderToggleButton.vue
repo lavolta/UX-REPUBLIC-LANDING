@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, defineEmits, onMounted, useTemplateRef } from 'vue'
+import { computed, onMounted, useTemplateRef } from 'vue'
 import { gsap } from 'gsap'
 const props = defineProps<{
   open: boolean
