@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useDefaultSeo, usePageTransition } from '@/composable'
-import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner2.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
 
@@ -13,7 +13,7 @@ const generateHbsptForm = () => {
   if (window) {
     window.hbspt.forms.create({
       portalId: '6113121',
-      formId: 'ad2a381b-6c32-4683-adaf-369b6157507d',
+      formId: 'c9e6edb1-0c91-4ada-8b97-ac8dba31747f',
       region: 'na1',
       target: '#hubspotForm',
       onFormReady(formulaire: HTMLFormElement) {
@@ -24,6 +24,7 @@ const generateHbsptForm = () => {
     })
   }
 }
+
 onMounted(() => {
   if (window.hbspt) {
     generateHbsptForm()

@@ -2,6 +2,37 @@ export const fr = {
   header: {
     navigation: [
       {
+        content: 'Ux-Republic',
+        type: 'anchor',
+        href: '/#uxrepublic',
+      },
+
+      {
+        content: 'Nos expértises en action',
+        type: 'anchor',
+        href: '/#expert',
+      },
+      {
+        content: 'Propulsez votre croissance',
+        type: 'anchor',
+        href: '/#croissance',
+      },
+      {
+        content: 'Nos réussites',
+        type: 'anchor',
+        href: '/#reussites',
+      },
+      {
+        content: 'Nos agences',
+        type: 'anchor',
+        href: '/#nos-agences',
+      },
+      {
+        content: 'Actualités',
+        type: 'anchor',
+        href: '/#actus',
+      },
+      {
         content: 'Contactez-nous',
         type: 'internal',
         href: '/contact',

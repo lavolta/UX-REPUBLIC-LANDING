@@ -2,12 +2,12 @@
 import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
-import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner2.vue'
 import AgencySlider from '@/components/agency/AgencySliderComponent3.vue'
 import CountComponent from '@/components/count/CountComponent.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
-import StackSlider from '@/components/stack-slider/StackSlider4.vue'
+import StackSlider from '@/components/stack-slider/StackSlider6.vue'
 import {
   usePageTransition,
   useDefaultSeo,
@@ -18,7 +18,10 @@ usePageTransition()
 </script>
 <template>
   <HeroBanner />
-  <PresentationHero background-color="black">
+  <PresentationHero
+    id="uxrepublic"
+    background-color="black"
+  >
     <template #title>
       UX-REPUBLIC
     </template>
@@ -30,10 +33,13 @@ usePageTransition()
     </template>
   </PresentationHero>
   <StackSlider
-    id="agencyStackSlider"
+    id="expert"
     title="Nos expertises en action"
   />
-  <PresentationHero background-color="white">
+  <PresentationHero
+    id="croissance"
+    background-color="white"
+  >
     <template #title>
       Propulsez votre croissance
     </template>
@@ -42,9 +48,11 @@ usePageTransition()
       Depuis plus de 12 ans, nos expertises transforment l'Expérience Utilisateur en un véritable levier stratégique.
     </template>
   </PresentationHero>
-  <ProjectGrid />
-  <AgencySlider id-agency="agency-1" />
-  <NewsGrid />
+  <ProjectGrid id="reussites" />
+  <AgencySlider
+    id-agency="nos-agences"
+  />
+  <NewsGrid id="actus" />
   <InfiniteScrollText id="contacteznousinfinitescrollcontent">
     {{ $t('footer.infiniteTitle') }}
     <template #icon>

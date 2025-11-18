@@ -21,7 +21,6 @@ import { globalStore } from '@/store'
 
 const props = defineProps<StackSliderPropsInterface>()
 const stackSliderRef = useTemplateRef('stackSliderRef')
-const iosDevice = /iP(ad|hone)/.test(navigator.userAgent)
 type GoToType = 'next' | 'prev'
 
 const handleSwipeCurrentItem = (goTo: GoToType) => {
@@ -41,21 +40,21 @@ const handleSwipeCurrentItem = (goTo: GoToType) => {
     stackSliderState.value.nextIndex = tempIndex
   }
   if (goToNextSlide) {
-    slideInIOS()
+    slideInMobile()
   }
   else {
-    slideOutIOS()
+    slideOutMobile()
   }
 }
-
+const isDesktopDevice = ref(false)
 useSwipe(stackSliderRef, {
   onSwipeStart() {
-    if (!iosDevice) return
+    if (isDesktopDevice.value) return
     globalStore.scrollSmoother?.scrollTo(stackSliderRef.value, true)
   },
   onSwipeEnd(e, direction) {
     const leftOrRightDirection = direction === 'left' || direction === 'right'
-    if (!iosDevice) return
+    if (isDesktopDevice.value) return
     if (!leftOrRightDirection) return
     window.scrollTo({
       behavior: 'smooth',
@@ -102,6 +101,8 @@ let stackSliderItemInner: HTMLElement[] | null = null
 let stackSliderItemTitle: HTMLElement[] | null = null
 let stackSliderItemTitlesSplitted: SplitText[] | null = null
 
+const userCheckAllSlide = ref<boolean>(false)
+
 const handleSplitTitle = () => {
   if (!stackSliderItemTitle) return
   stackSliderItemTitlesSplitted = stackSliderItemTitle.map((title) => {
@@ -129,9 +130,9 @@ const revealSectionHeading = () => {
 const handleSlideIn = () => {
   if (!stackSliderItems) return
   const tempIndex = stackSliderState.value.currentIndex + 1
-
   if (tempIndex >= stackSliderItems.length) {
     stackSliderObserver?.disable()
+    userCheckAllSlide.value = true
     return
   }
   stackSliderState.value.isTransitionning = true
@@ -181,7 +182,7 @@ const slideIn = () => {
   }
 }
 
-const slideInIOS = () => {
+const slideInMobile = () => {
   if (!stackSliderItems || !stackSliderItemImageBg || !stackSliderItemOuter || !stackSliderItemInner) return
 
   const current = stackSliderState.value.currentIndex
@@ -236,7 +237,7 @@ const handleSlideOut = () => {
   slideOut()
 }
 
-const slideOutIOS = () => {
+const slideOutMobile = () => {
   if (!stackSliderItems || !stackSliderItemImageBg || !stackSliderItemOuter || !stackSliderItemInner) return
 
   const current = stackSliderState.value.currentIndex
@@ -320,67 +321,80 @@ const isTouchDevice = () => {
   )
 }
 
-const createStackSliderObserver = () => {
-  if (stackSliderObserver) return
+const createStackSliderObserver = (isDesktop: boolean) => {
+  if (stackSliderObserver) {
+    stackSliderObserver.kill()
+    stackSliderObserver = null
+  }
+  if (!isDesktop) return
   stackSliderObserver = ScrollTrigger.observe({
-    type: 'wheel,touch',
+    type: 'wheel',
     preventDefault: true,
     tolerance: 10,
     onEnable(self) {
       globalStore.setForcedHideHeader(true)
-      const savedScroll = self.scrollY()
-      self._restoreScroll = () => {
-        if (globalStore.isIOS) {
+      if (isDesktop) {
+        const savedScroll = self.scrollY()
+        self._restoreScroll = () => {
           globalStore.scrollSmoother?.scrollTop(savedScroll)
+          self.scrollY(savedScroll)
         }
-        self.scrollY(savedScroll)
+        document.addEventListener('scroll', self._restoreScroll, { passive: false })
       }
-      document.addEventListener('scroll', self._restoreScroll, { passive: false })
     },
 
     onDisable(self) {
       globalStore.setForcedHideHeader(false)
-      document.removeEventListener('scroll', self._restoreScroll)
+      if (isDesktop) {
+        document.removeEventListener('scroll', self._restoreScroll)
+      }
     },
 
     onUp() {
       if (stackSliderState.value.isTransitionning) return
-      if (isMobileDevice.value) {
-        handleSlideIn()
+      if (isDesktop) {
+        handleSlideOut()
       }
       else {
-        handleSlideOut()
+        handleSlideIn()
       }
     },
 
     onDown() {
       if (stackSliderState.value.isTransitionning) return
-      if (isMobileDevice.value) {
-        handleSlideOut()
+      if (isDesktop) {
+        handleSlideIn()
       }
       else {
-        handleSlideIn()
+        handleSlideOut()
       }
     },
   })
   stackSliderObserver.disable()
 }
 
-const createStackSliderScrollTriger = () => {
+const createStackSliderScrollTriger = (isDesktop: boolean) => {
+  if (stackSliderScrollTrigger) {
+    stackSliderScrollTrigger.kill()
+    stackSliderScrollTrigger = null
+  }
+
   stackSliderScrollTrigger = ScrollTrigger.create({
     trigger: stackSliderConfig.trigger,
     start: 'top top',
-    pin: !iosDevice,
-    end: iosDevice ? '0' : '+=200',
+    pin: isDesktop,
+    end: !isDesktop ? '0' : '+=200',
     onEnter(self) {
-      if (iosDevice) return
+      if (!isDesktop) return
+      if (userCheckAllSlide.value) return
       if (stackSliderObserver?.isEnabled) return
       // On jump d'un pixel pour pouvoir fixer l'utilisateur dans la section
       self.scroll(self.start + 1)
       switchStackSliderObserver(true)
     },
     onEnterBack(self) {
-      if (iosDevice) return
+      if (!isDesktop) return
+      if (userCheckAllSlide.value) return
       if (stackSliderObserver?.isEnabled) return
       self.scroll(self.end - 1)
       switchStackSliderObserver(true)
@@ -389,6 +403,7 @@ const createStackSliderScrollTriger = () => {
 }
 
 const switchStackSliderObserver = (enableObserver: boolean) => {
+  if (globalStore.disabledObserver) return
   if (!stackSliderObserver) return
   if (enableObserver) {
     stackSliderObserver.enable()
@@ -398,7 +413,7 @@ const switchStackSliderObserver = (enableObserver: boolean) => {
   }
 }
 
-const handleSetDefaultGsapValue = () => {
+const handleSetDefaultGsapValue = (isDesktop: boolean) => {
   stackSliderItems = gsap.utils.toArray<HTMLElement>(stackSliderConfig.items)
 
   if (!stackSliderItems) return
@@ -409,38 +424,85 @@ const handleSetDefaultGsapValue = () => {
   stackSliderItemTitle = gsap.utils.toArray<HTMLElement>(stackSliderConfig.itemTitle)
 
   handleSplitTitle()
-  if (iosDevice) {
-    gsap.set(stackSliderItemOuter, { xPercent: 100 })
-    gsap.set(stackSliderItemInner, { xPercent: -100 })
-
-    slideInIOS()
-  }
-  else {
+  if (isDesktop) {
     gsap.set(stackSliderItemOuter, { yPercent: 100 })
     gsap.set(stackSliderItemInner, { yPercent: -100 })
-
     slideIn()
+  }
+  else {
+    gsap.set(stackSliderItemOuter, { xPercent: 100 })
+    gsap.set(stackSliderItemInner, { xPercent: -100 })
+    slideInMobile()
   }
 }
 
+const timerIdForceHideHeader = ref<null | number>(null)
+const handleScrollOnTopOfStackSlider = async () => {
+  globalStore.setForcedHideHeader(true)
+
+  window.scrollTo({
+    behavior: 'smooth',
+
+  })
+  globalStore.scrollSmoother?.scrollTo(stackSliderRef.value, true)
+  if (timerIdForceHideHeader.value) {
+    clearTimeout(timerIdForceHideHeader.value)
+    timerIdForceHideHeader.value = null
+  }
+  timerIdForceHideHeader.value = setTimeout(() => {
+    globalStore.setForcedHideHeader(false)
+  }, 1000)
+}
 const handleClickOnDot = (value: number) => {
   const tempIndex = stackSliderState.value.currentIndex
   const goToNextItem = value > tempIndex
   stackSliderState.value.nextIndex = value
+  handleScrollOnTopOfStackSlider()
   if (goToNextItem) {
-    slideInIOS()
+    slideInMobile()
   }
   else {
-    slideOutIOS()
+    slideOutMobile()
   }
 }
 
+const handlePrevSlide = () => {
+  if (!stackSliderItems) return
+  if (stackSliderState.value.isTransitionning) return
+  handleScrollOnTopOfStackSlider()
+
+  const tempIndex = stackSliderState.value.currentIndex - 1
+  if (tempIndex < 0) return
+  stackSliderState.value.isTransitionning = true
+  stackSliderState.value.nextIndex = tempIndex
+  slideOut()
+}
+
+const handleNextSlide = () => {
+  if (!stackSliderItems) return
+  if (stackSliderState.value.isTransitionning) return
+  handleScrollOnTopOfStackSlider()
+  const tempIndex = stackSliderState.value.currentIndex + 1
+  if (tempIndex >= stackSliderItems.length) return
+  stackSliderState.value.isTransitionning = true
+  stackSliderState.value.nextIndex = tempIndex
+  slideIn()
+}
+
 onMounted(() => {
-  handleSetDefaultGsapValue()
-  createStackSliderObserver()
   isMobileDevice.value = isTouchDevice()
   stackSliderContext = gsap.context(() => {
-    createStackSliderScrollTriger()
+    const mm = gsap.matchMedia()
+    mm.add({
+      isDesktop: '(min-width:1280px)',
+      isMobile: '(min-width:200px)',
+    }, (context) => {
+      const { isDesktop } = context.conditions
+      isDesktopDevice.value = isDesktop
+      handleSetDefaultGsapValue(isDesktop)
+      createStackSliderObserver(isDesktop)
+      createStackSliderScrollTriger(isDesktop)
+    })
   })
 
   if (stackSliderScrollTrigger) {
@@ -453,14 +515,12 @@ onUnmounted(() => {
     stackSliderContext.revert()
   }
 })
-
 </script>
 <template>
   <div
     :id="id"
     ref="stackSliderRef"
     class="stackslider"
-    :class="{'stackslider--ios' : globalStore.isIOS}"
   >
     <div class="stackslider__title">
       <p class="section-title">
@@ -472,7 +532,6 @@ onUnmounted(() => {
         v-for="(item, key) in xpItems"
         :key="`stackslider-item-${key}`"
         class="stackslider-item"
-        :class="{'stackslider-item--ios' : globalStore.isIOS}"
       >
         <div class="stackslider-item__outer">
           <div class="stackslider-item__inner">
@@ -521,7 +580,6 @@ onUnmounted(() => {
       </section>
     </div>
     <div
-      v-if="globalStore.isIOS"
       class="stackslider__dots"
     >
       <button
@@ -532,6 +590,17 @@ onUnmounted(() => {
         :aria-label="`afficher item ${key}`"
         @click="handleClickOnDot(key)"
       />
+    </div>
+    <div
+      class="stackslider__arrows"
+      :class="{'visible': userCheckAllSlide}"
+    >
+      <button @click="handlePrevSlide">
+        &lt;
+      </button>
+      <button @click="handleNextSlide">
+        &gt;
+      </button>
     </div>
   </div>
 </template>
@@ -584,6 +653,10 @@ onUnmounted(() => {
     left: 0;
     justify-content: center;
     width: 100%;
+
+    @include mq(desktop) {
+      display: none;
+    }
   }
 
   &__dot {
@@ -601,6 +674,47 @@ onUnmounted(() => {
 
     &:not(:last-child) {
       margin-right: 7px;
+    }
+  }
+
+  &__arrows {
+    display: none;
+    position: absolute;
+    z-index: 30;
+    right: 0;
+    bottom: 0;
+    padding: 2rem;
+    transform: translateY(100%);
+    transition: all ease-in .2s;
+
+    @include mq(desktop) {
+      display: flex;
+    }
+
+    &.visible {
+      transform: translateY(0);
+    }
+
+    >button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      transition: all ease-in .2s;
+      border: 1px solid var(--color-white);
+      border-radius: 99rem;
+      background-color: transparent;
+
+      &:hover {
+        background-color: var(--color-white);
+        color: var(--color-bg);
+        cursor: pointer;
+      }
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
     }
   }
 
@@ -629,45 +743,12 @@ onUnmounted(() => {
 
     --bg-gradient: radial-gradient(circle,rgb(0 0 0 / 40%) 0%, rgb(0 0 0 / 0%) 100%);
 
-    &--ios {
-      #{$c}__content {
-        text-align: center;
-      }
-      #{$c}__text {
-        display: block;
-        margin-bottom: 2rem;
-
-        p {
-          font-size: 1.2rem;
-          line-height: 1.3rem;
-        }
-      }
-      #{$c}__left {
-        margin-bottom: 2rem;
-      }
-      #{$c}__center {
-        display: none;
-      }
-      #{$c}__right {
-        padding-top: 0;
-      }
-      #{$c}__inner {
-        padding: 3.75rem 2.5rem 3.562rem;
-
-        @include mq(desktop) {
-          padding: 0;
-        }
-      }
-
-      .clip-text {
-        display: flex!important;
-        justify-content: center!important;
-        text-align: center!important;
-      }
-    }
-
     &__inner {
-      padding: 2.06rem 1.25rem;
+      padding: 3.75rem 2.5rem 3.562rem;
+
+      @include mq(smartphone) {
+        padding: 2.06rem 1.25rem;
+      }
 
       @include mq(desktop) {
         padding: 0;
@@ -714,15 +795,19 @@ onUnmounted(() => {
       margin-bottom: 1.6875rem;
       font-size: 1rem;
       font-weight: 200;
+      text-align: center;
 
       @include mq(desktop) {
         margin-bottom: 2.125rem;
+        text-align: left;
       }
     }
 
     &__title {
+      display: block;
       font-size: 2rem;
       line-height: 2.1rem;
+      text-align: center;
 
       @include mq(xsphone) {
         font-size: 2.375rem;
@@ -733,6 +818,7 @@ onUnmounted(() => {
       @include mq(desktop) {
         font-size: 2.375rem;
         line-height: 2.8125rem;
+        text-align: left;
       }
 
       .clip-text {
@@ -741,6 +827,7 @@ onUnmounted(() => {
     }
 
     &__center {
+      display: none;
       position: relative;
       flex: 0 0 auto;
       padding-top: 100%;
@@ -748,6 +835,7 @@ onUnmounted(() => {
       border-radius:  3px;
 
       @include mq(desktop) {
+        display: block;
         flex: 0 0 33.33%;
         padding-top: 33.33%;
       }
@@ -772,17 +860,13 @@ onUnmounted(() => {
     }
 
     &__text {
-      display: none;
-
-      @include mq(xsphone) {
-        display: block;
-      }
+      display: block;
 
       p {
-        // min-height: 6rem;
-        font-size: 1.375rem;
+        font-size: 1.2rem;
         font-weight: 300;
-        line-height: 1.875rem;
+        line-height: 1.3rem;
+        text-align: center;
 
         @include mq(desktop) {
           // min-height: auto;
@@ -791,6 +875,7 @@ onUnmounted(() => {
           font-size: 1.125rem;
           font-weight: 300;
           line-height: 1.875rem;
+          text-align: left;
         }
       }
     }

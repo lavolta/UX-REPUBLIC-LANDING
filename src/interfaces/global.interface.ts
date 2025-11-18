@@ -73,6 +73,12 @@ interface NavigationItemInternalLink {
   type: 'internal'
 }
 
+interface NavigationItemAnchorLink {
+  href: string
+  content: string
+  type: 'anchor'
+}
+
 interface NavigationItemExternalLink {
   href: string
   content: string
@@ -83,7 +89,7 @@ interface NavigationItemButton {
   type: 'button'
 }
 
-export type NavigationItem = NavigationItemInternalLink | NavigationItemExternalLink | NavigationItemButton
+export type NavigationItem = NavigationItemInternalLink | NavigationItemExternalLink | NavigationItemButton | NavigationItemAnchorLink
 
 export interface SeoPageInterface {
   title: string

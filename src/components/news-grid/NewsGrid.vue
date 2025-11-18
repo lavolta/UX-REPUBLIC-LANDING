@@ -43,7 +43,7 @@ onMounted(async () => {
   <section class="news">
     <div class="news__inner">
       <p class="news__title section-title">
-        News
+        Actualités
       </p>
       <div class="news__grid">
         <div
