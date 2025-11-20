@@ -35,7 +35,11 @@ onMounted(() => {
       ease: 'power3',
       duration: 1,
       delay: 0.5,
-    }, '>').to('.welcome', { opacity: 0, duration: 0.5, ease: 'power1' }, '>')
+    }, '>').to('.welcome', {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power1',
+    }, '>')
   })
 })
 

@@ -36,7 +36,6 @@ const updateIndicator = () => {
     if (scrollableDistance > 0) {
       const scrollProgress = scrollLeft / scrollableDistance
       const positionPercentage = scrollProgress * 100
-      console.log('positionPercentage', positionPercentage)
       indicatorSpan.value.style.setProperty('--indicator-position-x', `${positionPercentage}%`)
     }
   }
