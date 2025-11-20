@@ -2,6 +2,7 @@
 import { agencyItems } from '@/data'
 import { globalStore } from '@/store'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useResizeObserver } from '@vueuse/core'
 
 import {
@@ -9,22 +10,37 @@ import {
   onMounted,
   onUnmounted,
   useTemplateRef,
+  withDefaults,
+  watch,
+  nextTick,
 } from 'vue'
 import AgencyItemComponent from './AgencyItemComponent.vue'
 
+const props = withDefaults(defineProps<{
+  sliderTiming?: number
+  idAgency: string
+}>(), {
+  sliderTiming: 3000,
+})
+
 const agencySlider = useTemplateRef('agencySection')
+const agencyNav = useTemplateRef('agencyNav')
+
 const agencySize = ref({
   width: 0,
   height: 0,
 })
+
 const mobileSvgScale = ref({
   x: 0,
   y: 0,
 })
+
 const svgMobileExportSize = {
   width: 430,
   height: 844,
 }
+
 useResizeObserver(agencySlider, (entries) => {
   const entry = entries[0]
   const { width, height } = entry.contentRect
@@ -33,56 +49,108 @@ useResizeObserver(agencySlider, (entries) => {
   agencySize.value.width = width
   agencySize.value.height = height
 })
-const props = defineProps<{ idAgency: string }>()
 const items = ref(agencyItems)
 
 const itemActif = ref(0)
 
-let agencyGsapContext: gsap.Context | null = null
-// eslint-disable-next-line
-let agencyGsapTimeline: gsap.core.Timeline | null = null
+const sliderInterval = ref<null | number>(null)
 
-const isInView = ref(false)
+let agencyGsapContext: gsap.Context | null = null
+let agencyGsapScrollTrigger: ReturnType<typeof ScrollTrigger.create> | null = null
+
+const isInView = ref(true)
+const displayNav = ref(false)
+
 const handleClickOnNavButton = (key) => {
+  disabledAutoSlide()
   itemActif.value = key
+  globalStore.scrollSmoother?.scrollTo(`#${props.idAgency}`, true)
+  globalStore.setForcedHideHeader(true)
+  activeAutoSlide()
 }
+
+const handleChangingSliderIndex = () => {
+  const temp = itemActif.value + 1
+  if (temp === items.value.length) {
+    itemActif.value = 0
+  }
+  else {
+    itemActif.value = temp
+  }
+}
+
+const activeAutoSlide = () => {
+  if (sliderInterval.value) {
+    clearInterval(sliderInterval.value)
+    sliderInterval.value = null
+  }
+  sliderInterval.value = setInterval(() => {
+    handleChangingSliderIndex()
+  }, props.sliderTiming)
+}
+
+const disabledAutoSlide = () => {
+  if (sliderInterval.value) {
+    clearInterval(sliderInterval.value)
+    sliderInterval.value = null
+  }
+}
+
+watch(itemActif, async (newIndex) => {
+  await nextTick()
+  const navEl = agencyNav.value
+  if (!navEl) return
+
+  const buttons = navEl.querySelectorAll('.agency__cta')
+  const activeBtn = buttons[newIndex] as HTMLElement | undefined
+  if (!activeBtn) return
+
+  // Calcul de la position à atteindre
+  const navRect = navEl.getBoundingClientRect()
+  const btnRect = activeBtn.getBoundingClientRect()
+
+  // Différence entre le centre du bouton et le centre du conteneur
+  const offset = btnRect.left - navRect.left
+
+  navEl.scrollTo({
+    left: navEl.scrollLeft + offset,
+    behavior: 'smooth',
+  })
+})
 
 onMounted(() => {
   agencyGsapContext = gsap.context(() => {
-    const agencyBackgrounds = gsap.utils.toArray(`#${props.idAgency} .agency__bg > *`)
-    const timeline = gsap.timeline({
-      scrollTrigger: {
+    if (!agencyGsapScrollTrigger) {
+      agencyGsapScrollTrigger = ScrollTrigger.create({
         trigger: `#${props.idAgency}`,
         id: props.idAgency,
         start: 'top top',
-        pin: true,
-        invalidateOnRefresh: true,
-        fastScrollEnd: false,
-        end: () => '+=' + (agencyBackgrounds.length * window.innerHeight),
+        end: '+=60% top',
         onEnter() {
           globalStore.setForcedHideHeader(true)
           isInView.value = true
-        },
-        onUpdate(self) {
-          const progress = self.progress
-          const totalSlides = agencyBackgrounds.length
-          const index = Math.floor(progress * totalSlides)
-          itemActif.value = Math.min(totalSlides - 1, Math.max(0, index))
+          displayNav.value = true
+          activeAutoSlide()
         },
         onEnterBack() {
           globalStore.setForcedHideHeader(true)
+          displayNav.value = true
+          activeAutoSlide()
         },
         onLeave() {
           globalStore.setForcedHideHeader(false)
+          displayNav.value = false
+          disabledAutoSlide()
         },
         onLeaveBack() {
           globalStore.setForcedHideHeader(false)
+          disabledAutoSlide()
         },
-      },
-    })
-    agencyGsapTimeline = timeline
+      })
+    }
   })
 })
+
 onUnmounted(() => {
   if (agencyGsapContext) {
     agencyGsapContext.revert()
@@ -199,21 +267,28 @@ onUnmounted(() => {
         :item="item"
       />
     </div>
-    <nav class="agency__nav">
-      <ul>
-        <li
-          v-for="(item, key) in items"
-          :key="`agency-nav-item-${key}`"
-        >
-          <button
-            class="agency__cta"
-            :class="{'actif': key === itemActif}"
-            @click="handleClickOnNavButton(key)"
+    <nav
+      class="agency__nav"
+      :class="{'actif': displayNav}"
+    >
+      <div>
+        <ul ref="agencyNav">
+          <li
+            v-for="(item, key) in items"
+            :key="`agency-nav-item-${key}`"
           >
-            {{ item.title }}
-          </button>
-        </li>
-      </ul>
+            <button
+              class="agency__cta"
+              :class="{'actif': key === itemActif}"
+              @click="handleClickOnNavButton(key)"
+            >
+              <span>
+                {{ item.title }}
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
     </nav>
   </section>
 </template>
@@ -226,7 +301,7 @@ onUnmounted(() => {
 
   position: relative;
   width: 100%;
-  height: 100svh;
+  height: var(--window-height);
   overflow: hidden;
   background-color: var(--color-background);
   color: var(--color-text-dark);
@@ -292,7 +367,7 @@ onUnmounted(() => {
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh;
+      height: var(--window-height);
       transform: scale(1.1);
       transition: var(--animation);
       opacity: 0%;
@@ -385,48 +460,125 @@ onUnmounted(() => {
   }
 
   &__nav {
+    display: flex;
     position: absolute;
     z-index: 7;
     bottom: 0;
     left: 0;
+    justify-content: flex-start;
     width: 100%;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: all ease-in .2s;
+
+    &.actif {
+      transform: translateY(0);
+    }
+
+    @include mq(desktop) {
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    > div {
+      position: relative;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+      overflow: hidden;
+      border-radius: 99rem;
+
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        opacity: 100%;
+        background: rgb(24 28 35 / 40%);
+        backdrop-filter: blur(2px);
+        inset: 0;
+      }
+    }
 
     ul {
       display: flex;
-      gap: 1rem;
+      position: relative;
+      z-index: 2;
+      justify-content: flex-start;
       width: 100%;
-      max-width: var(--max-section-width);
       margin: 0 auto;
-      padding: 0 1rem;
       overflow-y: auto;
+      gap: 0;
 
       @include mq(desktop) {
+        justify-content: center;
+        max-width: var(--max-section-width);
         padding: 0;
-        gap: 9.375rem;
         overflow-y: none;
+        gap: 1rem;
       }
     }
   }
 
   &__cta {
-        padding: 2rem;
+        position: relative;
+        padding: 0.5rem 1rem;
+        overflow: hidden;
+        transition: all ease-in .2s;
+        border-radius: 99rem;
         background-color: transparent;
-        color: var(--agency-text-color);
-        font-size: 1rem;
-        font-weight: 200;
+
+        // background-color: rgb(197 197 197 / 100%);
+        color: var(--color-text);
+        font-size: .75rem;
+        font-weight: 700;
         letter-spacing: 1px;
         line-height: 1.125rem;
         text-align: center;
 
         @include mq(desktop) {
-          padding: 1.25rem 0;
-          font-size: .75rem;
+          padding: 0.5rem 1.5rem;
+          font-size: 1rem;
+        }
+
+        span {
+          display: block;
+          position: relative;
+          z-index: 2;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          z-index: 1;
+          width: 100%;
+          transform: translateY(calc(100% + 2px));
+          transition: all ease-in .2s;
+          background-color: white;
+          inset: 0;
+        }
+
+        &:hover {
+          @include mq(desktop) {
+            color: var(--color-text-dark);
+
+            &::after {
+              transform: translateY(0);
+            }
+          }
         }
 
         &.actif,
         &:hover {
           font-weight: 700;
           cursor: pointer;
+        }
+
+        &.actif {
+          color: var(--color-text-dark);
+
+          &::after {
+            transform: translateY(0);
+          }
         }
   }
 

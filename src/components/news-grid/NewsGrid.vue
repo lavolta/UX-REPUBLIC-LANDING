@@ -4,11 +4,14 @@ import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
 import NewGridSocialItem from './NewGridSocialItem.vue'
 import { useI18n } from 'vue-i18n'
-import { onMounted } from 'vue'
+import { onMounted, useTemplateRef } from 'vue'
 import { cleanDataArcticleFromUxRepublicResponse } from '@/utils/data.utils'
 import type { UxRepublicArticleInterface, NewsItemType } from '@/interfaces'
 const { tm, locale } = useI18n()
 const items = tm('news.items')
+
+const newsGrid = useTemplateRef('newsGrid')
+const indicatorSpan = useTemplateRef('indicatorSpan')
 
 const gridToDisplay = ref(items)
 const mapFrechDataWithDefaultData = (data: UxRepublicArticleInterface[]) => {
@@ -23,7 +26,30 @@ const mapFrechDataWithDefaultData = (data: UxRepublicArticleInterface[]) => {
   }, [])
   gridToDisplay.value = frechData
 }
+const updateIndicator = () => {
+  if (newsGrid.value && indicatorSpan.value) {
+    const grid = newsGrid.value
+    const scrollWidth = grid.scrollWidth
+    const clientWidth = grid.clientWidth
+    const scrollLeft = grid.scrollLeft
+    const scrollableDistance = scrollWidth - clientWidth
+    if (scrollableDistance > 0) {
+      const scrollProgress = scrollLeft / scrollableDistance
+      const positionPercentage = scrollProgress * 100
+      console.log('positionPercentage', positionPercentage)
+      indicatorSpan.value.style.setProperty('--indicator-position-x', `${positionPercentage}%`)
+    }
+  }
+}
 onMounted(async () => {
+  // 3. Attacher l'écouteur d'événement
+  if (newsGrid.value) {
+    // Écoute de l'événement de défilement
+    newsGrid.value.addEventListener('scroll', updateIndicator)
+
+    // Initialiser la position de l'indicateur au cas où il y aurait déjà un défilement
+    updateIndicator()
+  }
   try {
     const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8`
     const response = await fetch(urlToFetch)
@@ -40,12 +66,17 @@ onMounted(async () => {
 
 </script>
 <template>
-  <section class="news">
+  <section
+    class="news"
+  >
     <div class="news__inner">
       <p class="news__title section-title">
         Actualités
       </p>
-      <div class="news__grid">
+      <div
+        ref="newsGrid"
+        class="news__grid"
+      >
         <div
           v-for="(item, key) in gridToDisplay"
           :key="key"
@@ -67,6 +98,9 @@ onMounted(async () => {
             :item="item"
           />
         </div>
+      </div>
+      <div class="news__indicator">
+        <span ref="indicatorSpan" />
       </div>
     </div>
   </section>
@@ -115,12 +149,13 @@ onMounted(async () => {
   &__grid {
     display: flex;
     flex-wrap: nowrap;
-    overflow-y: auto;
+    overflow-x: auto;
     gap: 1rem;
+    scroll-snap-type: x mandatory;
 
     @include mq(tablet) {
       flex-wrap: wrap;
-      overflow-y: hidden;
+      overflow: hidden;
       gap: 0;
     }
 
@@ -130,6 +165,7 @@ onMounted(async () => {
       width: var(--item-size);
       padding-top: var(--item-size);
       border: 1px solid var(--color-border);
+      scroll-snap-align: start;
 
       @include mq(tablet) {
         flex: 0 0 auto;
@@ -153,6 +189,39 @@ onMounted(async () => {
         width: 100%;
         height: 100%;
       }
+    }
+  }
+
+  &__indicator {
+    display: block;
+    width: 50%;
+    height: 3px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    overflow: hidden;
+    background-color: var(--color-btn-border);
+
+    @include mq(tablet) {
+      display: none;
+    }
+
+    span {
+      --indicator-position-x: 0%;
+
+      display: block;
+      width: calc(var(--indicator-position-x) + 10px);
+      height: 3px;
+
+      // Nouvelle ligne: Utilise transform: translateX pour le mouvement
+      // On retire la largeur du span (2rem) de la zone totale (100%) pour que la fin du span
+      // corresponde à la fin de la barre lorsque le défilement est terminé.
+      // transform: translateX(calc( * (100% - 2rem) / 100));
+
+      // Optionnel: ajouter une transition pour un mouvement plus fluide
+      transition: width 0.1s linear;
+      background-color: var(--color-background);
+
+      // Nouvelle ligne: Définit la position initiale (utile pour le calcul)
     }
   }
 }

@@ -681,10 +681,10 @@ onUnmounted(() => {
     display: none;
     position: absolute;
     z-index: 30;
-    right: 0;
     bottom: 0;
+    left: 50%;
     padding: 2rem;
-    transform: translateY(100%);
+    transform: translate(-50%, 100%);
     transition: all ease-in .2s;
 
     @include mq(desktop) {
@@ -692,7 +692,7 @@ onUnmounted(() => {
     }
 
     &.visible {
-      transform: translateY(0);
+      transform: translate(-50%, 0);
     }
 
     >button {
@@ -756,7 +756,7 @@ onUnmounted(() => {
     }
 
     &__left {
-      margin-bottom: 1.743rem;
+      margin-bottom: 1rem;
 
       @include mq(desktop) {
         margin-bottom: 0;
@@ -851,10 +851,7 @@ onUnmounted(() => {
     }
 
     &__right {
-      padding-top: 2rem;
-
       @include mq(desktop) {
-        padding-top: 0;
         padding-left: 6.75rem;
       }
     }
@@ -863,9 +860,9 @@ onUnmounted(() => {
       display: block;
 
       p {
-        font-size: 1.2rem;
+        font-size: 1.43rem;
         font-weight: 300;
-        line-height: 1.3rem;
+        line-height: 1.87rem;
         text-align: center;
 
         @include mq(desktop) {

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import AgencySlider from '@/components/agency/AgencySliderComponent.vue'
 import NewsGrid from '@/components/news-grid/NewsGrid.vue'
 import ProjectGrid from '@/components/project-grid/ProjectGrid.vue'
 import PresentationHero from '@/components/presentation/PresentationHero.vue'
-import HeroBanner from '@/components/hero-banner/HeroBanner2.vue'
-import AgencySlider from '@/components/agency/AgencySliderComponent3.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import CountComponent from '@/components/count/CountComponent.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
