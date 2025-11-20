@@ -7,7 +7,7 @@ import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import CountComponent from '@/components/count/CountComponent.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
-import StackSlider from '@/components/stack-slider/StackSlider6.vue'
+import StackSlider from '@/components/stack-slider/StackSlider.vue'
 import {
   usePageTransition,
   useDefaultSeo,
