@@ -19,6 +19,11 @@ onMounted(() => {
       <source
         src="/images/hero/lion.mp4"
         type="video/mp4"
+        media="(min-width: 1280px)"
+      >
+      <source
+        src="/images/hero/lion_m.mp4"
+        type="video/mp4"
       >
     </video>
   </section>

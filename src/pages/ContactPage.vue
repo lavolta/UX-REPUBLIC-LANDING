@@ -143,8 +143,10 @@ onMounted(() => {
   }
 
   .hs_submit {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    max-width: 290px;
+    max-width: 350px;
     margin: 1rem auto;
 
     .actions {
@@ -183,7 +185,6 @@ onMounted(() => {
           position: relative;
           z-index: 2;
           width: 100%;
-          min-height: 90px;
           padding: 0.8125rem 1.875rem;
           border: none;
           background-color: transparent;
@@ -191,6 +192,10 @@ onMounted(() => {
           font-weight: 400;
           text-align: center;
           white-space: nowrap;
+
+          @include mq (smartphone) {
+            padding: 1.8125rem 3.25rem;
+          }
 
           &:hover {
             cursor: pointer;

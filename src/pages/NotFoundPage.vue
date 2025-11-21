@@ -88,7 +88,7 @@ onUnmounted(() => {
           :duration="`${10 + (item * 10)}`"
           :direction="item % 2 ? 'reverse' : 'normal'"
         >
-          404 oupss
+          404 ooopss
           <template #icon>
             <StarsIcon />
           </template>

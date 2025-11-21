@@ -699,8 +699,8 @@ onUnmounted(() => {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       transition: all ease-in .2s;
       border: 1px solid var(--color-white);
       border-radius: 99rem;
@@ -711,6 +711,8 @@ onUnmounted(() => {
         color: var(--color-bg);
         cursor: pointer;
       }
+      &:first-child { transform: rotate(90deg); }
+      &:last-child { transform: rotate(90deg); }
 
       &:not(:last-child) {
         margin-right: 1rem;
@@ -883,7 +885,7 @@ onUnmounted(() => {
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       margin-left: auto;
 
       .button {
@@ -916,6 +918,7 @@ onUnmounted(() => {
         align-items: flex-start;
         justify-content: flex-start;
         max-width: 20.25rem;
+        margin-top: 1rem;
       }
     }
 
