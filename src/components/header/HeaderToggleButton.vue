@@ -86,13 +86,13 @@ button {
   > span {
     display: block;
     position: relative;
-    width: 30px;
-    height: 3px;
+    width: 25px;
+    height: 2px;
     border-radius: 3px;
     background-color: var(--color-white);
 
     &:not(:last-child) {
-      margin-bottom: 4px;
+      margin-bottom: 7px;
     }
   }
 

@@ -77,6 +77,7 @@
         }
       }
 
+      &:first-child,
       &:last-child {
         @include mq(desktop) {
           padding-right: 3.25rem;

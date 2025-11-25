@@ -7,20 +7,6 @@ onMounted(() => {
 </script>
 <template>
   <section class="hero">
-    <picture
-      class="hero__img"
-      aria-hidden="true"
-    >
-      <source
-        srcset="/images/hero/lion_m.png"
-        media="(max-width: 767px)"
-      >
-      <img
-        src="/images/hero/lion.png"
-        alt=""
-        loading="eager"
-      >
-    </picture>
     <video
       ref="heroVideo"
       poster="/images/hero/lion.png"
@@ -33,7 +19,11 @@ onMounted(() => {
       <source
         src="/images/hero/lion.mp4"
         type="video/mp4"
-        media="(min-width: 1260px)"
+        media="(min-width: 1280px)"
+      >
+      <source
+        src="/images/hero/lion_m.mp4"
+        type="video/mp4"
       >
     </video>
   </section>
@@ -42,45 +32,24 @@ onMounted(() => {
 .hero {
   position: relative;
   width: 100%;
-  height: 70svh;
+  height: auto;
+  aspect-ratio: 9 / 10;
   overflow: hidden;
 
   @include mq(desktop) {
     height: 78vh;
   }
 
-  &__img {
-    display: block;
-    width: 100%;
-    height: 100%;
-
-    > img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 50% 50%;
-    }
-
-    @include mq(desktop) {
-      display: none;
-    }
-  }
-
   &__bg {
-    display: none;
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 70% 0%;
 
     @include mq(desktop) {
       display: block;
-    }
-  }
-
-  @include mq(desktop) {
-    &__bg {
       object-position: 50% 50%;
     }
   }

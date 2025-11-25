@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useDefaultSeo, usePageTransition } from '@/composable'
-import HeroBanner from '@/components/hero-banner/HeroBanner2.vue'
+import HeroBanner from '@/components/hero-banner/HeroBanner.vue'
 import InfiniteScrollText from '@/components/infinite-scroll-text/InfiniteScrollText.vue'
 import StarsIcon from '@/components/icons/StarsIcon.vue'
 
@@ -64,7 +64,7 @@ onMounted(() => {
   padding: 4rem 2rem;
 
   @include mq(desktop) {
-    padding: 7.25rem 0 15.9375rem;
+    padding: 7.25rem 0 4.9375rem;
   }
 
   &__inner {
@@ -143,8 +143,14 @@ onMounted(() => {
   }
 
   .hs_submit {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 350px;
+    margin: 1rem auto;
+
     .actions {
-        display: block;
+        display: inline-block;
         position: relative;
         overflow: hidden;
         border: 1px solid var(--color-btn-border);
@@ -175,13 +181,25 @@ onMounted(() => {
     }
 
     .hs-button {
+          display: block;
           position: relative;
           z-index: 2;
           width: 100%;
           padding: 0.8125rem 1.875rem;
           border: none;
           background-color: transparent;
+          font-size: 1.5rem;
+          font-weight: 400;
           text-align: center;
+          white-space: nowrap;
+
+          @include mq (smartphone) {
+            padding: 1.8125rem 3.25rem;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
     }
   }
 }
