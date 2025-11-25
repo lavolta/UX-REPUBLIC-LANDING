@@ -2,13 +2,13 @@ export const fr = {
   header: {
     navigation: [
       {
-        content: 'Ux-Republic',
+        content: 'UX-REPUBLIC',
         type: 'anchor',
         href: '/#uxrepublic',
       },
 
       {
-        content: 'Nos expértises en action',
+        content: 'Nos expertises en action',
         type: 'anchor',
         href: '/#expert',
       },

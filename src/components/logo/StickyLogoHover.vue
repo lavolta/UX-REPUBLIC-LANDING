@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
+import { globalStore } from '@/store'
 const textures = ref([
   '/images/textures/white.png',
 ])
@@ -16,12 +16,22 @@ const switchIndex = () => {
   }
   currentIndex.value = newIndex
 }
+const handleClick = () => {
+  if (window.location.pathname === '/') {
+    window.scrollTo({
+      behavior: 'smooth',
+
+    })
+    globalStore.scrollSmoother?.scrollTo('html', true)
+  }
+}
 </script>
 
 <template>
   <RouterLink
     class="sticky-logo"
     to="/"
+    @click="handleClick"
   >
     <svg
       width="76"

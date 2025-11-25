@@ -109,12 +109,22 @@ defineExpose({
     li {
       &:not(:last-child) {
         margin-bottom: 1rem;
+
+        @include mq(desktop) {
+          margin-bottom: 1.5rem;
+        }
       }
 
       .button {
         display: block;
+        border: none;
         color: var(--color-bg);
+        font-size: 1.3rem;
         text-align: center;
+
+        @include mq(desktop) {
+          font-size: 2.3rem;
+        }
 
         &.internal {
           display: block;

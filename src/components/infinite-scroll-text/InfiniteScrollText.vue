@@ -3,18 +3,34 @@ import { onMounted, useTemplateRef, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+type ThemeType = 'default' | 'white'
+type AnimationDirectionType = 'normal' | 'reverse'
+
 interface IniniteScrollTextPropsInterface {
   revealTextOnScroll?: boolean
+  theme?: ThemeType
   id: string
+  duration?: string
+  direction?: AnimationDirectionType
 }
 const props = withDefaults(defineProps<IniniteScrollTextPropsInterface>(), {
   revealTextOnScroll: true,
+  theme: 'default',
+  duration: '60',
+  direction: 'normal',
 })
 
 const infiniteScrollContent = useTemplateRef('infiniteScrollContent')
+const infiniteInner = useTemplateRef('infiniteInner')
+
 let infiniteScrollContentContext: gsap.Context | null = null
 
 onMounted(() => {
+  if (infiniteInner.value) {
+    infiniteInner.value.style.setProperty('--animation-duration', `${props.duration}s`)
+    infiniteInner.value.style.setProperty('--animation-direction', props.direction)
+  }
+  if (!props.revealTextOnScroll) return
   infiniteScrollContentContext = gsap.context(() => {
     const infiniteScrollContentTimeline = gsap.timeline()
     const contentpictos = gsap.utils.toArray(`#${props.id} .infinite-scroll-content__picto`) as HTMLOrSVGElement[]
@@ -58,9 +74,11 @@ onUnmounted(() => {
   <div
     :id="id"
     class="infinite-scroll-content"
+    :class="{'static': !props.revealTextOnScroll, 'white': props.theme === 'white'}"
   >
     <div ref="infiniteScrollContent">
       <div
+        ref="infiniteInner"
         class="infinite-scroll-content__inner"
       >
         <div
@@ -85,6 +103,8 @@ onUnmounted(() => {
 </template>
 <style lang="scss">
 .infinite-scroll-content {
+  $c: &;
+
   overflow: hidden;
 
   --translate-value: calc(-25% - 5px);
@@ -99,6 +119,31 @@ onUnmounted(() => {
     }
   }
 
+  &.white {
+    #{$c}__item {
+      color: var(--color-white);
+
+      span {
+        color: var(--color-white);
+        line-height: 1;
+      }
+    }
+    #{$c}__picto {
+      color: var(--color-white);
+    }
+  }
+
+  &.static {
+    > div {
+    transform: translateY(0%);
+    }
+    #{$c}__item {
+      span {
+        line-height: 1;
+      }
+    }
+  }
+
   > div {
     transform: translateY(100%);
   }
@@ -107,7 +152,8 @@ onUnmounted(() => {
     display: flex;
     flex-wrap: nowrap;
     width: max-content;
-    animation: scroll 60s linear infinite;
+    animation: scroll var(--animation-duration) linear infinite;
+    animation-direction: var(--animation-direction);
     gap: 1rem;
   }
 

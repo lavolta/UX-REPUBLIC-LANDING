@@ -9,14 +9,12 @@ defineProps<{
 </script>
 
 <template>
-  <a
+  <div
     class="social"
     :class="{
       'no-left-p': noLeftPadding,
       'no-right-p': noRightPadding
     }"
-    :href="item.link"
-    target="_blank"
   >
     <div class="social__inner">
       <div class="social__media">
@@ -29,8 +27,10 @@ defineProps<{
           v-html="item.title"
         />
       </div>
-      <div
+      <a
         class="social__button"
+        :href="item.link"
+        target="_blank"
       >
         <span>
           {{ item.buttonText }}
@@ -39,9 +39,9 @@ defineProps<{
           src="/images/icons/social/follow-arrow.svg"
           :alt="`nous suivre sur ${item.socialType}`"
         >
-      </div>
+      </a>
     </div>
-  </a>
+  </div>
 </template>
 
 <style scoped lang="scss">

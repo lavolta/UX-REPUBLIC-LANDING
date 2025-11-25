@@ -103,9 +103,9 @@ defineProps<{
   &__content {
     p {
       margin: 0;
-      font-size: 1rem;
+      font-size: 1.625rem;
       font-weight: 200;
-      line-height: 1.3;
+      line-height: 2.2rem;
 
       @include mq(smartphone) {
         font-size: 1.2rem;
