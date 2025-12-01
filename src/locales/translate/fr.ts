@@ -119,9 +119,12 @@ export const fr = {
     title: 'Propulsez votre croissance',
     content: 'Vous cherchez un partenaire pour aller au-delà du simple digital, captiver vos utilisateurs et propulser votre croissance ? Depuis plus de 12 ans, nos expertises transforment l\'Expérience Utilisateur en un véritable levier stratégique.',
   },
+  agency: {
+    title: 'Un réseau international <br>au service de vos projets',
+  },
   seo: {
     home: {
-      title: 'The future is the republic',
+      title: 'The future is the republic | Accueil',
       description: 'Description dans le head pour la page Accueil FR.',
     },
     contact: {
@@ -279,5 +282,21 @@ export const fr = {
   },
   footer: {
     infiniteTitle: 'contactez-nous',
+    contact: {
+      title: 'Prêts à transformer <br> votre expérience digitale ?',
+      ctaItems: [
+        {
+          content: 'Contactez-nous',
+          href: '/contact',
+          type: 'internal',
+        },
+        {
+          content: 'Rejoignez-nous',
+          href: 'https://jobs.smile.eu/departments/ux-republic',
+          type: 'link',
+        },
+      ],
+    },
+    copyRight: 'UX Republic — Membre du groupe Smile — Tous droits réservés.',
   },
 } satisfies import('vue-i18n').DefineLocaleMessage

@@ -4,37 +4,37 @@ export const es = {
       {
         content: 'UX-REPUBLIC',
         type: 'anchor',
-        href: '/#uxrepublic',
+        href: '/es#uxrepublic',
       },
       {
         content: 'Nuestras experticias en acción',
         type: 'anchor',
-        href: '/#expert',
+        href: '/es#expert',
       },
       {
         content: 'Impulsa tu crecimiento',
         type: 'anchor',
-        href: '/#croissance',
+        href: '/es#croissance',
       },
       {
         content: 'Nuestros logros',
         type: 'anchor',
-        href: '/#reussites',
+        href: '/es#reussites',
       },
       {
         content: 'Nuestras agencias',
         type: 'anchor',
-        href: '/#nos-agences',
+        href: '/es#nos-agences',
       },
       {
         content: 'Actualidades',
         type: 'anchor',
-        href: '/#actus',
+        href: '/es#actus',
       },
       {
         content: 'Contáctanos',
         type: 'internal',
-        href: '/contact',
+        href: '/es/contact',
       },
     ],
   },
@@ -111,14 +111,17 @@ export const es = {
     content:
     '¿Buscas un socio que vaya más allá de lo digital, que cautive a tus usuarios y acelere tu crecimiento? Desde hace más de 12 años, nuestras experticias transforman la Experiencia de Usuario en un verdadero motor estratégico.',
   },
+  agency: {
+    title: 'Una red internacional <br>al servicio de tus proyectos',
+  },
   seo: {
     home: {
-      title: 'The future is the republic',
-      description: 'Descripción meta para la página de inicio (ES).',
+      title: 'The future is the republic | home',
+      description: 'Descripción meta para la página de inicio.',
     },
     contact: {
       title: 'The future is the republic | Contacto',
-      description: 'Descripción meta para la página de contacto (ES).',
+      description: 'Descripción meta para la página de contacto.',
     },
   },
   hero: {
@@ -271,5 +274,21 @@ export const es = {
   },
   footer: {
     infiniteTitle: 'contáctanos',
+    contact: {
+      title: '¿Listos para transformar <br> vuestra experiencia digital?',
+      ctaItems: [
+        {
+          content: 'Contáctanos',
+          href: '/es/contact',
+          type: 'internal',
+        },
+        {
+          content: 'Únete a nosotros',
+          href: 'https://jobs.smile.eu/en',
+          type: 'link',
+        },
+      ],
+    },
+    copyRight: 'UX Republic — Miembro del grupo Smile — Todos los derechos reservados.',
   },
 } satisfies import('vue-i18n').DefineLocaleMessage

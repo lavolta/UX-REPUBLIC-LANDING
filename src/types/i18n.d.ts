@@ -25,8 +25,16 @@ declare module 'vue-i18n' {
       title: string
       content: string
     }
+    agency: {
+      title: string
+    }
     footer: {
       infiniteTitle: string
+      contact: {
+        title: string
+        ctaItems: NavigationItem[]
+      }
+      copyRight: string
     }
     seo: {
       home: SeoPageInterface

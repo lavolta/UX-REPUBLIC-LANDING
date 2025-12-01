@@ -4,37 +4,37 @@ export const en = {
       {
         content: 'UX-REPUBLIC',
         type: 'anchor',
-        href: '/#uxrepublic',
+        href: '/en#uxrepublic',
       },
       {
         content: 'Our expertise in action',
         type: 'anchor',
-        href: '/#expert',
+        href: '/en#expert',
       },
       {
         content: 'Boost your growth',
         type: 'anchor',
-        href: '/#croissance',
+        href: '/en#croissance',
       },
       {
         content: 'Our success stories',
         type: 'anchor',
-        href: '/#reussites',
+        href: '/en#reussites',
       },
       {
         content: 'Our agencies',
         type: 'anchor',
-        href: '/#nos-agences',
+        href: '/en#nos-agences',
       },
       {
         content: 'News',
         type: 'anchor',
-        href: '/#actus',
+        href: '/en#actus',
       },
       {
         content: 'Contact us',
         type: 'internal',
-        href: '/contact',
+        href: '/en/contact',
       },
     ],
   },
@@ -111,14 +111,17 @@ export const en = {
     content:
     'Looking for a partner to go beyond digital, captivate your users, and accelerate your growth? For over 12 years, our expertise has transformed User Experience into a true strategic lever.',
   },
+  agency: {
+    title: 'An international network <br>at the service of your projects',
+  },
   seo: {
     home: {
       title: 'The future is the republic',
-      description: 'Meta description for the Home page (EN).',
+      description: 'Meta description for the Home page.',
     },
     contact: {
       title: 'The future is the republic | Contact',
-      description: 'Meta description for the Contact page (EN).',
+      description: 'Meta description for the Contact page.',
     },
   },
   hero: {
@@ -271,5 +274,21 @@ export const en = {
   },
   footer: {
     infiniteTitle: 'contact us',
+    contact: {
+      title: 'Ready to transform <br> your digital experience?',
+      ctaItems: [
+        {
+          content: 'Contact us',
+          href: '/en/contact',
+          type: 'internal',
+        },
+        {
+          content: 'Join us',
+          href: 'https://jobs.smile.eu/en',
+          type: 'link',
+        },
+      ],
+    },
+    copyRight: 'UX Republic — Member of the Smile Group — All rights reserved.',
   },
 } satisfies import('vue-i18n').DefineLocaleMessage
