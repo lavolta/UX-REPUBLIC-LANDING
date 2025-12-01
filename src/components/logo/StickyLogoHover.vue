@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { globalStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 const textures = ref([
   '/images/textures/white.png',
 ])
@@ -16,6 +17,16 @@ const switchIndex = () => {
   }
   currentIndex.value = newIndex
 }
+const { locale } = useI18n()
+console.log('locale', locale)
+const homeUrl = {
+  fr: '/',
+  en: '/en',
+  es: '/es',
+}
+const getHomeUrl = computed(() => {
+  return homeUrl[locale.value]
+})
 const handleClick = () => {
   if (window.location.pathname === '/') {
     window.scrollTo({
@@ -30,7 +41,7 @@ const handleClick = () => {
 <template>
   <RouterLink
     class="sticky-logo"
-    to="/"
+    :to="getHomeUrl"
     @click="handleClick"
   >
     <svg
