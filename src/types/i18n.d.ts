@@ -21,6 +21,10 @@ declare module 'vue-i18n' {
       title: string
       items: StackSliderItem[]
     }
+    growth: {
+      title: string
+      content: string
+    }
     footer: {
       infiniteTitle: string
     }

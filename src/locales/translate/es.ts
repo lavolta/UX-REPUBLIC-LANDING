@@ -106,6 +106,11 @@ export const es = {
       },
     ],
   },
+  growth: {
+    title: 'Impulsa tu crecimiento',
+    content:
+    '¿Buscas un socio que vaya más allá de lo digital, que cautive a tus usuarios y acelere tu crecimiento? Desde hace más de 12 años, nuestras experticias transforman la Experiencia de Usuario en un verdadero motor estratégico.',
+  },
   seo: {
     home: {
       title: 'The future is the republic',

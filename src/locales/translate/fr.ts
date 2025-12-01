@@ -115,6 +115,10 @@ export const fr = {
       },
     ],
   },
+  growth: {
+    title: 'Propulsez votre croissance',
+    content: 'Vous cherchez un partenaire pour aller au-delà du simple digital, captiver vos utilisateurs et propulser votre croissance ? Depuis plus de 12 ans, nos expertises transforment l\'Expérience Utilisateur en un véritable levier stratégique.',
+  },
   seo: {
     home: {
       title: 'The future is the republic',

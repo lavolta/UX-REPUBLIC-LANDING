@@ -44,11 +44,10 @@ usePageTransition()
     background-color="white"
   >
     <template #title>
-      Propulsez votre croissance
+      {{ $t('growth.title') }}
     </template>
     <template #content>
-      Vous cherchez un partenaire pour aller au-delà du simple digital, captiver vos utilisateurs et propulser votre croissance ?
-      Depuis plus de 12 ans, nos expertises transforment l'Expérience Utilisateur en un véritable levier stratégique.
+      {{ $t('growth.content') }}
     </template>
   </PresentationHero>
   <ProjectGrid id="reussites" />

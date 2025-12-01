@@ -106,6 +106,11 @@ export const en = {
       },
     ],
   },
+  growth: {
+    title: 'Boost your growth',
+    content:
+    'Looking for a partner to go beyond digital, captivate your users, and accelerate your growth? For over 12 years, our expertise has transformed User Experience into a true strategic lever.',
+  },
   seo: {
     home: {
       title: 'The future is the republic',
