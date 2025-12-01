@@ -6,10 +6,21 @@ import type {
   ProjectItemInterface,
   NavigationItem,
   SeoPageInterface,
+  CountItem,
+  StackSliderItem,
 } from '@/interfaces'
 // https://vue-i18n.intlify.dev/guide/advanced/typescript
 declare module 'vue-i18n' {
   export interface DefineLocaleMessage {
+    uxrep: {
+      title: string
+      content: string
+      count: CountItem[]
+    }
+    skill: {
+      title: string
+      items: StackSliderItem[]
+    }
     footer: {
       infiniteTitle: string
     }

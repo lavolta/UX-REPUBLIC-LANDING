@@ -13,10 +13,8 @@ export const xpItems: XpItemInterface[] = [
     secondarypicture: {
       alt: '',
       href: '/images/xp-slider/bg-1.jpg',
-
     },
   },
-
   {
     title: 'Façonner <br>des parcours <br>qui convertissent',
     text: 'Nous transformons vos interfaces en leviers de croissance, grâce à des expériences alliant design, produit et performance pour générer impact.',

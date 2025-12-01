@@ -95,3 +95,18 @@ export interface SeoPageInterface {
   title: string
   description: string
 }
+
+export interface CountItem {
+  title: string
+  value: number
+  displayValue: number
+  suffix: string
+}
+
+export interface StackSliderItem {
+  title: string
+  text: string
+  tags: string[]
+  mainpicture: PictureInterface
+  secondarypicture: PictureInterface
+}
