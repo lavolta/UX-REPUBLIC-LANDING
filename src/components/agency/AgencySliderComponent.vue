@@ -164,9 +164,10 @@ onUnmounted(() => {
     ref="agencySection"
     class="agency"
   >
-    <p class="agency__sectiontitle section-title">
-      Un réseau international <br>au service de vos projets
-    </p>
+    <p
+      class="agency__sectiontitle section-title"
+      v-html="$t('agency.title')"
+    />
     <div
       class="agency__mask"
     >

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { xpItems } from '@/data'
 import {
   onMounted,
   onUnmounted,
@@ -529,7 +528,7 @@ onUnmounted(() => {
     </div>
     <div class="stackslider__content">
       <section
-        v-for="(item, key) in xpItems"
+        v-for="(item, key) in props.items"
         :key="`stackslider-item-${key}`"
         class="stackslider-item"
       >
@@ -583,7 +582,7 @@ onUnmounted(() => {
       class="stackslider__dots"
     >
       <button
-        v-for="(item, key) in xpItems"
+        v-for="(item, key) in props.items"
         :key="`${props.id}-dot-${key}`"
         class="stackslider__dot"
         :class="{'actif': stackSliderState.currentIndex === key}"

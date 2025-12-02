@@ -1,11 +1,7 @@
 <script lang="ts" setup>
 import InfiniteScrollSlider from '@/components/infinite-scroll-slider/InfiniteScrollSlider.vue'
 import ProjectGridBG from './ProjectGridBG.vue'
-import ProjectItem from './ProjectItem2.vue'
-import { useI18n } from 'vue-i18n'
-const { tm } = useI18n()
-const projectItems = tm('project.items')
-
+import ProjectItem from './ProjectItem.vue'
 </script>
 <template>
   <section class="project-grid">
@@ -16,7 +12,7 @@ const projectItems = tm('project.items')
       </p>
       <div class="project-grid__list grid">
         <ProjectItem
-          v-for="(item, key) in projectItems"
+          v-for="(item, key) in $tm('project.items')"
           :key="`project-item-${key}`"
           :item="item"
           :number="key + 1 < 10 ? `0${key + 1}` : `${key + 1}`"

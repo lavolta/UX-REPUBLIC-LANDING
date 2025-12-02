@@ -17,14 +17,11 @@ let notFoundContext: gsap.Context | null = null
 useDefaultSeo('home')
 usePageTransition()
 watch(() => transitionStore.state.welcomeAnimation, (welcomeAnimation: boolean) => {
-  console.log('welcomeAnimation change', welcomeAnimation)
   if (!welcomeAnimation) {
-    console.log('pret a lancer l\'animation')
     handleGsapAnimation()
   }
 })
 const handleGsapAnimation = () => {
-  console.log('handleGsapAnimation')
   if (!contentVisible.value) {
     notFoundContext = gsap.context(() => {
       const timeline = gsap.timeline({
