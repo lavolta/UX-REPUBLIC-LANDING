@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import { onMounted, useTemplateRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
+import HeaderLangSwitcher from '@/components/header/HeaderLangSwitcher.vue'
+
 defineEmits<{
   (e: 'click', value: string): void
 }>()
-const { tm } = useI18n()
-const items = tm('header.navigation')
+
 const mobileNavComponentTimeline = gsap.timeline()
 const mobileNav = useTemplateRef('mobileNav')
 const mobileNavItems = useTemplateRef('mobileNavItems')
+const mobileNavLang = useTemplateRef('mobileNavLang')
 
 const defineMobileTimeLine = () => {
   if (!mobileNav) {
@@ -32,14 +33,13 @@ const defineMobileTimeLine = () => {
       ease: 'back.inOut',
       duration: 0.5,
     }, '>-=0.2')
-    // menuNavItems.forEach((menuNavItem, index) => {
-    //   mobileNavComponentTimeline.fromTo(menuNavItem, {
-    //     opacity: 0,
-    //     y: 10,
-    //     duration: 0.1,
-    //     stagger: 0.01,
-    //   }, { opacity: 1, y: 0 }, index === 0 ? '>' : `<+0.03`)
-    // })
+  }
+  if (mobileNavLang.value) {
+    mobileNavComponentTimeline.fromTo(mobileNavLang.value,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.3, ease: 'power1' },
+      '<+0.5',
+    )
   }
 }
 
@@ -60,7 +60,7 @@ defineExpose({
       <nav class="mobile-nav__list">
         <ul>
           <li
-            v-for="(item, key) in items"
+            v-for="(item, key) in $tm('header.navigation')"
             :key="`mobile-nav-item-${key}`"
             ref="mobileNavItems"
           >
@@ -82,6 +82,12 @@ defineExpose({
           </li>
         </ul>
       </nav>
+      <div
+        ref="mobileNavLang"
+        class="mobile-nav__lang"
+      >
+        <HeaderLangSwitcher />
+      </div>
     </div>
   </div>
 </template>
@@ -90,6 +96,7 @@ defineExpose({
   /* stylelint-disable max-nesting-depth, selector-class-pattern */
   position: fixed;
   z-index: 100;
+  overflow: hidden;
 
   // transform: translateY(-110%);
   background-color: transparent;
@@ -135,6 +142,13 @@ defineExpose({
         }
       }
     }
+  }
+
+  &__lang {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>
