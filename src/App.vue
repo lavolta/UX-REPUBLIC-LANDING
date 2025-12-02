@@ -47,7 +47,6 @@ useHead({
     },
   ],
   meta: [
-    { name: 'robots', content: 'noindex, follow' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   ],
 })

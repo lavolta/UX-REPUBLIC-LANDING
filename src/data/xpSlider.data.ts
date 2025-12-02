@@ -7,7 +7,7 @@ export const xpItems: XpItemInterface[] = [
     tags: ['UX Research', 'Design de service', 'Coaching UX', 'Stratégie', 'Product Ownership'],
     mainpicture: {
       alt: '',
-      href: '/images/xp-slider/main-1.png',
+      href: '/images/xp-slider/main-1.jpg',
 
     },
     secondarypicture: {
