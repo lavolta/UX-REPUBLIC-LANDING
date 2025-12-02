@@ -18,7 +18,6 @@ const switchIndex = () => {
   currentIndex.value = newIndex
 }
 const { locale } = useI18n()
-console.log('locale', locale)
 const homeUrl = {
   fr: '/',
   en: '/en',

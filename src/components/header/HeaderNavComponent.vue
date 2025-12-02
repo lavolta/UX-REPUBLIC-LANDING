@@ -1,15 +1,10 @@
-<script lang="ts" setup>
-import { useI18n } from 'vue-i18n'
-const { tm } = useI18n()
-const navItems = tm('header.navigation')
-</script>
 <template>
   <nav
     class="header-nav"
   >
     <ul>
       <li
-        v-for="(item, key) in navItems"
+        v-for="(item, key) in $tm('header.navigation')"
         :key="`header-nav-item-${key}`"
       >
         <a

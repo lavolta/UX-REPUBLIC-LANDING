@@ -13,15 +13,14 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 import { useElementSize, useWindowSize } from '@vueuse/core'
-
 import { globalStore, transitionStore } from '@/store'
+
 import HeaderComponent from '@/components/header/HeaderComponent.vue'
 import FooterComponent from '@/components/footer/FooterComponent.vue'
 import WelcomeComponent from '@/components/welcome/WelcomeComponent.vue'
 import TransitionScreen from '@/components/transition-screen/TransitionScreen.vue'
 
 const mainContent = useTemplateRef('mainContent')
-
 const { height: PageHeight } = useElementSize(mainContent)
 const { height: windowHeight } = useWindowSize()
 

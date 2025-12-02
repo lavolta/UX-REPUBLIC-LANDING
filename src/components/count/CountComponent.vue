@@ -14,7 +14,7 @@ const target = useTemplateRef<HTMLDivElement>('countSection')
 const targetIsVisible = useElementVisibility(target)
 
 const handleSwitchValueToDisplay = () => {
-  displayItems.value = displayItems.value.map((item) => {
+  displayItems.value = props.items.map((item) => {
     return {
       title: item.title,
       value: item.value,
@@ -23,6 +23,10 @@ const handleSwitchValueToDisplay = () => {
     }
   })
 }
+
+watch(() => props.items, () => {
+  handleSwitchValueToDisplay()
+})
 
 watch(targetIsVisible, (newValue) => {
   if (newValue && firstView.value) {
