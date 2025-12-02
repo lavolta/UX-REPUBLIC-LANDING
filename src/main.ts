@@ -32,7 +32,6 @@ export const createApp = ViteSSG(
 
     router.beforeEach((to) => {
       if (to.path.startsWith('/en')) {
-        console.log('ici')
         i18n.global.locale.value = 'en'
       }
       else if (to.path.startsWith('/es')) {
