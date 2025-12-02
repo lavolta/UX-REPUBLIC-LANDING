@@ -1,8 +1,8 @@
 <!-- components/footer/FooterNav.vue -->
 <script setup lang="ts">
+import { computed } from 'vue'
 import LinkedinIcon from '@/components/icons/LinkedinIcon.vue'
 import YoutubeIcon from '@/components/icons/YoutubeIcon.vue'
-
 const footerLinks = [
   { text: 'Informations Légales', url: '#legal' },
   { text: 'Politique de Confidentialité (RGPD)', url: '#privacy' },
@@ -13,6 +13,9 @@ const socialLinks = [
   { icon: LinkedinIcon, url: 'https://www.linkedin.com/company/ux-republic' },
   { icon: YoutubeIcon, url: 'https://www.youtube.com/@UXREPUBLICParis' },
 ]
+const currentYear = computed(() => {
+  return new Date().getFullYear()
+})
 </script>
 
 <template>
@@ -24,7 +27,7 @@ const socialLinks = [
       <!-- Left: copyright -->
       <div class="copyright-section">
         <p class="copyright-text">
-          © 2025 UX Republic — Membre du groupe Smile — Tous droits réservés.
+          © {{ currentYear }} {{ $t('footer.copyRight') }}
         </p>
       </div>
 

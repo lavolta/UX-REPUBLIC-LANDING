@@ -27,12 +27,16 @@ const targetIsVisible = useElementVisibility(target, {
       </div>
       <div class="project-item__content">
         <div>
-          <span class="project-item__number">
-            <span>{{ number }}</span>
-          </span>
-          <h3 class="project-item__title">
+          <h3 class="project-item__number">
             <span>{{ item.title }}</span>
           </h3>
+          <span
+            v-if="item.subtitle"
+            class="project-item__title"
+          >
+            <span>{{ item.subtitle }}</span>
+          </span>
+
           <p class="project-item__text">
             <span>{{ item.content }}</span>
           </p>
@@ -183,7 +187,7 @@ const targetIsVisible = useElementVisibility(target, {
       transition: all var(--bezier) .5s;
       transition-delay: .5s;
       opacity: 0%;
-      font-size: 1rem;
+      font-size: 1.5rem;
       font-weight: 300;
 
       @include mq(smartphone) {
@@ -192,14 +196,14 @@ const targetIsVisible = useElementVisibility(target, {
 
       @include mq(desktop) {
         margin-bottom: 2.25rem;
-        font-size: 1.25rem;
       }
   }
 
   &__title {
+    display: block;
     margin-bottom: 1rem;
     overflow: hidden;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.2;
 

@@ -1,1 +1,1 @@
-export type i18nLocalType = 'fr' | 'en'
+export type i18nLocalType = 'fr' | 'en' | 'es'

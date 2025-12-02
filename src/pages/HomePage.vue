@@ -12,7 +12,6 @@ import {
   usePageTransition,
   useDefaultSeo,
 } from '@/composable'
-
 useDefaultSeo('home')
 usePageTransition()
 </script>
@@ -23,29 +22,32 @@ usePageTransition()
     background-color="black"
   >
     <template #title>
-      UX-REPUBLIC
+      {{ $t('uxrep.title') }}
     </template>
     <template #content>
-      Dompteur d'expériences digitales qui mettent l'utilisateur au centre. Précurseurs du design à Paris, nous avons grandi avec audace. Aujourd'hui, dans un paysage où les discours se ressemblent, nous choisissons de nous réinventer. Fidèles à nos valeurs — innovation, proximité, pragmatisme et partage — nous affirmons une nouvelle ambition : créer des expériences justes, utiles, performantes et profondément humaines.
+      {{ $t('uxrep.content') }}
     </template>
     <template #secondaryContent>
-      <CountComponent theme="white" />
+      <CountComponent
+        theme="white"
+        :items="$tm('uxrep.count')"
+      />
     </template>
   </PresentationHero>
   <StackSlider
     id="expert"
-    title="Nos expertises en action"
+    :title="$t('skill.title')"
+    :items="$tm('skill.items')"
   />
   <PresentationHero
     id="croissance"
     background-color="white"
   >
     <template #title>
-      Propulsez votre croissance
+      {{ $t('growth.title') }}
     </template>
     <template #content>
-      Vous cherchez un partenaire pour aller au-delà du simple digital, captiver vos utilisateurs et propulser votre croissance ?
-      Depuis plus de 12 ans, nos expertises transforment l'Expérience Utilisateur en un véritable levier stratégique.
+      {{ $t('growth.content') }}
     </template>
   </PresentationHero>
   <ProjectGrid id="reussites" />

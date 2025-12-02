@@ -4,7 +4,7 @@ import NewsGridItemText from './NewsGridItemText.vue'
 import NewsGridItemImage from './NewsGridItemImage.vue'
 import NewGridSocialItem from './NewGridSocialItem.vue'
 import { useI18n } from 'vue-i18n'
-import { onMounted, useTemplateRef } from 'vue'
+import { onMounted, useTemplateRef, watch } from 'vue'
 import { cleanDataArcticleFromUxRepublicResponse } from '@/utils/data.utils'
 import type { UxRepublicArticleInterface, NewsItemType } from '@/interfaces'
 const { tm, locale } = useI18n()
@@ -40,15 +40,7 @@ const updateIndicator = () => {
     }
   }
 }
-onMounted(async () => {
-  // 3. Attacher l'écouteur d'événement
-  if (newsGrid.value) {
-    // Écoute de l'événement de défilement
-    newsGrid.value.addEventListener('scroll', updateIndicator)
-
-    // Initialiser la position de l'indicateur au cas où il y aurait déjà un défilement
-    updateIndicator()
-  }
+const fetchData = async () => {
   try {
     const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8`
     const response = await fetch(urlToFetch)
@@ -61,6 +53,16 @@ onMounted(async () => {
   catch (error) {
     console.log('error', error)
   }
+}
+watch(locale, () => {
+  fetchData()
+})
+onMounted(async () => {
+  if (newsGrid.value) {
+    newsGrid.value.addEventListener('scroll', updateIndicator)
+    updateIndicator()
+  }
+  fetchData()
 })
 
 </script>
