@@ -1,8 +1,9 @@
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
+import type { StackSliderItem } from '@/interfaces'
 export interface StackSliderPropsInterface {
   id: string
   title: string
+  items: StackSliderItem[]
 }
 export interface StackSliderState {
   currentIndex: number

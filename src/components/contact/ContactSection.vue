@@ -5,24 +5,31 @@
 
 <template>
   <div class="contact">
-    <h2 class="contact__title">
-      Prêts à transformer <br>
-      votre expérience digitale ?
-    </h2>
+    <h2
+      class="contact__title"
+      v-html="$t('footer.contact.title')"
+    />
     <div class="contact__cta">
-      <RouterLink
-        to="/contact"
-        class="button"
+      <template
+        v-for="(item, key) in $tm('footer.contact.ctaItems')"
+        :key="`footerCtaItem-${key}`"
       >
-        Contactez-nous
-      </RouterLink>
-      <a
-        href="https://jobs.smile.eu/departments/ux-republic"
-        target="_blank"
-        class="button"
-      >
-        Rejoignez-nous
-      </a>
+        <RouterLink
+          v-if="item.type === 'internal'"
+          :to="item.href"
+          class="button"
+        >
+          {{ item.content }}
+        </RouterLink>
+        <a
+          v-else
+          :href="item.href"
+          target="_blank"
+          class="button"
+        >
+          {{ item.content }}
+        </a>
+      </template>
     </div>
   </div>
 </template>

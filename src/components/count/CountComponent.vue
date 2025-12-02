@@ -2,28 +2,19 @@
 import NumberFlow, { continuous } from '@number-flow/vue'
 import { useElementVisibility } from '@vueuse/core'
 import { useTemplateRef, watch, ref } from 'vue'
-interface ItemsNumber {
-  title: string
-  value: number
-  displayValue: number
-  suffix: string
-}
-defineProps<{
+import type { CountItem } from '@/interfaces'
+const props = defineProps<{
   theme: 'white' | 'black'
+  items: CountItem[]
 }>()
-const items = ref<ItemsNumber[]>([
-  { title: 'ans au service de l\'UX', value: 12, displayValue: 10, suffix: '' },
-  { title: 'Collaborateurs passionnés', value: 100, displayValue: 50, suffix: '+' },
-  { title: 'Missions réalisées', value: 950, displayValue: 800, suffix: '+' },
-  { title: 'Bureaux en Europe', value: 4, displayValue: 0, suffix: '' },
-])
+const displayItems = ref<CountItem[]>(props.items)
 
 const firstView = ref(true)
 const target = useTemplateRef<HTMLDivElement>('countSection')
 const targetIsVisible = useElementVisibility(target)
 
 const handleSwitchValueToDisplay = () => {
-  items.value = items.value.map((item) => {
+  displayItems.value = displayItems.value.map((item) => {
     return {
       title: item.title,
       value: item.value,
@@ -48,7 +39,7 @@ watch(targetIsVisible, (newValue) => {
     :class="['count', `count--${theme}`]"
   >
     <div
-      v-for="(item, key) in items"
+      v-for="(item, key) in displayItems"
       :key="`count-item-${key}`"
       class="count__item"
     >
