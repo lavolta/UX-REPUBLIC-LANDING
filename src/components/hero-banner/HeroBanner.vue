@@ -9,7 +9,7 @@ onMounted(() => {
   <section class="hero">
     <video
       ref="heroVideo"
-      poster="/images/hero/lion.png"
+      poster="/images/hero/lion.jpg"
       preload="none"
       class="hero__bg"
       muted

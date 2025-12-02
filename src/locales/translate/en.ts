@@ -58,7 +58,7 @@ export const en = {
         tags: ['UX Research', 'Service Design', 'UX Coaching', 'Strategy', 'Product Ownership'],
         mainpicture: {
           alt: '',
-          href: '/images/xp-slider/main-1.png',
+          href: '/images/xp-slider/main-1.jpg',
         },
         secondarypicture: {
           alt: '',

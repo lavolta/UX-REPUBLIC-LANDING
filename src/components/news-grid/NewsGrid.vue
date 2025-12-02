@@ -42,7 +42,8 @@ const updateIndicator = () => {
 }
 const fetchData = async () => {
   try {
-    const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8`
+    const urlToFetch = locale.value === 'fr' ? `https://www.ux-republic.com/wp-json/wp/v2/posts?per_page=8&_fields=id,date,link,title.rendered,excerpt.rendered` : `https://www.ux-republic.com/${locale.value}/wp-json/wp/v2/posts?per_page=8&fields=id,date,link,title.rendered,excerpt.rendered`
+    console.log('urlToFetch', urlToFetch)
     const response = await fetch(urlToFetch)
     const data: UxRepublicArticleInterface[] = await response.json()
     mapFrechDataWithDefaultData(data)
