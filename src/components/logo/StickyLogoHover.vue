@@ -21,7 +21,7 @@ const handleClick = () => {
 <template>
   <RouterLink
     class="sticky-logo"
-    :to="`/${$i18n.locale}`"
+    :to="$i18n.locale === 'fr' ? '/' : `/${$i18n.locale}`"
     @click="handleClick"
   >
     <svg
