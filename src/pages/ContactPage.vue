@@ -9,11 +9,13 @@ import StarsIcon from '@/components/icons/StarsIcon.vue'
 const { locale } = useI18n()
 useDefaultSeo('contact')
 usePageTransition()
+
 const formId = {
   fr: 'c9e6edb1-0c91-4ada-8b97-ac8dba31747f',
   en: '7580579c-7ec5-4443-b18f-45e19b2c875b',
   es: '7580579c-7ec5-4443-b18f-45e19b2c875b',
 }
+
 const generateHbsptForm = () => {
   if (window) {
     window.hbspt.forms.create({
