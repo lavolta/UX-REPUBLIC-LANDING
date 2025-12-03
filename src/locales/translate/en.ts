@@ -38,6 +38,35 @@ export const en = {
       },
     ],
   },
+  footer: {
+    infiniteTitle: 'contact us',
+    contact: {
+      title: 'Ready to transform <br> your digital experience?',
+      ctaItems: [
+        {
+          content: 'Contact us',
+          href: '/en/contact',
+          type: 'internal',
+        },
+        {
+          content: 'Join us',
+          href: 'https://jobs.smile.eu/en',
+          type: 'link',
+        },
+      ],
+    },
+    copyRight: 'UX Republic — Member of the Smile Group — All rights reserved.',
+  },
+  seo: {
+    home: {
+      title: 'The future is the republic',
+      description: 'Meta description for the Home page.',
+    },
+    contact: {
+      title: 'The future is the republic | Contact',
+      description: 'Meta description for the Contact page.',
+    },
+  },
   uxrep: {
     title: 'UX-REPUBLIC',
     content:
@@ -114,65 +143,37 @@ export const en = {
   agency: {
     title: 'An international network <br>at the service of your projects',
   },
-  seo: {
-    home: {
-      title: 'The future is the republic',
-      description: 'Meta description for the Home page.',
-    },
-    contact: {
-      title: 'The future is the republic | Contact',
-      description: 'Meta description for the Contact page.',
-    },
-  },
-  hero: {
-    title: 'Hero title from the "fr" file',
-    subtitle: 'Hero subtitle',
-  },
-  heroHome: [
-    { text: 'Tamer', isSpecialStyle: false },
-    { text: 'of experiences that', isSpecialStyle: false },
-    { text: 'put the user', isSpecialStyle: false },
-    { text: 'at the center', isSpecialStyle: true },
-  ],
-  button: {
-    navigationCta: 'Navigate',
-    offerCta: 'Join us',
-    translateCta: 'EN',
-    contactCta: 'Contact us',
-  },
-  tags: {
-    accessibility: 'Accessibility',
-    security: 'Security',
-    performance: 'Performance',
-  },
-  expert: {
-    title: 'My great title',
-    cards: [
+  project: {
+    title: 'Our success stories',
+    items: [
       {
-        title: 'Card 1',
-        text: 'This is the text for card 1',
-        tags: ['UX', 'UI'],
+        title: 'BPCE',
+        subtitle: 'Loyalty built on trust',
+        content: 'Our UX/UI, Product and Analytics experts have been working with BPCE since 2017 to optimize their digital performance.',
+        theme: 'theme-1',
         picture: {
-          alt: 'image card 1',
-          href: '/images/img-1.jpg',
+          alt: '',
+          href: '/images/project/project-item-media-1.png',
         },
       },
       {
-        title: 'Card 2',
-        text: 'This is the text for card 2',
-        tags: ['UX', 'UI'],
+        title: 'LVMH',
+        subtitle: 'Serving sustainable excellence',
+        content: 'Since 2014, our experience design has supported LVMH, reflecting the excellence initiated with Louis Vuitton.',
+        theme: 'theme-2',
         picture: {
-          alt: 'image card 2',
-          href: '/images/img-1.jpg',
+          alt: '',
+          href: '/images/project/project-item-media-2.png',
         },
       },
       {
-        title: 'Card 3',
-        text: 'This is the text for card 3',
-        tags: ['UX', 'UI'],
+        title: 'NAVBLUE',
+        subtitle: 'Innovation for the long run',
+        content: 'Partners of NAVBLUE (Airbus Group) since 2018, we design digital products that ensure their technological leadership.',
+        theme: 'theme-3',
         picture: {
-          alt: 'image card 3',
-          href: '/images/img-1.jpg',
+          alt: '',
+          href: '/images/project/project-item-media-3.png',
         },
       },
     ],
@@ -236,59 +237,5 @@ export const en = {
         socialType: 'youtube',
       },
     ],
-  },
-  project: {
-    title: 'Our success stories',
-    items: [
-      {
-        title: 'BPCE',
-        subtitle: 'Loyalty built on trust',
-        content: 'Our UX/UI, Product and Analytics experts have been working with BPCE since 2017 to optimize their digital performance.',
-        theme: 'theme-1',
-        picture: {
-          alt: '',
-          href: '/images/project/project-item-media-1.png',
-        },
-      },
-      {
-        title: 'LVMH',
-        subtitle: 'Serving sustainable excellence',
-        content: 'Since 2014, our experience design has supported LVMH, reflecting the excellence initiated with Louis Vuitton.',
-        theme: 'theme-2',
-        picture: {
-          alt: '',
-          href: '/images/project/project-item-media-2.png',
-        },
-      },
-      {
-        title: 'NAVBLUE',
-        subtitle: 'Innovation for the long run',
-        content: 'Partners of NAVBLUE (Airbus Group) since 2018, we design digital products that ensure their technological leadership.',
-        theme: 'theme-3',
-        picture: {
-          alt: '',
-          href: '/images/project/project-item-media-3.png',
-        },
-      },
-    ],
-  },
-  footer: {
-    infiniteTitle: 'contact us',
-    contact: {
-      title: 'Ready to transform <br> your digital experience?',
-      ctaItems: [
-        {
-          content: 'Contact us',
-          href: '/en/contact',
-          type: 'internal',
-        },
-        {
-          content: 'Join us',
-          href: 'https://jobs.smile.eu/en',
-          type: 'link',
-        },
-      ],
-    },
-    copyRight: 'UX Republic — Member of the Smile Group — All rights reserved.',
   },
 } satisfies import('vue-i18n').DefineLocaleMessage

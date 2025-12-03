@@ -2,7 +2,7 @@ import { ViteSSG } from 'vite-ssg'
 import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import routes from './router'
-import { en, fr, es } from './locales'
+import { en, fr, es, nl } from './locales'
 
 // PLUGINS GSAP
 
@@ -26,6 +26,7 @@ export const createApp = ViteSSG(
         fr,
         en,
         es,
+        nl,
       },
     })
     app.use(i18n)
@@ -36,6 +37,9 @@ export const createApp = ViteSSG(
       }
       else if (to.path.startsWith('/es')) {
         i18n.global.locale.value = 'es'
+      }
+      else if (to.path.startsWith('/nl')) {
+        i18n.global.locale.value = 'nl'
       }
       else {
         i18n.global.locale.value = 'fr'

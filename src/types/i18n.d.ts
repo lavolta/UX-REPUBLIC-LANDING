@@ -1,7 +1,5 @@
 import 'vue-i18n'
 import type {
-  CardExpertInterface,
-  HeroBannerTextInterface,
   NewsItemType,
   ProjectItemInterface,
   NavigationItem,
@@ -12,6 +10,21 @@ import type {
 // https://vue-i18n.intlify.dev/guide/advanced/typescript
 declare module 'vue-i18n' {
   export interface DefineLocaleMessage {
+    header: {
+      navigation: NavigationItem[]
+    }
+    footer: {
+      infiniteTitle: string
+      contact: {
+        title: string
+        ctaItems: NavigationItem[]
+      }
+      copyRight: string
+    }
+    seo: {
+      home: SeoPageInterface
+      contact: SeoPageInterface
+    }
     uxrep: {
       title: string
       content: string
@@ -27,41 +40,6 @@ declare module 'vue-i18n' {
     }
     agency: {
       title: string
-    }
-    footer: {
-      infiniteTitle: string
-      contact: {
-        title: string
-        ctaItems: NavigationItem[]
-      }
-      copyRight: string
-    }
-    seo: {
-      home: SeoPageInterface
-      contact: SeoPageInterface
-    }
-    header: {
-      navigation: NavigationItem[]
-    }
-    hero: {
-      title: string
-      subtitle: string
-    }
-    heroHome: HeroBannerTextInterface[]
-    button: {
-      navigationCta: string
-      offerCta: string
-      translateCta: string
-      contactCta: string
-    }
-    tags: {
-      accessibility: string
-      security: string
-      performance: string
-    }
-    expert: {
-      title: string
-      cards: CardExpertInterface[]
     }
     project: {
       title: string
