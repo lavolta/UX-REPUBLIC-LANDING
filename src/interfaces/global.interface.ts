@@ -23,14 +23,6 @@ export interface GridItemTextInterface {
   type: 'text'
 }
 
-export interface XpItemInterface {
-  title: string
-  text: string
-  mainpicture: PictureInterface
-  secondarypicture: PictureInterface
-  tags: string[]
-}
-
 export type ItemThemeType = 'theme-1' | 'theme-2' | 'theme-3' | 'theme-4' | 'theme-5' | 'theme-6' | 'theme-7'
 export interface AgencyItemInterface {
   title: string
