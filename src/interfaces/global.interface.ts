@@ -2,10 +2,6 @@ export interface PictureInterface {
   href: string
   alt: string
 }
-export interface HeroBannerTextInterface {
-  text: string
-  isSpecialStyle: boolean
-}
 export interface GridItemSocialInterface {
   type: 'social'
   title: string
@@ -25,14 +21,6 @@ export interface GridItemTextInterface {
   date: string
   href: string
   type: 'text'
-}
-
-export interface XpItemInterface {
-  title: string
-  text: string
-  mainpicture: PictureInterface
-  secondarypicture: PictureInterface
-  tags: string[]
 }
 
 export type ItemThemeType = 'theme-1' | 'theme-2' | 'theme-3' | 'theme-4' | 'theme-5' | 'theme-6' | 'theme-7'

@@ -110,6 +110,7 @@ onUnmounted(() => {
     position: relative;
     top: calc(50% - 37px);
     left: 0;
+    opacity: 0%;
     pointer-events: none;
 
     @include mq(desktop) {

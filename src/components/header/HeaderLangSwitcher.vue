@@ -19,6 +19,7 @@ const handleSwitchLocale = (localeToSwitch: string) => {
       v-for="(availableLocale, key) in availableLocales"
       :key="`availableLocale-item-${key}`"
       :class="['button', 'lang-switcher__btn', {'actif': availableLocale === locale}]"
+      :disabled="availableLocale === locale"
       @click="handleSwitchLocale(availableLocale)"
     >
       <span>

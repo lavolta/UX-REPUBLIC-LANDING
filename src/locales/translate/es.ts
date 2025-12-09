@@ -38,6 +38,35 @@ export const es = {
       },
     ],
   },
+  footer: {
+    infiniteTitle: 'contáctanos',
+    contact: {
+      title: '¿Listos para transformar <br> vuestra experiencia digital?',
+      ctaItems: [
+        {
+          content: 'Contáctanos',
+          href: '/es/contact',
+          type: 'internal',
+        },
+        {
+          content: 'Únete a nosotros',
+          href: 'https://jobs.smile.eu/en',
+          type: 'link',
+        },
+      ],
+    },
+    copyRight: 'UX Republic — Miembro del grupo Smile — Todos los derechos reservados.',
+  },
+  seo: {
+    home: {
+      title: 'The future is the republic | home',
+      description: 'Descripción meta para la página de inicio.',
+    },
+    contact: {
+      title: 'The future is the republic | Contacto',
+      description: 'Descripción meta para la página de contacto.',
+    },
+  },
   uxrep: {
     title: 'UX-REPUBLIC',
     content:
@@ -114,65 +143,37 @@ export const es = {
   agency: {
     title: 'Una red internacional <br>al servicio de tus proyectos',
   },
-  seo: {
-    home: {
-      title: 'The future is the republic | home',
-      description: 'Descripción meta para la página de inicio.',
-    },
-    contact: {
-      title: 'The future is the republic | Contacto',
-      description: 'Descripción meta para la página de contacto.',
-    },
-  },
-  hero: {
-    title: 'Título del héroe (archivo fr)',
-    subtitle: 'Subtítulo del héroe',
-  },
-  heroHome: [
-    { text: 'Domador', isSpecialStyle: false },
-    { text: 'de experiencias que', isSpecialStyle: false },
-    { text: 'ponen al usuario', isSpecialStyle: false },
-    { text: 'en el centro', isSpecialStyle: true },
-  ],
-  button: {
-    navigationCta: 'Navegar',
-    offerCta: 'Únete a nosotros',
-    translateCta: 'FR',
-    contactCta: 'Contáctanos',
-  },
-  tags: {
-    accessibility: 'Accesibilidad',
-    security: 'Seguridad',
-    performance: 'Rendimiento',
-  },
-  expert: {
-    title: 'Mi gran título',
-    cards: [
+  project: {
+    title: 'Nuestros logros',
+    items: [
       {
-        title: 'Tarjeta 1',
-        text: 'Este es el texto de la tarjeta 1',
-        tags: ['UX', 'UI'],
+        title: 'BPCE',
+        subtitle: 'Una fidelidad construida sobre la confianza',
+        content: 'Nuestros expertos en UX/UI, Producto y Analítica trabajan con BPCE desde 2017 para optimizar su rendimiento digital.',
+        theme: 'theme-1',
         picture: {
-          alt: 'imagen tarjeta 1',
-          href: '/images/img-1.jpg',
+          alt: '',
+          href: '/images/project/project-item-media-1.png',
         },
       },
       {
-        title: 'Tarjeta 2',
-        text: 'Este es el texto de la tarjeta 2',
-        tags: ['UX', 'UI'],
+        title: 'LVMH',
+        subtitle: 'Al servicio de una excelencia sostenible',
+        content: 'Desde 2014, nuestro diseño de experiencia acompaña a LVMH, reflejando la excelencia iniciada con Louis Vuitton.',
+        theme: 'theme-2',
         picture: {
-          alt: 'imagen tarjeta 2',
-          href: '/images/img-1.jpg',
+          alt: '',
+          href: '/images/project/project-item-media-2.png',
         },
       },
       {
-        title: 'Tarjeta 3',
-        text: 'Este es el texto de la tarjeta 3',
-        tags: ['UX', 'UI'],
+        title: 'NAVBLUE',
+        subtitle: 'Innovación a largo plazo',
+        content: 'Socios de NAVBLUE (Grupo Airbus) desde 2018, creamos productos digitales que garantizan su liderazgo tecnológico.',
+        theme: 'theme-3',
         picture: {
-          alt: 'imagen tarjeta 3',
-          href: '/images/img-1.jpg',
+          alt: '',
+          href: '/images/project/project-item-media-3.png',
         },
       },
     ],
@@ -237,58 +238,5 @@ export const es = {
       },
     ],
   },
-  project: {
-    title: 'Nuestros logros',
-    items: [
-      {
-        title: 'BPCE',
-        subtitle: 'Una fidelidad construida sobre la confianza',
-        content: 'Nuestros expertos en UX/UI, Producto y Analítica trabajan con BPCE desde 2017 para optimizar su rendimiento digital.',
-        theme: 'theme-1',
-        picture: {
-          alt: '',
-          href: '/images/project/project-item-media-1.png',
-        },
-      },
-      {
-        title: 'LVMH',
-        subtitle: 'Al servicio de una excelencia sostenible',
-        content: 'Desde 2014, nuestro diseño de experiencia acompaña a LVMH, reflejando la excelencia iniciada con Louis Vuitton.',
-        theme: 'theme-2',
-        picture: {
-          alt: '',
-          href: '/images/project/project-item-media-2.png',
-        },
-      },
-      {
-        title: 'NAVBLUE',
-        subtitle: 'Innovación a largo plazo',
-        content: 'Socios de NAVBLUE (Grupo Airbus) desde 2018, creamos productos digitales que garantizan su liderazgo tecnológico.',
-        theme: 'theme-3',
-        picture: {
-          alt: '',
-          href: '/images/project/project-item-media-3.png',
-        },
-      },
-    ],
-  },
-  footer: {
-    infiniteTitle: 'contáctanos',
-    contact: {
-      title: '¿Listos para transformar <br> vuestra experiencia digital?',
-      ctaItems: [
-        {
-          content: 'Contáctanos',
-          href: '/es/contact',
-          type: 'internal',
-        },
-        {
-          content: 'Únete a nosotros',
-          href: 'https://jobs.smile.eu/en',
-          type: 'link',
-        },
-      ],
-    },
-    copyRight: 'UX Republic — Miembro del grupo Smile — Todos los derechos reservados.',
-  },
+
 } satisfies import('vue-i18n').DefineLocaleMessage
