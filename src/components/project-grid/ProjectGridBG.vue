@@ -8,7 +8,7 @@ const target = useTemplateRef<HTMLDivElement>('gridBgContainer')
 const { top } = useElementBounding(target)
 
 watch(top, (newvalue) => {
-  if (newvalue <= 0 && firstView.value) {
+  if (newvalue <= 200 && firstView.value) {
     firstView.value = false
     animeBg.value = true
   }
